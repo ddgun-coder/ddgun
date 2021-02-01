@@ -1,0 +1,1 @@
+DMG(36, musa_skill1,78);

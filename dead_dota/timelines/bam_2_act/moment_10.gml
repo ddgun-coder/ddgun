@@ -1,0 +1,1 @@
+server78_create_instace(bam_skill2, x + lengthdir_x(25 * big_val, YA - 90), y + lengthdir_y(25 * big_val, YA - 90));

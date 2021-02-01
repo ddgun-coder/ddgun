@@ -1,0 +1,1 @@
+DMG_buff(10,spr_gas,30, 20);

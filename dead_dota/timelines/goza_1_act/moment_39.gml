@@ -1,0 +1,11 @@
+effect_index = spr_none
+effect_index_under = spr_none;
+server77_equal(serve_val.cancle_able, effect_index_under, buffer_u16);
+left_foot_YA = YA
+right_foot_YA = YA
+right_foot_deltay = 0;
+left_foot_deltay = 0;
+left_arm_xscale = 1;
+left_arm_yscale = 1;
+right_arm_xscale = -1;
+right_arm_yscale = 1;

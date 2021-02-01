@@ -1,0 +1,10 @@
+/// @DnDAction : YoYo Games.Common.Execute_Code
+/// @DnDVersion : 1
+/// @DnDHash : 1A855FDA
+/// @DnDArgument : "code" "x = cid_id.x + lengthdir_x(deltay, cid_id.YA - 90);$(13_10)y = cid_id.y + lengthdir_y(deltay, cid_id.YA - 90);$(13_10)image_angle = cid_id.YA - 90;$(13_10)image_xscale = cid_id.big_val;$(13_10)image_yscale = cid_id.big_val;$(13_10)deltay += 40;$(13_10)"
+x = cid_id.x + lengthdir_x(deltay, cid_id.YA - 90);
+y = cid_id.y + lengthdir_y(deltay, cid_id.YA - 90);
+image_angle = cid_id.YA - 90;
+image_xscale = cid_id.big_val;
+image_yscale = cid_id.big_val;
+deltay += 40;

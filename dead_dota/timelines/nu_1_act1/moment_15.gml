@@ -1,0 +1,1 @@
+normal_play(nu_1_act2)

@@ -1,0 +1,10 @@
+a_possible = false;
+temp_YA = YA;
+effect_index = sprite645;
+effect_index_num = -1;
+left_goto_YA = YA - 50;
+right_goto_YA = YA - 50;
+arm_spin_able = 1;
+arm_spin_speed = 4;
+arm_type = "attack";
+arm_type_more = "temp_YA_async"

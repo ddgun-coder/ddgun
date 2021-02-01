@@ -1,0 +1,1 @@
+skill_create(600);

@@ -1,0 +1,1 @@
+msg = get_string_async("원하는 ip입력(취소 = 기본서버)", "");

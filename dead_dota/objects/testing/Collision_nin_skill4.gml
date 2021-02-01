@@ -1,0 +1,1 @@
+DMG_buff(2, buff_nin4, 30, 200);

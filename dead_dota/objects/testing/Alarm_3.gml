@@ -1,0 +1,15 @@
+arm_frame = 0;
+a_possible_time = 0;
+only_move_frame = 1;
+a_possible = 1;
+charging = 0;
+arm_type = "normal";
+spr_arm_more = spr_none;
+spr_arm_more_num = 0;
+view_visible[1] = false;
+view_visible[0] = true;
+cancle_able =false;
+server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+view_where = 0;
+obj_telescope_view.tele = false;
+arm_all_normal();

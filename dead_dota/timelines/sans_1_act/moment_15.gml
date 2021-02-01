@@ -1,0 +1,1 @@
+server78_create_instace(sans_skill1, x, y);

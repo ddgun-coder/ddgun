@@ -1,0 +1,1 @@
+DMG_buff(10, buff_bwiza2, 40, 80);

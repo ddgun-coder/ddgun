@@ -1,0 +1,1 @@
+server78_create_instace(obj_snow_man, x, y);

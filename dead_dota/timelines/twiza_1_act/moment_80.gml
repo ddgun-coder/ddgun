@@ -1,0 +1,3 @@
+terror_charge = 2;
+server202_sound(twiza_1_charge);
+server77_equal(serve_val.terror_charge, 2, buffer_u8)

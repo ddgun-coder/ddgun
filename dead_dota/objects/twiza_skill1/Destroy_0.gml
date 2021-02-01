@@ -1,0 +1,1 @@
+audio_stop_sound(nu_2_sound);

@@ -1,0 +1,1 @@
+server78_create_instace(eng_skill1, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));

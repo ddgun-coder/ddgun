@@ -1,0 +1,1 @@
+DMG(20, hunt_skill2, 40)
