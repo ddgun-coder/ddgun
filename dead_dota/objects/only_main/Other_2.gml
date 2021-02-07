@@ -95,7 +95,7 @@ spr_hat24, spr_hat26, spr_hat2, spr_hat11, spr_hat17, spr_hat20, spr_hat28, spr_
 global.prt_list=ds_list_create();//변수 리스트
 global.prt_de_list=ds_list_create();//복호화 키 리스트
 global.prt_key=irandom_range(1,10000);//암호화 키
-global.ip = "";
+global.ip = "127.0.0.1";
 global.ban_list = array_create(100, false);
 global.cid_array = array_create(25, 0);
 global.cid_array = [testing0, testing1,testing2,testing3,testing4,testing5,testing6,testing7,

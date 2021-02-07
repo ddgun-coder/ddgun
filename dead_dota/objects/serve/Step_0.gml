@@ -13,11 +13,12 @@ if (global.online == true) {
 kazino_time--;
 last_time--;
 if (online < 0) {
+	online = 100
+	global.online = 0;
 	show_message_async("랜뽑이거나 핑이 너무높음");
 	network_destroy(global.client);
-	global.online = 0;
 	room_goto(room_out);
-    exit;
+	exit;
 }
 if (OK > 2) {
 	show_message_async("스피드 핵 감지");

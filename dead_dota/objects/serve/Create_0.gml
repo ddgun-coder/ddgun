@@ -1,8 +1,9 @@
 max_score = 40;
 version = 127;
 network_set_config(network_config_connect_timeout,4000);
-global.client = network_create_socket(network_socket_tcp);
 if (global.online == 0) {
+	network_destroy(global.client);
+	global.client = network_create_socket(network_socket_tcp);
 	if (global.client < 0 ){
 		show_message("어캐했노 ㅅㅂ련아")
 		game_end()
@@ -11,7 +12,7 @@ if (global.online == 0) {
 	temp_id = 0;
 	depth = -2000;
 	ime_set_composition_window(0);
-	connect = network_connect_async(global.client , global.ip , 50199);
+	connect = network_connect(global.client , global.ip , 50199);
 	
 	if (connect < 0) {
 		network_destroy(global.client);

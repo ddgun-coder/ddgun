@@ -1,7 +1,7 @@
 if (global.team == 2) {
 	global.team = irandom(1);	
 }
-if (room == room_temp) { 
+if (room == room_temp) {
 	buffer_seek(buff_chat, buffer_seek_start, 0);
 					
 	buffer_write(buff_chat,buffer_u8,111)//111 is only start 
