@@ -7,6 +7,3 @@ be_inv = false;
 depth = -2000; 
 dy = 0;
 image_blend = c_green;
-if (cid_id.skin == 2) {
-	sprite_index = 	Sprite902
-}
