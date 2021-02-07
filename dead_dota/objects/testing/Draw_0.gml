@@ -129,6 +129,9 @@ if (global.show_me == false) {
 						case spr_hat1:
 							draw_sprite_ext(global.hat,sprite_get_number(global.hat) - 1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
 						break;
+						default:
+							draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
+						break;
 					}
 				}
 				else {
