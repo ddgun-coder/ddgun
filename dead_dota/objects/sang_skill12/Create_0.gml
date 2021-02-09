@@ -7,6 +7,7 @@ tempsurf = -1;
 realsurf = -1;
 dis = point_distance(0, 0, 159 / 2, 153 / 2);
 alarm[1] = 1;
+draw_this  = sprite3
 YA = 0;
 alphad = false;
 image_xscale = 20;

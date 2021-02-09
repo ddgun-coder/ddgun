@@ -1,3 +1,5 @@
+/// @description Insert description here
+// You can write your code in this editor
 if (sturn <= 0 and live != 0) {
 	hp -= 10;
 	sturn = 30;
