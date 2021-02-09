@@ -69,6 +69,8 @@ delay= 5;
 OK = 0;
 OK2 = 0;
 date = date_current_datetime();
+testing0.skin = global.skin;
+testing0.hat = global.hat;
 
 ftime1 =date_create_datetime(
 date_get_year(date),date_get_month(date),
