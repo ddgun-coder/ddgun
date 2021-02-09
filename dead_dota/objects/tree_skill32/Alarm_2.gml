@@ -10,3 +10,6 @@ for (var i = 0; i < instance_number(tree_skill12); i++) {
 		break;
 	}
 }
+if (cid_id.skin == 1) {
+	sprite_index =  doll_tree1;
+}

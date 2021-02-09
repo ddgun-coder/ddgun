@@ -1296,13 +1296,13 @@ if(live = 1) {
 							
 							case spr_hat36 :
 							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
+								if (mana >= 15) {
+									prt_val_add(Val.mp, -15);
 									normal_play(kpower_1_act);
 								}
 								else {
 									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
+									skill_say = "MP: " + string(mana) + " / 15(15)";
 								}
 							}
 							break;
@@ -2177,8 +2177,8 @@ if(live = 1) {
 								
 								case spr_hat14 :
 								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
+									if (mana >= 35) {
+										prt_val_add(Val.mp, -35);
 										normal_play(sward_2_act);
 										arm_all_normal();
 										a_possible = false;
@@ -2196,7 +2196,7 @@ if(live = 1) {
 									}
 									else {
 										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
+										skill_say = "MP: " + string(mana) + " / 35(35)";
 									}
 								}
 								break;
@@ -2355,13 +2355,13 @@ if(live = 1) {
 								
 								case spr_hat23:
 									if (a_cooltime <= 0) {
-										if (mana >= 55) {
+										if (mana >= 80) {
 											prt_val_add(Val.mp, -110);
 											normal_play(wing_2_act);
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 110(55)";
+											skill_say = "MP: " + string(mana) + " / 110(80)";
 										}
 									}
 								break;
@@ -2611,12 +2611,12 @@ if(live = 1) {
 								case spr_hat36 :
 								if (a_cooltime <= 0) {
 									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
+										prt_val_add(Val.mp, -60);
 										normal_play(kpower_2_act);
 									}
 									else {
 										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
+										skill_say = "MP: " + string(mana) + " / 60(50)";
 									}
 								}
 							break;		
@@ -3384,12 +3384,12 @@ if(live = 1) {
 								case spr_hat9 :
 									if (a_cooltime <= 0) {
 										if (gi >= 30) {
-											prt_val_add(Val.gi, -30)
+											prt_val_add(Val.gi, -33)
 											random_table3();
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 30(30)";
+											skill_say = "GI: " + string(gi) + " / 33(30)";
 										}
 									}
 								break;
@@ -3422,13 +3422,13 @@ if(live = 1) {
 								
 								case spr_hat14 :
 									if (a_cooltime <= 0) {
-										if (mana >= 120) {
-											prt_val_add(Val.mp, -80);
+										if (gi >= 80) {
+											prt_val_add(Val.gi, -80);
 											normal_play(sward_3_act);
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 80(120)";
+											skill_say = "GI: " + string(mana) + " / 80(80)";
 										}
 									}
 								break;
@@ -4390,13 +4390,13 @@ if(live = 1) {
 								break;
 								case spr_hat72:
 									if (a_cooltime <= 0) {
-										if (mana >= 88) {
-											prt_val_add(Val.mp, -88);
+										if (mana >= 44) {
+											prt_val_add(Val.mp, -44);
 											random_tableno();
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 88(88)";
+											skill_say = "MP: " + string(mana) + " / 44(44)";
 										}
 									}
 								break;
@@ -4538,13 +4538,13 @@ if(live = 1) {
 								
 								case spr_hat14 :
 									if (a_cooltime <= 0) {
-										if (gi >= 250) {
-											prt_val_add(Val.gi, -250)
+										if (gi >= 220) {
+											prt_val_add(Val.gi, -220)
 											normal_play(sward_4_act);
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 250(250)";
+											skill_say = "GI: " + string(gi) + " / 220(220)";
 										}
 									}
 								break;
@@ -4855,13 +4855,13 @@ if(live = 1) {
 								
 								case spr_hat36 :
 									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150)
+										if (gi >= 170) {
+											prt_val_add(Val.gi, -170)
 											normal_play(kpower_4_act);
 										}
 										else {
 											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
+											skill_say = "GI: " + string(gi) + " / 170(170)";
 										}
 									}
 								break;

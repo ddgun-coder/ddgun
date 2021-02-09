@@ -11,5 +11,5 @@ YA = 0;
 alphad = false;
 image_xscale = 20;
 image_yscale = dis;
-dmg = 20;
+dmg = 23;
 audio_play_sound(sang_1_sound,1,false);

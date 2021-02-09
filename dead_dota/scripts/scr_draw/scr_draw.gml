@@ -63,27 +63,27 @@ function scr_draw() {
 						draw_sprite_ext(buff_see3,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
 					}
 					else {
-						if (hat_frame == 4) {
-							switch(global.hat) {
-								case spr_hat5:
-								case spr_hat1:
-									draw_sprite_ext(hat,sprite_get_number(hat) - 1,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);
-								break;
-								default:
-									draw_sprite_ext(hat,hat_frame + skin * 4,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);
-								break;
-							}
-						}
-						else {
-							if (hat != spr_level5_hat12) {
-								draw_sprite_ext(hat,hat_frame + skin * 4,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);// 모자
-							}
-							else {
-								draw_sprite_ext(hat,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-							}
-						}
-					}
-				}
+						if (hat_frame ==4) {
+						   switch(global.hat) {
+							   case spr_hat5:
+							   case spr_hat1: 
+							       draw_sprite_ext(hat,sprite_get_number(hat) - 1,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);
+							   break;
+							   default:
+						           draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val, big_val,YA + hat_YA,color,alpha);
+				               break;
+						    } 
+					   }					   
+					   else {
+						   if (hat != spr_level5_hat12) {
+							   draw_sprite_ext(hat,hat_frame + skin * 4,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);// 모자
+						   }
+						   else {
+							   draw_sprite_ext(hat,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
+					       }
+					   }
+			       }  	 
+			   }
 				else {
 					draw_sprite_ext(spr_hat6_1 + hat_frame,skin,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);
 				}

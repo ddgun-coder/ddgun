@@ -5,4 +5,4 @@ alarm[1] = 1;
 time = 0;
 mysurf = -1;
 image_yscale = 0;
-dmg = 10;
+dmg = 12;

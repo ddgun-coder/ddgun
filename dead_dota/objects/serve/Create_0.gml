@@ -12,10 +12,9 @@ if (global.online == 0) {
 	temp_id = 0;
 	depth = -2000;
 	ime_set_composition_window(0);
-	connect = network_connect(global.client , global.ip , 50199);
+	connect = network_connect_async(global.client , global.ip , 50199);
 	
 	if (connect < 0) {
-		network_destroy(global.client);
 		show_message("서버가 없다:" + string(version) + "버전")
 		global.online = 0;
 	}

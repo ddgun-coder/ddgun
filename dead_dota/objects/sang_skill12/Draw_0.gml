@@ -9,7 +9,7 @@ surface_reset_target();
 if( !surface_exists(realsurf) ){
 realsurf = surface_create(318,307);
 surface_set_target(realsurf);
-draw_sprite(sprite659, 0, 0, 0);
+draw_sprite(sprite_index, 0, 0, 0);
 surface_reset_target();
 }
 surface_set_target(tempsurf);
@@ -19,7 +19,7 @@ gpu_set_blendmode(bm_normal);
 surface_reset_target();
 
 surface_set_target(realsurf);
-draw_sprite(sprite659, 0, 0, 0);
+draw_sprite(sprite_index, 0, 0, 0);
 gpu_set_blendmode(bm_subtract);
 draw_surface(tempsurf, 0, 0);
 gpu_set_blendmode(bm_normal);

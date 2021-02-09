@@ -5,3 +5,4 @@ name.cid_id = cid_id;
 name.cid = cid;
 name.team = team;
 instance_destroy();
+

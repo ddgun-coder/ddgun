@@ -123,23 +123,23 @@ if (global.show_me == false) {
 				draw_sprite_ext(buff_see3,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);// 모자
 			}
 			else {
-				if (level == 4) {
+				if (level ==4) {
 					switch(global.hat) {
 						case spr_hat5:
 						case spr_hat1:
-							draw_sprite_ext(global.hat,sprite_get_number(global.hat) - 1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-						break;
+						    draw_sprite_ext(global.hat,sprite_get_number(global.hat) - 1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
+					    break;
 						default:
-							draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-						break;
+						    draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val, big_val,YA + hat_YA,color,alpha);
+				        break;
 					}
 				}
 				else {
-					if (global.hat != spr_level5_hat12) {
-						draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);// 모자
+			        if (global.hat != spr_level5_hat12) {
+					    draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);// 모자
 					}
-					else {
-						draw_sprite_ext(global.hat,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
+				    else {
+					    draw_sprite_ext(global.hat,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
 					}
 				}
 			}
