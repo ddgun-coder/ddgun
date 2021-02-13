@@ -1,5 +1,5 @@
 function norm_attack() {
-	a_cooltime = 20 + round(big_val * 3);
+	a_cooltime = 37 + round(big_val * 3);
 	arm_all_normal();
 	jumping = false;
 	arm_type = "attack"

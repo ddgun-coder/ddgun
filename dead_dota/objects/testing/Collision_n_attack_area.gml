@@ -1,1 +1,1 @@
-DMG(10, n_attack_area, 20)
+DMG(10, n_attack_area, 40)

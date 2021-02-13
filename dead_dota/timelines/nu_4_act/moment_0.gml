@@ -8,7 +8,7 @@ only_hat = true;
 effect_index = effect_nu3;
 nu_on = true;
 temp_YA = YA;
-if (room != room_what) {
+if (room == room_what) {
 	buffer_seek(buff_chat, buffer_seek_start, 0);
 	
 	buffer_write(buff_chat,buffer_u8,1)//1은 이제 채팅
