@@ -55,7 +55,7 @@
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
     "xorigin": 62,
-    "yorigin": 0,
+    "yorigin": 20,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_charge3","path":"sprites/spr_charge3/spr_charge3.yy",},

@@ -3,3 +3,6 @@
 x = xstart + irandom(10);
 y = ystart + irandom(10);
 image_angle = YA;
+if (cid_id.skin == 1) {
+	sprite_index =  spr_doll_tree2;
+}

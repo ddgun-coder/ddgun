@@ -1,5 +1,5 @@
-image_xscale = cid_id.big_val * 1.5;
-image_yscale = cid_id.big_val * 1.5;
+image_xscale = cid_id.big_val * 1.2;
+image_yscale = cid_id.big_val * 1.2;
 image_angle += 15;
 image_index = cid_id.hat_frame + cid_id.skin * 4;
 sprite_index = cid_id.hat;

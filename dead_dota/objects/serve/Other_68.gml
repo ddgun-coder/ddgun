@@ -1163,7 +1163,7 @@ if ( tp = network_type_data) {
 	
 							buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
 							buffer_write(buff_chat,buffer_u8, global.hat_show);
-							buffer_write(buff_chat,buffer_u8, level);
+							buffer_write(buff_chat,buffer_u8, testing.level);
 	
 							network_send_packet(0,buff_chat, 3);
 						}

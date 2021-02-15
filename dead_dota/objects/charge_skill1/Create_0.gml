@@ -1,7 +1,10 @@
 image_angle = testing.YA;
-skill_create(200)
+team = 0;
+
+alarm_set(0, 200);
 
 audio_play_sound(charge_1_sound,9,false);
-
+cid = 1;
+cid_id  = asset_get_index("testing" + string(cid));
 image_speed = 5
 dmg = 30;

@@ -1,5 +1,5 @@
 max_score = 40;
-version = 135;
+version = 136;
 network_set_config(network_config_connect_timeout,4000);
 if (global.online == 0) {
 	network_destroy(global.client);

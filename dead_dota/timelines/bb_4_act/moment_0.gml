@@ -4,7 +4,7 @@ left_goto_YA = YA + 225;
 right_goto_YA = YA + 290;
 arm_spin_able = 1;
 arm_spin_speed = 4;
-a_cooltime = 130;
+a_cooltime = 100;
 arm_type = "attack"
 server202_sound(gather_sound);
 cancle_able = true;

@@ -143,7 +143,7 @@ for(var j = 0; j < jj; j++) {
 			break;
 			case 24:
 				item[num].price = 6000;
-				item[num].max_time = 6000;//cry
+				item[num].max_time = 5000;//cry
 				item[num].what = 1;
 				item[num].expl = "기절시간 동안 체력회복을 한다.(초당 60)";
 			break;
@@ -207,7 +207,7 @@ for(var j = 0; j < jj; j++) {
 			break;
 			case 36:
 				item[num].price = 2500;
-				item[num].max_time = 4000;
+				item[num].max_time = 3500;
 				item[num].expl = "짧은 범위 근거리 공격이다.(대미지:36)";
 			break;
 			case 37:
@@ -322,7 +322,7 @@ for(var j = 0; j < jj; j++) {
 			break;
 			case 56:
 				item[num].price = 4000;
-				item[num].max_time = 40 * 60;
+				item[num].max_time = 3500;
 				item[num].expl = "넓은 범위로 적을 가둡니다(대미지:40)";
 			break;
 			case 57:

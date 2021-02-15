@@ -70,7 +70,7 @@ function scr_draw() {
 							       draw_sprite_ext(hat,sprite_get_number(hat) - 1,hat_x,hat_y,hat_xscale * big_val ,hat_yscale * big_val,YA + hat_YA,color,alpha);
 							   break;
 							   default:
-						           draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val, big_val,YA + hat_YA,color,alpha);
+						           draw_sprite_ext(hat,hat_frame + skin * 4,hat_x,hat_y,hat_xscale * big_val, big_val,YA + hat_YA,color,alpha);
 				               break;
 						    } 
 					   }					   
