@@ -1,5 +1,5 @@
 arm_all_normal();
-a_cooltime = 160;
+a_cooltime = 440 - level * 40;
 arm_type = "attack"
 arm_type_more = "studing";
 effect_index = effect_book;
@@ -14,3 +14,5 @@ buffer_write(buff_chat,buffer_string, "(뭔가 적는 중..)");
 buffer_write(buff_chat,buffer_string,global.name);
 	
 network_send_packet(0,buff_chat,buffer_tell(buff_chat));
+
+timeline_position = level * 40;

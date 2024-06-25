@@ -1,14 +1,15 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":true,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"last_tuto","path":"timelines/last_tuto/last_tuto.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
-    {"moment":280,"evnt":{"isDnD":false,"eventNum":280,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"last_tuto","path":"timelines/last_tuto/last_tuto.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"last_tuto",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":280,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":280,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "etc",
-    "path": "folders/Timelines/etc.yy",
+  "name":"last_tuto",
+  "parent":{
+    "name":"etc",
+    "path":"folders/Timelines/etc.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "last_tuto",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

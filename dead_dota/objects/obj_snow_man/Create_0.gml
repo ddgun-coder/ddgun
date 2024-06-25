@@ -3,3 +3,5 @@
 skill_create(200)
 image_index = irandom(6)
 image_speed = 0
+
+dmg = 14

@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-if (place_meeting(mouse_x, mouse_y, obj_resize)) {
+/*if (place_meeting(mouse_x, mouse_y, obj_resize)) {
 	what = "게임 창 크기를 바꿉니다.";
 }
 if (place_meeting(mouse_x, mouse_y, obj_end)) {
@@ -23,6 +23,6 @@ if (place_meeting(mouse_x, mouse_y, obj_save)) {
 }
 if (place_meeting(mouse_x, mouse_y, obj_keycon)) {
 	if (obj_keycon.main == false) {
-		what = "키를 변경합니다.";
+		what = "[W][A][S][D] = 이동키\n[D][Q][W][E] =  스킬\nESC = 모든 UI 숨기기\nCAPS LOCK = 레이싱 모드\nSHIFT = 방향 고정";
 	}
-}
+}// 20210718 삭제됨

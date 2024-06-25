@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "DMGS",
-    "path": "folders/Scripts/DMGS.yy",
+  "$GMScript":"",
+  "%Name":"DMG_item",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DMG_item",
+  "parent":{
+    "name":"DMGS",
+    "path":"folders/Scripts/DMGS.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "DMG_item",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

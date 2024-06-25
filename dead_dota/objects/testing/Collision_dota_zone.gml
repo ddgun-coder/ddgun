@@ -84,7 +84,7 @@ if (keyboard_check_pressed(ord("f")) or keyboard_check_pressed(ord("F"))) {
 					fun_try += 1;
 					break;
 					case 1:
-					mine_say = "놀라운 사실1: 샌즈는 강하다."
+					mine_say = "놀라운 사실1: 잰즈는 강하다."
 					mine_say_time = 100;
 					fun_try += 1;
 					break;

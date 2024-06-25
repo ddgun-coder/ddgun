@@ -1,6 +1,6 @@
 function DMG_no_surn_hpsteal(argument0) {
 	var D = argument0;
-	D = dmg_cal(D);
+	D = dmg_cal(D, other);
 	if (live = 1) {
 		if (buff_index != spr_wing1) {
 			if (global.team != other.team or (other.team == 2 and other.cid != global.my_cid)) {
@@ -16,12 +16,7 @@ function DMG_no_surn_hpsteal(argument0) {
 	
 							network_send_packet(0,buff_chat,5);
 							obj_id = other.cid_id;
-							if (obj_id.buff_index == buff_nu2) {
-								hp -= 1.8 * D;
-							}
-							else {
-								hp -= D;
-							}
+							hp -= D;
 							if (just_time > 0) {
 								buffer_seek(buff_chat, buffer_seek_start, 0);
 						

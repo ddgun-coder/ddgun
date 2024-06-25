@@ -1,13 +1,14 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":true,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"pota_3_what","path":"timelines/pota_3_what/pota_3_what.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"pota_3_what",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "help",
-    "path": "folders/Timelines/help.yy",
+  "name":"pota_3_what",
+  "parent":{
+    "name":"help",
+    "path":"folders/Timelines/help.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "pota_3_what",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

@@ -1,14 +1,15 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":true,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"fheal_1_act","path":"timelines/fheal_1_act/fheal_1_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
-    {"moment":40,"evnt":{"isDnD":true,"eventNum":40,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"fheal_1_act","path":"timelines/fheal_1_act/fheal_1_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"fheal_1_act",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":80,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":80,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "fheal_skill",
-    "path": "folders/Timelines/fheal_skill.yy",
+  "name":"fheal_1_act",
+  "parent":{
+    "name":"fheal_skill",
+    "path":"folders/Timelines/fheal_skill.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "fheal_1_act",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

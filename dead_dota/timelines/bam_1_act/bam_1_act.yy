@@ -1,14 +1,15 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"bam_1_act","path":"timelines/bam_1_act/bam_1_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
-    {"moment":240,"evnt":{"isDnD":false,"eventNum":240,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"bam_1_act","path":"timelines/bam_1_act/bam_1_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"bam_1_act",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":240,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":240,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "bam_skill",
-    "path": "folders/Timelines/bam_skill.yy",
+  "name":"bam_1_act",
+  "parent":{
+    "name":"bam_skill",
+    "path":"folders/Timelines/bam_skill.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "bam_1_act",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

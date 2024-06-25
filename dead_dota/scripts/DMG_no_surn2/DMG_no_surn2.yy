@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "DMGS",
-    "path": "folders/Scripts/DMGS.yy",
+  "$GMScript":"",
+  "%Name":"DMG_no_surn2",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DMG_no_surn2",
+  "parent":{
+    "name":"DMGS",
+    "path":"folders/Scripts/DMGS.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "DMG_no_surn2",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -12,12 +12,20 @@ if (global.hat == spr_hat5 or global.hat == spr_level5_hat1)
 }
 
 if (global.hat == spr_hat22 and level > 1) {
-	if (a_cooltime < 1 and a_possible == true) {
-		if(irandom(20) == 1) {
+	if (sturn > 0) {
+		if(irandom(14) == 1) {
 			server78_create_instace(nu_skill2, x, y);
 		}
 	}
 }
+
+if (global.hat == spr_hat52 and level > 0) {
+		if(irandom(10) == 1) {
+			hat_move = true;
+			server78_create_instace(jam_stock, x, y);
+		}
+	}
+
 
 if (global.hat == spr_hat23 and level > 1) {
 	if(irandom(20 - level) == 1) {
@@ -34,13 +42,7 @@ if (global.hat == spr_hat38 and level > 1) {
 		}
 	}
 }
-if (global.hat == spr_hat53 and level > 1) {
-	if (sturn > 0) {
-		if(irandom(8) == 1) {
-			server78_create_instace(he_skill1, x, y);
-		}
-	}
-}
+
 if (string_length(global.name) == 0) {
 	show_message("공백충");
 	url_open("https://www.youtube.com/watch?v=Zq51xKG-hyU");

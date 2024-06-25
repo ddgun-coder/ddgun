@@ -1,1 +1,1 @@
-DMG_only_exp(0.5)
+DMG_only_exp(0.38)

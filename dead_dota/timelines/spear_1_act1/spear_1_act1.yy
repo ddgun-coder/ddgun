@@ -1,13 +1,14 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"spear_1_act1","path":"timelines/spear_1_act1/spear_1_act1.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"spear_1_act1",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "spearman_skill",
-    "path": "folders/Timelines/spearman_skill.yy",
+  "name":"spear_1_act1",
+  "parent":{
+    "name":"spearman_skill",
+    "path":"folders/Timelines/spearman_skill.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "spear_1_act1",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

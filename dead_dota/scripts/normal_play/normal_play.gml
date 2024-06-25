@@ -10,6 +10,11 @@ function normal_play(argument0) {
 		a_possible = true;
 		jumping = false;
 		image_angle = YA;
+		with (obj_crown) {
+			if (cid_id == global.my_cid_id and activate) {
+				server78_create_instace(obj_crown_beam, x, y);
+			}
+		}
 		if (nu_on == true) {
 			nu_on = false;
 			if (go_to_scale < 1) {

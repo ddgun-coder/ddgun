@@ -1,4 +1,4 @@
-var mind = 2000;
+/*var mind = 2000;
 for(var i = 1; i < 24; i++) {
 	var obj = global.cid_array[i];
 	if (obj.team != team) {
@@ -16,4 +16,4 @@ ida.team = team;
 ida.cid = cid;
 ida.cid_id = cid_id;
 ida.YA = image_angle;
-alarm[1] = 10;
+alarm[1] = 20;

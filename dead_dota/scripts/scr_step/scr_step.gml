@@ -3,11 +3,17 @@ function scr_step() {
 		instance_destroy(testhat)
 		instance_destroy()
 		exit;
-	}
+	}	
 	if (say_time > 0){
 		say_time -=1;
 	}//말 사라짐
 	alive--;
+	if (room == room_ghost) {
+		draw_hat = spr_hat37;
+	}
+	else {
+		draw_hat = hat;
+	}//할로윈
 	if (sturn > 0) {
 			sturn -= 1;
 		}//스턴값 줄이기
@@ -28,7 +34,8 @@ function scr_step() {
 	if (mouse_check_button_pressed(mb_right)) {
 		if (distance_to_point(mouse_x, mouse_y) < 10) { 
 			if (testing.chat_point == 1) {
-				keyboard_string += serve.serve_name[object_index - testing0];
+				var ind = real(string_digits(object_get_name(object_index)));
+				keyboard_string += serve.serve_name[ind];
 			}
 		}
 	}

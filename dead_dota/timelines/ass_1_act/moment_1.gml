@@ -1,0 +1,1 @@
+server78_create_instace(ass_skill1, x, y);

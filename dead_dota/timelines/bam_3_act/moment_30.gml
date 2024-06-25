@@ -1,0 +1,9 @@
+arm_type = "normal";
+go_soild = false
+right_arm_YA = 0 + 90
+left_arm_YA = 0 - 90
+extra_speed = 0
+left_foot_YA = 0
+right_foot_YA = 0
+go_to_speed = 0;
+main_big_val = 1

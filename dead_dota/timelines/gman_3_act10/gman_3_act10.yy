@@ -1,0 +1,12 @@
+{
+  "$GMTimeline":"",
+  "%Name":"gman_3_act10",
+  "momentList":[],
+  "name":"gman_3_act10",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
+}

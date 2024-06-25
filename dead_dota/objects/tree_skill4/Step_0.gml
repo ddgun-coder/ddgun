@@ -23,6 +23,11 @@ if (sturn == 0) {
 else {
 	sturn--;	
 }
-if (hp <= 0) {
+
+if (hp <= 0 or cid_id.live != 1) {
 	instance_destroy()	
+}
+
+if (instance_number(tree_skill4) > 1) {
+   instance_destroy();   
 }

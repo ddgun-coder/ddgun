@@ -1,5 +1,9 @@
 function server202_sound(argument0) {
 	var sound = argument0
+	if (room == room_tuto) {
+		audio_play_sound(sound ,1,false);
+		exit;
+	}
 	buffer_seek(testing.buff_chat, buffer_seek_start, 0);
 	
 	buffer_write(testing.buff_chat, buffer_u8, 202);//202는 소리.

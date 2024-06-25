@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"Shader2",
+  "name":"Shader2",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

@@ -18,6 +18,7 @@ if (main) {
 				global.keyw = ord("W");
 				global.keye = ord("E");
 				global.keyr = ord("R");
+				
 				pease = -1;
 				main = false
 				obj_expl.what = "설정이 저장됐습니다.";

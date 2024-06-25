@@ -1,9 +1,8 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 565F2908
-/// @DnDArgument : "code" "if(hat_button_main.windows == 4)$(13_10){$(13_10)	draw_self();$(13_10)	draw_sprite(spr_face1 + number,0, x, y);$(13_10)}"
-if(hat_button_main.windows == 4)
-{
-	draw_self();
-	draw_sprite(spr_face1 + number,0, x, y);
+if(hat_button_main.windows == 4) {
+	surf_made();	
+	var draw_y1 = my_layer * 78;
+	var draw_y2 = 78 * 4;
+	draw_surface_part(surf, 0, draw_y1, weight * 78, draw_y2, x - 32, y - 32);
+
+	draw_sprite(spr_hat_rand, 0, x + 340, y - 184);
 }

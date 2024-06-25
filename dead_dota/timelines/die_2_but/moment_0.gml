@@ -13,8 +13,8 @@ switch(re) {
 	case 0:
 		arm_all_normal();
 		a_possible = false; 
-		left_arm_YA = YA - 135;
-		right_arm_YA = YA + 135;
+		left_arm_YA = 0 - 135;
+		right_arm_YA = 0 + 135;
 		spr_arml_more = spr_lebe1
 		spr_armr_more = spr_lebe1
 		server78_create_instace(lebe_skill1, x, y)
@@ -26,10 +26,10 @@ switch(re) {
 		arm_all_normal();
 		a_cooltime = 40;
 		arm_type = "attack"
-		right_arm_YA = YA + 90
-		left_arm_YA = YA - 90
-		left_foot_YA = YA - 45
-		right_foot_YA = YA + 45
+		right_arm_YA = 0 + 90
+		left_arm_YA = 0 - 90
+		left_foot_YA = 0 - 45
+		right_foot_YA = 0 + 45
 		temp_YA = YA;
 		temp_x = x;
 		temp_y = y;

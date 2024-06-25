@@ -4,7 +4,7 @@ buffer_seek(buff_chat, buffer_seek_start, 0);
 switch(irandom(2)) {
 	case 0:
 		prt_val_add(0, 1500);
-		
+
 		buffer_write(buff_chat,buffer_u8,1)//1은 이제 채팅
 		buffer_write(buff_chat,buffer_string, "빌게이츠... 복수할거다! (은행이 털렸습니다.)");
 		buffer_write(buff_chat,buffer_string,global.name);

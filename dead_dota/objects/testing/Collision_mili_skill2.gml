@@ -1,1 +1,1 @@
-heal_server(0.08);
+heal_server(0.08)

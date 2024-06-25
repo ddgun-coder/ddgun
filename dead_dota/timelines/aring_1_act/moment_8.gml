@@ -1,5 +1,5 @@
-right_arm_YA = YA;
-left_arm_YA = YA;
+right_arm_YA = 0;
+left_arm_YA = 0;
 left_arm_xscale = 1;
 right_arm_xscale = -1;
 arm_movement(3, -3, 10, 10);

@@ -1,13 +1,14 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":true,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"twiza_3_act","path":"timelines/twiza_3_act/twiza_3_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"twiza_3_act",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "twiza_skill",
-    "path": "folders/Timelines/twiza_skill.yy",
+  "name":"twiza_3_act",
+  "parent":{
+    "name":"twiza_skill",
+    "path":"folders/Timelines/twiza_skill.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "twiza_3_act",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

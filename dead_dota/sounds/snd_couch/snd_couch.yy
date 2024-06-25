@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_couch",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.5,
+  "name":"snd_couch",
+  "parent":{
+    "name":"UI",
+    "path":"folders/Objects/UI.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_couch.wav",
+  "type":0,
+  "volume":0.5,
+}

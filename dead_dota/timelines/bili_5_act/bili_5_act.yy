@@ -1,13 +1,14 @@
 {
-  "momentList": [
-    {"moment":0,"evnt":{"isDnD":true,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},"parent":{"name":"bili_5_act","path":"timelines/bili_5_act/bili_5_act.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMMoment",},
+  "$GMTimeline":"",
+  "%Name":"bili_5_act",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":true,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
   ],
-  "parent": {
-    "name": "level5_skills",
-    "path": "folders/Timelines/level5_skills.yy",
+  "name":"bili_5_act",
+  "parent":{
+    "name":"level5_skills",
+    "path":"folders/Timelines/level5_skills.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "bili_5_act",
-  "tags": [],
-  "resourceType": "GMTimeline",
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
 }

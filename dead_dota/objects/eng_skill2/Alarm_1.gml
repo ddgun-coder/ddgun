@@ -18,4 +18,10 @@ ida.team = team;
 ida.cid = cid;
 ida.cid_id = cid_id;
 ida.YA = image_angle;
-alarm[1] = 60;
+
+if (boost = true) {
+	alarm[1] = 20;
+}
+else {
+	alarm[1] = 80;
+}

@@ -1,9 +1,7 @@
-image_angle = testing.YA;
-team = -1;
-
-alarm_set(0, 5);
-
-audio_play_sound(spear_3_sound,9,false);
 cid = 1;
+audio_play_sound(spear_3_sound,9,false);
 cid_id  = asset_get_index("testing" + string(cid));
-dmg = 65;
+image_angle = cid_id.YA;
+alarm[0] = 20;
+team = -1;
+dmg = 49;

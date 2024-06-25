@@ -3,11 +3,9 @@
 to_cid_id();
 if (cid == global.my_cid) {
 	with(testing) {
-		all_YA_change(0);
-		YA2 = 0;
-		a_possible = false;
 	}
 }
-if (cid_id.hp < 0) {
+
+if (cid_id.live != 1) {
 	instance_destroy()	
 }

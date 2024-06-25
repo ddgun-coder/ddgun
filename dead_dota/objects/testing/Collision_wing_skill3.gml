@@ -1,4 +1,4 @@
-if(level < 2) {
+if(level < 3) {
 	if(other.team == global.team) {
 		aexp += 1;
 		mana_1 += 0.7;

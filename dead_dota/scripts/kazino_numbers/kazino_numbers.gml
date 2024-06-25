@@ -61,7 +61,7 @@ function kazino_numbers(argument0) {
 			case 7:
 				if (kazino_one == true) {
 					kazino_one = false;
-					scr_hat_change(irandom(array_length(global.hat_array - 3)));
+					scr_hat_change(irandom(global.hat_limit - 1));
 					buffer_seek(buff_chat, buffer_seek_start, 0);
 	
 					buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화

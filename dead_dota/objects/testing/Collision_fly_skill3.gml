@@ -1,1 +1,2 @@
-DMG_debuff(spr_gas, 400);
+DMG_buff_e(spr_gas, 160);
+/*

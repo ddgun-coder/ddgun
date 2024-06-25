@@ -1,1 +1,1 @@
-DMG(10, hunt_skill2, 10)
+DMG(15, hunt_skill2, 10)

@@ -1,1 +1,1 @@
-right_arm_YA = YA + 100;
+right_arm_YA = 0 + 100;

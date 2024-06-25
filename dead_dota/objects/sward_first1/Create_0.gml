@@ -1,3 +1,3 @@
-skill_create(15);
-up = 0;
-surf = -1;
+skill_create(18);
+YA = 0;
+alarm[1] = 1;

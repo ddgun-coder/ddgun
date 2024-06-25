@@ -1,11 +1,20 @@
-/// @description Insert description here
-// You can write your code in this editor
-if (gogo == true) {
-	if (global.my_cid_id == cid_id) {
+if (global.my_cid_id == cid_id) {
+	if (gogo == true) {
 		dis = min(distance_to_point(testing.x, testing.y), 400);
 		dir = point_direction(testing.x, testing.y, x, y);
 		testing.x += lengthdir_x(dis / 5, dir);
 		testing.y += lengthdir_y(dis / 5, dir);	
+	}
+}
+if (global.my_cid_id == cid_id) {
+	if (testing.a_cooltime <= 0) {
+		if (gogo == false) {
+			if (keyboard_check_released(global.keye)) {
+				alarm[2] = 1
+				testing.x_cooltime = 40
+				testing.a_cooltime = 40
+			}
+		}
 	}
 }
 
@@ -30,8 +39,8 @@ if(live = 1) {
 		go_to_speed = 0;
 		a_charging = 0;
 		arm_all_normal();
-		left_arm_YA = YA + 270;
-		right_arm_YA = YA + 90;
+		left_arm_YA = 0 + 270;
+		right_arm_YA = 0 + 90;
 		arm_movement(5, -5, 5, 5);
 		if (sturn = 0){
 			a_cooltime = 0;
@@ -43,8 +52,8 @@ if(live = 1) {
 			if (keyboard_check(vk_shift) and arm_type != "ouch" and arm_type != "caps_lock" and arm_type != "attack") {
 				arm_type = "shift"
 				arm_movement(5, -5, 5, 5);
-				left_arm_YA = YA + 270;
-				right_arm_YA = YA + 90;
+				left_arm_YA = 0 + 270;
+				right_arm_YA = 0 + 90;
 			}
 			else {
 				if (arm_type == "shift")
@@ -110,15 +119,15 @@ if(live = 1) {
 					case 0 :
 						arm_type_num = 1
 						arm_movement(0, 0, 4, -4);
-						right_arm_YA = YA + 120
-						left_arm_YA = YA + 10
+						right_arm_YA = 0 + 120
+						left_arm_YA = 0 + 10
 						a_cycle = 4;
 					break;
 					case 1 :
 						arm_type_num = 0
 						arm_movement(0, 0, -4, 4);
-						right_arm_YA = YA - 10
-						left_arm_YA = YA - 120
+						right_arm_YA = 0 - 10
+						left_arm_YA = 0 - 120
 						a_cycle = 4;
 					break;
 					}
@@ -289,12 +298,12 @@ if(live = 1) {
 	if place_meeting(x, y, team_1_heal_zone) {
 		if (global.team =1) {
 			if (hp < m_hp) {
-				hp += 0.06;
+				hp += 0.07;
 			}
 		}
 		else{
 			if (hp >= 0) {
-				hp -= 0.16;
+				hp -= 0.12;
 			}
 		}
 	}//우리팀 기지
@@ -303,12 +312,12 @@ if(live = 1) {
 	if place_meeting(x, y, team_0_heal_zone) {
 		if (global.team = 0) {
 			if (hp < m_hp) {
-				hp += 0.06;
+				hp += 0.07;
 			}
 		}
 		else{
 			if (hp >= 0) {
-				hp -= 0.16;
+				hp -= 0.12;
 			}
 		}
 	}//적팀 기지

@@ -1,14 +1,17 @@
 if (instance_exists(testing)) {
 	if (!global.only_see) {
 		if (!instance_exists(see_skill32)) {
+			change_han();
 			switch (testing.chat_point) {
-				case 0 : testing.chat_point = 1;
-				keyboard_string = "";
-				ime_set_language(1)
+				case 0 : 
+				//SetHangleMode();
+					testing.chat_point = 1;
+					keyboard_string = "";
 				break;
 	
-				case 1 : testing.chat_point = 0;
-				ime_set_language(0);
+				case 1 : 
+				//SetEnglishMode();
+				testing.chat_point = 0;
 				if (string_count("씨",pre_len) > 0 or string_count("시",pre_len) > 0) {
 					keyboard_string = string_replace_all(keyboard_string, "2", "에아");
 					keyboard_string = string_replace_all(keyboard_string, "E", "갑니다.");
@@ -40,6 +43,9 @@ if (instance_exists(testing)) {
 					case "노뫼":
 					case "노뫠":
 					case "노뭬":
+					case "놋트":
+					case "노몌":
+					case "노먜":
 					global.chat = "내 엉덩이를 때려줘 찰싹!";
 					break;
 					case "도타신":
@@ -55,7 +61,7 @@ if (instance_exists(testing)) {
 							}
 						}
 					break;
-					case "허경영!":
+					case "허령영!":
 					with(testing) {
 						if (room == room_sky) {
 							if (mana >= 80 and a_cooltime <= 0 and a_possible == true) {
@@ -88,59 +94,35 @@ if (instance_exists(testing)) {
 						{
 						case "/r" :
 						case "/R" :
+						/*
 						case "/관전" :
 							if (testing.hp > 99) {
 								global.only_see = true;
 							}
-						break;
-						case "/인벤" :
-							if (testing.open_key1 == 0)
-							{
-								testing.mine_say = "구리:" + string(testing.copper) + " 철:" + string(testing.iron) + "\n" + "도타볼:" + string(testing.dota_ball) + " 금:" + string(testing.gold)
-								testing.mine_say_time = 100;
+						break;*/
+						case "/중립":
+							with(testing) {
+								if(gi >= 400) {
+									if(a_possible = true) {
+										if (a_cooltime <= 0) {
+										level = 0
+										main_big_val = 1
+										hp = hp * 0.5
+										for (var i = 0; i < 8; i++) {
+											global.item_time[i] -= global.item_time[i] * 0.65;
+										}
+										global.team = 2;
+										server77_equal(serve_val.team, global.team, buffer_u8);
+										prt_val_add(Val.gi, -500);
+									}
+								}	
 							}
-							else
-							{
-								testing.mine_say = "구리:" + string(testing.copper) + " 철:" + string(testing.iron) + " 열쇠:" + string(testing.open_key1) + "\n" + "도타볼:" + string(testing.dota_ball) + " 금:" + string(testing.gold)
-								testing.mine_say_time = 100;
 							}
-						break;
-						case "/2020" :
-							scr_hat_change2(spr_hatee);
-
-							buffer_seek(testing.buff_chat, buffer_seek_start, 0);
-	
-							buffer_write(testing.buff_chat,buffer_u8,95);//95는 고자동기화
-							buffer_write(testing.buff_chat,buffer_u8, global.hat_show);
-							buffer_write(testing.buff_chat,buffer_u8, testing.level);
-	
-							network_send_packet(0,testing.buff_chat, 3);
-						break;
-						case "/P" :
-						case "/곡괭이" :
-							if (pickaxe_UI.windows = true)
-							{
-								pickaxe_UI.windows = false;
-							}
-							else
-							{
-								pickaxe_UI.windows = true;
-							}
-						break;
-						case "/((플루톤" :
-							scr_hat_change2(spr_secret);
-							testing.level = 5;
-
-								buffer_seek(testing.buff_chat, buffer_seek_start, 0);
-	
-								buffer_write(testing.buff_chat,buffer_u8,95);//95는 고자동기화
-								buffer_write(testing.buff_chat,buffer_u8, global.hat_show);
-								buffer_write(testing.buff_chat,buffer_u8, testing.level);
-	
-								network_send_packet(0,testing.buff_chat, 3);
 						break;
 						case "/))플루톤" :
 							scr_hat_change2(spr_hat50849);
+							testing.level = 0
+							testing.main_big_val = 1
 
 							buffer_seek(testing.buff_chat, buffer_seek_start, 0);
 	
@@ -154,13 +136,13 @@ if (instance_exists(testing)) {
 					break;
 		
 					case "%":
-						if (global.hat == spr_hat13 and testing.level > 1) {
-							if (testing.gi > 270) {
+						if (global.hat == spr_hat13 and testing.level >= 0 and testing.a_cooltime <= 0) {
+							if (testing.gi >= 220 - testing.level * 40) {
 								var delet = string_delete(global.chat, 1, 1);
 								var find = false;
 								var teama = false;
 								for(var i = 0; i < 20; i++) {
-									with(testing1 + i) {
+									with(global.cid_array[i]) {
 										if (delet == name) {
 											if (hat != spr_level5_hat7) {
 												find = true;
@@ -178,7 +160,7 @@ if (instance_exists(testing)) {
 										if (teama) {
 											hp -= 300;
 										}
-										prt_val_add(Val.gi, -270);
+										prt_val_add(Val.gi, -220 + testing.level * 40);
 										normal_play(apple_3_act);
 									}
 								}
@@ -189,7 +171,7 @@ if (instance_exists(testing)) {
 							}
 							else {
 								testing.skill_say_time = 60;
-								testing.skill_say = "GI: " + string(testing.gi) + " / 270(270)";
+								testing.skill_say =  "GI: " + string(testing.gi) + " / "  + string(220 - testing.level * 40) + "(" + string(220 - testing.level * 40)  + ")";
 							}
 						}
 						else {
@@ -205,12 +187,12 @@ if (instance_exists(testing)) {
 					break;
 		
 					case "~":
-						if (global.hat == spr_hat28 and testing.level > 1) {
+						if (global.hat == spr_hat28 and testing.level > 1 and testing.a_cooltime <= 0) {
 							if (testing.gi > 500) {
 								var delet = string_delete(global.chat, 1, 1);
 								var find = false;
 								for(var i = 0; i < 20; i++) {
-									with(testing1 + i) {
+									with(global.cid_array[i]) {
 										if (delet == name) {
 											find = true;
 											break;
@@ -253,7 +235,7 @@ if (instance_exists(testing)) {
 								var delet = string_delete(global.chat, 1, 1);
 								var find = false;
 								for(var i = 0; i < 20; i++) {
-									with(testing1 + i) {
+									with(global.cid_array[i]) {
 										if (delet == name) {
 											find = true;
 											break;
@@ -298,6 +280,7 @@ if (instance_exists(testing)) {
 									prt_val_add(Val.gi, -50);
 									var delet = string_delete(global.chat, 1, 1);
 									with(testing) {
+										sans_type = delet
 										switch(delet) {
 										case "1":
 											normal_play(twiza_2_act);
@@ -306,7 +289,7 @@ if (instance_exists(testing)) {
 											normal_play(ane_2_act);
 										break;
 										case "3":
-											normal_play(pwiza_2_act);
+											normal_play(p_1_act);
 										break;
 										case "4":
 											normal_play(apple_1_act);
@@ -324,12 +307,13 @@ if (instance_exists(testing)) {
 											normal_play(nuke_2_act);
 										break;
 										case "9":
-											normal_play(he_4_act);
+											normal_play(die_3_act);
 										break;
 										case "":
-											testing.chat3 = "&1 = 초록법사2차, &2 = 앤2차, &3 = 불법사2차";
-											testing.chat2 = "&4 = 사과1차, &5 = 전기1차, &6 = 마녀1차";
-											testing.chat1 = "&7 = 양아치1차, &8 = 원자력2차, &9 = 추모4차";
+											testing.chat4 = "&1 = 초록법사 Q, &2 = 앤 Q, &3 = 펭귄 D";
+											testing.chat3 = "&4 = 사과 D, &5 = 전기D, &6 = 마녀 D";
+											testing.chat2 = "&7 = 양아치 D, &8 = 원자력Q, &9 = 척살 w";
+											testing.chat1 = "사용할 마법이 설정되지 않았다!"
 										break;
 										default:
 											normal_play(p_1_act);

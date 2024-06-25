@@ -1,1 +1,1 @@
-DMG_buff(18, buff_bwiza2, 40, 240);
+DMG_buff(16, buff_bwiza2, 40, 240);

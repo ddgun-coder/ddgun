@@ -4,11 +4,14 @@ function filterling() {
 	 global.chat = string_replace_all(global.chat, " ", "");
 	}
 	global.chat = string_replace_all(global.chat, "씨발", "엌");
+	global.chat = string_replace_all(global.chat, "이눔아", "더러워");
 	global.chat = string_replace_all(global.chat, "시발", "샌즈");
 	global.chat = string_replace_all(global.chat, "새끼", "얼라");
 	global.chat = string_replace_all(global.chat, "병신", "중붕");
 	global.chat = string_replace_all(global.chat, "븅신", "돌붕");
 	global.chat = string_replace_all(global.chat, "느금", "-플-");
+	global.chat = string_replace_all(global.chat, "할미", "-정-");
+	global.chat = string_replace_all(global.chat, "할매", "-공-");
 	global.chat = string_replace_all(global.chat, "부랄", "금구슬");
 	global.chat = string_replace_all(global.chat, "랄부", "복주머니");
 	global.chat = string_replace_all(global.chat, "가슴", "아가맘마통");
@@ -26,6 +29,9 @@ function filterling() {
 	global.chat = string_replace_all(global.chat, "시1", "시간");
 	global.chat = string_replace_all(global.chat, "씨팔", "오팔");
 	global.chat = string_replace_all(global.chat, "좆", "쥬지");
+	global.chat = string_replace_all(global.chat, "할카스", "까스활명수");
+	global.chat = string_replace_all(global.chat, "똥구녕", "앗!");
+	global.chat = string_replace_all(global.chat, "똥구멍", "이야앗");
 	global.chat = string_replace_all(global.chat, "개새", "개꿀잼");
 	global.chat = string_replace_all(global.chat, "애미", "으악");
 	global.chat = string_replace_all(global.chat, "부모님", "감비아");
@@ -54,6 +60,7 @@ function filterling() {
 	global.chat = string_replace_all(global.chat, "보전깨", "전구깨");
 	global.chat = string_replace_all(global.chat, "빠꾸리", "고도리");
 	global.chat = string_replace_all(global.chat, "불알", "블루");
+	global.chat = string_replace_all(global.chat, "항문", "' 더러움 '");
 	for(var j = 0; j < max_chat; j++) {
 	 if (string_char_at(global.chat, j) == "병") {
 	  for(var i = j; i < max_chat + 1; i++) {
@@ -79,10 +86,34 @@ function filterling() {
 	   }
 	  }
 	 }
+	 if (string_char_at(global.chat, j) == "이") {
+	  for(var i = j; i < max_chat + 1; i++) {
+	   if (string_char_at(global.chat, i) == "눔") {
+	    global.chat = "어허 그런방 안입니다."
+	    break;
+	   }
+	  }
+	 }
 	 if (string_char_at(global.chat, j) == "ㅆ") {
 	  for(var i = j; i < max_chat + 1; i++) {
 	   if (string_char_at(global.chat, i) == "발") {
 	    global.chat = "코감기 기침감기 콧물감기 콜록콜록"
+	    break;
+	   }
+	  }
+	 }
+	  if (string_char_at(global.chat, j) == "똥") {
+	  for(var i = j; i < max_chat + 1; i++) {
+	   if (string_char_at(global.chat, i) == "구") {
+	    global.chat = "저는 엄마가 없습니다."
+	    break;
+	   }
+	  }
+	 }
+	  if (string_char_at(global.chat, j) == "똥") {
+	  for(var i = j; i < max_chat + 1; i++) {
+	   if (string_char_at(global.chat, i) == "꾸") {
+	    global.chat = "저는 엄마가 없습니다."
 	    break;
 	   }
 	  }
@@ -310,7 +341,10 @@ function filterling() {
 	if (string_char_at(global.chat, 0) == "후" and string_char_at(global.chat, max_chat) == "씨") {
 	 global.chat = "신난다 재미난다 우리들은 꾸러기";
 	}
-	show_debug_message(global.chat);
+	if (string_char_at(global.chat, 0) == "할" and string_char_at(global.chat, max_chat) == "멍") {
+	 global.chat = "저는 엄마가 없습니다.";
+	}
+	//show_debug_message(global.chat);
 
 
 }

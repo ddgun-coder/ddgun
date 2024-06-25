@@ -1,5 +1,5 @@
 function random_table3() {
-	var what = irandom(53);
+	var what = irandom(57);
 	switch(what) {
 		case 0:
 			normal_play(yellow_3_act);
@@ -104,7 +104,7 @@ function random_table3() {
 			normal_play(gilmak_3_act);
 		break;
 		case 34:
-			normal_play(EQ_3_act2);
+			normal_play(EQ_3_act1);
 		break;
 		case 35:
 			normal_play(nuke_3_act);
@@ -116,18 +116,7 @@ function random_table3() {
 			normal_play(pota_3_act);
 		break;
 		case 38:
-			if(hp > 70) {
-				normal_play(jam_3_act);
-			}
-			else {
-				buffer_seek(buff_chat, buffer_seek_start, 0);
-	
-				buffer_write(buff_chat,buffer_u8,1)//1은 이제 채팅
-				buffer_write(buff_chat,buffer_string, "저는 개호좁이에용 ㅎㅎ");
-				buffer_write(buff_chat,buffer_string,global.name);
-	
-				network_send_packet(0,buff_chat,buffer_tell(buff_chat));
-			}
+			normal_play(jam_3_act);
 		break;
 		case 39:
 			normal_play(he_3_act);
@@ -151,7 +140,7 @@ function random_table3() {
 			normal_play(nin_3_act);
 		break;
 		case 46:
-			normal_play(time_3_act);
+			normal_play(time_2_act);
 		break;
 		case 47:
 			normal_play(tu_3_act);
@@ -169,10 +158,27 @@ function random_table3() {
 			normal_play(yo_3_act);
 		break;
 		case 52:
-			normal_play(tree_3_act);
+			normal_play(tree_3_act1);
 		break;
 		case 53:
 			normal_play(bam_3_act);
+		break;
+		case 54:
+			normal_play(ass_3_act);
+		break;
+		case 55:
+			normal_play(sang_3_act1);
+		break;
+		case 56 :
+			go_to_scale = 1 + big_val;
+			big_val += 1;
+			big_val_time = 220;
+			server78_create_instace(n_attack_area, x, y);
+			normal_play(r_ready1);
+			server202_sound(ready_1_sound)
+		break;
+		case 57:
+			normal_play(newb_3_act);
 		break;
 	}
 

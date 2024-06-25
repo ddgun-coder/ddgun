@@ -1,5 +1,3 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 3B1DB87D
-/// @DnDArgument : "code" "item_button(6)"
-item_button(6)
+if (global.stats = spr_stats1 or global.stats = spr_stats2) {
+	item_button(6)
+}

@@ -1,0 +1,1 @@
+draw_sprite(spr_main_back,global.back_index,x,y)

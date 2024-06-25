@@ -99,11 +99,6 @@ if (global.my_cid == cid) {
 			normal_play(bili_5_act);
 		}
 		break;
-		case obj_fish17:
-			with(testing) {
-				hp += 100;
-			}
-		break;
 		case obj_fish18:
 			with(testing) {
 				random_level5();
@@ -385,22 +380,22 @@ if (global.my_cid == cid) {
 		break;
 		case obj_food2:
 			with(testing) {
-				aexp += 50;
+				aexp += 75;
 			}
 		break;
 		case obj_food3:
 			with(testing) {
-				aexp += 300;
+				aexp += 187;
 			}
 		break;
 		case obj_food4:
 			with(testing) {
-				aexp += 600;
+				aexp += 900;
 			}
 		break;
 		case obj_food5:
 			with(testing) {
-				aexp += 1000;
+				aexp += 1500;
 			}
 		break;
 		case obj_food6:
@@ -468,6 +463,80 @@ if (global.my_cid == cid) {
 				big_val_time = 400;
 				mine_say = string(go_to_scale) + "크기 당첨!(10초)";
 				mine_say_time = 80;
+			}
+		break;
+		case obj_food17:
+			with(testing) {
+				hp = 100
+			}
+		break;
+		case obj_food18:
+			with(testing) {
+				m_stemina = 200
+			}
+		break;
+		case obj_food19:
+			with(testing) {
+				m_mana = 250
+			}
+		break; 
+		case obj_food20:
+			with(testing) {
+				server78_create_instace(healer_skill4, x, y)
+			}
+		break;
+		case obj_food21:
+			with(testing) {
+				server78_create_instace(jam_skill22, x, y)
+			}
+		break;
+		case obj_food22:
+			with(testing) {
+				server78_create_instace(food_skill2, x, y)
+				buffer_seek(buff_chat, buffer_seek_start, 0);
+	
+				buffer_write(buff_chat,buffer_u8,1)//1은 이제 채팅
+				buffer_write(buff_chat,buffer_string, "전쟁을 준비해라.");
+				buffer_write(buff_chat,buffer_string,global.name);
+	
+				network_send_packet(0,buff_chat,buffer_tell(buff_chat));
+			}
+		break;
+		case obj_food23:
+			with(testing) {
+				random_table5()
+			}
+		break;
+		case obj_food24:
+			with(testing) {
+				normal_attack_type = spr_bobo;	
+			}
+		break;
+		case obj_food25:
+			with(testing) {
+				global.hat = spr_level5_hat14;
+				level = 0
+			}
+		break;
+		case obj_food26:
+			with(testing) {
+				normal_play(sea_4_act);
+			}
+		break;
+		case obj_food27:
+			with(testing) {
+				go_to_scale = 1 + big_val;
+				big_val += 1;
+				big_val_time = 220;
+				server78_create_instace(n_attack_area, x, y);
+				server202_sound(ready_1_sound)
+				normal_play(r_ready1);
+				prt_val_add(Val.gi, 150);
+			}
+		break;
+		case obj_food28:
+			with(testing) {
+				aexp += 200;
 			}
 		break;
 	}

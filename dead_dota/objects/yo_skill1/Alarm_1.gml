@@ -1,0 +1,1 @@
+sturn_attack = true

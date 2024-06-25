@@ -1,1 +1,1 @@
-DMG(12, n_attack_area, 30)
+DMG(18, n_attack_area, 40);

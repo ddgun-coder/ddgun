@@ -1,5 +1,4 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 5F567ABE
-/// @DnDArgument : "code" "left_goto_YA = YA;"
-left_goto_YA = YA;
+a_possible = true
+a_cooltime = 80
+extra_speed = 0
+light_set(false);

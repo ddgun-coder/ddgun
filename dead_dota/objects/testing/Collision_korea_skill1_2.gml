@@ -1,1 +1,1 @@
-DMG_no_surn(0.4);
+DMG_no_surn_hide(0.6, 0.3);

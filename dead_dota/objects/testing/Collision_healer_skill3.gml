@@ -1,6 +1,6 @@
 if (live == 0) {
 	if (global.team == other.team) {
-		if (global.hat != spr_hat15 and global.hat != spr_hat72) {
+		if (global.hat != spr_hat15 and global.hat != spr_hat75) {
 			server202_sound(resurrection);
 			live = 1;
 			hp = 100;
@@ -21,6 +21,7 @@ if (live == 0) {
 			buffer_write(buff_chat,buffer_u8,other_cid);
 	
 			network_send_packet(0,buff_chat, 48);
+			achi_get_if(5);
 		}
 	}
 }

@@ -1,0 +1,1 @@
+a_cooltime = 10

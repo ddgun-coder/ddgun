@@ -1,13 +1,11 @@
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 2F9C9512
-/// @DnDArgument : "code" "skill_create(30);$(13_10)deltay = 0;$(13_10)delayb = 1;$(13_10)YA = 0;$(13_10)alarm[1] = 1;$(13_10)alarm[2] = 10;$(13_10)image_blend = make_colour_hsv(random(255), random(255), random(255));$(13_10)sprite_set_cache_size(spr_t, 2);$(13_10)dmg = 20;"
-skill_create(30);
-deltay = 0;
-delayb = 1;
-YA = 0;
-alarm[1] = 1;
-alarm[2] = 10;
-image_blend = make_colour_hsv(random(255), random(255), random(255));
-sprite_set_cache_size(spr_t, 2);
-dmg = 20;
+/// @DnDArgument : "code" "cid = 2;$(13_10)cid_id = asset_get_index("testing" + string(cid))$(13_10)team = -1$(13_10)alarm[0] = 15;$(13_10)audio_play_sound(he_1_sound,1,false);$(13_10)scale = 0;$(13_10)dmg = 12;"
+cid = 2;
+cid_id = asset_get_index("testing" + string(cid))
+team = -1
+alarm[0] = 15;
+audio_play_sound(he_1_sound,1,false);
+scale = 0;
+dmg = 12;

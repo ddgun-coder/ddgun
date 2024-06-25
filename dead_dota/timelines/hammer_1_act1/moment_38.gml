@@ -1,0 +1,1 @@
+server78_create_instace(EQ_skill1, x + lengthdir_x(270 * big_val, YA - 90), y + lengthdir_y(270 * big_val, YA - 90));

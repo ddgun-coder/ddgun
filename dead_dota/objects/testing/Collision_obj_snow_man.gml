@@ -1,1 +1,2 @@
-DMG_buff(10, buff_bwiza2, 40, 80);
+DMG(14, n_attack_area, 40)
+

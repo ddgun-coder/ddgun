@@ -1,9 +1,10 @@
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 55133E91
-/// @DnDArgument : "code" "DMG_no_surn(0.03);$(13_10)if place_free(x + lengthdir_x(6, other.YA - 90), y + lengthdir_y(6, other.YA - 90)) {$(13_10)	x += lengthdir_x(4, other.YA - 90);$(13_10)	y += lengthdir_y(4, other.YA - 90);$(13_10)}"
-DMG_no_surn(0.03);
-if place_free(x + lengthdir_x(6, other.YA - 90), y + lengthdir_y(6, other.YA - 90)) {
-	x += lengthdir_x(4, other.YA - 90);
-	y += lengthdir_y(4, other.YA - 90);
+/// @DnDArgument : "code" "DMG_no_surn(0.04);$(13_10)if (global.team == other.team or (other.team == 2 and other.cid == global.my_cid)) {$(13_10)	if(a_cooltime <= 0 and a_possible = true) {$(13_10)		normal_play(shep_1_act)$(13_10)	}$(13_10)}"
+DMG_no_surn(0.04);
+if (global.team == other.team or (other.team == 2 and other.cid == global.my_cid)) {
+	if(a_cooltime <= 0 and a_possible = true) {
+		normal_play(shep_1_act)
+	}
 }

@@ -18,7 +18,7 @@ cid = 3;
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 228A0D4D
-/// @DnDArgument : "code" "cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_angle = cid_id.YA;$(13_10)dmg = 15;"
+/// @DnDArgument : "code" "cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_angle = cid_id.YA;$(13_10)dmg = 18;"
 cid_id  = asset_get_index("testing" + string(cid));
 image_angle = cid_id.YA;
-dmg = 15;
+dmg = 18;

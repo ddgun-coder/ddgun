@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "server",
-    "path": "folders/Scripts/server.yy",
+  "$GMScript":"",
+  "%Name":"server78_create_instace",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"server78_create_instace",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "server78_create_instace",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -1,10 +1,10 @@
 arm_all_normal();
 a_cooltime = 22;
 arm_type = "jump"
-right_arm_YA = YA + 90
-left_arm_YA = YA - 90
-left_foot_YA = YA - 45
-right_foot_YA = YA + 45
+right_arm_YA = 0 + 90
+left_arm_YA = 0 - 90
+left_foot_YA = 0 - 45
+right_foot_YA = 0 + 45
 temp_YA = YA;
 temp_x = x;
 temp_y = y;

@@ -12,6 +12,9 @@ mana = 200;
 
 m_stemina = 100;
 
+surf_xoffset = x;
+surf_yoffset = y;
+
 stemina = 100;
 
 m_aexp = 600;
@@ -80,8 +83,8 @@ left_arm_deltax = 0;
 left_arm_deltay = 0;
 right_arm_deltax = 0;
 right_arm_deltay = 0;
-left_goto_YA = YA;
-right_goto_YA = YA;
+left_goto_YA = 0;
+right_goto_YA = 0;
 arm_spin_speed = 1;
 arm_spin_able = 0;
 
@@ -100,8 +103,8 @@ left_foot_deltax = 0;
 left_foot_deltay = 0;
 right_foot_deltax = 0;
 right_foot_deltay = 0;
-left_goto_YA = YA;
-right_goto_YA = YA;
+left_goto_YA = 0;
+right_goto_YA = 0;
 arm_type_more = "none"
 spr_arml_more = spr_none;
 spr_armr_more = spr_none;
@@ -121,3 +124,23 @@ a_possible_time = 0;
 color = c_white;
 charging_color = 0;
 color_cycle = 0;
+to_testingXY = false;
+to_testingXY_time = 0;
+
+other_YA = 0;
+
+function do_charge() {
+	hp -= 20;
+	sturn = 120;
+	audio_play_sound(have_hit, 9,false);
+	var show = instance_create_depth(x, y, depth - 1, DMG_show);
+	show.d = 20;
+	to_testingXY = true;
+	to_testingXY_time = 100;
+}
+function go_to_back() {
+	to_testingXY = false;
+	sturn = 60;
+	other_YA = testing.YA + 90;
+	go_to_speed = 20;
+}

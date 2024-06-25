@@ -1,4 +1,4 @@
-var D = 2
+var D = 0
 var sturn_time = 200
 
 view_visible[1] = false;
@@ -12,9 +12,10 @@ if (live = 1) {
 			invisible = false;
 			alpha = 1;
 			cli_alpha = 1;
+			cur_attack = other.cid;
 			server77_equal(serve_val.alpha, 1, buffer_bool)
 			if (other.cid_id.buff_index == buff_nu2) {
-				hp -= 2 * D;
+				hp -= 0 * D;
 			}
 			else {
 				hp -= D;

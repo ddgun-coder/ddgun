@@ -1,1 +1,1 @@
-DMG_buff(2, buff_nin4, 30, 200);
+DMG_buff_only_hit(10, buff_nin4, 30, 200);

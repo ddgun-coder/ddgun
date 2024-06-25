@@ -1,14 +1,31 @@
+testing_surf_set();
 if (creper_die == 0) {
-	footL_x = x + (lengthdir_x(-20 + left_foot_deltax, YA) + lengthdir_x(10 + left_foot_deltay, YA + 270)) * big_val;
-	footL_y = y + (lengthdir_y(-20 + left_foot_deltax, YA) + lengthdir_y(10 + left_foot_deltay, YA + 270)) * big_val;
-	footR_x = x + (lengthdir_x(20 + right_foot_deltax, YA) + lengthdir_x(10 + right_foot_deltay, YA + 270)) * big_val;
-	footR_y = y + (lengthdir_y(20 + right_foot_deltax, YA) + lengthdir_y(10 + right_foot_deltay, YA + 270)) * big_val;
-	armL_x = x + (lengthdir_x(-20 + left_arm_deltax, YA) + lengthdir_x(left_arm_deltay, YA + 270)) * big_val;
-	armL_y = y + (lengthdir_y(-20 + left_arm_deltax, YA) + lengthdir_y(left_arm_deltay, YA + 270)) * big_val;
-	armR_x = x + (lengthdir_x(20 + right_arm_deltax, YA) + lengthdir_x(right_arm_deltay, YA + 270)) * big_val;
-	armR_y = y + (lengthdir_y(20 + right_arm_deltax, YA) + lengthdir_y(right_arm_deltay, YA + 270)) * big_val;
-	hat_x = x + lengthdir_x(charge * 15, YA - 90);
-	hat_y = y + lengthdir_y(charge * 15, YA - 90);
+	if (seq == -1) {
+		footL_x = surf_xoffset + (-20 + left_foot_deltax) * 1;
+		footL_y = surf_yoffset + (10 + left_foot_deltay) * 1;
+		footR_x = surf_xoffset + (20 + right_foot_deltax) * 1;
+		footR_y = surf_yoffset + (10 + right_foot_deltay) * 1;
+		armL_x = surf_xoffset + (-20 + left_arm_deltax) * 1;
+		armL_y = surf_yoffset + (left_arm_deltay) * 1;
+		armR_x = surf_xoffset + (20 + right_arm_deltax) * 1;
+		armR_y = surf_yoffset + right_arm_deltay * 1;
+		hat_x = surf_xoffset;
+		hat_y = surf_yoffset + charge * 15 + face_delta
+		face_x = surf_xoffset + face_delta_x;
+		face_y = surf_yoffset + face_delta + face_delta_y;
+		arm_moreR_YA = right_arm_YA;
+		arm_moreL_YA = left_arm_YA;
+		armL_more_x = armL_x + lengthdir_x(-spr_arm_morex, left_arm_YA) + lengthdir_x(spr_arm_morey, left_arm_YA + 270);
+		armL_more_y = armL_y + lengthdir_y(-spr_arm_morex, left_arm_YA) + lengthdir_y(spr_arm_morey, left_arm_YA + 270);
+		armR_more_x = armR_x + lengthdir_x(spr_arm_morex, right_arm_YA) + lengthdir_x(spr_arm_morey, right_arm_YA + 270);
+		armR_more_y = armR_y + lengthdir_y(spr_arm_morex, right_arm_YA) + lengthdir_y(spr_arm_morey, right_arm_YA + 270);
+		effect_x = surf_xoffset;
+		effect_y = surf_yoffset;
+		effect_YA = temp_YA;
+	}
+	else {
+		seq_to_variable();
+	}
 }
 else {
 	creper_die--;
@@ -21,6 +38,7 @@ switch(global.name) {
 		draw_text(x - 120, y + 50, "추가 효과:" +string(effect_index))
 		draw_text(x + 60, y + 30, "팔 상황:" + string(arm_type))
 		draw_text(x + 60, y + 15, "스턴:" + string(sturn))
+		draw_text(x - 120, y - 70, "스텟 쿨타임:" + string(b_cooltime))
 		break;
 	case "99플루톤" :
 		draw_text(x + 60, y + 15, "카운터:" + string(counter))
@@ -31,14 +49,14 @@ switch(global.name) {
 		draw_text(x + 60, y + 30, "다른 사람이 보는 투명값:" + string(cli_alpha))
 	break;
 }
-if (global.hat == spr_hat42) {
+if (global.hat == spr_hat42 and global.wild_circle) {
 	draw_set_color(c_blue);
 	draw_circle(x, y, 450, true);
 	draw_set_color(c_red);
 	draw_circle(x, y, 300, true);
 }
-cur_xview = camera_get_view_x(view_camera[view_current]);
-cur_yview = camera_get_view_y(view_camera[view_current]);
+cur_xview = camera_get_view_x(view_camera[0]);
+cur_yview = camera_get_view_y(view_camera[0]);
 if (nu_say_time > 0) {
 	switch(nu_say) {
 		case 1:
@@ -70,110 +88,46 @@ if (nu_say_time > 0) {
 	nu_say_time -= 1;
 }
 if (global.show_me == false) {
-	draw_sprite_ext(effect_index_under, effect_index_num, x, y, big_val, big_val, temp_YA,color,alpha);
-	if (live =0) {
-		draw_sprite_ext(spr_rip,0,x,y,big_val,big_val,YA,-1,1);
-		shader_set(shGrayscale);
-	}
-	if (live = 1) {
-		if(only_hat == false) {
-		var a, f;
-		if (global.hat == spr_hat39 and level == 3) {
-			a = spr_arm31
-			f = spr_foot22;
-		}
-		else {
-			a = global.arm;
-			f = global.foot;
-		}
-		draw_sprite_ext(f, 0, footL_x, footL_y, left_foot_xscale * big_val, left_foot_yscale * big_val, left_foot_YA, color, alpha);//왼발
-		draw_sprite_ext(f, 0, footR_x, footR_y, right_foot_xscale * big_val, right_foot_yscale * big_val, right_foot_YA, color, alpha);//오른발
-		draw_sprite_ext(a, 0, armL_x, armL_y, left_arm_xscale * big_val, left_arm_yscale * big_val, left_arm_YA, color, alpha);//왼손
-		draw_sprite_ext(a, 0, armR_x, armR_y, right_arm_xscale * big_val, right_arm_yscale * big_val, right_arm_YA, color, alpha);//오른손
-		//팔
-		}
-	}
-	if (sturn = 0)
-	{
-		switch (face_variable)
-		{
-			case 0:
-				switch(global.face) {
-						case spr_e4:
-							draw_sprite_ext(spr_e4,-1,x,y,big_val,big_val,YA,-1,alpha);
-						break;
-						default:
-							draw_sprite_ext(global.face,0,x,y,big_val,big_val,YA,color,alpha);
-						break;
-					}
-			break;
-			case 1:
-				draw_sprite_ext(spr_hunt_face,face_frame,x,y,big_val,big_val,YA,color,alpha);
-			break;
-		}
+	var rot_x, rot_y;
 	
-	}
-	if(sturn > 0)
-	{
-		ser_eface(global.face);
-	}
-	if (hat_bye = false) {
-		if(global.hat != spr_hat6) {
-			if (instance_exists(see_skill31)) {
-				draw_sprite_ext(buff_see3,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);// 모자
-			}
-			else {
-				if (level ==4) {
-					switch(global.hat) {
-						case spr_hat5:
-						case spr_hat1:
-						    draw_sprite_ext(global.hat,sprite_get_number(global.hat) - 1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-					    break;
-						default:
-						    draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val, big_val,YA + hat_YA,color,alpha);
-				        break;
-					}
-				}
-				else {
-			        if (global.hat != spr_level5_hat12) {
-					    draw_sprite_ext(global.hat,level + global.skin * 4,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);// 모자
-					}
-				    else {
-					    draw_sprite_ext(global.hat,-1,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-					}
-				}
-			}
-		}
-		else {
-			draw_sprite_ext(spr_hat6_1 + level, global.skin,hat_x,hat_y,hat_xscale * big_val ,big_val,YA + hat_YA,color,alpha);
-		}
-	}
-	if (frame_level_up =1) {
-		draw_sprite_ext(spr_level_up,-1,x,y,big_val,big_val,0,color,1);
-	}//레벨 업 표시
-	if (spr_armr_more != spr_none or spr_arml_more != spr_none)
-	{
-		var armL_more_x = armL_x + lengthdir_x(-spr_arm_morex, left_arm_YA) + lengthdir_x(spr_arm_morey, left_arm_YA + 270);
-		var armL_more_y = armL_y + lengthdir_y(-spr_arm_morex, left_arm_YA) + lengthdir_y(spr_arm_morey, left_arm_YA + 270);
-		var armR_more_x = armR_x + lengthdir_x(spr_arm_morex, right_arm_YA) + lengthdir_x(spr_arm_morey, right_arm_YA + 270);
-		var armR_more_y = armR_y + lengthdir_y(spr_arm_morex, right_arm_YA) + lengthdir_y(spr_arm_morey, right_arm_YA + 270);
-		draw_sprite_ext(spr_armr_more, spr_arm_more_num, armR_more_x, armR_more_y, big_val * right_arm_xscale, big_val * right_arm_yscale, right_arm_YA,color,alpha);
-		draw_sprite_ext(spr_arml_more, spr_arm_more_num, armL_more_x, armL_more_y, big_val * left_arm_xscale, big_val * left_arm_yscale, left_arm_YA,color,alpha);
-	}//추가 팔 그래픽
+	rot_x = surf_xoffset * cos(degtorad(-YA)) - surf_yoffset * sin(degtorad(-YA));
+	rot_y = surf_xoffset * sin(degtorad(-YA)) + surf_yoffset * cos(degtorad(-YA));
+	draw_surface_ext(surf, x - rot_x * big_val, y - rot_y * big_val, big_val, big_val, YA, color, 1); 
+
 	draw_sprite_ext(effect_index, effect_index_num, x, y, big_val, big_val, temp_YA,color,alpha);//추가 효과 그래픽
-	if (alive > 0) {
-		draw_sprite_ext(spr_spawn1, 0, x, y, big_val, big_val, 0,-1,1);
-		draw_sprite_ext(spr_spawn2, 0, x, y, alive / 3, alive / 3, 0,-1,1);
-	}
 	if (terror_charge < 5) {
 		draw_sprite_ext(spr_terror_charge,terror_charge,x,y,big_val,big_val,YA,color,alpha);
 	}
 	shader_reset();
+	if (frame_level_up =1) {
+		draw_sprite_ext(spr_level_up,-1,x,y,big_val,big_val,0,color,1);
+	}//레벨 업 표시
+	gpu_set_fog(false, c_white, 0, 1000);
+	draw_sprite(global.stats, 0, x, y);//특성	
 	draw_sprite_ext(buff_index,-1, x, y, big_val, big_val, 0,color,alpha);//추가 효과 그래픽
-	draw_sprite_part(spr_hp,5,0,0,(m_hp/100)*58,4,x-28,y-44);
-	draw_sprite_part(spr_hp,0,0,0,(hp/100)*58,4,x-28,y-44);//작은 채력바
-	draw_sprite_part(spr_hp,7,0,0, 58,4,x-28,y-40);
-	draw_sprite_part(spr_hp,6,0,0,(sturn/40)*58,4,x-28,y-40);//스턴바
+	draw_sprite_part(spr_hp,5,0,0,58,4,x-28,y-44);//체력 바
+	var _len = m_hp + armor;
+	if (protection_val > 0) {
+		draw_sprite_ext(spr_barrier, 0, x, y, big_val, big_val, 0, c_white, alpha * protection_val / 10);	
+	}
+	if (armor + hp < m_hp) {
+		var _ration = _len / m_hp;
+		var _hp_len = (hp/_len) * 58 * _ration;
+		draw_sprite_part(spr_hp,0,0,0,_hp_len,4,x-28,y-44);//체력 바
+		draw_sprite_part(spr_hp,10,0,0,(armor/_len) * 58 * _ration,4, x-28+_hp_len,y-44);//아머 바   
+	}
+	else {
+		 _len = armor + hp
+		var _hp_len = (hp/_len)*58
+		draw_sprite_part(spr_hp,0,0,0,(hp/_len)*58,4,x-28,y-44);//체력 바
+		draw_sprite_part(spr_hp,10,0,0,(armor/_len)*58,4, x-28+_hp_len,y-44);//아머 바
+	}
+	draw_sprite_part(spr_hp,7,0,0,58,4,x-28,y-40);
+	var low_sturn = sturn;
+	if (low_sturn > 80) {
+		low_sturn = 80;
+	}
+	draw_sprite_part(spr_hp,6,0,0,(low_sturn/80)*58,4,x-28,y-40);//스턴바
 	draw_set_halign(fa_center);
 	draw_text(x,y-60, "LV." + string(level + 1));
 	draw_set_color(c_black);
@@ -189,7 +143,7 @@ if (global.show_me == false) {
 	break;
 	}
 	draw_text(x, y + 32, "■ "+ global.name+" ■");//이름
-	draw_set_color(c_white);
+	draw_set_color(c_yellow);
 	if (global.hat == spr_hat40) {
 		draw_set_alpha(combo_time / 40);
 		draw_text(x + 45, y, "Combo:" + string(combo));
@@ -200,28 +154,178 @@ if (global.show_me == false) {
 	draw_text_bold(x, y - 80, chat);
 	draw_set_color(c_white);
 	draw_text(x,y - 80 ,chat);
+	}
+	
+	if (a_a_cooltime = 2 and global.hat != spr_hat29 and global.hat !=spr_hat26 and global.hat !=spr_hat37) {
+	skill_say_time = 60;
+    skill_say = "' 쿨타임류 스킬 준비됨! '"//쿨타임 알림
+    }
+	
+    switch(buff_index) {
+	case buff_fast_go:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x, y + 48, "[ 이동속도 증가 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_nu2:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 공격력 + 50% ]");
+		draw_set_alpha(1);
+	break;
+	case buff_bwiza2:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 이동속도 감소 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_mpkiller:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 마나 감소 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_giligili:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 방향제어 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_timea:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 행동불가 ]");
+		draw_set_alpha(1);
+	break;
+	case spr_gas:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 체력이 점점 감소합니다. ]");
+		draw_set_alpha(1);
+	break;
+	case buff_timeb:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 타격시 아이템 가속 + 100% ]");
+		draw_set_alpha(1);
+	break;
+	case buff_timeP:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 모든 자동회복 2배 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_p2:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 재생력 증가 ]");
+		draw_set_alpha(1);
+	break;
+		case buff_shadow:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 은신 ]");
+		draw_set_alpha(1);
+	break;
+		case buff_noheal:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 회복금지 ]");
+		draw_set_alpha(1);
+	break;
+		case buff_see3:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 검열됨 ]");
+		draw_set_alpha(1);
+	break;
+		case buff_see2:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 경직 ]");
+		draw_set_alpha(1);
+	break;
+		case buff_jaja:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 받는 피해 - 50% ]");
+		draw_set_alpha(1);
+	break;
+		case buff_apple3:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48, "[ 체력 페널티 ]");
+		draw_set_alpha(1);
+	break;
+	case spr_wing1:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48 , "[ 무적! ]");
+		draw_set_alpha(1);
+	break;
+	case buff_noitem:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48 , "[ 아이템 사용금지 ]");
+		draw_set_alpha(1);
+	break;
+	case buff_sang:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48 , "[ 타격시 기 회복 + 25% ]");
+		draw_set_alpha(1);
+	break;
+	case buff_nin4:
+		draw_set_color(c_white)
+		draw_set_alpha(buff_time / 40);
+		draw_text(x , y + 48 , "[ 받는 데미지 + 20% ]");
+		draw_set_alpha(1);
+	break;
+	
 	}//캐릭터위에 말
 	if (live == 0) {
 		draw_sprite_ext(spr_rip,1,x,y,big_val,big_val,YA,-1,1);
 	}
 	else {
 		if(sturn > 0) {
-			draw_sprite_ext(spr_star,-1,x,y,big_val,big_val,YA,color,alpha);
+			draw_sprite_ext(spr_star,star_frame,x,y,big_val,big_val,YA,color,alpha);
+			if (star_frame == 1) {
+				if (star_frame_s == 0)
+				{
+					star_frame = 0;
+					star_frame_s = 5;
+				}
+			}
+			else
+			{
+				if (star_frame_s == 0)
+				{
+					star_frame = 1;	
+					star_frame_s = 5;
+				}
+			}
+			if (star_frame_s > 0) {
+				star_frame_s -= 1;
+			}
 		}
 	}
 }
 
 draw_set_halign(fa_center);
 if (skill_say_time > 0) {
-	draw_set_color(c_blue);
+	draw_set_color(make_color_rgb(32, 23, 79));
+	draw_text_bold(cur_xview + 512, cur_yview + 350, skill_say);
+	draw_set_color(make_color_rgb(136, 223, 249));
 	draw_text(cur_xview + 512, cur_yview + 350, skill_say);
 	draw_set_color(c_white);
 }
 if (chat_point = 1) {
 	draw_set_halign(fa_left);
 	draw_set_color(c_black);
-	draw_sprite(spr_say_here,0,cur_xview + 320,cur_yview + 384);
-	draw_text(cur_xview + 320,cur_yview + 384, keyboard_string + string(ime_get_string_utf8()))
+	var chat_x = cur_xview + global.window_width / 2 - (1024 / 2 - obj_say_here_online.xstart);
+	draw_sprite(spr_say_here,0,chat_x,cur_yview + 384);
+	draw_text(chat_x,cur_yview + 384, keyboard_string)
 	draw_set_color(c_white);
 }//그 채팅 칠때 나오는거
 if (mine_say_time > 0) {
@@ -232,9 +336,20 @@ if (mine_say_time > 0) {
 	draw_set_color(c_black);
 	draw_text(x,y - 80 , mine_say);
 }//캐릭터위에 말 세팅
+
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_blue)
-draw_text_bold(cur_xview + 10 , cur_yview + 740 ,"gold:" + string(global.money))
+draw_text_bold(cur_xview + 25 , cur_yview + 740 ,"GOLD : " + string(global.money))
 draw_set_color(c_white);
-draw_text(cur_xview + 10 , cur_yview + 740 ,"gold:" + string(global.money));//돈 부분
+draw_text(cur_xview + 25 , cur_yview + 740 ,"GOLD : " + string(global.money));//돈 부분
+
+if (is_babo_angle_show) {
+	draw_set_color(c_red);
+	var len1 = 55, len2 = 45;
+	draw_arrow(x, y, x + lengthdir_x(len1, babo_angle1), y + lengthdir_y(len1, babo_angle1), 15);
+	draw_arrow(x, y, x + lengthdir_x(len1, babo_angle2), y + lengthdir_y(len1, babo_angle2), 15);
+
+	draw_set_color(c_white);
+}
+check_seq_is_end();

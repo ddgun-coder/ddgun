@@ -1,1 +1,1 @@
-DMG_buff_team(buff_p2, 300);
+DMG_buff_team(buff_p2, 360);

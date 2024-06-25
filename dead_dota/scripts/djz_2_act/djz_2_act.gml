@@ -13,7 +13,7 @@ function djz_2_act() {
 			normal_play(EQ_4_act)
 		break;
 		case 4:
-			normal_play(EQ_3_act2)
+			normal_play(EQ_3_act1)
 		break;
 	}
 

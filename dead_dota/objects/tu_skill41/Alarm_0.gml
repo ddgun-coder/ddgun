@@ -1,4 +1,3 @@
-/// @DnDAction : YoYo Games.Instances.Destroy_Instance
-/// @DnDVersion : 1
-/// @DnDHash : 245E6633
+/// @description Insert description here
+// You can write your code in this editor
 instance_destroy();

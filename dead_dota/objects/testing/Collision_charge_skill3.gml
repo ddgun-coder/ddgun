@@ -9,4 +9,4 @@ if (live = 1) {
 		}
 	}
 }
-DMG(49, EQ_skill1, 100)
+DMG(49, EQ_skill1, 120)

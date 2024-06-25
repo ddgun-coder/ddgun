@@ -6,6 +6,6 @@ if (other.image_index > 10) {
 	}
 }
 else {
-	DMG(80, yellow_skill2, 70);
+	DMG(66, yellow_skill2, 70);
 	other_cid = 0;
 }

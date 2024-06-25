@@ -1,4 +1,4 @@
-skill_create(360);
+skill_create(250);
 depth = 200;
 spin = 0;
 audio_play_sound(nu_2_sound,9,false);

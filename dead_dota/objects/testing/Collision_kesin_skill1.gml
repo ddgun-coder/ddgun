@@ -1,1 +1,2 @@
-DMG(9, EQ_skill1, 96);
+DMG(10, EQ_skill1, 96);
+

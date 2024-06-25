@@ -1,0 +1,10 @@
+a_possible = true;
+effect_index = spr_none;
+left_goto_YA = 0 - 150;
+right_goto_YA = 0 + 150;
+left_arm_yscale = 1;
+right_arm_yscale = 1;
+arm_type = "normal";
+arm_type_more = "none"
+arm_spin_able = false;
+arm_spin_speed = 0;

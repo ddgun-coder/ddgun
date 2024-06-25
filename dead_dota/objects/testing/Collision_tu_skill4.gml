@@ -1,3 +1,5 @@
-/// @description Insert description here
-// You can write your code in this editor
-DMG(10, n_attack_area, 7)
+DMG(25, EQ_skill1, 88)
+
+
+
+

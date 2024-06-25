@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "server",
-    "path": "folders/Scripts/server.yy",
+  "$GMScript":"",
+  "%Name":"server202_sound",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"server202_sound",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "server202_sound",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

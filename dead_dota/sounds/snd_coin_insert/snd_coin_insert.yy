@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_coin_insert",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.785229,
+  "name":"snd_coin_insert",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_coin_insert.wav",
+  "type":0,
+  "volume":1.0,
+}

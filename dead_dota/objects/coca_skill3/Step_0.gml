@@ -8,6 +8,7 @@ if (cid_id != global.my_cid_id) {
 		instance_destroy();
 	}
 }
+
 for (var i = 1; i < 24; i++) {
 	if (i != global.my_cid_id) {
 		if (place_meeting(x, y, global.cid_array[i])) {

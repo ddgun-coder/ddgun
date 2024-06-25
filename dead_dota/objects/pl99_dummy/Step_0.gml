@@ -19,8 +19,8 @@ if(live = 1) {
 		go_to_speed = 0;
 		a_charging = 0;
 		arm_all_normal();
-		left_arm_YA = YA + 270;
-		right_arm_YA = YA + 90;
+		left_arm_YA = 0 + 270;
+		right_arm_YA = 0 + 90;
 		arm_movement(5, -5, 5, 5);
 		if (sturn = 0){
 			a_cooltime = 0;
@@ -32,8 +32,8 @@ if(live = 1) {
 			if (keyboard_check(vk_shift) and arm_type != "ouch" and arm_type != "caps_lock" and arm_type != "attack") {
 				arm_type = "shift"
 				arm_movement(5, -5, 5, 5);
-				left_arm_YA = YA + 270;
-				right_arm_YA = YA + 90;
+				left_arm_YA = 0 + 270;
+				right_arm_YA = 0 + 90;
 			}
 			else {
 				if (arm_type == "shift")
@@ -99,15 +99,15 @@ if(live = 1) {
 					case 0 :
 						arm_type_num = 1
 						arm_movement(0, 0, 4, -4);
-						right_arm_YA = YA + 120
-						left_arm_YA = YA + 10
+						right_arm_YA = 0 + 120
+						left_arm_YA = 0 + 10
 						a_cycle = 4;
 					break;
 					case 1 :
 						arm_type_num = 0
 						arm_movement(0, 0, -4, 4);
-						right_arm_YA = YA - 10
-						left_arm_YA = YA - 120
+						right_arm_YA = 0 - 10
+						left_arm_YA = 0 - 120
 						a_cycle = 4;
 					break;
 					}

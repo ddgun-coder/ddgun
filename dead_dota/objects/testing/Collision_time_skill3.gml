@@ -1,8 +1,13 @@
-/// @description Insert description here
-// You can write your code in this editor
-DMG_no_surn(0.1);
-if (other.team == global.team) {
-	buff_index = buff_timeP;
-	server77_equal(serve_val.buff_index, buff_index, buffer_u16);
-	buff_time = 240;
+if (other.image_alpha = 1) {
+	DMG(10, n_attack_area, 80)
+	DMG_buff_team(buff_timeb, 280)
+	if (global.my_cid == other.cid) {
+		if(sturn > 0) { 
+			sturn = 0
+			m_sturn = 0
+		}
+	}
 }
+
+
+

@@ -1,8 +1,2 @@
-/// @description Insert description here
-// You can write your code in this editor
-if (other.team == global.team) {
-	if (other.eat) {
-		hp += other.get_mp;
-		instance_destroy(other.id);
-	}
-}
+var hp = (other.cid_id.m_hp - other.cid_id.hp) * 0.32
+DMG(10 + hp, n_attack_area, 48);

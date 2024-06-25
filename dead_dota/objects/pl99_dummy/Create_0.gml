@@ -90,8 +90,8 @@ left_arm_deltax = 0;
 left_arm_deltay = 0;
 right_arm_deltax = 0;
 right_arm_deltay = 0;
-left_goto_YA = YA;
-right_goto_YA = YA;
+left_goto_YA = 0;
+right_goto_YA = 0;
 arm_spin_speed = 1;
 arm_spin_able = 0;
 
@@ -110,8 +110,8 @@ left_foot_deltax = 0;
 left_foot_deltay = 0;
 right_foot_deltax = 0;
 right_foot_deltay = 0;
-left_goto_YA = YA;
-right_goto_YA = YA;
+left_goto_YA = 0;
+right_goto_YA = 0;
 
 arm_type_more = "none"
 spr_arml_more = spr_none;

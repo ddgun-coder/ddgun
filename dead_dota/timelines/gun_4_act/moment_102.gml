@@ -1,0 +1,1 @@
+d_attack_type = spr_sangbow

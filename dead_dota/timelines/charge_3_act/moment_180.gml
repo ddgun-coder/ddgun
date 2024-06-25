@@ -1,0 +1,11 @@
+arm_type = "normal";
+right_arm_YA = 0
+left_arm_YA = 0
+left_foot_YA = 0
+right_foot_YA = 0
+charge = false;
+right_foot_deltay = 0;
+left_foot_deltay = 0;
+go_to_speed = 0;
+cancle_able = false;
+server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);

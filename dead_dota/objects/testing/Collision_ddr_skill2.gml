@@ -1,13 +1,11 @@
-var D = 25
+var D = 20
 var name = spr_none;
 var sturn_time = 40;
-if (level == 5 and global.hat == spr_level5_hat16) {
-	D = D / 2;
-}
 
-if ((global.hat == spr_hat18 and level > 2) or buff_index == buff_jaja) {
-	D = D / 2;
-}
+DMG(D, name, sturn_time, normal_play(ddr_2_hit));
+/*
+
+D = dmg_cal(D, other);
 if (buff_index == buff_djz) {
 	sturn_time *= 2;  	
 }
@@ -47,10 +45,12 @@ if (buff_index != spr_wing1) {
 							immune = false;
 							alpha = 1;
 							cli_alpha = 1;
+							heal_stack += 1
+							heal_stack_time = 80
 							server77_equal(serve_val.alpha, 1, buffer_bool)
 							obj_id = other.cid_id;
 							if (obj_id.buff_index == buff_nu2) {
-								hp -= 1.8 * D;
+								hp -= 1.5 * D;
 								if (global.hat == spr_level5_hat8) {
 									prt_val_add(Val.mp, 1.8 * D);	
 								}
@@ -66,6 +66,7 @@ if (buff_index != spr_wing1) {
 							cur_attack = other.cid;
 							other_cid = other.cid;
 							arm_type = "ouch";
+							Hit_item(D)
 							server202_sound(have_hit);
 				
 							buffer_seek(testing.buff_chat, buffer_seek_start, 0);

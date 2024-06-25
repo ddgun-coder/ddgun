@@ -7,4 +7,3 @@ scale = 1;
 big_num = 1;
 image_yscale = 0;
 image_xscale = 0;
-dmg = 50;

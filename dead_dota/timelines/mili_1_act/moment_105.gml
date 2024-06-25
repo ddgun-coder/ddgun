@@ -8,9 +8,12 @@ a_possible = true;
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 1A84A5BC
-/// @DnDArgument : "code" "arm_type = "normal";$(13_10)arm_type_more = "none";$(13_10)cancle_able = false;$(13_10)arm_all_normal();$(13_10)server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);"
+/// @DnDArgument : "code" "arm_type = "normal";$(13_10)arm_type_more = "none";$(13_10)face_YA = 0$(13_10)hat_angle = 0$(13_10)arm_movement(0,0,0,0)$(13_10)cancle_able = false;$(13_10)arm_all_normal();$(13_10)server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);"
 arm_type = "normal";
 arm_type_more = "none";
+face_YA = 0
+hat_angle = 0
+arm_movement(0,0,0,0)
 cancle_able = false;
 arm_all_normal();
 server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);

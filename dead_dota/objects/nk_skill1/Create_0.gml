@@ -1,8 +1,8 @@
-alarm_set(0, 105);
+var sound = audio_play_sound(nk_1_sound,0,false);
+audio_sound_gain(sound, 0.3, 0);
 
-team = -1;
-cid = 3;
+skill_create(35)
+YA = 0;
+dmg = 7
 
-audio_play_sound(mili_1_sound,1,true);
-cid_id  = asset_get_index("testing" + string(cid));
-image_angle = cid_id.YA;
+alarm[1] = 1;

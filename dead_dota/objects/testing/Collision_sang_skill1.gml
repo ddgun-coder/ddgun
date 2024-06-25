@@ -1,1 +1,1 @@
-DMG(12, n_attack_area, 20)
+DMG_sang(11, n_attack_area, 20)

@@ -1,9 +1,12 @@
+/// @description Insert description here
+// You can write your code in this editor
+skill_create(160);
+image_alpha = 0.5
 image_angle = testing.YA;
-image_blend = c_gray;
-team = -1;
-alarm_set(0, 20);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
+spin = 0
+team = 0;
+time = 0;
 cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
+
+alarm[1] = 1

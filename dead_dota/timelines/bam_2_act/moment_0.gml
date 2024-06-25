@@ -1,5 +1,5 @@
 arm_all_normal()
-a_cooltime = 70;
+a_cooltime= 60;
 arm_type = "attack"
 face_variable = 1;
 server77_equal(serve_val.face_variable, 1, buffer_u8)

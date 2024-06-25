@@ -6,7 +6,7 @@ image_yscale = 4;
 if(cid_id.sturn > 0) {
 	instance_destroy();
 }
-if (testing.cid == cid) {
+if (global.my_cid == cid) {
 	solid = false;
 }
 if (deltay < 800) {

@@ -1,11 +1,8 @@
-a_cooltime = 10;
-server78_create_instace(he_skill1, x, y);
-if (cur_attack >= 0) {
-	var obj = asset_get_index("testing" + string(cur_attack));
-	if (cur_attack != 0) {
-		if (obj.x > 0 and obj.y > 0) { 
-			x = obj.x + irandom(30);
-			y = obj.y + irandom(30);
-		}
-	}
-}
+arm_all_normal();
+go_to_speed = 5;
+a_possible = false
+temp_YA = YA;
+a_cooltime = 40;
+arm_type = "attack"
+left_arm_yscale = -1
+right_arm_yscale = -1

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"DMG_mana",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DMG_mana",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

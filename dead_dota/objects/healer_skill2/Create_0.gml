@@ -17,9 +17,8 @@ alarm_set(0, 80 * 1.3);
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 466D38A0
-/// @DnDArgument : "code" "audio_play_sound(healer_2_sound,9,false);$(13_10)cid = 1;$(13_10)cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_speed = 5$(13_10)image_alpha = 0.8;"
+/// @DnDArgument : "code" "audio_play_sound(healer_2_sound,9,false);$(13_10)cid = 1;$(13_10)cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_alpha = 0.8;"
 audio_play_sound(healer_2_sound,9,false);
 cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
-image_speed = 5
 image_alpha = 0.8;

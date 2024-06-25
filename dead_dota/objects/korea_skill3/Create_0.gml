@@ -12,8 +12,8 @@ team = -1;
 /// @DnDAction : YoYo Games.Instances.Set_Alarm
 /// @DnDVersion : 1
 /// @DnDHash : 53192E40
-/// @DnDArgument : "steps" "4"
-alarm_set(0, 4);
+/// @DnDArgument : "steps" "8"
+alarm_set(0, 8);
 
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1

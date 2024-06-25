@@ -1,0 +1,1 @@
+server79_create_instace_ext(hammer_skill3_0, x + lengthdir_x(20 * big_val, YA - 90), y + lengthdir_y(20 * big_val, YA - 90), how_long);

@@ -11,9 +11,9 @@ for(var i = 1; i < 24; i++) {
 		}
 	}
 }
-var ida = instance_create_depth(x, y, -100, hunt_skill1_temp);
+var ida = instance_create_depth(x, y, -100, tree_skill1_temp);
 ida.team = team;
 ida.cid = cid;
 ida.cid_id = cid_id;
 ida.YA = image_angle;
-alarm[1] = 40;
+alarm[1] = 60;

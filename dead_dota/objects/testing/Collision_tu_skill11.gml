@@ -1,1 +1,1 @@
-DMG(15, EQ_skill1, 120)
+DMG(40, EQ_skill1, 40)

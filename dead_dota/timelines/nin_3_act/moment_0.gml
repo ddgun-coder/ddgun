@@ -1,5 +1,5 @@
 arm_all_normal();
-a_cooltime = 10;
+a_cooltime = 20;
 arm_type = "attack";
 arm_type_more = "go 90";
 YA += 180;

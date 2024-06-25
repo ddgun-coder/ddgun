@@ -39,21 +39,22 @@ if (kazino_time == 0) {
 	testing.a_possible = true;
 }
 if (instance_exists(testing)) {
-	if (kazino_time > 0) {
-		with(testing) {
-			testing.moveable = false;
-			testing.effect_index = effect_gag;
-			testing.a_possible = false;
-			temp_YA = YA;
+	if (room == room_kazino) {
+		if (kazino_time > 0) {
+			with(testing) {
+				testing.moveable = false;
+				testing.effect_index = effect_gag;
+				testing.a_possible = false;
+				temp_YA = YA;
+			}
+		}
+		else {
+			testing.moveable = true;
+			if (testing.effect_index == effect_gag) {
+				testing.effect_index = spr_none;
+			}
 		}
 	}
-	else {
-		testing.moveable = true;
-		if (testing.effect_index == effect_gag) {
-			testing.effect_index = spr_none;
-		}
-	}
-
 	if (team_score[0] > team_score[1]) {
 		if (global.team == 1) {
 			testing.aexp += (team_score[0] - team_score[1]) * 0.01;
@@ -70,6 +71,7 @@ if (instance_exists(testing)) {
 		with(testing) {
 			testing.moveable = false;
 			testing.effect_index = effect_gag;
+			testing.undying = false//불사
 			testing.arm_type = "ouch"
 			testing.a_possible = false;
 			temp_YA = YA;
@@ -79,3 +81,13 @@ if (instance_exists(testing)) {
 for (var i = 0; i < 24; i++) {
 	cid_time[i]--;
 }
+
+var obj = global.cid_array[0];
+obj.x = testing.x;
+obj.y = testing.y;
+obj.YA = testing.YA;
+obj.temp_YA = testing.temp_YA;
+obj.hp = testing.hp;
+
+obj.big_val = testing.big_val;
+obj.charge = testing.charge;

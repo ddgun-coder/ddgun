@@ -1,0 +1,9 @@
+jumping = false;
+hide_bam = false
+YA -= 180;
+right_arm_YA = 0 + 90
+left_arm_YA = 0 - 90
+left_foot_YA = 0 
+right_foot_YA = 0;
+go_to_speed_solid = 0;
+a_possible = true;

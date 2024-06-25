@@ -1,14 +1,13 @@
-alarm[5] = 400;
+alarm[5] = 360;
+server77_equal(serve_val.d_attack_type, d_attack_type, buffer_u16);
+server77_equal(serve_val.stats, global.stats, buffer_u16);
+
 if (global.hat == spr_hat37 and level == 3) {
-	var big_val  = (irandom(15) + 1) * 0.2;
+	var big_val  = (irandom(10) + 1) * 0.2;
 	main_big_val = big_val;
 	go_to_scale = big_val;
 }
-if (global.hat == spr_level5_hat16) {
-	var big_val  = (irandom(11) + 5) * 0.2;
-	main_big_val = big_val;
-	go_to_scale = big_val;
-}
+
 if (file_exists("deadsave1.sav"))
 {
 	var map = ds_map_create();

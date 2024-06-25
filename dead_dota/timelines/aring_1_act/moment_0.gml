@@ -2,8 +2,8 @@ arm_all_normal()
 arm_type = "attack"
 spr_armr_more = spr_bigsaw;
 spr_arml_more = spr_bigsaw;
-right_arm_YA = YA - 180;
-left_arm_YA = YA - 180;
+right_arm_YA = 0 - 180;
+left_arm_YA = 0 - 180;
 left_arm_xscale = -1;
 aring_amount = 3;
 right_arm_xscale = 1;

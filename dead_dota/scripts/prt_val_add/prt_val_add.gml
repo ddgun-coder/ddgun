@@ -1,4 +1,4 @@
-function prt_val_add(argument0, argument1) 
+function prt_val_add(argument0, argument1)
 {
 	var add_val;
 	add_val=prt_decode(argument0,global.prt_list[|argument0]);

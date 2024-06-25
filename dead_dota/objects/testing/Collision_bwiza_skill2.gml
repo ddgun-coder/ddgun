@@ -1,1 +1,2 @@
-DMG_buff(20, buff_bwiza2, 30, 240);
+var dmg = min(12 + other.time, 25)
+DMG_buff(dmg, buff_bwiza2, 25, 200)

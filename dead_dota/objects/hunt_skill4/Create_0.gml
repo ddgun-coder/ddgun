@@ -1,7 +1,7 @@
 image_angle = testing.YA;
 team = 0;
 
-alarm_set(0, 5);
+alarm_set(0, 10);
 
 audio_play_sound(hunt_4_sound,9,false);
 cid = 1;

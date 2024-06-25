@@ -1,7 +1,7 @@
-var footL_x = x + lengthdir_x(-20 + left_foot_deltax, YA) + lengthdir_x(17 + left_foot_deltay, YA + 270);
-var footL_y = y + lengthdir_y(-20 + left_foot_deltax, YA) + lengthdir_y(17 + left_foot_deltay, YA + 270);
-var footR_x = x + lengthdir_x(20 + right_foot_deltax, YA) + lengthdir_x(17 + right_foot_deltay, YA + 270);
-var footR_y = y + lengthdir_y(20 + right_foot_deltax, YA) + lengthdir_y(17 + right_foot_deltay, YA + 270);
+var footL_x = x + lengthdir_x(-20 + left_foot_deltax, YA) + lengthdir_x(10 + left_foot_deltay, YA + 270);
+var footL_y = y + lengthdir_y(-20 + left_foot_deltax, YA) + lengthdir_y(10 + left_foot_deltay, YA + 270);
+var footR_x = x + lengthdir_x(20 + right_foot_deltax, YA) + lengthdir_x(10 + right_foot_deltay, YA + 270);
+var footR_y = y + lengthdir_y(20 + right_foot_deltax, YA) + lengthdir_y(10 + right_foot_deltay, YA + 270);
 var armL_x = x + lengthdir_x(-20 + left_arm_deltax, YA) + lengthdir_x(left_arm_deltay, YA + 270);
 var armL_y = y + lengthdir_y(-20 + left_arm_deltax, YA) + lengthdir_y(left_arm_deltay, YA + 270);
 var armR_x = x + lengthdir_x(20 + right_arm_deltax, YA) + lengthdir_x(right_arm_deltay, YA + 270);
@@ -35,9 +35,9 @@ if (live != 2)
 	}
 	else 
 	{
-		ser_eface(face);
+		ser_eface(face, true);
 	}
-draw_sprite_ext(hat,level,x,y,1,1,YA,color,1);// 모자
+	draw_sprite_ext(hat,level,x,y,1,1,YA,color,1);// 모자
 }
 if (frame_level_up =1) {
 	draw_sprite_ext(spr_level_up,-1,x,y,1,1,0,-1,1);
@@ -64,7 +64,7 @@ if (mine_say_time > 0) {
 	draw_text(x,y - 80 , mine_say);
 }//캐릭터위에 말
 
-if (live = 1) {
+if (live = 1) {	
 		if (sturn > 0) {
 			draw_sprite_ext(spr_star, star_frame, x, y, 1, 1, YA, -1, 1);
 			if (star_frame == 1) {
@@ -97,8 +97,6 @@ draw_set_valign(fa_center);
 draw_set_color(c_yellow);
 draw_text(x,y + 32,"■ " + name + " ■");//이름
 draw_set_halign(fa_center);
-gpu_set_alphatestenable(true);
-gpu_set_alphatestref(100);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white)

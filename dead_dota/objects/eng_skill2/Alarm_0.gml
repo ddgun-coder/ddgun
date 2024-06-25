@@ -1,4 +1,5 @@
-/// @DnDAction : YoYo Games.Instances.Destroy_Instance
-/// @DnDVersion : 1
-/// @DnDHash : 35F326D9
-instance_destroy();
+instance_destroy()
+var ida = instance_create_depth(x, y, -100, eng_skill_destroy);
+ida.team = team;
+ida.cid = cid;
+ida.cid_id = cid_id;

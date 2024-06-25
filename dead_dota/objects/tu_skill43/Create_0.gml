@@ -1,9 +1,9 @@
-image_angle = testing.YA;
-image_blend = c_fuchsia;
-team = -1;
-alarm_set(0, 20);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
-cid = 1;
-cid_id  = asset_get_index("testing" + string(cid));
+skill_create(51);
+image_speed = 0;
+image_alpha = 0.9
+alarm[1] = 1;
+alarm[2] = 50
+alarm[3] = 2
+YA = 0;
+time = 0;
+spin= 0

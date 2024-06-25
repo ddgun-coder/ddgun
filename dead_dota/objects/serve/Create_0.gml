@@ -1,36 +1,33 @@
+if (instance_number(object_index) >= 2) instance_destroy();
+time = 0;
 max_score = 40;
-version = 136;
-network_set_config(network_config_connect_timeout,4000);
+network_set_config(network_config_connect_timeout,15000);
+network_set_config(network_config_use_non_blocking_socket,true);
+connecting = false;
 if (global.online == 0) {
 	network_destroy(global.client);
 	global.client = network_create_socket(network_socket_tcp);
 	if (global.client < 0 ){
 		show_message("어캐했노 ㅅㅂ련아")
-		game_end()
+		game_end();
 	}
 	network_set_timeout(global.client, 1000, 1000);
 	temp_id = 0;
 	depth = -2000;
-	ime_set_composition_window(0);
-	connect = network_connect_async(global.client , global.ip , 50199);
-	
+	connect = network_connect_async(global.client , global.ip, 50199);
+	connecting = true;
 	if (connect < 0) {
-		show_message("서버가 없다:" + string(version) + "버전")
-		global.online = 0;
+		show_message("접속 불가능!");
 	}
-	else
-	{
-		global.online = 1;
-	}
-}
+}	
 else {
 	connect = 1;
 }
 ping = 0;
 num_client = 0;
 win = 0;
-bol_hat1 = spr_hat1;
-bol_hat2 = spr_hat1;
+bol_hat1 = 0;
+bol_hat2 = 0;
 last_time = 0;
 left_n = 0;
 right_n = 0;
@@ -58,7 +55,8 @@ enum ROOM {
 	rock_cave,
 	dragon_sward,
 	test,
-	last
+	low_cli,
+	last,
 }
 enum serve_val{
 	terror_charge,
@@ -82,6 +80,8 @@ enum serve_val{
 	effect_index,
 	effect_num,
 	hat_YA,
+	hat_angle,
+	face_YA,
 	right_arm_yscale,
 	left_arm_yscale,
 	spr_arm_more_num,
@@ -92,8 +92,24 @@ enum serve_val{
 	alive,
 	face,
 	alpha,
-	eiu
-}
+	eiu,
+	stats,
+	d_attack_type,
+	q_attack_type,
+	w_attack_type,
+	stats6_type,
+	skill_con,
+	up_skill,
+	light,
+	babo_change,
+	armR_more_x,
+	armR_more_y,
+	arm_moreR_YA,
+	arm_moreL_YA,
+	armL_more_x,
+	armL_more_y,
+	protection_val
+}//서버룸
 buff_size = 0;
 kazino_what = 0;
 kazino_amount = 0;
@@ -126,29 +142,23 @@ nu_name_right = array_create(25,"YES");
 team_score = array_create(2,0);
 ary_cid = array_create(25,0);
 green_text = array_create(4,"");
-arm = array_create(25, spr_arm1);
-foot = array_create(25, spr_foot1);
-hat = array_create(25, spr_hat1);
+arm = array_create(25, 0);
+foot = array_create(25, 0);
+hat = array_create(25, 0);
 skin = array_create(25, 0);
-face = array_create(25, spr_face1);
+face = array_create(25, 0);
 pow = array_create(25, 0);
 nu_time = 0;
 buff_chat = buffer_create(48,buffer_fixed,1);
+buff_ach = buffer_create(150,buffer_fixed,1);
+buff_big = buffer_create(300, buffer_grow, 1);
+buffer_write(buff_ach, buffer_u8, 242);
+buffer_write(buff_ach, buffer_string, "hidden_key");
+buff_ach_len = buffer_tell(buff_ach);
 get_money = 0;
-delay= 5;
+delay= 5;	
 OK = 0;
 OK2 = 0;
-date = date_current_datetime();
 
-ftime1 =date_create_datetime(
-date_get_year(date),date_get_month(date),
-date_get_day(date),date_get_hour(date),
-date_get_minute(date),date_get_second(date)+delay);
 
-ftime2 =date_create_datetime(
-date_get_year(date),date_get_month(date),
-date_get_day(date),date_get_hour(date),
-date_get_minute(date),date_get_second(date)+delay);
-
-alarm[0] = 40 * delay + 1;
-alarm[1] = 40 * delay;
+alarm[2] = 100

@@ -1,3 +1,5 @@
+a_cooltime = 40;
+a_possible = true;
 var xx;
 var yy;
 

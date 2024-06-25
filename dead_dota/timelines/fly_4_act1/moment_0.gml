@@ -1,10 +1,12 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 20FD8D10
-/// @DnDArgument : "code" "arm_all_normal();$(13_10)a_cooltime = 40;$(13_10)server78_create_instace(fly_skill41, x, y);$(13_10)arm_type = "attack"$(13_10)YA_change_small = true;$(13_10)YA_change_small_time = 40;"
 arm_all_normal();
-a_cooltime = 40;
+a_cooltime = 50;
 server78_create_instace(fly_skill41, x, y);
 arm_type = "attack"
+right_foot_deltay = -10;
+left_foot_deltay = -10;
 YA_change_small = true;
 YA_change_small_time = 40;
+hat_xscale = 2;
+hat_yscale = 2;
+server77_equal(serve_val.hat_yscale, hat_yscale, buffer_s8);
+server77_equal(serve_val.hat_xscale, hat_xscale, buffer_s8);

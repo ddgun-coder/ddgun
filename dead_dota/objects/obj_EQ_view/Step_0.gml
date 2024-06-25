@@ -1,3 +1,4 @@
+if (!instance_exists(testing)) exit;
 if (room == room_main) {
 	instance_destroy()
 	exit;

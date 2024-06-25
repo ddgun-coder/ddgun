@@ -1,0 +1,1 @@
+arm_type_num = 1

@@ -1,7 +1,11 @@
-skill_create(2000);
+skill_create(2500);
 alarm[1] = 10;
 alarm[2] = 1;
 YA = 0;
 image_speed = 0;
-hp = 80;
+hp = 70;
+mp = 0;
+boost = false;
+boost_time = 0;
 sturn = 0;
+eng_buff = spr_none;

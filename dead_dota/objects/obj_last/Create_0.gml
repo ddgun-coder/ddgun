@@ -1,1 +1,2 @@
-skill_create(1600);
+skill_create(600);
+to_cid = 0;

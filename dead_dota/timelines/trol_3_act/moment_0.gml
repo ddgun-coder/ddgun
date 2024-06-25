@@ -1,6 +1,4 @@
-a_cooltime = 10;
+a_cooltime = 35;
 arm_type = "attack"
 arm_movement(3, -3, 10, 10);
-if (!place_meeting(x + lengthdir_x(45 * big_val, YA - 90), y + lengthdir_y(45 * big_val, YA - 90), trol_skill3)) {
-	server78_create_instace(trol_skill3, x + lengthdir_x(45 * big_val, YA - 90), y + lengthdir_y(45 * big_val, YA - 90));
-}
+server78_create_instace(trol_skill3, x, y);

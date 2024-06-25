@@ -1,0 +1,1 @@
+spr_armr_more = spr_none

@@ -1,1 +1,1 @@
-DMG_buff(15, spr_gas, 30, 240);
+DMG_buff(19, spr_gas, 30, 240);

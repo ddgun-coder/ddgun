@@ -22,3 +22,8 @@ if (global.hat == spr_secret) {
 		mine_say_time = 40;
 	}
 }
+
+/*
+if (keyboard_check(vk_shift)) {
+server78_create_instace(obj_shack_kill, mouse_x, mouse_y)
+}

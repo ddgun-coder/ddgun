@@ -1,4 +1,4 @@
- var mind = 2000;
+var mind = 2000;
 for(var i = 1; i < 24; i++) {
 	var obj = global.cid_array[i];
 	if (obj.team != team) {

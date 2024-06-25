@@ -1,3 +1,4 @@
+mask_index = spr_wall_mask
 gi = prt_val_get(Val.gi);
 mana = prt_val_get(Val.mp);
 copper = prt_val_get(Val.cuper);
@@ -5,208 +6,472 @@ iron= prt_val_get(Val.iron);
 gold = prt_val_get(Val.gold);
 dota_ball = prt_val_get(Val.ball);
 global.money = prt_val_get(0);
-var speedd = main_speed + extra_speed + buff_speed;
-if (speedd < 0) {
-	speedd =0;
-}
-if (global.only_see) {
-	buff_index = spr_wing1;
-	buff_time = 50;
-	sturn = 0;
-	hp = 101;
-	big_val = 0; 
-	image_xscale = 0;
-	image_yscale = 0;
-	extra_speed = 10;
-}
-if (level == 4) {
-	global.team = 2;
-	m_hp = 125 ;
-	if (global.hat == spr_level5_hat18) {
-		if (hp <= 10) {
-			if (gi > 100) {
-				prt_val_set(Val.gi, 0);
-				normal_play(wing_1_act1);
-			}
-		}
+item_time--
+flash_time = max(flash_time - 1, 0);
+endemic_time = max(endemic_time - 1, 0);
+if (instance_exists(obj_card_manager)) {
+	if (obj_card_manager.timer > 0) {
+		moveable = false;
+		buff_index = effect_card_gag;
+		buff_time = 3;
+		undying = false
+		arm_type = "ouch"
+		a_possible = false;
+		temp_YA = YA;
+		counter = 2;
 	}
-}
-if (room == room_mak) {
-	hp -= 0.01;	
-}
-if (instance_exists(diediedie)) {
-	if (distance_to_point(diediedie.x, diediedie.y) < 100) {
-		hp -= 0.2;
-	}
-	else {
-		if (distance_to_point(diediedie.x, diediedie.y) < 300) {
-			hp -= 0.1;
-		}
-	}
-}
-if (global.hat == spr_hat53 or global.hat == spr_hat70) {
-	switch(level) {
-		case 0:
-			m_hp = 105 ;
-		break;
-		case 1:
-			m_hp = 110 ;
-		break;
-		case 2:
-			m_hp = 115 ;
-		break;
-		case 3:
-			m_hp = 120 ;
-		break;
-	}
+	card_name = obj_card_manager.get_name();
 }
 else {
-	m_hp = 100 ;
+	if (buff_index = effect_card_gag) {
+		effect_index = spr_none;
+		moveable = true;
+	}
+	card_name = "none";
 }
-if (global.hat == spr_hat63 and level == 3) {
-	m_hp = 110;	
+if (alive > 0) {
+	server78_create_instace(obj_spawn, x, y);
 }
+if (bullet >= 7) {
+	bullet = 6
+}// 불릿 초기화
+
+if (bullet < 0) {
+	bullet = 0	
+}// 불릿 초기화2
+
+if (up_skill > 3) {
+	up_skill = 0
+}// 투사 초기화
+
+
 switch(global.hat) {
-	case spr_hat24:
-	if (keyboard_check(global.keyw)) {
-		if (level > 1) {
-			if (a_cooltime <= 0) {
-				if (gi >= 40) {
-					prt_val_add(Val.gi, -40);
-					normal_play(gili_3_act);
-				}
-				else {
-					skill_say_time = 30;
-					skill_say = "GI: " + string(gi) + " / 40(40)";
-				}
-			}
+    case spr_hat71:
+	    if (skill_con >= 7) {
+			skill_con = 7
 		}
-	}
 	break;
-	case spr_hat71:
-	if (keyboard_check(global.keyw)) {
-		if (level > 1) {
-			if (gi >= 1) {
-				prt_val_add(Val.gi, -1);
-				normal_play(gun_3_act);
-			}
-			else {
-				skill_say_time = 30;
-				skill_say = "GI: " + string(gi) + " / 1(1)";
-			}
-		}
-	}
-	break;
-	case spr_level5_hat16: 
-		if (level > 4) {
-			if (mana < 1) {
-				level = 4;
-				buffer_seek(buff_chat, buffer_seek_start, 0);
-	
-				buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
-				buffer_write(buff_chat,buffer_u8, global.hat_show);
-				buffer_write(buff_chat,buffer_u8, level);
-	
-				network_send_packet(0,buff_chat,3);
-				server77_equal(serve_val.hat_frame, level, buffer_u8);
-			}
-			else {
-				prt_val_add(Val.mp, -0.3);
-			}
+	default:
+	    if (skill_con >= 6) {
+			skill_con = 6
 		}
 	break;
 }
 
+var speedd = (main_speed + extra_speed + stats_speed + buff_speed) * high_speed;
+if (speedd < 0) speedd = 0;
+move_x = 0;
+move_y = 0;
 if (instance_exists(grvity)) {
 	if (go_soild == false) {
-		if (place_free(x, y + 2)) {
-			y += 1;
+	   if (place_meeting(x, y, water_zone)) {
+		  if (grv < 0) {
+			  grv += 1;
+		  }
+		  else {
+			grv = 0.1;  
+		  }
+		  move_y += 2;
+		  is_ground = false;
+	   } 
+	   else {
+	      grv += 0.8; // 하락
+		  if (jump == false) {
+			 is_ground = !place_free(x, y + 1);
+		  }
+	   }
+	   
+	   if (is_ground) {
+		  if (jump) {
+			if(grv >= 0) {
+				jump = false;
+			}
+		  }
+		  else {
+			grv = 0;  
+		  }
+	   } 
+	   else {
+	      move_y += grv;
+	   }
+	}
+}
+if (speedd < 0) {
+	speedd = 0;
+}
+/*
+if (mouse_check_button(mb_left)) {
+	var _id = instance_create_depth(mouse_x, mouse_y, depth, choose(bwiza_skill2 , tree_skill41));
+	_id.cid = global.my_cid;
+	_id.team = !global.team;
+	_id.cid_id = global.cid_array[global.my_cid];
+}
+*/
+if(global.hat = spr_hat74) {
+   if (stats_speed > 2 or extra_speed > 2 or buff_speed > 2) {
+      if (speedd > 16 or go_to_speed > 10 ) {
+         server78_create_instace(ski_skill_p, x, y);
+      }
+   }
+   else {
+      if(stemina >= 10) {
+         if (sturn == 0) {
+            if (speedd > 16 or go_to_speed > 10 ) {
+               server78_create_instace(ski_skill_p, x, y);
+            }
+         }
+      }
+   }
+}
+main_big_val_step();
+if (global.only_see) {
+   buff_index = spr_wing1;
+   buff_time = 50;
+   sturn = 0;
+   hp = 101;
+   big_val = 0; 
+   image_xscale = 0;
+   image_yscale = 0;
+   extra_speed = 10;
+}
+if (go_to_speed < go_to_speed2) {
+    go_to_speed += 0.1;
+}
+if (level == 4) {
+   global.team = 2;
+   m_hp = 125 ;
+   if (global.hat == spr_level5_hat18) {
+      if (hp <= 10) {
+         if (gi > 100) {
+            prt_val_set(Val.gi, 0);
+            normal_play(wing_1_act1);
+         }
+      }
+   }
+}
+
+if(global.hat = spr_hat57) {
+    if (heal_stack >= 5) {
+        heal_stack = 0
+       server78_create_instace(ma_skill0, x, y);
+    }// 대지은혜 스택
+}
+
+if( global.hat = spr_hat75) {
+    if (heal_stack >= 1) {
+      combo = 0
+    }
+    if (combo >= 1) {
+      heal_stack= 0
+    }
+}
+        
+
+
+if (instance_exists(diediedie)) {
+   if (distance_to_point(diediedie.x, diediedie.y) < 100) {
+      hp -= 0.2;
+   }
+   if (global.hat == spr_level5_hat8) {
+      hp += 0.3;
+   }
+   else {
+      if (distance_to_point(diediedie.x, diediedie.y) < 300) {
+         hp -= 0.1;
+      }
+      if (global.hat == spr_level5_hat8) {
+          hp += 0.2;
+       }
+   }
+}
+/*
+if (global.hat == spr_hat57) {
+   switch(level) {
+      case 0:
+         m_hp = 105 ;
+      break;
+      case 1:
+         m_hp = 110 ;
+      break;
+      case 2:
+         m_hp = 115 ;
+      break;
+      case 3:
+         m_hp = 120 ;
+      break;
+   }
+}
+//삭제된 마론 패시브*/
+else {
+   m_hp = 100 ;
+}
+if (global.stats == spr_stats4 and level >= 0) {
+   m_mana = 250;   // 대현자
+}
+if (global.stats == spr_stats3 and level >= 0) {
+   m_stemina = 180;   // 겁쟁이
+}
+
+switch(global.hat) {
+   case spr_hat24:
+   if (keyboard_check(global.keyw)) {
+      if (level > 1) {
+         if (a_cooltime <= 0) {
+            if (gi >= 40) {
+               prt_val_add(Val.gi, -40);
+               normal_play(gili_3_act);
+            }
+            else {
+               skill_say_time = 30;
+               skill_say = "GI: " + string(gi) + " / 40(40)";
+            }
+         }
+      }
+   }
+   break;
+
+   case spr_hat75: 
+      if (level > 4) {
+         if (mana < 1) {
+            level = 4;
+            buffer_seek(buff_chat, buffer_seek_start, 0);
+   
+            buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
+            buffer_write(buff_chat,buffer_u8, global.hat_show);
+            buffer_write(buff_chat,buffer_u8, level);
+   
+            network_send_packet(0,buff_chat,3);
+            server77_equal(serve_val.hat_frame, level, buffer_u8);
+         }
+         else {
+            prt_val_add(Val.mp, -0);
+         }
+      }
+   break;
+}
+
+if (keyboard_check_released(global.keyf)) {
+    if (instance_exists(grvity)) {
+        if (!place_free(x, y + 2) or place_meeting(x, y, water_zone)) {
+            jump = true;
+			grv = -20;
+			is_ground = false;
+        }
+    }
+   if (fishing != false) {
+      if (fish_time <= 80) {
+         if (fishing == 2) {
+            normal_play(fish_get);
+         }
+         else {
+            normal_play(fish_not_get);
+         }
+         fishing = 3
+      }
+   }
+}
+/*
+for (var i = 0; i < 24; i++) {
+	var _id = asset_get_index("testing" + string(i))
+	_id.x = x + i * 64;
+	_id.y = y;
+}
+*/
+//타겟팅 테스트용, 함부로 건들면 큰 화를 부를거란다 
+
+if (mana < -100){
+	mana = 0;
+}
+if(live == 1) {
+	if (babo_change == false) {
+		if (babo_gage >= 100) {
+			babo_change = true;	
+			server77_equal(serve_val.babo_change, babo_change, buffer_bool);
 		}
-		if (place_meeting(x, y, water_zone)) {
-			if (place_free(x, y + 2)) {
-				y += 3;
+	}
+	else {
+		babo_gage -= 0.1;
+		if (babo_gage <= 0) {
+			babo_change = false;
+			server77_equal(serve_val.babo_change, babo_change, buffer_bool);		
+		}
+	}
+	if (global.hat == spr_hat77) {
+		if (babo_time <= 0) {
+			if (babo_change == false) {
+				babo_time = 80;
+				instance_create_depth(global.window_width - 256, global.window_height / 2 - 100, depth, obj_question_ui);
 			}
 		}
 		else {
-			if (place_free(x, y + 9 + grv)) {
-				grv += 0.05;
-				y += 10 + grv;
+			if (!instance_exists(obj_question_ui)) babo_time--;	
+		}
+	}
+	if (targeting) {
+		targeting_array = [];
+		for (var i = 0; i < 24; i++) {
+			var _id = asset_get_index("testing" + string(i));
+			if (point_in_rectangle(_id.x, _id.y, x - 512, y - 384, x + 512, y + 384) and global.my_cid != i) {
+				array_push(targeting_array, _id);
 			}
 		}
-	}
-	repeat(10) {
-		if (!place_free(x, y)) {
-			y--;
-		}
-	}
-}
-if (keyboard_check(global.keyf)) {
-	if (instance_exists(grvity)) {
-		if (!place_free(x, y + 2) or place_meeting(x, y, water_zone)) {
-			grv = 0;
-			jump_time = 20; 
-			jump = true;
-		}
-	}
-	if (fishing != false) {
-		if (fish_time <= 80) {
-			if (fishing == 2) {
-				normal_play(fish_get);
+		var num = array_length(targeting_array);
+		if (num > 0) {
+			array_sort(targeting_array,	function(elm1, elm2) {
+			    return abs(point_direction(x, y, elm1.x, elm1.y)) - abs(point_direction(x, y, elm2.x, elm2.y))
+			})
+			var _bool = (cur_target == noone or !array_any(targeting_array, function(_val, _ind) {
+				cur_target_index = _ind;
+			    return _val == cur_target;
+			}));
+			
+			if (_bool) {
+				cur_target = targeting_array[0];
+				targeting_time = 20;
 			}
 			else {
-				normal_play(fish_not_get);
+				targeting_time--;
+				if (targeting_time < 0) {
+					audio_play_sound(sound_charging , 1, false, 0.5);
+					if (cur_target_index >= num - 1) {
+						cur_target = targeting_array[0];
+					}
+					else {
+						cur_target = targeting_array[cur_target_index + 1];
+					}
+					targeting_time = 20;
+				}
 			}
-			fishing = 3
 		}
 	}
-}
-if (mana < -100 ){
-	mana = 0;
-}
-if(live = 1) {
+	if (spin_steadly) {
+		spin_val += spin_val_delta;
+		left_arm_YA += spin_val;
+	}	
+	if (left_arm_get_bigger) {
+		left_arm_xscale += left_arm_get_bigger_delta;	
+		left_arm_yscale += left_arm_get_bigger_delta;	
+	}
+	if (lighting) {
+		if (light_time < 5) {
+			light_time++;
+		}
+		else {
+			light_time = 0;
+			draw_lighting = !draw_lighting;
+		} 
+	}
+	if (global.hat == spr_hat76) {
+		if (protect_break == false){
+			protection = true;
+		}
+		switch (level) {
+			case 0 :
+				protection_val_max = 5;
+			break;
+			case 1 :
+				protection_val_max = 10;
+			break;
+			case 2 :
+				protection_val_max = 10;
+			break;
+			case 3 :
+				protection_val_max = 10;
+			break;
+		}
+	}
+	else {
+		protection_val_max = 0;
+	}
+	if (protection == false) {
+		if (protection_val > 0) {
+			protection_val = max(protection - 1, 0);	
+		}
+	}
+	else if (protect_break == false){
+		if (protection_val < protection_val_max) {
+			protection_val = min(protection_val_max, protection_val + 0.04);
+		}
+		else {
+			protection_val = protection_val_max;	
+		}
+	}
+	if (protect_break) {
+		if (protect_break_time > 0) {
+			protect_break_time--;
+		}
+		else {
+			protect_break = false;	
+		}
+	}
+	
 	if (moveable) {
+		if (a_cooltime <= 0) {
+			with(obj_testing) {
+				solid_pre = solid;
+				solid = false;
+			}
+			if (!place_free(x, y) and go_soild == false) {
+				var len_x, len_y;
+				for (var i = 0; i < 36; i++) {
+					len_x = lengthdir_x(10, 10 * i);
+					len_y = lengthdir_y(10, 10 * i);
+					if (place_free(x + len_x, y + len_y)) {
+						x += len_x;
+						y += len_y;
+						break;
+					}
+				}
+			}
+			with(obj_testing) {
+				solid = solid_pre;
+			}
+		}
 		if (keyboard_check(global.left)) {
 			if (sturn = 0) {
 				if (a_cooltime <= 0) {
 					if (only_move = 1) {
 						if (keyboard_check(global.shift)) {
 							if (keyboard_check(global.cap)) {
-								if(place_free(x + (lengthdir_x(5,YA2 - 180)), y + (lengthdir_y(5,YA2 - 180))) or go_soild) {
-									x += lengthdir_x(5,YA2 - 180)
+								if(place_free(x + (lengthdir_x(speedd - 4,YA2 - 180)), y + (lengthdir_y(speedd - 4,YA2 - 180))) or go_soild) {
+									x += lengthdir_x(speedd - 4,YA2 - 180)
 									if (!instance_exists(grvity) or go_soild == true) {
-										y += lengthdir_y(5,YA2 - 180)
+										y += lengthdir_y(speedd - 4,YA2 - 180)
 									}
 									all_YA_change_delta2(2);
 								}
 							}
 							else {
-								if(place_free(x - (speedd), y) or go_soild) {
-									x -= speedd;
-								}
+								move_x -= speedd;
 							}
 						}//쉬프트
 						else {
 							if (keyboard_check(global.cap)) {
 								all_YA_change_delta2(4);
-								event_user(0);
 								}//탭 (쉬프트 X)
 							}
 					}
 				if (!keyboard_check(global.shift)) {
 					 if (!keyboard_check(global.cap)) {
-						 if(place_free(x - (speedd), y) or go_soild) {
-							 x -= speedd;			
-						 }
+						 if (instance_exists(grvity)) {
+                             for (var i = 0; i < 5; i++) {
+                                 if(place_free(x - (speedd), y - i * 2) or go_soild) {
+                                     x -= speedd;
+                                     y -= i * 2;
+                                     break;
+                                 }
+                             }
+                         }
+                         else {
+							move_x -= speedd;
+                         }
 						 all_YA_change2(270);
-						 event_user(0);
 					 	 // 탭x 쉬프트x
 						 if (keyboard_check(global.up)) {
 							 all_YA_change2(310);
-							 event_user(0);
 						 }
 						 if (keyboard_check(global.down)) {
 							all_YA_change2(225);
-							event_user(0);
 							}
 						}	
 					}
@@ -214,8 +479,7 @@ if(live = 1) {
 				else {
 					if (spin_able == true) {
 						if (a_a_cooltime < 0) {
-							all_YA_change_delta2(4);
-							event_user(0);
+							all_YA_change_delta2(4 * spin_scale);
 						}
 					}
 				}
@@ -227,22 +491,18 @@ if(live = 1) {
 					if (only_move = 1) {
 						if (keyboard_check(global.shift)) {
 							if (!keyboard_check(global.cap)) {
-								if(place_free(x, y - (speedd)) or go_soild) {
-									if (!instance_exists(grvity)) {
-										y -= speedd;
-									}
-									event_user(0);
+								if (!instance_exists(grvity)) {
+									move_y -= speedd;
 								}
 							}
 						}
 						if (keyboard_check(global.cap)) {
 							if (keyboard_check(global.shift)) {
-								if(place_free(x + lengthdir_x(2,YA2-90), y + lengthdir_y(2,YA2-90)) or go_soild) {
-									x += lengthdir_x(2,YA2-90);
+								if(place_free(x + lengthdir_x(speedd - 4,YA2-90), y + lengthdir_y(speedd - 4,YA2-90)) or go_soild) {
+									x += lengthdir_x(speedd - 4,YA2-90);
 									if (!instance_exists(grvity)) {
-										y += lengthdir_y(2,YA2-90);
+										y += lengthdir_y(speedd - 4,YA2-90);
 									}
-									event_user(0);
 									}
 								}
 							else {
@@ -252,27 +512,33 @@ if(live = 1) {
 									if (!instance_exists(grvity) or go_soild == true) {
 										y += lengthdir_y(cap_speed,YA2-90);
 									}
-									event_user(0);
 									}
 								}
+								/*
+		                        if (global.hat == spr_hat74 and level < 4) {
+				                    var cap_speed = speedd + (ride * 7) + 2;
+								    if(place_free(x + lengthdir_x(cap_speed, YA2-90), y + lengthdir_y(cap_speed, YA2-90)) or go_soild) {
+								 	   x += lengthdir_x(cap_speed,YA2-90);
+									   if (!instance_exists(grvity) or go_soild == true) {
+									       y += lengthdir_y(cap_speed,YA2-90);
+									 }
+									 
+								     }
+							    }*/
 						}
 					}
+					
 					if (!keyboard_check(global.shift)) {
 						if (!keyboard_check(global.cap)) {
-							if(place_free(x, y - (speedd)) or go_soild) {
-								if (!instance_exists(grvity) or go_soild == true) {
-									y -= speedd;
-								}
+							if (!instance_exists(grvity) or go_soild == true) {
+								move_y -= speedd;
 							}
-								all_YA_change2(180);
-								event_user(0);
+							all_YA_change2(180);
 							if (keyboard_check(global.left)) {
 								all_YA_change2(225);
-								event_user(0);
 							}
 							if (keyboard_check(global.right)) {
 								all_YA_change2(135);
-								event_user(0);
 							} 
 						}
 					}
@@ -285,42 +551,47 @@ if(live = 1) {
 					if (only_move = 1) {
 						if (keyboard_check(global.shift)) {
 							if (keyboard_check(global.cap)) {
-								if(place_free(x + (lengthdir_x(5,YA2)), y + (lengthdir_y(5,YA2))) or go_soild) {
-									x += lengthdir_x(5,YA2)
+								if(place_free(x + (lengthdir_x(speedd - 4,YA2)), y + (lengthdir_y(speedd - 4,YA2))) or go_soild) {
+									x += lengthdir_x(speedd - 4,YA2)
 									if (!instance_exists(grvity) or go_soild == true) {
-										y += lengthdir_y(5,YA2)
+										y += lengthdir_y(speedd - 4,YA2)
 									}
 									all_YA_change_delta2(-2);
 								}
 							}
 							else {
-								if(place_free(x + speedd, y) or go_soild) {
-									x += speedd;
-									event_user(0);
-								}
+								move_x += speedd;
 							}
 					}
 					else {
 					if (keyboard_check(global.cap)) {
 						all_YA_change_delta2(-4);
-						event_user(0);
 						}
 					}
 				}
 					if (!keyboard_check(global.shift)) {
 						if (!keyboard_check(global.cap)) {
-							if(place_free(x + speedd, y) or go_soild) {
-							x += speedd;
-							}
+							if (instance_exists(grvity)) {
+                             for (var i = 0; i < 5; i++) {
+                                 if(place_free(x + (speedd), y - i * 2) or go_soild) {
+                                     x += speedd;
+                                     y -= i * 2;
+                                     break;
+                                 }
+                             }
+                         }
+                         else {
+							move_x += speedd;         
+                         }
+						 all_YA_change2(90);
+						 //탭x 쉬프트x 오른쪽
 							all_YA_change2(90);
-							event_user(0);
 							if (keyboard_check(global.up)) {
 								all_YA_change2(135);
-								event_user(0);
 							}
 							if (keyboard_check(global.down)) {
 								all_YA_change2(45);
-								event_user(0);
+								
 							} 
 						}
 					}
@@ -328,8 +599,8 @@ if(live = 1) {
 				else {
 					if (spin_able == true) {
 						if (a_a_cooltime < 0) {
-							all_YA_change_delta2(-4);
-							event_user(0);
+							all_YA_change_delta2(-4 * spin_scale);
+							
 						}
 					}
 				}
@@ -341,18 +612,15 @@ if(live = 1) {
 					if (only_move = 1) {
 						if (keyboard_check(global.shift)) {
 							if (!keyboard_check(global.cap)) {
-								if(place_free(x, y + speedd) or go_soild) {
-								y += speedd;
-								event_user(0);
-								}
+								move_y += speedd;
 							}
 						}
 						if (keyboard_check(global.cap)) {
 							if (keyboard_check(global.shift)) {
-								if(place_free(x - lengthdir_x(2,YA2-90), y - lengthdir_y(2,YA2-90)) or go_soild) {
-									x -= lengthdir_x(2,YA2-90);
-									y -= lengthdir_y(2,YA2-90);
-									event_user(0);
+								if(place_free(x - lengthdir_x(speedd - 4,YA2-90), y - lengthdir_y(speedd - 4,YA2-90)) or go_soild) {
+									x -= lengthdir_x(speedd - 4,YA2-90);
+									y -= lengthdir_y(speedd - 4,YA2-90);
+									
 								}
 							}
 							else {
@@ -360,57 +628,186 @@ if(live = 1) {
 								if(place_free(x - lengthdir_x(cap_speed,YA2-90), y - lengthdir_y(cap_speed,YA2-90)) or go_soild) {
 									x -= lengthdir_x(cap_speed,YA2-90);
 									y -= lengthdir_y(cap_speed,YA2-90);
-									event_user(0);
+									
 								}
+								/*
+								if (global.hat == spr_hat74 and level < 4) {  
+				                    var cap_speed = speedd + (ride * 7) + 2;
+								    if(place_free(x - lengthdir_x(cap_speed,YA2-90), y - lengthdir_y(cap_speed,YA2-90)) or go_soild) {
+									     x -= lengthdir_x(cap_speed,YA2-90);
+									     y -= lengthdir_y(cap_speed,YA2-90);
+									     
+									}	 
+							    }*/
 							}
 						}
 					}
 					if (!keyboard_check(global.shift)) {
 						if (!keyboard_check(global.cap)) {
-							if(place_free(x, y + speedd) or go_soild) {
-								y += speedd;
-							}
+							move_y += speedd;
 							all_YA_change2(0);
-							event_user(0);
+							
 							if (keyboard_check(global.left)) {
 								all_YA_change2(315);
-								event_user(0);
+								
 							}
 							if (keyboard_check(global.right)) {
 								all_YA_change2(45);
-								event_user(0);
+								
 							}
 						}
 					}
 				}
 			}
 		}
+		if (move_x != 0 or move_y != 0) {
+			if (go_soild) {
+				x += move_x;
+				y += move_y;
+			}
+			else {
+				move_x = round(move_x);
+				move_y = round(move_y);
+				if (place_free(x, y)) {
+					var dx = 0;
+					for (var i = 0; i < abs(move_x); i++) {
+						dx = move_x - sign(move_x) * i;
+						if (place_free(x + dx, y)) {
+							x += dx;
+							break;
+						}
+					}
+					if (move_y <= 0) {
+						jump = true;
+					}
+					is_ground = true;
+					for (var i = 0; i < abs(move_y); i++) {
+						dx = move_y - sign(move_y) * i;
+						if (place_free(x, y + dx)) {
+							y += dx;
+							jump = false;
+							is_ground = false;
+							break;
+						}
+					}
+				}
+				else {
+					/*
+					var _direction_multi;
+					for (var i = 1; i < 15; i++) {
+						_direction_multi = i * 0.1 + 1;
+						if (place_free(x + move_x * _direction_multi, y + move_y * _direction_multi)) {
+							x += move_x * _direction_multi;
+							y += move_y * _direction_multi;
+							break;
+						}
+					}
+					*/
+				}
+			}
+		}
 	}
 	if (sturn <= 0) {
 		if (chat_point = 0) {
-			if (a_possible = 1) {
-				if (keyboard_check(ord("4"))) {
+			if (keyboard_checkD) {
+				if(arm_type_more != "hammer_end") {	
+					if (a_cooltime <= 0) {
+						if (keyboard_check_released(global.keyd)) {
+							keyboard_checkD = false;
+							switch (timeline_index) {
+								case hammer_1_act :
+									if (timeline_position > 30) {
+										normal_play(hammer_1_act1);
+									}
+									else {
+										arm_spin_speed = 4;
+										left_goto_YA = 0 + 45;
+										a_cooltime = 10;
+										left_arm_get_bigger = false;
+										normal_play(hammer_1_act0);
+									}
+									instance_destroy(hammer_skill1_gauge);
+								break;
+							}
+						}
+					}
+				}
+			}
+			if (keyboard_checkQ) {
+				if (keyboard_check_released(global.keyq)) {
+					keyboard_checkQ = false;
+					switch (timeline_index) {
+						case babo_2_act1 :
+							is_babo_angle = false;
+							normal_play(babo_2_act2);
+						break;
+					}
+				}
+			}
+			if (keyboard_checkW) {
+				if (keyboard_check_released(global.keyw)) {
+					keyboard_checkW = false;
+					switch (timeline_index) {
+						case hammer_3_act :
+							arm_spin_speed = 4;
+							right_goto_YA = 0 + 45;
+							a_cooltime = 25;
+							left_arm_get_bigger = false;
+							cancle_able = false;
+							spr_arml_more = spr_none;
+							how_long = timeline_position;
+							server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+							normal_play(hammer_3_act0);
+							instance_destroy(hammer_skill3_gauge);
+						break;
+					}
+				}
+			}
+			if (keyboard_checkE) {
+				if (keyboard_check_released(global.keye)) {
+					keyboard_checkE = false;
+					switch (timeline_index) {
+						case hammer_4_act :
+							if (cur_target_index > 0 and cur_target_index <= 24) {
+								a_cooltime = 40;
+								spin_able = true;
+								server79_create_instace_ext(hammer_skill4, x, y, cur_target_index);
+							}
+							else {
+								arm_type = "ouch";
+								sturn = 80;
+								spin_able = true;
+								server79_create_instace_ext(hammer_skill4, x, y, 0);
+							}
+							target_start(false);
+						break;
+					}
+				}
+			}
+			if (a_possible) {
+				if (keyboard_check(global.key4)) {
 					if (a_cooltime <= 0) {
 						normal_play(it_hing);
 					}
 				}
-				if (keyboard_check(ord("5"))) {
+				if (keyboard_check(global.key5)) {
 					if (a_cooltime <= 0) {
 						normal_play(da_bong);
 					}
 				}
-				if (keyboard_check(ord("6"))) {
+				if (keyboard_check(global.key6)) {
 					if (a_cooltime <= 0) {
 						normal_play(ap);
 					}
 				}
-				if (keyboard_check(ord("7"))) {
+				if (keyboard_check(global.key7)) {
 					if (a_cooltime <= 0) {
 						normal_play(ap1);
 					}
 				}
 				if (keyboard_check(global.keya)) {
 					if (a_cooltime <= 0) {
+						seq_end();
 						switch(normal_attack_type) {
 							case spr_hat11 :
 								norm_attack()
@@ -429,50 +826,104 @@ if(live = 1) {
 								norm_attack()
 								normal_play(twiza_3_act);
 							break;
-							case spr_sea_k :
-								normal_play(sea_2_act2);
-							break;
-							case spr_nk:
-								normal_play(nk_1_act);
-							break;
 							case spr_korea3:
 								normal_play(korea_3_act);
 							break;
 							case spr_nuke3:
 								normal_play(nuke_3_act);
 							break;
+							case spr_bobo:
+								normal_play(cry_4_act);
+							break;
 							default:
 							if (a_possible == true) {
 								switch (global.hat) {
+									case spr_hat71:
+									    switch(d_attack_type) {
+										    case spr_sangbrush :
+										         normal_play(gun_0_act);
+										    break;
+										    default :
+										        normal_play(gun_0_act1);
+										    break;
+										    }
+									break;
 									case spr_hat70:
 										normal_play(bam_1_act);
 									break;
-									case spr_hat10:
-										norm_attack()
-										if (level > 1) {
-											normal_play(p_3_act);
-										}
-										break;
-									case spr_hat12 :
-										norm_attack()
-										if (level > 1) {
-											normal_play(twiza_3_act);
-										}
-										break;
-									case spr_hat67 :
-										if (a_a_cooltime <= 0) {
-											if (level > 2) {
-												normal_play(yo_4_act);
-											}
-											else {
-												norm_attack();	
-											}
+									case spr_hat37:
+										if(room = room_ghost) {	
+											normal_play(hide_4_act);
 										}
 										else {
-											skill_say_time = 30;
-											skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
+											norm_attack()
 										}
 									break;
+									case spr_hat10:
+									     norm_attack()
+									     normal_play(p_0_act);
+									break;
+									case spr_hat12 :
+										norm_attack()
+										normal_play(twiza_3_act);
+									break;
+									case spr_hat49 :
+										normal_play(nuke_1_act);
+									break;
+										
+									case spr_hat61 :
+										if (stemina >= 80) {
+											normal_play(nin_0_act);
+											stemina -= m_stemina * 0.6
+										}
+										 {
+											skill_say_time = 30;
+											skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 0.6) + "(80)";
+										}
+									break;
+									case spr_hat50 :
+									if (level > 0) {
+										if (stemina >= 80) {
+											normal_play(sea_2_act2);
+											stemina -= 150
+										}
+										else {
+											norm_attack()
+											skill_say_time = 30;
+											skill_say = "스테미나: " + string(stemina) + " / 150(80)";
+										}
+									}
+									else {
+										norm_attack()
+									}
+									break;
+									case spr_hat59 :
+                                    if (level > 1) {
+                                        if (stemina >= 80) {
+                                            normal_play(time_0_act);
+                                            stemina -= m_stemina * 1.5
+                                        }
+                                        else{
+                                            skill_say_time = 30;
+                                            skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 1.5) + "(80)";
+                                        }
+                                    }
+                                    else {
+                                        norm_attack()
+                                    }
+                                    break;		
+									case spr_hat66 :
+							        if (level > 1) {
+								     if (a_cooltime <= 0) {
+										normal_play(bb_1_act1);
+									    }
+									}
+							        else {
+								    if (a_cooltime <= 0) {
+									    normal_play(bb_1_act);
+									}
+									}
+								    break;
 									case spr_hat11 :
 										norm_attack()
 										normal_play(bwiza_1_act);
@@ -480,8 +931,40 @@ if(live = 1) {
 									case spr_hat40:
 										normal_play(fighter_1_act);
 									break;
-									case spr_hat71:
-										normal_play(gun_0_act);
+									/*
+									case spr_hat45 :
+									if (stemina >= 80) {
+									    normal_play(fheal_0_act);
+										stemina -= 150
+									}
+									else {
+										skill_say_time = 30;
+										skill_say = "스테미나: " + string(stemina) + " / 150(80)";
+									}
+									break;
+									*/
+									case spr_hat54 :
+								        normal_play(trol_0_act);
+							        break;
+									case spr_hat58 :
+								        normal_play(nk_1_act);
+									break;
+									case spr_hat65:
+									    normal_play(eng_0_act);
+									break;
+									case spr_hat72:
+									    if (a_cooltime <= 0) {
+									        if (bullet > 0) {
+												bullet -= 1
+								                normal_play(snow_4_act);
+									        }
+											else {
+											    norm_attack()
+											}
+										}
+									break;
+									case spr_hat73:
+									    normal_play(ass_0_act);
 									break;
 									case spr_hat56:
 										if(level > 1) {
@@ -492,14 +975,29 @@ if(live = 1) {
 										}
 									break;
 									case spr_hat15:
-										norm_attack()
-										if (level > 1) {
+									switch(level) {
+											case 0:
+												norm_attack()
+											break;
+											case 1:
+												norm_attack()
+											break;
+											default:
 											if(gi > 10) {
+												a_cooltime = 36 + round(big_val * 3);
+	                                            arm_all_normal();
+	                                            jumping = false;
+	                                            arm_type = "attack"
+	                                            arm_movement(3, -3, 10, 10);
 												prt_val_add(Val.gi, -10);
 												server78_create_instace(healer_skill3, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
 											}
-										}
+											else {
+												norm_attack()
+											}
 										break;
+									}
+									break;
 									case spr_hat17:
 										switch(level) {
 											case 0:
@@ -512,7 +1010,6 @@ if(live = 1) {
 												normal_play(die_3_act2);
 											break;
 											case 3:
-												stemina -= 25;
 												normal_play(die_4_act2);
 											break;
 										}
@@ -553,15 +1050,7 @@ if(live = 1) {
 									break;
 									case spr_hat38 :
 										if (level == 3) {
-											normal_play(fly_4_act);
-										}
-										else {
-											norm_attack();	
-										}
-									break;
-									case spr_hat49:
-										if (irandom(9) == 0) {
-											normal_play(nuke_1_act)
+											normal_play(fly_0_act);
 										}
 										else {
 											norm_attack();	
@@ -571,7 +1060,7 @@ if(live = 1) {
 										normal_play(die_3_but);
 									break;
 									default :
-									norm_attack()
+										norm_attack();
 								}
 							}
 							break;
@@ -604,5099 +1093,101 @@ if(live = 1) {
 					}
 				}
 			}
-
+			
 				if (a_possible = 1 and skill_posible = true and hat_bye == false) {
-					if (keyboard_check(global.keyd)) {
+					if (keyboard_check_released(global.keyd)) {
 						switch(global.hat) {
-							case spr_hat1 :
-								if (level != 4) {
-									if (a_cooltime <= 0) { 
-										if (mana >= 55) {
-											prt_val_add(Val.mp, -55);
-											normal_play(yellow_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 55(55)";
-										}
-									}//옐로우캡 부분
-								}
-								else {
-									if (a_cooltime <= 0) { 
-										if (mana >= 55) {
-											prt_val_add(Val.mp, -55);
-											normal_play(yellow_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 55(55)";
-										}
-									}//옐로우캡 부분
-								}
-							break;
-							
-							case spr_level5_hat1 :
-							if (level == 4) {
-									if (a_cooltime <= 0) {
-										if (mana >= 35) {
-											prt_val_add(Val.mp, -35);
-											normal_play(yellow_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 35(35)";
-										}
-									}
-							}
-							break;//무사 부분
-							
-							case spr_hatee:
-								if (a_cooltime <= 0) {
-									if (mana >= 66) {
-										prt_val_add(Val.mp, -66);
-										normal_play(charge_1_act2);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 66(66)";
-									}
-								}
-							break;
-							case spr_hat2 :
-								if (a_cooltime <= 0) {
-									if (mana >= 45) {
-										prt_val_add(Val.mp, -57);
-										normal_play(musa_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 57(45)";
-									}
-								}
-							break;//무사 부분
-							
-							case spr_hat50849:
-								if (a_cooltime <= 0) {
-									if (gi >= 50) {
-										prt_val_add(Val.gi, -50);
-										normal_play(p_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GP: " + string(gi) + " / 50(50)";
-									}
-								}
-							break;//무사 부분
-							
-							case spr_hat3 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50 - level * 5) {
-										prt_val_add(Val.mp, -50 + level * 5);
-										normal_play(hunt_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(50 - level * 5) + "(" + string(50 - level * 5)  + ")";
-									}
-								}
-							break;//사냥꾼 부분
-							
-							case spr_hat4 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(EQ_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-							break;
-							
-							case spr_hat6 :
-								if (a_cooltime <= 0) {
-									switch(level)
-									{
-										case 0:
-										if (mana >= 5) {
-											prt_val_add(Val.mp, -5);
-											normal_play(ssg_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 5(5)";
-										}
-										break;
-										case 1:
-										if (mana >= 10) {
-											prt_val_add(Val.mp, -10);
-											normal_play(ssg_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 10(10)";
-										}
-										break;
-										case 2:
-										if (mana >= 18) {
-											prt_val_add(Val.mp, -18);
-											normal_play(ssg_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 18(18)";
-										}
-										break;
-										case 3:
-										if (mana >= 40) {
-											prt_val_add(Val.mp, -40);
-											normal_play(ssg_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 40(40)";
-										}
-										break;
-									}
-								}
-							break;//소세지 부분
-							
-							case spr_hat7 :
-								if (a_cooltime <= 0) {
-									switch(level) {
-									case 0:
-										if (mana >= 75) {
-											prt_val_add(Val.mp, -75);
-											a_cooltime = 15;
-											go_to_scale = 2;
-											big_val_time = 540;
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 75(75)";
-										}
-										break;
-									case 1:
-										if (mana >= 75) {
-											prt_val_add(Val.mp, -75);
-											a_cooltime = 15;
-											go_to_scale = 2;
-											big_val_time = 540;
-											big_shild = true;
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 75(75)";
-										}
-										break;
-									case 2:
-										if (mana >= 125) {
-											prt_val_add(Val.mp, -125);
-											a_cooltime = 15;
-											go_to_scale = 4;
-											big_val_time = 540;
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 125(125)";
-										}
-										break;
-									case 3:
-										if (mana >= 125) {
-											prt_val_add(Val.mp, -125);
-											a_cooltime = 15;
-											go_to_scale = 6;
-											big_val_time = 540;
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 125(125)";
-										}
-										break;
-									}
-								}
-							break;//거인 부분
-							
-							case spr_hat8 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(nu_1_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							
-							case spr_hat9 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									random_table1();
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_hat10 :
-							if (a_cooltime <= 0) {
-								if(level == 3) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(p_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-									
-									
-								}
-								else {
-									if (mana >= 55 - level * 5) {
-										prt_val_add(Val.mp, -55 + level * 5);
-										normal_play(p_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(55 - level * 5) + "(" + string(55 - level * 5)  + ")";
-									}
-								}
-							}
-							break;
-							
-							case spr_hat11 :
-							if (a_cooltime <= 0) {
-								if (mana >= 8) {
-									prt_val_add(Val.mp, -10);
-									normal_play(bwiza_1_act2);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 10(8)";
-								}
-							}
-							break;
-							
-							case spr_hat12 :
-							if (a_cooltime <= 0) {
-								if(level == 0) {
-									if (mana >= 72) {
-										prt_val_add(Val.mp, -72);
-										normal_play(twiza_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 72(72)";
-									}
-									
-									
-								}
-								else {
-									if (mana >= 54) {
-										prt_val_add(Val.mp, -54);
-										normal_play(twiza_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 54(54)";
-									}
-								}
-							}
-							break;
-							
-							case spr_hat13 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(apple_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							
-							case spr_hat14 :
-							if (a_cooltime <= 0) {
-								if (mana >= 55) {
-									prt_val_add(Val.mp, -55);
-									normal_play(sward_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 55(55)";
-								}
-							}
-							break;
-							
-							case spr_hat15 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(healer_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break;
-							
-							case spr_hat16 :
-							case spr_hat35:
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(shep_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_hat17 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(die_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break;
-							
-							case spr_hat18 :
-							if (a_cooltime <= 0) {
-								if (mana >= 16) {
-									prt_val_add(Val.mp, -16);
-									normal_play(korea_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 16(16)";
-								}
-							}
-							break;
-							
-							case spr_hat19 :
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(ddr_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break;
-							
-							case spr_hat20 :
-							if (a_cooltime <= 0) {
-								if (mana >= 90) {
-									prt_val_add(Val.mp, -90);
-									if (level < 2) {
-										normal_play(hide_1_act);
-									}
-									else {
-										normal_play(hide_1_act2);
-									}
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 90(90)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat2 :
-							if (a_cooltime <= 0) {
-								if (mana >= 10) {
-									prt_val_add(Val.mp, -10);
-									normal_play(shep_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 10(10)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat7 :
-							if (a_cooltime <= 0) {
-								if (mana >= 10) {
-									prt_val_add(Val.mp, -10);
-									yagol_1_act();
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 10(10)";
-								}
-							}
-							break;
-							
-							case spr_hat21 :
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(lobo_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-							case spr_hat22 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(aring_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break;
-							
-							case spr_hat23 :
-							if (a_cooltime <= 0) {
-								if (mana >= 55) {
-									prt_val_add(Val.mp, -55);
-									normal_play(wing_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 55(55)";
-								}
-							}
-							break;
-							
-							case spr_hat24 :
-							if (a_cooltime <= 0) {
-								if (mana >= 45) {
-									prt_val_add(Val.mp, -45);
-									normal_play(gili_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 45(45)";
-								}
-							}
-							break;
-							
-							case spr_hat25 :
-							if (a_cooltime <= 0) {
-								if (mana >= 60) {
-									prt_val_add(Val.mp, -60);
-									normal_play(ik_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 60(60)";
-								}
-							}
-							break;
-							
-							case spr_hat26 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(mili_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break;
-							
 							case spr_hat27 :
 							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
+								if (mana >= 50 - level * 5) {
+									prt_val_add(Val.mp, -50 + level * 5);
 									normal_play(charge_1_act);
 								}
 								else {
 									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
+									skill_say = "MP: " + string(mana) + " / " + string(50 - level * 5) + "(" + string(50 - level * 5) + ")";
 								}
 							}
-							break;
-							
-							case spr_hat29 :
-							if (a_cooltime <= 0) {
-								if (mana >= 16) {
-									prt_val_add(Val.mp, -16);
-									normal_play(ane_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 16(16)";
-								}
-							}
-							break;
-							
-							case spr_hat30 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(fwiza_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat3 :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
-									normal_play(ik_2_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat4 :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
-									normal_play(sward_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break;
-							
-							case spr_secret :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
-									normal_play(yellow_1_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat5 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(normal_attack_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_level5_hat6 :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -25);
-									normal_play(hunt_2_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(20)";
-								}
-							}
-							break;
-							
-							case spr_hat31 :
-							if (a_cooltime <= 0) {
-								if (mana >= 60) {
-									prt_val_add(Val.mp, -60);
-									normal_play(mine_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 60(60)";
-								}
-							}
-							break;
-							
-							case spr_hat32 :
-							if (a_cooltime <= 0) {
-								if (keyboard_check(global.keye)) {
-									if (level == 3) {
-										if (mana >= 70) {
-											prt_val_add(Val.mp, -90);
-											normal_play(gili_3_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 70(90)";
-										}
-									}
-								}
-								else {
-									if (mana >= 60) {
-										prt_val_add(Val.mp, -60);
-										normal_play(sward_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 60(60)";
-									}
-								}
-							}
-							break;
-							
-							case spr_hat33 :
-							if (a_cooltime <= 0) {
-								if (mana >= 120) {
-									prt_val_add(Val.mp, -150);
-									normal_play(twiza_4_act2);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 150(120)";
-								}
-							}
-							break;
-							
-							case spr_hat34 :
-								if (a_cooltime <= 0) {
-									if (mana >= 80 - level * 10) {
-										prt_val_add(Val.mp, -80 + level * 10);
-										normal_play(p_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(80 - level * 10) + "(" + string(80 - level * 10)  + ")";
-									}
-								}
-							break;
-							
-							case spr_hat36 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(kpower_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_hat37 :
-							if (a_cooltime <= 0) {
-								if (mana >= 70) {
-									prt_val_add(Val.mp, -70);
-									normal_play(kesin_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 70(70)";
-								}
-							}
-							break;
-							
-							case spr_hat38 :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
-									normal_play(fly_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break;
-							
-							case spr_hat39 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(lebe_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							
-							case spr_hat62 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -66);
-									normal_play(lebe_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 66(66)";
-								}
-							}
-							break;
-							
-							case spr_hat40 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(fighter_1_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break;
-							
-							case spr_hat41 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(shit_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_hat42 :
-							if (a_cooltime <= 0) {
-								if (mana >= 14) {
-									prt_val_add(Val.mp, -14);
-									normal_play(wild_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 14(14)";
-								}
-							}
-							break;
-							
-							case spr_hat43 :
-							if (a_cooltime <= 0) {
-								if (mana >= 0) {
-									prt_val_add(Val.mp, -40);
-									normal_play(spear_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(0)";
-								}
-							}
-							break;
-							
-							case spr_hat44 :
-							if (a_cooltime <= 0) {
-								if (mana >= 5) {
-									prt_val_add(Val.mp, -5);
-									normal_play(pwiza_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 5(5)";
-								}
-							}
-							break;
-							
-							case spr_hat45 :
-							if (a_cooltime <= 0) {
-								if (mana >= 44) {
-									prt_val_add(Val.mp, -44);
-									normal_play(fheal_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 44(44)";
-								}
-							}
-							break;
-							case spr_hat46:
-								if (a_cooltime <= 0) {
-									if (gi >= 30) {
-										if (mana >= 40) {
-											prt_val_add(Val.gi, -30)
-											prt_val_add(Val.mp, -40)
-											normal_play(bandit_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 40(40)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 30(30)";
-									}
-								}	
-							break;
-							case spr_hat47 :
-							if (a_cooltime <= 0) {
-								if (mana >= 180) {
-									prt_val_add(Val.mp, -180);
-									normal_play(gilmak_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 180(180)";
-								}
-							}
-							break
-							case spr_hat48 :
-							if (a_cooltime <= 0) {
-								if (mana >= 55) {
-									prt_val_add(Val.mp, -55);
-									normal_play(sans_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 55(55)";
-								}
-							}
-							break
-							case spr_hat49 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(nuke_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break
-							case spr_hat50 :
-							if (a_cooltime <= 0) {
-								if (mana >= 60) {
-									prt_val_add(Val.mp, -60);
-									normal_play(sea_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 60(60)";
-								}
-							}
-							break
-							case spr_hat51 :
-							if (level != 3) {
-								if (a_cooltime <= 0) {
-									if (mana >= 45) {
-										prt_val_add(Val.mp, -45);
-										normal_play(pota_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 45(45)";
-									}
-								}
-								break
-							}
-							else {
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(pota_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 60(60)";
-									}
-								}
-								break
-							}
-							case spr_hat52 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(jam_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break
-							case spr_ehat4 :
-							if (a_cooltime <= 0) {
-								if (hp > 25) {
-									if (mana >= 50) {
-										hp -= 25;
-										prt_val_add(Val.mp, -50);
-										normal_play(jam_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "HP: " + string(hp) + " / 25(25)";
-								}
-							}
-							break
-							case spr_hat53 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(he_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break
-							case spr_level5_hat8 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(die_1_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break
-							case spr_level5_hat9 :
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -30);
-									normal_play(sans_1_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break
-							case spr_level5_hat10 :
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(musa_1_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break
-							case spr_level5_hat11 :
-							if (a_cooltime <= 0) {
-								if (mana >= 44) {
-									prt_val_add(Val.mp, -44);
-									normal_play(alpha_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 44(44)";
-								}
-							}
-							break
-							case spr_level5_hat12 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(hunt_1_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break
-							case spr_level5_hat13 :
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(shit_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break
-							case spr_level5_hat14 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(light_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break
-							case spr_level5_hat15 :
-							if (a_cooltime <= 0) {
-								if (mana >= 30) {
-									prt_val_add(Val.mp, -30);
-									normal_play(sward_2_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 30(30)";
-								}
-							}
-							break
-							case spr_hat54 :
-							if (a_cooltime <= 0) {
-								if (mana >= 8) {
-									prt_val_add(Val.mp, -8);
-									normal_play(trol_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 8(8)";
-								}
-							}
-							break
-							case spr_level5_hat16 :
-							if (a_cooltime <= 0) {
-								if (mana >= 1) {
-									prt_val_add(Val.mp, -1);
-									normal_play(sli_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 1(1)";
-								}
-							}
-							break
-							case spr_level5_hat17 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									a_cooltime = 15;
-									go_to_scale = 5;
-									big_val_time = 540;
-									big_shild = true;
-									buff_time = 2 * room_speed;
-									buff_index = spr_wing1;
-									server77_equal(serve_val.buff_index, buff_index, buffer_u16);
-									left_arm_YA = YA - 180;
-									go_to_speed = 1;
-									aexp += 30;
-									server202_sound(wing_1_sound);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 100(100)";
-								}
-							}
-							break
-							case spr_hat55 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(coca_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-							break;
-							case spr_hat56 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(he_3_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break
-							case spr_hat57 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(ma_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break
-							case spr_hat58 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(nk_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break
-							case spr_hat59 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(ik_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break
-							case spr_hat60 :
-								if (a_cooltime <= 0) {
-									if (mana >= 60 - level * 10) {
-										prt_val_add(Val.mp, -60 + level * 10);
-										normal_play(see_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(60 - level * 10) + "(" + string(60 - level * 10)  + ")";
-									}
-								}
-							break;
-							case spr_hat61 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50 - level * 5) {
-										prt_val_add(Val.mp, -50 + level * 5);
-										normal_play(nin_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(50 - level * 5) + "(" + string(50 - level * 5)  + ")";
-									}
-								}
-							break;
-							case spr_hat63 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(tu_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break
-							case spr_hat64 :
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(sang_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break
-							case spr_hat65 :
-							if (a_cooltime <= 0) {
-								if (mana >= 4) {
-									prt_val_add(Val.mp, -4);
-									normal_play(eng_1_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 4(4)";
-								}
-							}
-							break
-							case spr_level5_hat18 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(sward_1_act2);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break
-							case spr_hat5 :
-							if (level > 3) {
-								if (a_cooltime <= 0) {
-									if (mana >= 180) {
-										prt_val_add(Val.mp, -180);
-										normal_play(goza_skilld);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 180(180)";
-									}
-								}
-								break
-							}
-							case spr_hat66 :
-							if (level > 1) {
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(bb_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-								break
-							}
-							else {
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(bb_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-								break
-							}
-							case spr_hat67:
-							if (a_cooltime <= 0) {
-									if (gi >= 50) {
-										prt_val_add(Val.gi, -50);
-										normal_play(yo_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GP: " + string(gi) + " / 50(50)";
-									}
-								}
-							break;
-							case spr_hat68:
-								if (a_cooltime <= 0) {
-									if (mana >= 25) {
-										prt_val_add(Val.mp, -25);
-										normal_play(music_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 25(25)";
-									}
-								}
-							break;
-							case spr_hat69:
-								if (a_cooltime <= 0) {
-									var gout = false;
-									for (var i = 0; i < instance_number(tree_skill12); i++) {
-										var temp_id = instance_find(tree_skill12, i);
-										if (temp_id.cid == global.my_cid) {
-											if (mana >= 15) {
-												prt_val_add(Val.mp, -15);
-												normal_play(tree_1_act2);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 15(15)";
-											}
-											gout = true;
-											break;
-										}
-									}
-									for (var i = 0; i < instance_number(tree_skill32); i++) {
-										var temp_id = instance_find(tree_skill32, i);
-										if (temp_id.cid == global.my_cid) {
-											if (mana >= 25) {
-												prt_val_add(Val.mp, -25);
-												normal_play(tree_1_act3);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 25(25)";
-											}
-											gout = true;
-											break;
-										}
-									}
-									if (!gout) {
-										if (mana >= 45) {
-											prt_val_add(Val.mp, -45);
-											normal_play(tree_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 45(45)";
-										}
-									}
-								}
-							break;
-							case spr_hat70:
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										normal_play(bam_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / '0'(50)";
-									}
-								}
-							break;
-							case spr_hat71:
-								if (a_cooltime <= 0) {
-									if (mana >= 20) {
-										prt_val_add(Val.mp, -20);
-										normal_play(gun_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 20(20)";
-									}
-								}
-							break;
-							case spr_hat72:
-								if (a_cooltime <= 0) {
-									if (mana >= 120) {
-										prt_val_add(Val.mp, -120);
-										normal_play(gman_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 120(120)";
-									}
-								}
 							break;
 						}
+					}
+				}// 돌진D 부분
+
+				if (a_possible and skill_posible = true and hat_bye == false) {
+					//모든 공격의 시작.
+					if (instance_exists(obj_card_manager)) { 
+						if (first_item_play == true and obj_card_manager.get_name() == "두번 반복") {
+							item_twice();
+						}
+					}
+					if (keyboard_check_pressed(global.ctrl) and !instance_exists(obj_life_ui)) {
+						instance_create_depth(x, y, depth - 1, obj_life_ui);
+					}
+					
+					if (keyboard_check(global.keyd)) {
+						skill_start(global.hat, 0);
 					}//1차 스킬 
-						
 
 					if (keyboard_check(global.keyq)) {
 						if (level >= 1) {
-							switch(global.hat) {
-								case spr_hat1 :
-								if (level != 4) {
-									if (a_cooltime <= 0) {
-										if (gi >= 40) {
-											prt_val_add(Val.gi, -40);
-											normal_play(yellow_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GP: " + string(gi) + " / 40(40)";
-										}
-									}
-								}
-								else {
-									if (a_cooltime <= 0) {
-										if (mana >= 40) {
-											prt_val_add(Val.mp, -40);
-											normal_play(yellow_2_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 40(40)";
-										}
-									}
-								}
-								break;
-								
-								case spr_hat2 :
-									if (a_cooltime <= 0) {
-										if (mana >= 55) {
-											prt_val_add(Val.mp, -85);
-											normal_play(musa_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 85(55)";
-										}
-									}
-								break;//무사 부분
-								
-								case spr_hat3 :
-									if (a_cooltime <= 0) {
-										if (mana >= 56) {
-											prt_val_add(Val.mp, -56);
-											normal_play(hunt_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 56(56)";
-										}
-									}
-								break;
-								
-								case spr_hat4 :
-									if (a_cooltime <= 0) {
-										if (mana >= 110 - level * 10) {
-											prt_val_add(Val.mp, (-110 + level * 10));
-											normal_play(EQ_2_act);
-										}
-										else {
-											skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string((110 - level * 10)) + "(" + string((110 - level * 10))  + ")";
-										}
-									}
-								break;
-								
-								case spr_hat6 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(ssg_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat7 :
-									if (a_cooltime <= 0) {
-										if (mana >= 10) {
-											a_cooltime = 26
-											prt_val_add(Val.mp, -10);
-											YA_change_small = true;
-											arm_all_normal();
-											arm_type = "attack"
-											arm_movement(3, -3, 10, 10);
-											server78_create_instace(n_attack_area, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
-											YA_change_small_time = 26;
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 10(10)";
-										}
-									}
-								break;
-								
-								case spr_hat8 :
-									if (a_cooltime <= 0) {
-										if (mana >= 100) {
-											prt_val_add(Val.mp, -100);
-											normal_play(nu_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat9 :
-									if (a_cooltime <= 0) {
-										if (mana >= 30) {
-											prt_val_add(Val.mp, -30);
-											random_table2();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 30(30)";
-										}
-									}
-								break;
-								
-								case spr_hat10 :
-									if (a_cooltime <= 0) {
-										if (mana >= 81) {
-											prt_val_add(Val.mp, -81);
-											normal_play(p_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 81(81)";
-										}
-									}
-								break;
-								
-								case spr_hat11 :
-									if (a_cooltime <= 0) {
-										if (mana >= 70) {
-											prt_val_add(Val.mp, -70);
-											normal_play(bwiza_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 70(70)";
-										}
-									}
-								break;
-								
-								case spr_hat12 :
-									if (a_cooltime <= 0) {
-										if (mana >= 110) {
-											prt_val_add(Val.mp, -110);
-											normal_play(twiza_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 110(110)";
-										}
-									}
-								break;
-								
-								case spr_hat13 :
-								if (a_cooltime <= 0) {
-									if (mana >= 100) {
-										prt_val_add(Val.mp, -100);
-										normal_play(apple_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 100(100)";
-									}
-								}
-								break;
-								
-								case spr_hat14 :
-								if (a_cooltime <= 0) {
-									if (mana >= 35) {
-										prt_val_add(Val.mp, -35);
-										normal_play(sward_2_act);
-										arm_all_normal();
-										a_possible = false;
-										arm_type = "attack"
-										arm_type_more = "apple_1";
-										cancle_able = true;
-										arm_movement(13, -13, 2, 2);
-										shild = true;
-										effect_index = effect_shild
-										effect_index_num = 0;
-										temp_YA = YA;
-										server202_sound(sward_2_sound);
-										server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-										server77_equal(serve_val.effect_index_num, 0, buffer_bool);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 35(35)";
-									}
-								}
-								break;
-								
-								case spr_hat43 :
-								if (a_cooltime <= 0) {
-									if (mana >= 25) {
-										prt_val_add(Val.mp, -25);
-										normal_play(sward_2_act);
-										arm_all_normal();
-										a_possible = false;
-										arm_type = "attack"
-										arm_type_more = "apple_1";
-										cancle_able = true;
-										arm_movement(13, -13, 2, 2);
-										shild = true;
-										effect_index = effect_shild
-										effect_index_num = 0;
-										temp_YA = YA;
-										server202_sound(sward_2_sound);
-										server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-										server77_equal(serve_val.effect_index_num, 0, buffer_bool);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 25(25)";
-									}
-								}
-								break;
-								
-								case spr_hat15 :
-								if (a_cooltime <= 0) {
-									if (a_a_cooltime <= 0) {
-										a_a_cooltime = 240;
-										if (mana >= 110) {
-											prt_val_add(Val.mp, -130);
-											a_cooltime = 20;
-											arm_type = "attack"
-											server78_create_instace(healer_skill2, x, y);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 130(110)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-									}
-								}
-								break;
-								
-								case spr_hat16 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(shep_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_hat17 :
-								if (a_cooltime <= 0) {
-									if (mana >= 11) {
-										prt_val_add(Val.mp, -11);
-										normal_play(die_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 11(11)";
-									}
-								}
-								break;
-								
-								case spr_hat18 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(korea_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-								break;
-								
-								case spr_hat19 :
-								if (a_cooltime <= 0) {
-									if (mana >= 70) {
-										prt_val_add(Val.mp, -70);
-										normal_play(ddr_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 70(70)";
-									}
-								}
-								break;
-								
-								case spr_hat20 :
-								if (a_cooltime <= 0) {
-									if (mana >= 5) {
-										prt_val_add(Val.mp, -5);
-										normal_play(hide_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 5(5)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat2 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(ddr_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_hat21:
-									if (a_cooltime <= 0) {
-										if (mana >= 150) {
-											prt_val_add(Val.mp, -150);
-											normal_play(lobo_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_hat22:
-									if (a_cooltime <= 0) {
-										if (mana >= 20) {
-											prt_val_add(Val.mp, -20);
-											normal_play(aring_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 20(20)";
-										}
-									}
-								break;
-								
-								case spr_hat23:
-									if (a_cooltime <= 0) {
-										if (mana >= 120) {
-											prt_val_add(Val.mp, -110);
-											normal_play(wing_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 130(115)";
-										}
-									}
-								break;
-								
-								case spr_hat24:
-									if (a_cooltime <= 0) {
-										if (mana >= 15) {
-											prt_val_add(Val.mp, -15);
-											normal_play(gili_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 15(15)";
-										}
-									}
-								break;
-								
-								case spr_hat25:
-									if (a_cooltime <= 0) {
-										if (gi >= 25) {
-											prt_val_add(Val.gi, -25);
-											normal_play(ik_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 25(25)";
-										}
-									}
-								break;
-								
-								case spr_hat26:
-									if (a_cooltime <= 0) {
-										normal_play(mili_2_act);
-									}
-								break;
-								
-								case spr_hat27:
-									if (a_cooltime <= 0) {
-										if (mana >= 84) {
-											prt_val_add(Val.mp, -84);
-											normal_play(charge_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 84(84)";
-										}
-									}
-								break;
-								
-															
-								case spr_hat28 :
-								if (a_cooltime <= 0) {
-									if (mana >= 80) {
-										prt_val_add(Val.mp, -80);
-										normal_play(cry_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 80(80)";
-									}
-								}
-								break;
-								
-								case spr_hat29 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(ane_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-								break;
-								
-								case spr_hat30 :
-								if (a_cooltime <= 0) {
-									if (mana >= 60) {
-										prt_val_add(Val.mp, -60);
-										normal_play(fwiza_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 60(60)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat3 :
-								if (a_cooltime <= 0) {
-									if (mana >= 45) {
-										prt_val_add(Val.mp, -45);
-										normal_play(eletc_ane);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 45(45)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat4 :
-								if (a_cooltime <= 0) {
-									if (mana >= 5) {
-										prt_val_add(Val.mp, -5);
-										normal_play(tank_short);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 5(5)";
-									}
-								}
-								break;
-								
-								case spr_secret :
-								if (a_cooltime <= 0) {
-									if (mana >= 5) {
-										prt_val_add(Val.mp, -5);
-										normal_play(mili_1_but);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 5(5)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat5 :
-								if (a_cooltime <= 0) {
-									if (mana >= 10) {
-										prt_val_add(Val.mp, -10);
-										normal_play(good_bye);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 10(10)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat7 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(yagol_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat6 :
-								if (a_cooltime <= 0) {
-									if (mana >= 10) {
-										prt_val_add(Val.mp, -10);
-										normal_play(mili_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 10(10)";
-									}
-								}
-								break;
-								
-								case spr_hat31 :
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(mine_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-								break;
-								
-								case spr_hat32 :
-								if (a_cooltime <= 0) {
-									if (keyboard_check(global.keye)) {
-										if (level == 3) {
-											if (mana >= 40) {
-												prt_val_add(Val.mp, -40);
-												normal_play(EQ_1_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 40(40)";
-											}
-										}
-									}
-									else {
-										if (mana >= 60) {
-											prt_val_add(Val.mp, -60);
-											normal_play(twiza_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 60(60)";
-										}
-									}
-								}
-								break;
-								
-								case spr_hat33 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -60);
-										a_cooltime = 10;
-										random_xy();
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 60(40)";
-									}
-								}
-								break;
-								case spr_hat34 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50 - level * 5) {
-										prt_val_add(Val.mp, -50 + level * 5);
-										normal_play(fwiza_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(50 - level * 5) + "(" + string(50 - level * 5)  + ")";
-									}
-								}
-								break;
-								
-								case spr_hat35 :
-									if (a_cooltime <= 0) {
-										if (mana >= 40) {
-											prt_val_add(Val.mp, -40);
-											normal_play(apple_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 40(40)";
-										}
-									}
-								break;
-								
-								case spr_hat36 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -60);
-										normal_play(kpower_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 60(50)";
-									}
-								}
-							break;		
-							case spr_hat38 :
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(fly_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-							break;		
-							case spr_hat39 :
-								if (a_cooltime <= 0) {
-									if (mana >= 80) {
-										prt_val_add(Val.mp, -80);
-										normal_play(leba_2_skill1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 80(80)";
-									}
-								}
-							break;	
-							
-							case spr_hat40 :
-							if (a_cooltime <= 0) {
-								if (mana >= 15) {
-									prt_val_add(Val.mp, -15);
-									normal_play(fighter_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 15(15)";
-								}
-							}
-							break;
-							
-							case spr_hat41 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(shit_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							
-							case spr_hat42 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(wild_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							
-							case spr_hat44 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(pwiza_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-													
-							case spr_hat45:
-								if (a_cooltime <= 0) {
-									if (gi >= 200) {
-										prt_val_add(Val.gi, -200)
-										normal_play(fheal_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 200(200)";
-									}
-								}
-							break;
-							
-							case spr_hat46:
-							if (a_cooltime <= 0) {
-								if (mana >= 68) {
-									prt_val_add(Val.mp, -68);
-									normal_play(bandit_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 68(68)";
-								}
-							}
-							break;
-							case spr_hat47:
-							if (a_cooltime <= 0) {
-								if (gi >= 300) {
-									prt_val_add(Val.gi, -300);
-									normal_play(gilmak_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "GI: " + string(gi) + " / 300(300)";
-								}
-							}
-							break;
-							case spr_hat48:
-							if (a_cooltime <= 0) {
-								if (mana >= 60) {
-									prt_val_add(Val.mp, -60);
-									normal_play(sans_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 60(60)";
-								}
-							}
-							break;
-							case spr_hat49:
-							if (a_cooltime <= 0) {
-								if (mana >= 80) {
-									prt_val_add(Val.mp, -80);
-									normal_play(nuke_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 80(80)";
-								}
-							}
-							break;
-							case spr_hat50:
-							if (a_cooltime <= 0) {
-								if (mana >= 70) {
-									prt_val_add(Val.mp, -70);
-									normal_play(sea_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 60(55)";
-								}
-							}
-							break;
-							case spr_hat51:
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(pota_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break;
-							case spr_hat52:
-							if (a_cooltime <= 0) {
-								if (mana >= 90) {
-									prt_val_add(Val.mp, -90);
-									normal_play(jam_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 90(90)";
-								}
-							}
-							break;
-							
-							case spr_ehat4:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									ehat_2_act();
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_hat53:
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(he_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break;
-							case spr_level5_hat8:
-							if (a_cooltime <= 0) {
-								if (mana >= 20) {
-									prt_val_add(Val.mp, -20);
-									normal_play(die_2_act3);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 20(20)";
-								}
-							}
-							break;
-							case spr_level5_hat9:
-							if (a_cooltime <= 0) {
-								if (gi >= 50) {
-									prt_val_add(Val.gi, -50);
-									sans_speak();
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "GP: " + string(gi) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_level5_hat10:
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(musa_2_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break;
-							case spr_level5_hat11:
-							if (a_cooltime <= 0) {
-								if (mana >= 22) {
-									prt_val_add(Val.mp, -22);
-									normal_play(mine_2_but);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 22(22)";
-								}
-							}
-							break;
-							case spr_level5_hat12:
-							if (a_cooltime <= 0) {
-								if (mana >= 25) {
-									prt_val_add(Val.mp, -25);
-									normal_play(mili_1_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 25(25)";
-								}
-							}
-							break;
-							case spr_level5_hat13:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									djz_2_act();
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_level5_hat14:
-							if (a_cooltime <= 0) {
-								if (mana >= 100) {
-									prt_val_add(Val.mp, -100);
-									normal_play(die_2_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 100(100)";
-								}
-							}
-							break;
-							case spr_level5_hat15:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(ane_4_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_hat54:
-							if (a_cooltime <= 0) {
-								if (mana >= 10) {
-									prt_val_add(Val.mp, -10);
-									normal_play(trol_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 10(10)";
-								}
-							}
-							break;
-							case spr_hat5:
-							if (a_cooltime <= 0) {
-								if (hp > 50) {
-									if (mana >= 10) {
-										prt_val_add(Val.mp, -10);
-										normal_play(goza_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 10(10)";
-									}
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "HP: " + string(hp) + " / '1'(50)";
-								}
-							}
-							break;
-							case spr_level5_hat16:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(sea_1_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_level5_hat17:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(EQ_4_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_hat55 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(coca_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-							break;
-							case spr_hat56:
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(t_killer2);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							case spr_hat57 :
-								if (a_cooltime <= 0) {
-									if (mana >= 110 - level * 10) {
-										prt_val_add(Val.mp, -110 + level * 10);
-										normal_play(ma_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(110 - level * 10) + "(" + string(110 - level * 10)  + ")";
-									}
-								}
-							break;
-							case spr_hat58:
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(nk_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break;
-							case spr_hat59:
-							if (a_cooltime <= 0) {
-								if (mana >= 100) {
-									prt_val_add(Val.mp, -100);
-									normal_play(time_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 100(100)";
-								}
-							}
-							break;
-							case spr_hat60:
-							if (a_cooltime <= 0) {
-								if (mana >= 80) {
-									prt_val_add(Val.mp, -80);
-									normal_play(see_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 80(80)";
-								}
-							}
-							break;
-							case spr_hat61:
-							if (a_cooltime <= 0) {
-								if (gi >= 85 - level * 5) {
-									prt_val_add(Val.gi, -85 - level * 5);
-									normal_play(nin_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "GI: " + string(gi) + " / "  + string(85 - level * 5) + "(" + string(85 - level * 5)  + ")";
-								}
-							}
-							break;
-							case spr_hat62:
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50)
-										normal_play(healer_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-							break;
-							case spr_hat63:
-							if (a_cooltime <= 0) {
-								if (gi >= 70) {
-									prt_val_add(Val.gi, -70);
-									normal_play(tu_2_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "GI: " + string(gi) + " / 70(70)";
-								}
-							}
-							break;
-							case spr_hat64:
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15)
-										normal_play(sang_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-							break;
-							case spr_hat65:
-							if (a_cooltime <= 0) {
-								if (gi >= 150) {
-									prt_val_add(Val.gi, -150);
-									normal_play(eng_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "GI: " + string(gi) + " / 150(150)";
-								}
-							}
-							break;
-							case spr_level5_hat18 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(twiza_4_act11);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break
-							case spr_hat66 :
-							if (a_cooltime <= 0) {
-								if (mana >= 35) {
-									prt_val_add(Val.mp, -35);
-									normal_play(bb_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 35(35)";
-								}
-							}
-							break
-							case spr_hat67 :
-							if (a_cooltime <= 0) {
-								if (mana >= 180) {
-									prt_val_add(Val.mp, -180);
-									normal_play(yo_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 180(180)";
-								}
-							}
-							break
-							case spr_hat68 :
-							if (a_cooltime <= 0) {
-								if (mana >= 120) {
-									prt_val_add(Val.mp, -120);
-									normal_play(music_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 120(120)";
-								}
-							}
-							break
-							case spr_hat69 :
-							if (a_cooltime <= 0) {
-								if (a_a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(tree_2_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-								}
-							}
-							break
-							case spr_hat70 :
-							if (a_cooltime <= 0) {
-								if (hp >= 20) {
-									hp -= 20;
-									normal_play(bam_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "hp: " + string(hp) + " / 20(20)";
-								}
-							}
-							break
-							case spr_hat71 :
-							if (a_cooltime <= 0) {
-								if (mana >= 40) {
-									prt_val_add(Val.mp, -40);
-									normal_play(gun_2_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 40(40)";
-								}
-							}
-							break;
-							case spr_hat50849:
-								if (a_cooltime <= 0) {
-									if (mana >= 20) {
-										prt_val_add(Val.mp, -20);
-										normal_play(cry_2_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 20(20)";
-									}
-								}
-							break;
-							case spr_hat72:
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150);
-										normal_play(gman_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GP: " + string(gi) + " / 150(150)";
-									}
-								}
-							break;
-							case spr_hatee:
-								if (a_cooltime <= 0) {
-									if (gi >= 140) {
-										prt_val_add(Val.gi, -140);
-										normal_play(snow_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GP: " + string(gi) + " / 140(140)";
-									}
-								}
-							break;
-							}
+							skill_start(global.hat, 1);
 						}
 					}//2차 스킬
 		
 					if (keyboard_check(global.keyw)) {
 						if (level >= 2) {
-							switch(global.hat) {
-								case spr_hat1 :
-								if (level != 4) {
-									if (a_cooltime <= 0) {
-										if (mana >= 70) {
-											prt_val_add(Val.mp, -70);
-											normal_play(yellow_3_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 70(70)";
-										}
-									}
-								}
-								else {
-									if (a_cooltime <= 0) {
-										if (mana >= 70) {
-											prt_val_add(Val.mp, -70);
-											normal_play(yellow_3_act11);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 70(70)";
-										}
-									}
-								}
-								break;
-								case spr_level5_hat1 :
-								if (level == 4) {
-									if (a_cooltime <= 0) {
-										if (mana >= 180) {
-											prt_val_add(Val.mp, -180);
-											normal_play(gilmak_1_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 180(180)";
-										}
-									}
-								}
-								break;
-								case spr_hat2 :
-								if (a_cooltime <= 0) {
-									if (gi >= 300) {
-										prt_val_add(Val.gi, -300)
-										normal_play(musa_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 300(300)";
-									}
-								}
-								break;
-								
-								case spr_hat3 :
-								if (a_cooltime <= 0) {
-									if (gi >= 50) {
-										prt_val_add(Val.gi, -50)
-										normal_play(hunt_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_hat4 :
-								if (a_cooltime <= 0) {
-									if (gi >= 200) {
-										prt_val_add(Val.gi, -200)
-										normal_play(EQ_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 200(200)";
-									}
-								}
-								break;
-								
-								case spr_hat5 :
-								if (a_cooltime <= 0) {
-									if (gi >= 200) {
-										prt_val_add(Val.gi, -200)
-										normal_play(goza_1_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 200(200)";
-									}
-								}
-								break;
-								
-								case spr_hat6 :
-								if (a_cooltime <= 0) {
-									if (mana >= level * 30 - 48) {
-										prt_val_add(Val.mp, -level * 30 + 48);
-										normal_play(ssg_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / " + string(level * 30 - 48) + "(" + string(level * 30 - 48) + ")";
-									}
-								}
-								break;
-								
-								case spr_hat7 :
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150)
-											go_to_scale = 1 + big_val;
-											big_val += 1;
-											big_val_time = 300;
-											server78_create_instace(n_attack_area, x, y);
-											normal_play(r_ready1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_hat8 :
-									if (a_cooltime <= 0) {
-										if (level == 2) {
-											if (gi >= 250) {
-												prt_val_add(Val.gi, -250)
-												normal_play(nu_3_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 250(250)";
-											}
-										}
-										else {
-											if (gi >= 200) {
-												prt_val_add(Val.gi, -200)
-												normal_play(nu_3_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 200(200)";
-											}
-										}
-									}
-								break;
-								
-								case spr_hat9 :
-									if (a_cooltime <= 0) {
-										if (gi >= 30) {
-											prt_val_add(Val.gi, -33)
-											random_table3();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 33(30)";
-										}
-									}
-								break;
-								
-								case spr_hat11 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(bwiza_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat12 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(twiza_3_act2);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat14 :
-									if (a_cooltime <= 0) {
-										if (gi >= 80) {
-											prt_val_add(Val.gi, -80);
-											normal_play(sward_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(mana) + " / 80(80)";
-										}
-									}
-								break;
-								
-								case spr_hat16 :
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(shep_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								
-								case spr_hat17 :
-									if (a_cooltime <= 0) {
-										if (gi >= 40) {
-											if (mana >= 40) {
-												prt_val_add(Val.gi, -40)
-												prt_val_add(Val.mp, -4)
-												normal_play(die_3_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 4(4)";
-											}
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 40(40)";
-										}
-									}
-								break;
-								
-								case spr_hat19 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(ddr_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat20 :
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150)
-											normal_play(hide_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat2 :
-								if (a_cooltime <= 0) {
-									if (mana >= 40) {
-										prt_val_add(Val.mp, -40);
-										normal_play(yellow_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 40(40)";
-									}
-								}
-								break;
-								
-								case spr_hat21:
-									if (a_cooltime <= 0) {
-										if (mana >= 5) {
-											prt_val_add(Val.mp, -5);
-											normal_play(lobo_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 5(5)";
-										}
-									}
-								break;
-								
-								case spr_hat23 :
-								if (a_cooltime <= 0) {
-									if (gi >= 40) {
-										prt_val_add(Val.gi, -40);
-										normal_play(wing_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 35(35)";
-									}
-								}
-								break;
-								
-								case spr_hat25 :
-								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(ik_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-								break;
-								
-								case spr_hat26 :
-								if (a_cooltime <= 0) {
-									if (gi >= 100) {
-										prt_val_add(Val.gi, -100)
-										normal_play(mili_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 100(100)";
-									}
-								}
-								break;
-								
-								case spr_hat27 :
-								if (a_cooltime <= 0) {
-									if (gi >= 100) {
-										prt_val_add(Val.gi, -100)
-										normal_play(charge_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 100(100)";
-									}
-								}
-								break;
-								
-								case spr_hat29 :
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150)
-										normal_play(ane_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 150(150)";
-									}
-								}
-								break;
-								
-								case spr_hat30 :
-								if (a_cooltime <= 0) {
-									if (gi >= 45) {
-										prt_val_add(Val.gi, -45)
-										normal_play(fwiza_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 45(45)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat3 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(charge_4_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat4 :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(EQ_1_walk);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat7 :
-								if (a_cooltime <= 0) {
-									if (mana >= 15) {
-										prt_val_add(Val.mp, -15);
-										normal_play(yagol_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 15(15)";
-									}
-								}
-								break;
-								
-								case spr_secret :
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(big_terror_but);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat5 :
-								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(elis_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-								break;
-								
-								case spr_level5_hat6 :
-								if (a_cooltime <= 0) {
-									if (mana >= 100) {
-										prt_val_add(Val.mp, -100);
-										normal_play(leba_2_skill);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 100(100)";
-									}
-								}
-								break;
-								
-								case spr_hat31 :
-								if (a_cooltime <= 0) {
-									if (gi >= 200) {
-										prt_val_add(Val.gi, -200);
-										normal_play(mine_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 200(200)";
-									}
-								}
-								break;
-								
-																
-								case spr_hat32 :
-									if (a_cooltime <= 0) {
-										if (keyboard_check(global.keye)) {
-											if (level == 3) {
-												if (mana >= 60) {
-													prt_val_add(Val.mp, -60);
-													normal_play(wing_1_act);
-												}
-												else {
-													skill_say_time = 30;
-													skill_say = "MP: " + string(mana) + " / 60(60)";
-												}
-											}
-										}
-										else  {
-											if (gi >= 50) {
-												prt_val_add(Val.gi, -50)
-												normal_play(healer_1_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 50(50)";
-											}
-										}
-									}
-								break;
-								
-								case spr_hat33 :
-								if (a_cooltime <= 0) {
-									if (mana >= 85) {
-										prt_val_add(Val.mp, -85);
-										normal_play(twiza_1_but);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 85(85)";
-									}
-								}
-								break;
-								
-								case spr_hat34 :
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150)
-										normal_play(wing_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 150(150)";
-									}
-								}
-								break;
-												
-								case spr_hat35 :
-									if (a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75)
-											normal_play(EQ_3_act2);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								
-								case spr_hat36 :
-								if (a_cooltime <= 0) {
-									if (mana >= 35) {
-										prt_val_add(Val.mp, -35);
-										normal_play(kpower_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 35(35)";
-									}
-								}
-								break;
-								
-								case spr_hat55 :
-								if (a_cooltime <= 0) {
-									if (gi >= 80) {
-										prt_val_add(Val.gi, -120)
-										normal_play(coca_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 120(120)";
-									}
-								}
-								break;
-								case spr_hat38 :
-									if (a_cooltime <= 0) {
-										if (gi >= 80) {
-											prt_val_add(Val.gi, -80)
-											normal_play(fly_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 80(80)";
-										}
-									}
-								break;
-								
-								case spr_hat39 :
-								if (a_cooltime <= 0) {
-									if (gi >= 250) {
-										prt_val_add(Val.gi, -250)
-										normal_play(lebe_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 250(250)";
-									}
-								}
-								break;
-								
-								case spr_hat40 :
-								if (a_cooltime <= 0 and a_a_cooltime < 0) {
-									if (mana >= 20) {
-										prt_val_add(Val.mp, -20);
-										normal_play(fighter_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 20(20)";
-									}
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-								}
-								break;
-								
-								case spr_hat41 :
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150)
-										normal_play(shit_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 150(150)";
-									}
-								}
-								break;
-								
-								case spr_hat43:
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(spear_3_act0);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat42:
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(wild_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat44:
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(pwiza_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat45 :
-								if (a_cooltime <= 0) {
-									if (mana >= 80) {
-										prt_val_add(Val.mp, -80);
-										normal_play(fheal_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 80(80)";
-									}
-								}
-								break;
-								
-								case spr_hat46 :
-								if (a_cooltime <= 0) {
-									if (mana >= 100) {
-										prt_val_add(Val.mp, -100);
-										normal_play(bandit_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 100(100)";
-									}
-								}
-								break;
-								case spr_hat47:
-							if (a_cooltime <= 0) {
-								if (mana >= 5) {
-									prt_val_add(Val.mp, -5);
-									normal_play(gilmak_3_act);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 5(5)";
-								}
-							}
-							break;
-							case spr_hat48:
-							if (a_cooltime <= 0) {
-								if (mana >= 50) {
-									prt_val_add(Val.mp, -50);
-									normal_play(sans_3_act1);
-								}
-								else {
-									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / 50(50)";
-								}
-							}
-							break;
-							case spr_hat49:
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150)
-										normal_play(nuke_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 150(150)";
-									}
-								}
-							break;
-							case spr_hat50:
-								if (a_cooltime <= 0) {
-									if (gi >= 150) {
-										prt_val_add(Val.gi, -150)
-										normal_play(sea_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 150(150)";
-									}
-								}
-							break;
-							
-							case spr_hat51:
-								if (a_cooltime <= 0) {
-									if (gi >= 175) {
-										prt_val_add(Val.gi, -175)
-										normal_play(pota_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 175(175)";
-									}
-								}
-							break;
-							case spr_hat52:
-								if (a_cooltime <= 0) {
-									if (gi >= 250) {
-										if (mana >= 160) {
-											if (hp >= 60) {
-												prt_val_add(Val.gi, -250)
-												prt_val_add(Val.mp, -160)
-												hp -= 60;
-												normal_play(jam_3_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "HP: " + string(hp) + " / 60(60)";
-											}
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 160(160)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 250(250)";
-									}
-								}
-							break;
-							case spr_ehat4:
-								if (a_cooltime <= 0) {
-									if (gi >= 50) {
-										prt_val_add(Val.gi, -50)
-										normal_play(pota_3_but);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 50(50)";
-									}
-								}
-							break;
-							case spr_hat53:
-								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(tu_4_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-							break;
-							
-							case spr_level5_hat8:
-									if (a_cooltime <= 0) {
-										if (gi >= 80) {
-											if (mana >= 4) {
-												prt_val_add(Val.gi, -80)
-												prt_val_add(Val.mp, -4)
-												normal_play(die_3_act1);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 4(4)";
-											}
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 80(80)";
-										}
-									}
-								break;
-								case spr_level5_hat9:
-								if (a_cooltime <= 0) {
-									if (mana >= 10) {
-										prt_val_add(Val.mp, -10);
-										normal_play(sans_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 10(10)";
-									}
-								}
-								break;
-								case spr_level5_hat11:
-								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(mine_2_but1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-								break;
-								case spr_level5_hat12:
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(sea_3_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								case spr_level5_hat13:
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(ik_1_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								case spr_level5_hat14:
-								if (a_cooltime <= 0) {
-									if (mana >= 50) {
-										prt_val_add(Val.mp, -50);
-										normal_play(musa_1_act2);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 50(50)";
-									}
-								}
-								break;
-								case spr_level5_hat15:
-								if (a_cooltime <= 0) {
-									if (mana >= 70) {
-										prt_val_add(Val.mp, -70);
-										normal_play(sward_1_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 70(70)";
-									}
-								}
-								break;
-								case spr_hat54:
-									if (a_cooltime <= 0) {
-										if (gi >= 15) {
-											prt_val_add(Val.gi, -15)
-											normal_play(trol_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 15(15)";
-										}
-									}
-								break;
-								case spr_level5_hat16:
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(gilmak_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								case spr_level5_hat17:
-									if (a_cooltime <= 0) {
-										if (gi >= 125) {
-											prt_val_add(Val.gi, -125)
-											normal_play(die_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 125(125)";
-										}
-									}
-								break;
-								case spr_hat56:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 400) {
-											prt_val_add(Val.gi, -400)
-											normal_play(t_killer3);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 400(400)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-									}
-								break;
-								case spr_hatee:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(snow_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-									}
-								break;
-								case spr_hat57:
-									if (hp > m_hp - 1) {
-										if (a_cooltime <= 0) {
-											hp -= 30;
-											normal_play(EQ_1_walk);
-										}
-									}
-									else {
-										if (a_cooltime <= 0) {
-											if (gi >= 75) {
-												prt_val_add(Val.gi, -75)
-												normal_play(ma_3_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 75(75)";
-											}
-										}
-									}
-								break;
-								case spr_hat58:
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(nk_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_hat59:
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(time_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_hat60 :
-								if (a_cooltime <= 0) {
-									if (gi >= 200) {
-										prt_val_add(Val.gi, -200)
-										normal_play(see_3_act2);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 200(200)";
-									}
-								}
-								break;
-								case spr_hat61:
-									if (a_cooltime <= 0) {
-										if (gi >= 125) {
-											prt_val_add(Val.gi, -125)
-											normal_play(nin_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 125(125)";
-										}
-									}
-								break;
-								case spr_hat62:
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50);
-											normal_play(yellow_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GP: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								case spr_hat63:
-								if (a_cooltime <= 0) {
-									if (mana >= 30) {
-										prt_val_add(Val.mp, -30);
-										normal_play(tu_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 30(30)";
-									}
-								}
-								break;
-								case spr_hat64:
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											normal_play(sang_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GP: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_hat65:
-									if (a_cooltime <= 0) {
-										if (gi >= 175) {
-											prt_val_add(Val.gi, -175);
-											normal_play(eng_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GP: " + string(gi) + " / 175(175)";
-										}
-									}
-								break;
-								case spr_level5_hat18 :
-								if (a_cooltime <= 0) {
-									if (mana >= 100) {
-										prt_val_add(Val.mp, -125);
-										normal_play(healer_2_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 125(100)";
-									}
-								}
-								break
-								case spr_hat66 :
-								if (a_cooltime <= 0) {
-									if (gi >= 66) {
-										prt_val_add(Val.gi, -66);
-										normal_play(bb_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 66(66)";
-									}
-								}
-								break
-								case spr_hat67 :
-								if (a_cooltime <= 0) {
-									if (gi >= 300) {
-										prt_val_add(Val.gi, -300);
-										normal_play(yo_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 300(300)";
-									}
-								}
-								break
-								case spr_hat68 :
-								if (a_cooltime <= 0) {
-									if (gi >= 220) {
-										prt_val_add(Val.gi, -220);
-										normal_play(music_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 220(220)";
-									}
-								}
-								break
-								case spr_hat69 :
-								if (a_cooltime <= 0) {
-									var gout = false;
-									for (var i = 0; i < instance_number(tree_skill12); i++) {
-										var temp_id = instance_find(tree_skill12, i);
-										if (temp_id.cid == global.my_cid) {
-											if (gi >= 250) {
-												prt_val_add(Val.gi, -250);
-												normal_play(tree_3_act2);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GP: " + string(mana) + " / 250(250)";
-											}
-											gout = true;
-											break;
-										}
-									}
-									if (!gout) {
-										if (mana >= 30) {
-											prt_val_add(Val.mp, -30);
-											normal_play(tree_3_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 30(30)";
-										}
-									}
-								}
-								break
-								case spr_hat70 :
-								if (a_cooltime <= 0) {
-									if (hp >= 45) {
-										hp -= 45;
-										normal_play(bam_3_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "hp: " + string(hp) + " / 45(45)";
-									}
-								}
-								break
-								case spr_hat50849:
-									if (a_cooltime <= 0) {
-										if (mana >= 30) {
-											prt_val_add(Val.mp, -30);
-											normal_play(mili_2_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 30(30)";
-										}
-									}
-								break;
-								case spr_hat72:
-									if (a_cooltime <= 0) {
-										if (mana >= 44) {
-											prt_val_add(Val.mp, -44);
-											random_tableno();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 44(44)";
-										}
-									}
-								break;
-							}
+							skill_start(global.hat, 2);
 						}
 					}//3차스킬
 			
 					if (keyboard_check(global.keye)) {
 						if (level >= 3) {
-							switch(global.hat)
-							{
-								case spr_hat1:
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(yellow_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_hat48:
-								if (a_cooltime <= 0) {
-									if (gi >= 50) {
-										prt_val_add(Val.gi, -50);
-										sans_speak();
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GP: " + string(gi) + " / 50(50)";
-									}
-								}
-								break;
-								case spr_hat3:
-									if (a_cooltime <= 0) {
-										if (gi >= 270) {
-											prt_val_add(Val.gi, -270)
-											normal_play(hunt_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 270(270)";
-										}
-									}
-								break;
-								
-								case spr_hat4:
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(EQ_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat8 :
-									if (a_cooltime <= 0) {
-										if (gi >= 440) {
-											prt_val_add(Val.gi, -440)
-											normal_play(nu_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 440(440)";
-										}
-									}
-								break;
-								
-								case spr_hat9 :
-									if (a_cooltime <= 0) {
-										if (gi >= 54) {
-											prt_val_add(Val.gi, -54)
-											random_table4();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 54(54)";
-										}
-									}
-								break;
-								
-								case spr_hat10 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(p_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat11 :
-									if (a_cooltime <= 0) {
-										if (gi >= 40) {
-											prt_val_add(Val.gi, -40)
-											normal_play(bwiza_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 40(40)";
-										}
-									}
-								break;
-								
-								case spr_hat12 :
-									if (a_cooltime <= 0) {
-										if (mana >= 60) {
-											prt_val_add(Val.mp, -60);
-											normal_play(twiza_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 60(60)";
-										}
-									}
-								break;
-								
-								case spr_hat13 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(apple_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat14 :
-									if (a_cooltime <= 0) {
-										if (gi >= 220) {
-											prt_val_add(Val.gi, -220)
-											normal_play(sward_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 220(220)";
-										}
-									}
-								break;
-								
-								case spr_hat15 :
-									if (a_cooltime <= 0) {
-										if (gi >= 290) {
-											prt_val_add(Val.gi, -290)
-											normal_play(healer_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 290(290)";
-										}
-									}
-								break;
-								
-								case spr_hat16 :
-									if (a_cooltime <= 0) {
-										if (gi >= 7) {
-											prt_val_add(Val.gi, -7)
-											normal_play(shep_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 7(7)";
-										}
-									}
-								break;
-								
-								case spr_hat17 :
-									if (a_cooltime <= 0) {
-										if (gi >= 55) {
-											prt_val_add(Val.gi, -55)
-											normal_play(die_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 55(55)";
-										}
-									}
-								break;
-								
-								case spr_hat20 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(hide_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat21:
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150)
-											normal_play(lobo_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_hat22 :
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150)
-											normal_play(aring_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_hat23 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(wing_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat24 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(gili_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat25 :
-									if (a_cooltime <= 0) {
-										if (gi >= 300) {
-											prt_val_add(Val.gi, -300)
-											normal_play(ik_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 300(300)";
-										}
-									}
-								break;
-								
-								case spr_hat26 :
-									if (a_cooltime <= 0) {
-										if (mana >= 99) {
-											prt_val_add(Val.mp, -99);
-											normal_play(mili_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 99(99)";
-										}
-									}
-								break;
-								
-								case spr_hat27 :
-									if (a_cooltime <= 0) {
-										if (mana >= 70) {
-											prt_val_add(Val.mp, -70);
-											normal_play(charge_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 70(70)";
-										}
-									}
-								break;
-								
-								case spr_hat28:
-									if (a_cooltime <= 0) {
-										if (gi >= 25) {
-											prt_val_add(Val.gi, -25)
-											normal_play(cry_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 25(25)";
-										}
-									}
-								break;
-								
-								case spr_hat29:
-									if (a_cooltime <= 0) {
-										if (a_a_cooltime <= 0) {
-											if (gi >= 40) {
-												prt_val_add(Val.gi, -40);
-												normal_play(ane_4_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 40(40)";
-											}
-										}
-										else {
-											if (gi >= 60) {
-												prt_val_add(Val.gi, -60);
-												normal_play(ane_4_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 60(60)";
-											}
-										}
-									}
-								break;
-								
-								case spr_hat30:
-									if (a_cooltime <= 0) {
-										if (gi >= 298) {
-											prt_val_add(Val.gi, -298)
-											normal_play(fwiza_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 298(298)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat3:
-									if (a_cooltime <= 0) {
-										if (mana >= 150) {
-											prt_val_add(Val.mp, -150);
-											normal_play(wing_sward);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 150(150)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat4:
-									if (a_cooltime <= 0) {
-										if (mana >= 110) {
-											prt_val_add(Val.mp, -80);
-											normal_play(sward_3_angry);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 110(80)";
-										}
-									}
-								break;
-								
-								case spr_secret:
-									if (a_cooltime <= 0) {
-										if (mana >= 10) {
-											prt_val_add(Val.mp, -8);
-											normal_play(bwiza_4_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 11(8)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat5:
-									if (a_cooltime <= 0) {
-											normal_play(i_book_but);
-									}
-								break;
-								
-								case spr_level5_hat6:
-									if (a_cooltime <= 0) {
-										if (mana >= 75) {
-											prt_val_add(Val.mp, -75);
-											normal_play(hunt_3_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 75(75)";
-										}
-									}
-								break;
-																
-								case spr_hat31 :
-									if (a_cooltime <= 0) {
-										if (gi >= 220) {
-											prt_val_add(Val.gi, -220)
-											normal_play(mine_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 220(220)";
-										}
-									}
-								break;
-								
-								case spr_hat33 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(law_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat34:
-									if (a_cooltime <= 0) {
-										if (mana >= 90) {
-											prt_val_add(Val.mp, -90);
-											normal_play(nu_2_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 90(90)";
-										}
-									}
-								break;
-								
-								case spr_hat35:
-									if (a_cooltime <= 0) {
-										if (mana >= 100) {
-											prt_val_add(Val.mp, -100);
-											normal_play(charge_2_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat36 :
-									if (a_cooltime <= 0) {
-										if (gi >= 170) {
-											prt_val_add(Val.gi, -170)
-											normal_play(kpower_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 170(170)";
-										}
-									}
-								break;
-								
-								case spr_hat38:
-									if (a_cooltime <= 0) {
-										if (mana >= 30) {
-											prt_val_add(Val.mp, -30);
-											normal_play(fly_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 30(30)";
-										}
-									}
-								break;
-								
-																
-								case spr_level5_hat7 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(yagol_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_hat40 :
-									if (a_cooltime <= 0) {
-										if (gi >= 330) {
-											prt_val_add(Val.gi, -330)
-											normal_play(fighter_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 330(330)";
-										}
-									}
-								break;
-								
-								case spr_hat41:
-									if (a_cooltime <= 0) {
-										if (gi > 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(shit_4_act)
-										}
-										else {
-											if (mana >= 100) {
-												prt_val_add(Val.mp, -100);
-												normal_play(shit_4_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 100(100)";
-											}
-										}
-									}
-								break;
-								
-								case spr_hat18 :
-									if (a_cooltime <= 0) {
-										if (gi >= 400) {
-											prt_val_add(Val.gi, -400)
-											normal_play(korea_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 400(400)";
-										}
-									}
-								break;
-								
-								case spr_hat37 :
-									if (a_cooltime <= 0) {
-										if (gi >= 400) {
-											prt_val_add(Val.gi, -400)
-											normal_play(kesin_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 400(400)";
-										}
-									}
-								break;
-								
-								case spr_hat42:
-									if (a_cooltime <= 0) {
-										normal_play(wild_4_act);
-									}
-								break;
-								
-								case spr_hat43:
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(spear_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-																
-								case spr_hat44 :
-									if (a_cooltime <= 0) {
-										if (gi >= 40) {
-											prt_val_add(Val.gi, -40);
-											normal_play(pwiza_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 40(40)";
-										}
-									}
-								break;
-								
-								case spr_hat45 :
-									if (a_cooltime <= 0) {
-										if (mana >= 20) {
-											prt_val_add(Val.mp, -100);
-											normal_play(fheal_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 100(20)";
-										}
-									}
-								break;
-								
-								case spr_hat46 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											normal_play(bandit_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_hat47 :
-									if (a_cooltime <= 0) {
-										normal_play(gilmak_4_act);
-									}
-								break;
-								
-								case spr_hat49 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(nuke_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_hat50 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(sea_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_hat51 :
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150);
-											normal_play(pota_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								case spr_hat52 :
-									if (a_cooltime <= 0 and a_a_cooltime < 0) {
-										if (mana >= 40) {
-											prt_val_add(Val.mp, -40);
-											normal_play(jam_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 40(40)";
-										}
-									}
-								break;
-								case spr_hat39:
-									if (a_cooltime <= 0 ) {
-										if (mana >= 150) {
-											if (gi >= 150) {
-												prt_val_add(Val.mp, -200);
-												prt_val_add(Val.gi, -150);
-												normal_play(lebe_4_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 150(150)";
-											}
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 200(150)";
-										}
-									}
-								break;
-								case spr_ehat4 :
-									if (a_cooltime <= 0 and a_a_cooltime < 0) {
-										if (mana >= 66) {
-											prt_val_add(Val.mp, -50);
-											normal_play(aring_4_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 66(66)";
-										}
-									}
-								break;
-								case spr_hat53:
-									if (a_cooltime <= 0) {
-										if (gi >= 40) {
-											prt_val_add(Val.gi, -40);
-											normal_play(he_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 40(40)";
-										}
-									}
-								break;
-								case spr_level5_hat9 :
-									if (a_cooltime <= 0) {
-										if (gi >= 125) {
-											prt_val_add(Val.gi, -105);
-											normal_play(sans_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 125(125)";
-										}
-									}
-								break;
-								case spr_level5_hat10:
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											if (mana >= 40) {
-												prt_val_add(Val.gi, -150)
-												prt_val_add(Val.mp, -40)
-												normal_play(musa_3_act11);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 40(40)";
-											}
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								case spr_level5_hat11 :
-									if (a_cooltime <= 0) {
-										if (gi >= 484) {
-											prt_val_add(Val.gi, -484);
-											normal_play(alpha_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 484(484)";
-										}
-									}
-								break;
-								case spr_level5_hat12 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(nuke_3_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_level5_hat13 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											normal_play(djz_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_level5_hat14 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(ik_4_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_level5_hat15 :
-									if (a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75);
-											normal_play(EQ_1_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								case spr_hat54 :
-									if (a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75);
-											normal_play(trol_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								case spr_level5_hat16 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											normal_play(mine_3_act1);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_level5_hat17 :
-									if (a_cooltime <= 0) {
-										if (mana >= 55) {
-											prt_val_add(Val.mp, -55);
-											normal_play(ane_1_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 55(55)";
-										}
-									}
-								break;
-								case spr_hat55:
-									if (a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75);
-											normal_play(coca_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								case spr_hat56:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi > 550) {
-											prt_val_add(Val.gi, -550)
-											normal_play(t_killer44)
-										}
-										else {
-											if (mana >= 190) {
-												prt_val_add(Val.mp, -350);
-												normal_play(t_killer44);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "MP: " + string(mana) + " / 350(190)";
-											}
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "쿨타임:" + string(a_a_cooltime / 40) + "초" ;
-									}
-								break;
-								case spr_hat57 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(ma_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_hat58 :
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150);
-											normal_play(nk_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								case spr_hat59 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											normal_play(time_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_hat60 :
-								if (a_cooltime <= 0) {
-									if (gi >= 400) {
-										prt_val_add(Val.gi, -400)
-										normal_play(see_4_act3);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 400(400)";
-									}
-								}
-								break;
-								case spr_hat61 :
-									if (a_cooltime <= 0) {
-										normal_play(nin_4_act);
-									}
-								break;
-								case spr_hat62 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											random_b();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								case spr_hat63:
-									if (a_cooltime <= 0) {
-										if (gi >= 150) {
-											prt_val_add(Val.gi, -150);
-											normal_play(tu_4_act1)
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 150(150)";
-										}
-									}
-								break;
-								case spr_hat65:
-									if (a_cooltime <= 0) {
-										if (mana >= 160) {
-											prt_val_add(Val.mp, -160);
-											normal_play(eng_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 160(160)";
-										}
-									}
-								break;
-								case spr_hat2 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200);
-											normal_play(musa_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								case spr_level5_hat18 :
-								if (a_cooltime <= 0) {
-									if (gi >= 100) {
-										prt_val_add(Val.gi, -100);
-										normal_play(sward_1_act3);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 100(100)";
-									}
-								}
-								break
-								case spr_hat66 :
-								if (a_cooltime <= 0) {
-									if (gi >= 280) {
-										prt_val_add(Val.gi, -280);
-										normal_play(bb_4_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 280(280)";
-									}
-								}
-								break
-								case spr_hat68 :
-								if (a_cooltime <= 0) {
-									if (gi >= 80) {
-										if (mana >= 100) {
-											prt_val_add(Val.mp, -100);
-											prt_val_add(Val.gi, -80);
-											normal_play(music_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 100(100)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 80(80)";
-									}
-								}
-								break
-								case spr_hat69 :
-								if (a_cooltime <= 0) {
-									if (gi >= 100) {
-										prt_val_add(Val.gi, -100);
-										normal_play(tree_4_act1);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 100(100)";
-									}
-								}
-								break
-								case spr_hat70 :
-								if (a_cooltime <= 0) {
-									if (hp >= 55) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100);
-											hp -= 55;
-											normal_play(bam_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "hp: " + string(hp) + " / 55(55)";
-									}
-								}
-								break
-								case spr_hat71 :
-								if (a_cooltime <= 0) {
-									if (gi >= 300) {
-										prt_val_add(Val.gi, -300);
-										normal_play(gun_4_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "GI: " + string(gi) + " / 300(300)";
-									}
-								}
-								break
-								case spr_hat50849:
-									if (a_cooltime <= 0) {
-										if (mana >= 45) {
-											prt_val_add(Val.mp, -45);
-											normal_play(ane_1_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 45(45)";
-										}
-									}
-								break;
-								case spr_hatee:
-									if (a_cooltime <= 0) {
-										if (mana >= 56) {
-											prt_val_add(Val.mp, -56);
-											normal_play(snow_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 56(56)";
-										}
-									}
-								break;
-							}
+							skill_start(global.hat, 3);
 						}
 					}//4차스킬
 					
 					if (keyboard_check(global.keyr)) {
 						if (level > 3) {
-							switch(global.hat)
-							{
-								case spr_hat1 :
-									if (a_cooltime <= 0) {
-										if (mana >= 99) {
-											prt_val_add(Val.mp, -99);
-											random_table5();
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / 99(99)";
-										}
-									}
-								break;
-								case spr_level5_hat2 :
-									if (a_cooltime <= 0) {
-										if (gi >= 300) {
-											prt_val_add(Val.gi, -300)
-											normal_play(hunt_4_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 300(300)";
-										}
-									}
-								break;
-								case spr_level5_hat1 :
-								if (level == 4) {
-										if (a_cooltime <= 0) {
-											if (gi >= 600) {
-												prt_val_add(Val.gi, -600)
-												normal_play(bili_5_act);
-											}
-											else {
-												skill_say_time = 30;
-												skill_say = "GI: " + string(gi) + " / 600(600)";
-											}
-										}
-								}
-								break;
-								case spr_level5_hat8 :
-									if (a_cooltime <= 0) {
-										if (gi >= 450) {
-											prt_val_add(Val.gi, -450)
-											normal_play(pota_3_what);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 450(450)";
-										}
-									}
-								break;
-								case spr_level5_hat3 :
-									if (a_cooltime <= 0) {
-										if (gi >= 200) {
-											prt_val_add(Val.gi, -200)
-											normal_play(big_terror);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 200(200)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat4 :
-									if (a_cooltime <= 0) {
-										if (gi >= 300) {
-											prt_val_add(Val.gi, -300)
-											normal_play(ik_4_nuke);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 300(300)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat5 :
-									if (a_cooltime <= 0) {
-										if (gi >= 20) {
-											prt_val_add(Val.gi, -20)
-											normal_play(change_go);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 20(20)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat6 :
-									if (a_cooltime <= 0) {
-										if (gi >= 50) {
-											prt_val_add(Val.gi, -50)
-											normal_play(shep_3_but);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 50(50)";
-										}
-									}
-								break;
-								
-								case spr_hat5 :
-									if (a_cooltime <= 0) {
-										if (gi >= 300) {
-											prt_val_add(Val.gi, -300)
-											normal_play(goza_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 300(300)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat7 :
-									if (a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(yagol_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_secret :
-									big_val = 28;
-									normal_play(nu_4_act);
-								break;
-								
-								case spr_ehat4:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 100) {
-											prt_val_add(Val.gi, -100)
-											normal_play(ehat_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 100(100)";
-										}
-									}
-								break;
-								
-								case spr_level5_hat10:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 40) {
-											prt_val_add(Val.gi, -40)
-											normal_play(musa_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 40(40)";
-										}
-									}
-								break;
-								case spr_level5_hat11:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 25) {
-											prt_val_add(Val.gi, -25)
-											normal_play(mine_2_but11);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 25(25)";
-										}
-									}
-								break;
-								case spr_level5_hat15:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75)
-											normal_play(EQ_1_act2);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								case spr_level5_hat17:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 75) {
-											prt_val_add(Val.gi, -75)
-											normal_play(oda_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 75(75)";
-										}
-									}
-								break;
-								case spr_level5_hat18:
-									if (a_cooltime <= 0 and a_a_cooltime <= 0) {
-										if (gi >= 300) {
-											prt_val_add(Val.gi, -300)
-											normal_play(mol_5_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "GI: " + string(gi) + " / 300(300)";
-										}
-									}
-								break;
-							}
+							skill_start(global.hat, 4);
 						}
-					}//5차스킬
+					}//5차스킬	
+					if (keyboard_check(global.keyg)) {
+							switch(global.stats) {
+								case spr_stats4 :
+									if (b_cooltime <= 0) {
+										a_cooltime = -100
+										normal_play(stats4_act)
+									}
+									else {
+										skill_say_time = 30;
+										skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+									}
+								break;//대현자
+							case spr_stats3:
+								 if (b_cooltime <= 0) {
+								    b_cooltime = 480
+									server78_create_instace(stats3_skill, x, y);
+								 }
+								 else {
+									skill_say_time = 30;
+									skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+								 }
+							break;//외눈박이
+							case spr_stats6:
+								 if (b_cooltime <= 0) {
+								    b_cooltime = 1000
+									stats6_type = 0
+									server78_create_instace(stats6_skill, x, y);
+								 }
+								 else {
+									skill_say_time = 30;
+									skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+								 }
+							break;//검삭신왕
+				 	        }
+					    }
 					if (keyboard_check(global.keyf)) {
-						if (room == room_racing or room == room_what) {
+						if (room == room_racing) {
 							if (a_cooltime <= 0 and a_possible = true) {
 								if (mana >= 55) {
 										prt_val_add(Val.mp, -55);
@@ -5714,15 +1205,31 @@ if(live = 1) {
 							}
 						}
 						if (room == room_sward) {
-							if (a_cooltime <= 0 and a_possible = true) {
+							if(big_val > 1) {
 								if (a_cooltime <= 0 and a_possible = true) {
-									if (mana >= 60 - level * 5) {
-										prt_val_add(Val.mp, -60 + level * 5);
-										normal_play(sward_1_act);
+									if (a_cooltime <= 0 and a_possible = true) {
+										if (mana >= 60 - level * 5) {
+											prt_val_add(Val.mp, -60 + level * 5);
+											normal_play(sward_1_act);
+										}
+										else {
+											skill_say_time = 30;
+											skill_say = "MP: " + string(mana) + " / "  + string(60 - level * 5) + "(" + string(60 - level * 5)  + ")";
+										}
 									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / "  + string(60 - level * 5) + "(" + string(60 - level * 5)  + ")";
+								}
+							}
+							else {
+								if (a_cooltime <= 0 and a_possible = true) {
+									if (a_cooltime <= 0 and a_possible = true) {
+										if (mana >= 90 - level * 5) {
+											prt_val_add(Val.mp, - 90 + level * 5);
+											normal_play(sward_1_act);
+										}
+										else {
+											skill_say_time = 30;
+											skill_say = "MP: " + string(mana) + " / "  + string(90 - level * 5) + "(" + string(90 - level * 5)  + ")";
+										}
 									}
 								}
 							}
@@ -5748,13 +1255,13 @@ if(live = 1) {
 								tuto_last.visible = false;
 							}
 						}
-						if (distance_to_object(obj_absfish) < 20 or distance_to_object(obj_food17) < 20) {
+						if (distance_to_object(obj_absfish) < 20 or distance_to_object(yo_skill2) < 20) {
 							if (a_cooltime <= 0 and a_possible == true) {
 								normal_play(fish_eat)
 							}
 						}
 						else {
-							if (distance_to_object(obj_fish) < 30) {
+							if (distance_to_object(obj_fish) < 30 or distance_to_object(yo_skill3) < 30) {
 								if (a_cooltime <= 0 and a_possible == true) {
 									prt_val_add(0, -300);
 									normal_play(fish_act)
@@ -6078,44 +1585,80 @@ if(live = 1) {
 				}
 			}
 		}
-
-	if (keyboard_check(global.keys)) {
-		if (stemina > 5) {
-			stemina -= 5;
-			if (global.hat == spr_hat19 and level == 3)
-			{
+	var dash_type = 0;
+	if (global.hat == spr_hat19 and level == 3) {
+		dash_type = 1;
+	}
+	else if (global.hat == spr_level5_hat15) {
+		dash_type = 2;	
+	}
+	else if (card_name_check("쓸만한 점멸")) {
+		dash_type = 3;	
+	}
+	switch (dash_type) {
+		case 0 :
+			if (keyboard_check(global.keys) and stemina > 5) {	
+				stemina -= 5;
+				main_speed = 12;
+			}
+			else {
+				main_speed = 7;
+			}
+			break;
+		case 1:
+			if (keyboard_check(global.keys) and stemina > 5) {	
+				stemina -= 5;
 				main_speed = 19;
 			}
 			else {
-				if (global.hat == spr_hat71 and level == 3) {
-					effect_index = spr_horse;
-					temp_YA = YA;
-					effect_index_num = 0;
-				}
 				main_speed = 12;
 			}
-		} //대시 부분 
-		else {
-			if (global.hat == spr_hat19 and level == 3) {
-				main_speed = 12;
+			break;
+		case 2:
+			if (keyboard_check(global.keys) and stemina > 5) {	
+				stemina -= 5;
+				main_speed = 19;
 			}
 			else {
-				if (global.hat == spr_hat71 and level == 3) {
-					effect_index = spr_none;
+				main_speed = irandom(30);
+			}
+			break;
+		case 3:
+			if (keyboard_check(global.keys) and hp > 5) {
+				if (flash_time <= 0) {
+					hp -= 5;
+					flash_time = 400;
+					arm_type = "attack";
+					server78_create_instace(obj_flash, x, y);
+					for(var i = 50; i > 0; i--) {
+						if(place_free(x + lengthdir_x(5 * i, YA - 90), y + lengthdir_y(5 * i, YA - 90)))
+						{
+							x += lengthdir_x(5 * i, YA - 90);
+							y += lengthdir_y(5 * i, YA - 90);
+							break;
+						}//앞으로 자동이동
+					}
+					server78_create_instace(obj_flash_2, x, y);
+					effect_card();
 				}
+				else {
+					skill_say_time = 30;
+					skill_say = "점멸 쿨타임: " + string(flash_time / 40) + "초";
+				}
+			}
+			else {
 				main_speed = 7;
 			}
-		} //속도 정상 
+		break;
 	}
-	else {
-		if (global.hat == spr_hat19 and level == 3) {
-			main_speed = 12;
-		}
-		else {
-			main_speed = 7;
-		}
-		if (global.hat == spr_level5_hat15) {
-			main_speed = irandom(30);	
+	with (obj_crown) {
+		if (cid == global.my_cid) {
+			if (activate) {
+				other.main_speed += 4;
+			}
+			else {
+				other.main_speed -= 4;	
+			}
 		}
 	}
 	
@@ -6130,21 +1673,29 @@ if(live = 1) {
 	}
 	
 
-	if (a_cooltime == 0) {
+	if (a_cooltime == 0 and horse == false) {
 		cancle_able = false;
 		spin_able = false;
 		terror_charge = 0;
 		shild = false;
 		go_soild = false;
+		left_arm_get_bigger = false;
+		seq_end();
+		spin_steadly_start(false);
 		no_change = 0;
+		ski_ready = false
+		high_speed = 1
+		hide_bam = false
 		view_where = 0;
 		view_visible[1] = false;
 		view_visible[0] = true;
 		YA2 = YA;
+		light_set(false);
 		go_to_speed = 0;
+	    go_to_speed2 = 0;
 		go_to_speed_solid = 0;
-		if (fishing != false) {
-			fishing = false;
+		if (fishing != 0) {
+			fishing = 0;
 			mine_say = "까비 아깝소 ㅋㅋ";
 			mine_say_time = 40;
 		}
@@ -6167,12 +1718,26 @@ if(live = 1) {
 	
 	if (arm_type == "ouch")
 	{
+		seq_end();
+		first_item_play = false;
+		keyboard_checkE = false;
+		keyboard_checkQ = false;
+		keyboard_checkD = false;
+		keyboard_checkW = false;
+		is_babo_angle_show = false;
+		target_start(false);
+		spin_steadly_start(false);
+		left_arm_get_bigger = false;
 		face_variable = 0;
 		server77_equal(serve_val.face_variable, 0, buffer_u8);
+		if(global.stats = spr_stats2){
+		    b_cooltime = 200
+		}
 		if (timeline_position > 1) {
 			timeline_running = 0;
 		}
 		only_hat = false;
+		ski_ready = false
 		hat_bye = false;
 		server77_equal(serve_val.only_hat, only_hat, buffer_bool);
 		server77_equal(serve_val.hat_bye, hat_bye, buffer_bool);
@@ -6182,14 +1747,14 @@ if(live = 1) {
 		jumping = false;
 		a_charging = 0;
 		arm_all_normal();
-		left_arm_YA = YA + 270;
-		right_arm_YA = YA + 90;
+		left_arm_YA = 0 + 270;
+		right_arm_YA = 0 + 90;
 		charge = false;
 		arm_movement(5, -5, 5, 5);
 		if (big_shild = false) {
 			if (instance_exists(serve)) {
 				if (serve.kazino_time < 0) {
-					go_to_scale = main_big_val;		
+					go_to_scale = main_big_val * stats_big_val;		
 				}
 			}
 		}
@@ -6197,9 +1762,18 @@ if(live = 1) {
 			if (nu_on == true) {
 				nu_on = false;
 				if (go_to_scale < 1) {
-					go_to_scale = main_big_val;
+					go_to_scale = main_big_val * stats_big_val;
 				}
 				big_val = 1;
+				if (normal_attack_type == spr_bigsaw) {
+					aring_amount--;
+					if (aring_amount < 1) {
+						normal_attack_type = spr_none;
+					}
+				}
+				else {
+					normal_attack_type = spr_none;
+				}
 				face_variable = 0;
 				if (no_change == false) {
 					terror_charge = 0;
@@ -6215,15 +1789,6 @@ if(live = 1) {
 	
 				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
 			}
-			if (normal_attack_type == spr_bigsaw) {
-				aring_amount--;
-				if (aring_amount < 1) {
-					normal_attack_type = spr_none;
-				}
-			}
-			else {
-				normal_attack_type = spr_none;
-			}
 			shild = false;
 			arm_type = "normal"
 			if (no_change == false) {
@@ -6233,8 +1798,28 @@ if(live = 1) {
 				a_possible = true;
 				YA2 = YA;
 			}
+			if (global.hat = spr_hat75) {
+			    combo_time = 0
+			}
 			EQ = false;
 			ride = false;
+			spin_scale = 1
+			counter_attak = false
+			extra_speed = 0
+			if (normal_attack_type == spr_bigsaw) {
+					aring_amount -= 1;
+					if (aring_amount < 1) {
+						normal_attack_type = spr_none;
+					}
+				}
+				else {
+					normal_attack_type = spr_none;
+				}
+			high_speed = 1
+			horse = false
+			face_YA = 0
+			hat_angle = 0
+			hide_bam = false
 			YA_changeable = false;
 			view_visible[0] = true;
 			view_visible[2] = false;
@@ -6244,12 +1829,11 @@ if(live = 1) {
 			hat_move = false;
 			big_shild = false;
 			server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-			if ((buff_index != buff_giligili or buff_index != buff_giligili2) and a_cooltime < 1 and a_possible == true) {
-				go_to_speed = 0;
+			if (buff_index != buff_giligili2 and a_cooltime < 1 and a_possible == true) {
 				go_soild = false;
 			}
 		}
-	}//공격을 받았다!
+	}//공격을 받았다!, 피격 상호작용
 	
 	if (sturn == 1) {
 		mouse_posible = false;
@@ -6263,7 +1847,6 @@ if(live = 1) {
 		server77_equal(serve_val.hat_yscale, hat_yscale, buffer_s8);
 		server77_equal(serve_val.hat_xscale, hat_xscale, buffer_s8);
 		server77_equal(serve_val.left_arm_xscale, left_arm_xscale, buffer_s8);
-		server77_equal(serve_val.right_arm_xscale, right_arm_xscale, buffer_s8);
 		server77_equal(serve_val.color, c_white, buffer_f32);
 		server77_equal(serve_val.cancle_able, effect_index_under, buffer_u16);
 		color = c_white;
@@ -6281,6 +1864,8 @@ if(live = 1) {
 					go_to_speed = 0;
 					timeline_running = 0;
 					view_where = 0;
+					jumping = false;
+					seq_end();
 					view_visible[0] = true;
 					only_hat = false;
 					hat_bye = false;
@@ -6292,6 +1877,9 @@ if(live = 1) {
 					shild = false;
 					cancle_able = false;
 					spin_able = false;
+					spin_scale = 1;
+					hat_angle = 0
+					face_YA = 0
 					ride = false;
 					if (arm_type_more = "mine_1") {
 						buff_index = spr_none;
@@ -6302,10 +1890,17 @@ if(live = 1) {
 					}
 					server77_equal(serve_val.cancle_able, false, buffer_bool);
 					extra_speed = 0;
+					stats_speed = 0;
 					a_cooltime = 26 + round(big_val * 3);
 					arm_all_normal();
 					arm_type = "attack"
-					arm_movement(3, -3, 10, 10);
+					hide_bam = false
+					left_arm_YA = 0
+					right_arm_YA = 0 
+					left_foot_YA = 0 - 5
+					right_foot_YA = 0 + 5
+					arm_movement(7, -6, 10, 10);
+					foot_movement(-5, 5, -3, -3);
 					server78_create_instace(n_attack_area, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
 					a_possible = true;
 				}
@@ -6322,6 +1917,7 @@ if(live = 1) {
 							normal_play(twiza_4_act2);
 						break;
 						case 5:
+						    spr_armr_more = spr_not
 							cancle_able = false;
 							spin_able = false;
 							invisible = false;
@@ -6333,13 +1929,19 @@ if(live = 1) {
 							view_visible[1] = false;
 							view_visible[0] = true;
 							obj_telescope_view.tele = false;
-							spr_arml_more = spr_not;
-							arm_type_more = "not";
-							left_arm_YA = YA - 90;
-							right_arm_YA = YA - 90;
+							arm_type_more = "hide_1";
+							arm_type_num = 0;
 							server78_create_instace(hide_skill1, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
 						break;
 						case 6:
+						    arm_all_normal();
+							temp_YA = YA;
+						    arm_type_more = "hide_1";
+							arm_type_num = 0
+							spin_scale = 1.8
+						    all_spin = 1
+							all_spin_limit = 136
+						    spr_armr_more = spr_not2
 							cancle_able = false;
 							spin_able = false;
 							invisible = false;
@@ -6352,48 +1954,190 @@ if(live = 1) {
 							view_visible[1] = false;
 							view_visible[0] = true;
 							obj_telescope_view.tele = false;
-							spr_arml_more = spr_not2;
-							arm_type_more = "not2";
-							left_arm_YA = YA - 90;
-							right_arm_YA = YA - 90;
-							server78_create_instace(hide_skill3, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
+							server78_create_instace(hide_skill11, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
 						break;
-						case 9:
+						case 20221013:
+						    arm_all_normal();
+							temp_YA = YA;
+						    arm_type_more = "hide_1";
+							arm_type_num = 0
+							spin_scale = 1.8
+						    all_spin = 1
+							all_spin_limit = 136
+						    spr_armr_more = spr_not2
 							cancle_able = false;
 							spin_able = false;
 							invisible = false;
 							invisible_time = 0;
-							a_cooltime = 15;
+							a_cooltime = 20;
 							alpha = 1;
+							view_where = 0;
 							a_possible = true;
-							all_spin = 1;
-							all_spin_limit = 360;
-							go_to_speed = 20;
-							temp_YA = YA;
 							cli_alpha = 1;
-							server78_create_instace(ane_skill1_2, x, y)
-							server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+							view_visible[1] = false;
+							view_visible[0] = true;
+							obj_telescope_view.tele = false;
+							server78_create_instace(hide_skill4, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))
 						break;
+						case 9:
+                            arm_type = "attack";
+                            arm_type_more = "none";
+                            arm_movement(3, 0, 7, 0);
+                            foot_movement(0, 0, 0, 0);
+                            face_YA = 0
+                            hat_angle = 0
+                            right_arm_YA = 0 + 120
+                            left_arm_YA = 0 + 10
+                            right_foot_YA = 0
+                            left_foot_YA = 0 
+                            spin_able = false;
+                            invisible = false
+                            invisible_time = 0;
+                            a_cooltime = 15;
+                            terror_charge = 0
+                            alpha = 1;
+                            a_possible = true;
+                            all_spin = 1;
+                            face_YA = 0
+                            hat_angle = 0
+                            cancle_able = false
+                            all_spin_limit = 360;
+                            go_to_speed = 25;
+                            temp_YA = YA;
+                            cli_alpha = 1;
+                            server78_create_instace(ane_skill11, x, y)
+                            server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+                        break;
 						case 10:
 							cancle_able = false;
 							invisible = false;
 							invisible_time = 0;
 							a_cooltime = 20;
+							terror_charge = 0
 							alpha = 1;
 							a_possible = true;
 							cli_alpha = 1;
 							server78_create_instace(lebe_skill3, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90))	
 						break;
+						case 400:
+							cancle_able = false;
+							a_possible = true;
+							spin_able = false;
+							invisible = false;
+							invisible_time = 0;	
+							a_cooltime = 15;
+							arm_type = "attack"
+							arm_type_more = "spear";
+                            arm_movement(2, -4, 10, -10);
+                            foot_movement(-6, 5, -6, 5);
+                            left_arm_YA = 0 + 25;
+                            right_arm_YA = 0 + 25;
+                            left_foot_YA = 0 + 110;
+                            right_foot_YA = 0 - 10
+                            temp_YA = YA;
+                            switch(global.skin) {
+							case 0:
+								spr_arml_more = spr_ass_w1
+							break;
+							case 1:
+								spr_arml_more = spr_blackass_w1
+							break;
+							}		    
+                            go_to_speed = 30;
+							cli_alpha = 1;
+                            server78_create_instace(ass_skill4, x + lengthdir_x(55, YA - 90), y + lengthdir_y(55, YA - 90));
+							server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+						break;
+						case 20210802:
+						   a_cooltime = 36 + round(big_val * 3);
+	                       jumping = false;
+	                       arm_movement(3, -3, 10, 10);
+	                        server78_create_instace(n_attack_area, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
+							arm_all_normal();
+                            a_possible = true
+                            arm_type = "normal";
+                            arm_type_more = "none";
+                            cancle_able = false;
+                            go_to_speed = 0;
+                            big_val_time = 0
+                            charge = false;
+                            all_spin_limit = 0;
+                            obj_telescope_view.tele = false;
+                            obj_telescope_view.go_pixel = 0;
+                            view_visible[0] = false;
+                            view_visible[1] = true;
+                            view_where = 0;
+                            server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);;
+						break;
+						case 20220111:
+			                 invisible_time = 0;
+			                 a_possible = true;
+			                 cancle_able = false;
+			                 normal_play(ass_3_act)
+			            break;
+						case 20230810:
+							cancle_able = false;
+							a_cooltime = 75
+							spin_scale = 1
+							arm_type_num = 0
+							terror_charge = 0
+							arm_type = "attack";
+							arm_type_more = "ski_1";
+							spin_able =  false
+						break;
 					}
 				}
 			}
+			if (keyboard_check_released(global.keya)) {
+				switch (terror_charge) {
+					case 20220509:
+			                 server78_create_instace(nk_skill11, x ,y);
+			        break;
+					case 20220813:
+						a_cooltime = 20
+						all_spin = 1
+						spin_scale = 1.5
+						effect_index = spr_none;
+						all_spin_limit = 360
+						terror_charge = 0
+						arm_type = "normal";
+						arm_type_more = "none";
+						cancle_able = false
+						server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+						a_possible = true;
+						ride = false;
+						temp_YA = YA;
+						var t = instance_create_depth(x, y, depth, pota_skill31_back1)
+						t.YA = YA
+						server78_create_instace(jam_skill21, x, y);
+						arm_type = "attack";
+					break;
+					case 17 :
+					if(x_cooltime < 0) {
+						x_cooltime = 400;
+						server78_create_instace(ane_skill21, x, y);
+					}
+					break;
+					case 20240128:
+						a_cooltime = 30
+						terror_charge = 0
+						cancle_able = false
+						norm_attack()
+						jumping = false
+						jump_time = 0;
+						jump_try = 0;
+						hide_bam = false
+
+				}
+			}
+			
 			if (keyboard_check(global.keyd)) {
 				switch (terror_charge) {
 					case 7:
 						if (a_a_cooltime < 0) {
 							if (mana >= 10) {
 								prt_val_add(Val.mp, -10);
-								a_a_cooltime = 50;
+								a_a_cooltime = 40;
 								server78_create_instace(mili_skill3_3, x + lengthdir_x(135 * big_val, YA - 90), y + lengthdir_y(135 * big_val, YA - 90));
 							}
 							else {
@@ -6404,73 +2148,86 @@ if(live = 1) {
 					break;
 					case 8:
 						if(a_a_cooltime < 0) {
-							a_a_cooltime = 20;
+							a_a_cooltime = 40;
 							server78_create_instace(mili_skill4_2, x + lengthdir_x(135 * big_val, YA - 90), y + lengthdir_y(135 * big_val, YA - 90));
 						}
 					break;
 					case 11:
+					if (a_possible = false) {
 						if (mana >= 0) {
 							if(a_a_cooltime < 0) {
-								prt_val_add(Val.mp, -50);
-								a_a_cooltime = 15;
+								prt_val_add(Val.mp, -24);
+								a_a_cooltime = 40;
+								terror_charge = 11
 								server78_create_instace(spear_skill1, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
 							}
 						}
 						else {
 							skill_say_time = 30;
-							skill_say = "MP: " + string(mana) + " / "  + "50(0)";
+							skill_say = "MP: " + string(mana) + " / "  + "24(0)";
 						}
+					}
 					break;
 					case 12:
+					if (sturn <= 0){
 						if(a_a_cooltime < 0) {
 							a_a_cooltime = 40;
 							server78_create_instace(nuke_skill41, x + lengthdir_x(105 * big_val, YA - 90), y + lengthdir_y(105 * big_val, YA - 90));
 						}
+					}
 					break;
 					case 13:
 						if (a_a_cooltime < 0) {
-							if (mana >= 50) {
-								prt_val_add(Val.mp, -50);
+							if (mana >= 45) {
+								prt_val_add(Val.mp, -45);
 								a_a_cooltime = 50;
 								server78_create_instace(sea_skill3, x + lengthdir_x(135 * big_val, YA - 90), y + lengthdir_y(135 * big_val, YA - 90));
 							}
 							else {
 								skill_say_time = 30;
-								skill_say = "MP: " + string(mana) + " / "  + "50(50)";
+								skill_say = "MP: " + string(mana) + " / "  + "45(45)";
 							}
 						}
 					break;
-					case 15:
-						if (gi > 20) {
-							prt_val_add(Val.gi, -20);
+					case 20210707:
+						if (mana > 20) {
+							prt_val_add(Val.mp, -20);
 							cancle_able = false;
-							a_cooltime = 30;
-							all_spin = true;
-							all_spin_limit = 360;
 							go_to_speed = 0;
-							server78_create_instace(sang_skill12, x, y);
+							a_cooltime = -1
+							arm_type_num = 0
+							terror_charge = 0
+							a_possible = false
+							arm_type = "attack";
+							arm_type_more = "sang_1";
 						}
 						else {
 							skill_say_time = 30;
-							skill_say = "GI: " + string(gi) + " / "  + "20(20)";
+							skill_say = "MP: " + string(mana) + " / "  + "20(20)";
 						}
+					break;
+					case 16:
+					if(a_a_cooltime < 0) {
+	                    a_a_cooltime = 40;
+						normal_play(sea_1_act11)
+					}
 					break;
 				}
 			}
 		}
-		if (keyboard_check(global.keyq)) {
+		if (keyboard_check_released(global.keyq)) {
 			switch(terror_charge) {
 				case 11:
 					if (mana >= 25) {
 							if(a_a_cooltime < 0) {
 								prt_val_add(Val.mp, -25);
 								arm_all_normal();
-								a_a_cooltime = 40;
+								a_a_cooltime = 200;
 								arm_type = "attack"
 								arm_type_more = "apple_1";
 								arm_movement(13, -13, 2, 2);
 								shild = true;
-								effect_index = effect_shild
+								effect_index = effect_shild;
 								effect_index_num = 0;
 								temp_YA = YA;
 								server202_sound(sward_2_sound);
@@ -6483,22 +2240,39 @@ if(live = 1) {
 						}
 				break;
 				case 12:
+				if (sturn <= 0){
 					if(a_a_cooltime < 0) {
 						a_a_cooltime = 40;
-						server78_create_instace(nuke_skill42, x + lengthdir_x(60 * big_val, YA - 90), y + lengthdir_y(60 * big_val, YA - 90));
+						server78_create_instace(nuke_skill42, x + lengthdir_x(5 * big_val, YA - 90), y + lengthdir_y(5 * big_val, YA - 90));
 					}
+				}
 				break;
-				case 17 :
-					if(a_a_cooltime < 0) {
-						a_a_cooltime = 200;
-						server78_create_instace(ane_skill21, x, y);
-					}
+				case 20220111:
+				    a_possible = true;
+			         cancle_able = false;
+					 spr_armr_more = spr_none;
+				     spr_arml_more = spr_none;
+                     right_arm_YA = 0;
+					 terror_charge = 0
+					 a_cooltime = 20
+					 arm_type_more = "go 90";
+					 invisible_time = 200;
+                     server78_create_instace(ass_skill2, x, y);
 				break;
-			}
-		}
+				case 20220530:
+				     a_cooltime = 30
+					 spin_scale = 1
+					 terror_charge = 0
+			         server78_create_instace(sea_skill2, x, y);
+					 arm_type = "attack";
+				     spin_able =  false
+				break;
+			    }
+		    }
 		if (keyboard_check(global.keyw)) {
 			switch(terror_charge) {
 				case 12:
+				if (sturn <= 0){
 					if(a_a_cooltime < 0) {
 						a_a_cooltime = 30;
 						temp_YA = YA;
@@ -6517,13 +2291,27 @@ if(live = 1) {
 						jump_time = i;
 						jump_try = 30;
 					}
+				}
 				break;
 				case 14:
 					normal_play(shit_4_act);
 					terror_charge = 0;
 					cancle_able = false;
 				break;
-			}
+			    case 15:
+				   if(a_a_cooltime <= 0) {
+					  if(gi >= 150) {
+					      hp = hp * 0.6;
+					      prt_val_add(Val.gi, -150);
+					      normal_play(he_3_act)
+			          }
+				      else {
+					      skill_say_time = 30;
+					      skill_say = "GI: " + string(gi) + " / "  + "150(150)";
+				     }
+			 }
+			 break;
+		}
 		}
 		if (keyboard_check(global.keye)) {
 			switch(terror_charge) {
@@ -6533,6 +2321,7 @@ if(live = 1) {
 						a_a_cooltime = 80;
 						prt_val_add(Val.mp, -40);
 						cancle_able = 2;
+						server78_create_instace(jam_skill41, x, y);
 						server77_equal(serve_val.cancle_able, cancle_able, buffer_u8);
 					}
 				}
@@ -6570,9 +2359,8 @@ if(live = 1) {
 		invisible_time -= 1;
 	}//은신
 	else {
-		if !(global.hat == spr_hat10 and level == 3) {
-			invisible = false;
-		}
+		sturn_alpha = false;
+		invisible = false;
 	}
 	
 	if(invisible == true or buff_index == buff_shadow) {
@@ -6615,8 +2403,8 @@ if(live = 1) {
 			if (keyboard_check(global.shift) and arm_type != "ouch" and arm_type != "caps_lock" and arm_type != "attack") {
 				arm_type = "shift"
 				arm_movement(5, -5, 5, 5);
-				left_arm_YA = YA + 270;
-				right_arm_YA = YA + 90;
+				left_arm_YA = 0 + 270;
+				right_arm_YA = 0 + 90;
 			}
 			else {
 				if (arm_type == "shift")
@@ -6681,23 +2469,45 @@ if(live = 1) {
 						switch(arm_type_num) {
 					case 0 :
 						arm_type_num = 1
-						arm_movement(0, 0, 4, -4);
-						right_arm_YA = YA + 120
-						left_arm_YA = YA + 10
-						a_cycle = 4;
+						arm_movement(6, -6, 12, -2);
+                        foot_movement(11, -2, -6, -4);
+                        face_YA = 10
+                        hat_angle = 10
+                        right_arm_YA = 0 + 90
+                        left_arm_YA = 0 + 10
+                        right_foot_YA = 0 + 30
+                        left_foot_YA = 0 - 65
+                        temp_YA = YA;
+						a_cycle = 2
 					break;
 					case 1 :
 						arm_type_num = 0
-						arm_movement(0, 0, -4, 4);
-						right_arm_YA = YA - 10
-						left_arm_YA = YA - 120
-						a_cycle = 4;
+						arm_movement(6, -6, -2, 12);
+                        foot_movement(2, -11, -4, -6);
+                        face_YA = -10
+                        hat_angle = -10
+                        right_arm_YA = 0 - 10
+                        left_arm_YA = 0 - 90
+                        right_foot_YA = 0 + 65
+                        left_foot_YA = 0 - 30
+                        temp_YA = YA;
+						a_cycle = 2
 					break;
 					}
 				break;
 				case "spear":
 					spr_armr_more = spr_spear;
-					right_arm_YA = YA2 - 100;
+					right_arm_YA = 02 - 100;
+				break;
+				case "ma":
+					 left_arm_YA = 0 + 51
+					 right_arm_YA = 0 - 240;
+					 arm_movement(0,0,15,0)
+				break;
+				case "ma_1":
+					 left_arm_YA = 0 - 120;
+					 right_arm_YA = 0
+					 arm_movement(0, -3, 0, 10);
 				break;
 				case "fish" :
 					switch(arm_type_num) {
@@ -6716,30 +2526,32 @@ if(live = 1) {
 				case "sward_1" :
 						switch(arm_type_num) {
 					case 0 :
-						left_arm_YA = image_angle;
+						left_arm_YA = 0;
 						spr_arml_more = spr_none;
-						spr_armr_more = spr_sward;
+						spr_armr_more = spr_new_sward1;
 						arm_type_num = 1;
-						left_goto_YA = image_angle;
-						right_arm_YA = image_angle + 10;
-						right_goto_YA = image_angle -160;
+						left_goto_YA = 0;
+						right_arm_YA = - 10;
+						right_goto_YA = + 160;
 						arm_spin_able = 1;
-						arm_spin_speed = 20;
+						arm_spin_speed = 30;
 						all_spin = true;
-						all_spin_limit = -60;
+						all_spin_limit = -30;
 						right_arm_deltay = 10;
 						left_arm_deltay = 10;
-						a_cycle = 20;
+						right_foot_deltay = 0;
+						left_foot_deltay = 0;
+						a_cycle = 20
 					break;
 					case 1 :
 						spr_armr_more = spr_none;
-						spr_arml_more = spr_sward;
+						spr_arml_more = spr_new_sward1;
 						arm_type_num = 0;
 						arm_spin_able = 1;
 						arm_spin_speed = 20;
-						left_arm_YA = image_angle - 10;
-						right_goto_YA = image_angle;
-						left_goto_YA = image_angle + 160;
+						left_arm_YA =  - 10;
+						right_goto_YA = 0;
+						left_goto_YA = + 160;
 						all_spin = true;
 						all_spin_limit = 60;
 						right_arm_deltay = 10;
@@ -6751,53 +2563,81 @@ if(live = 1) {
 				case "sward_10" :
 						switch(arm_type_num) {
 					case 0 :
-						left_arm_YA = YA;
+						left_arm_YA = 0;
 						spr_arml_more = spr_none;
-						spr_armr_more = spr_sward;
+						switch(global.skin) {
+	                    case 3:
+		                    spr_armr_more = spr_holysward1;
+                        break;
+                        default:
+		                    spr_armr_more = spr_new_sward1;
+                        break;
+                        }
 						arm_type_num = 1;
-						left_goto_YA = YA;
-						right_arm_YA = YA + 100;
-						right_goto_YA = YA - 50;
+						left_goto_YA = 0;
+						right_arm_YA = 0 + 120;
+						right_goto_YA = 0 - 50;
 						arm_spin_able = 1;
 						arm_spin_speed = 5;
-						a_cycle = 6;
+						a_cycle = 12;
 					break;
 					case 1 :
 						spr_armr_more = spr_none;
-						spr_arml_more = spr_sward;
+						switch(global.skin) {
+	                    case 3:
+		                    spr_arml_more = spr_holysward1;
+                        break;
+                        default:
+		                    spr_arml_more = spr_new_sward1;
+                        break;
+                        }
 						arm_type_num = 0;
 						arm_spin_able = 1;
 						arm_spin_speed = 5;
-						left_arm_YA = YA - 100;
-						right_goto_YA = YA;
-						left_goto_YA = YA + 50;
-						a_cycle = 6;
+						left_arm_YA = 0 - 120;
+						right_goto_YA = 0;
+						left_goto_YA = 0 + 50;
+						a_cycle = 12;
 					break;
 					}
 				break;
 				case "sward_3" :
 						switch(arm_type_num) {
 					case 0 :
-						left_arm_YA = YA;
+						left_arm_YA = 0;
 						spr_arml_more = spr_none;
-						spr_armr_more = spr_sward3;
+						switch(global.skin) {
+	                    case 3:
+		                    spr_armr_more = spr_holysward31;
+                        break;
+                        default:
+		                    spr_armr_more = spr_sward3;
+                        break;
+                        }
 						arm_type_num = 1;
-						left_goto_YA = YA;
-						right_arm_YA = YA + 100;
-						right_goto_YA = YA - 50;
+						left_goto_YA = 0;
+						right_arm_YA = 0 + 100;
+						right_goto_YA = 0 - 50;
 						arm_spin_able = 1;
 						arm_spin_speed = 5;
 						a_cycle = 6;
 					break;
 					case 1 :
 						spr_armr_more = spr_none;
-						spr_arml_more = spr_sward3;
+						switch(global.skin) {
+	                    case 3:
+		                    spr_arml_more = spr_holysward31;
+                        break;
+                        default:
+		                    spr_arml_more = spr_sward3;
+                        break;
+                        }
 						arm_type_num = 0;
 						arm_spin_able = 1;
 						arm_spin_speed = 5;
-						left_arm_YA = YA - 100;
-						right_goto_YA = YA;
-						left_goto_YA = YA + 50;
+						left_arm_YA = 0 - 100;
+						right_goto_YA = 0;
+						left_goto_YA = 0 + 50;
 						a_cycle = 6;
 					break;
 					}
@@ -6830,6 +2670,175 @@ if(live = 1) {
 					break;
 					}
 				break;
+				case "hammer_2":
+					 switch(arm_type_num) {
+                    case 0 :
+                        if (left_arm_YA > YA - 200) {
+                            left_arm_YA -= 5;
+                        }
+                        right_arm_YA = -85;
+                        face_YA = -20
+                        hat_angle = -20 
+                        left_foot_YA = 0 -25
+                        right_foot_YA = 0 + 10
+                        arm_movement(6,0,0,0)
+                        foot_movement(-7,-5,2,5)
+                        right_arm_yscale = -1
+                    break;
+                    case 1:
+                        go_to_speed = 0
+                        face_YA = 5
+                        hat_angle = 5 
+                        if (left_arm_YA < YA + 25) {
+                            left_arm_YA += 35;
+                        }
+                        right_arm_YA = 0 -35;
+                        arm_movement(6,2,8,12)
+                        foot_movement(-5,5,0,0)
+                        left_foot_YA = 0 -35
+                        right_foot_YA = 0 + 35
+                        right_arm_yscale = 1
+                    break;
+                    }
+				break;
+				case "sward_r" :
+				temp_YA = YA;
+				switch(arm_type_num) {
+					case 0 :
+						YA = 15
+						spr_armr_more = spr_spener
+						spr_arml_more = spr_none
+					    arm_type_num = 1;
+					    right_foot_YA = 0 + 7
+					    left_foot_YA = 0 + 7;
+						left_arm_YA = 0 - 24
+						right_arm_YA = 0 + 100;
+						arm_movement(6,-3,3,5)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 6; //동작 1
+						server202_sound(eng_swing_sound);
+						server202_sound(eng_swing_sound);
+				   break;
+				   case 1 :
+						YA = -15
+						spr_armr_more = spr_spener;
+					    arm_type_num = 2;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 24
+						right_arm_YA = 0 + 100;
+						arm_movement(6,-3,3,5)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 2
+				   break;
+				   case 2 :
+						YA = -75
+					    arm_type_num = 3;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 24
+						right_arm_YA = 0 + 100;
+						arm_movement(6,-3,3,5)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 3
+				   break;
+				   case 3 :
+						YA = -105
+					    arm_type_num = 4;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 4
+				   break;
+				   case 4 :;
+						YA = -105
+						spr_armr_more = spr_none
+						spr_arml_more = spr_none
+					    arm_type_num = 5;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 5 
+				   break;
+				   case 5 :
+						YA = -15
+						spr_armr_more = spr_none
+						spr_arml_more = spr_spener
+					    arm_type_num = 6;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 100
+						right_arm_YA = 0 + 24;
+						arm_movement(3,-6,5,3)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 6; //동작 6
+						server202_sound(eng_swing_sound);
+						server202_sound(eng_swing_sound);
+				   break;
+				   case 6 :
+						YA = 15
+					    arm_type_num = 7;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 7
+				   break;
+				   case 7 :
+						YA = 75
+					    arm_type_num = 8;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 8
+				   break;
+				   case 8 :
+						YA = 105
+						spr_armr_more = spr_none
+						spr_arml_more = spr_none
+					    arm_type_num = 9;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 9
+				   break;
+				   case 9 :
+						YA = 105
+					    arm_type_num = 0;
+					    right_foot_YA = 0 + 4
+					    left_foot_YA = 0 + 4;
+						left_arm_YA = 0 - 60
+						right_arm_YA = 0 + 10;
+						arm_movement(6,-3,3,0)
+						foot_movement(-6 ,4,-15,-15)
+					    all_spin = 0
+						a_cycle = 3; //동작 10
+				   break;
+			    }
+				break;
 				case "yellow_3" :
 						switch(arm_type_num) {
 					case 0 :
@@ -6842,6 +2851,35 @@ if(live = 1) {
 						arm_movement(0, 0, 1, 12);
 						a_cycle = 4;
 					break;
+					}
+				break;
+				case "bwiza_2" :
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_YA = 0 - 75
+						right_arm_YA = 0 + 144
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(7, -2, 12, 0);
+						foot_movement(-4, 4, -7, -7);
+						a_cycle = 5; 
+					break;
+					case 1 :
+						arm_type_num = 0
+						left_arm_YA = 0 - 144
+						right_arm_YA = 0 + 75
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(2, -7, 0, 12);
+						foot_movement(-4, 4, -7, -7);
+						a_cycle = 5; 
+					break;
+					/*case 1 :
+						arm_type_num = 0
+						arm_movement(0, 0, 1, 12);
+						a_cycle = 4;
+					break;*/
 					}
 				break;
 				case "studing" :
@@ -6867,13 +2905,371 @@ if(live = 1) {
 					break;
 					}
 				break;
+				case "studing_1" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						arm_movement(0, 2, 0, 0);
+						aexp += 5;
+						prt_val_add(Val.mp, 3);
+						prt_val_add(0, 6);
+						a_cycle = 3;
+					break;
+					case 1 :
+						arm_type_num = 2
+						arm_movement(0, 0, 0, 0);
+						a_cycle = 3;
+					break;
+					case 2 :
+						arm_type_num = 0
+						arm_movement(0, -2, 0, 0);
+						a_cycle = 3;
+					break;
+					}
+				break;
+				case "tu_3" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_YA = 0 + 245;
+                        right_arm_YA = 0 + 290;
+                        arm_movement(0, 0, 0, 17)
+						extra_speed = -2
+						a_cycle = 5;
+						server78_create_instace(tu_skill3_temp, x, y);
+					break;
+					case 1 :
+						arm_type_num = 2
+						arm_movement(2, -4, 10, -10);
+						foot_movement(-6, 5, -6, 5);
+						left_arm_YA = 0 + 25;
+						right_arm_YA = 0 + 25;
+						left_foot_YA = 0 + 110;
+						right_foot_YA = 0 - 10	
+						a_cycle = 5;
+						extra_speed = -2
+					break;
+					case 2 :
+						arm_type_num = 3
+						arm_movement(-4, -5, 2, -6);
+						foot_movement(4, -4, -3, -8)
+						left_arm_YA = 0 + 220;
+						right_arm_YA = 0 + 25
+						left_foot_YA = 0 - 35;
+						right_foot_YA = 0 + 45
+						a_cycle = 5;
+						extra_speed = -2
+					break;
+					case 3 :
+						arm_type_num = 0
+						arm_movement(-1, 2, -5, 5);
+						foot_movement(3, -2, 3, -2);
+						left_arm_YA = 0 + 12;
+						right_arm_YA = 0 + 12;
+						left_foot_YA = 0 + 55;
+						right_foot_YA = 0 - 5
+						a_cycle = 5;
+						extra_speed = -2
+					break;
+					}
+				break;
+				case "tu_4" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_YA = 0 + 245;
+                        right_arm_YA = 0 + 290;
+                        arm_movement(0, 0, 0, 17)
+						extra_speed = -5
+						a_cycle = 5;
+						server78_create_instace(tu_skill3_temp, x, y);
+					break;
+					}
+				break;
+				case "seobu_3" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_YA = 0 
+						right_arm_YA = 0
+						left_foot_YA = 0 - 40
+						right_foot_YA = 0
+						arm_movement(4, -2, 10, -1);
+						foot_movement(5, 0, -5, -4);
+						a_cycle = 3; 
+					break;
+					case 1 :
+						arm_type_num = 2
+						left_arm_YA = 0 - 20
+						right_arm_YA = 0 + 20
+						left_foot_YA = 0 + 20
+						right_foot_YA = 0 + 35
+						arm_movement(7, -2, 11, 3);
+						foot_movement(-3, 0, 4, -4);
+						a_cycle = 3 
+					break;
+					case 2 :
+						arm_type_num = 3
+						left_arm_YA = 0 - 20
+						right_arm_YA = 0 + 20
+						left_foot_YA = 0 + 20
+						right_foot_YA = 0 + 35
+						arm_movement(7, -5, -8, 8);
+						foot_movement(-9, 0, -5, -4);
+						a_cycle = 3; 
+					break;
+					case 3 :
+						arm_type_num = 0
+						left_arm_YA = 0 - 20
+						right_arm_YA = 0 + 20
+						left_foot_YA = 0 + 20
+						right_foot_YA = 0 + 35
+						arm_movement(15, -8, -8, 8);
+						foot_movement(-10, 1, -6, -10);
+						a_cycle = 3; 
+					break;
+					}
+				break;
+				case "sea_2" :
+				    temp_YA = YA;
+					    switch(arm_type_num) {
+					case 0:
+					    arm_type_num = 1
+					    left_arm_YA = 0 + 245;
+                        right_arm_YA = 0 + 290;
+                        foot_movement(0, 0, 3 , -14)
+                        arm_movement(0, 0, 0, 17)
+					    a_cycle = 8;
+				    break;
+					case 1:
+					    arm_type_num = 0
+					    right_arm_YA = 0;
+                        arm_movement(0, -3, 0, 10);
+                        server78_create_instace(sea_skill21, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
+					    a_cycle = 8;
+				    break;
+					}
+				break;
+				case "gun_2" :
+				    temp_YA = YA;
+					    switch(arm_type_num) {
+					case 0:
+						arm_movement(0, 0, -5, 14);
+                        left_arm_YA = 0 + 220;
+						right_arm_YA = 0 - 45;
+						arm_type_num = 1;
+						a_cycle = 4
+				    break;
+					case 1:
+						arm_movement(0, 0, -5, 14);
+                        left_arm_YA = 0 + 220;
+						right_arm_YA = 0 - 45;
+				    break;
+					}
+				break;
+				case "nk_1" :
+				    temp_YA = YA;
+					    switch(arm_type_num) {
+					case 0:
+					    server78_create_instace(nk_skill1, x , y)
+					    arm_movement(8, -8, 2, 2);
+						arm_type_num = 1
+					    a_cycle = 10;
+				    break;
+					case 1:
+					    arm_movement(8, -8, 2, 2);
+					    arm_type_num = 0
+					    a_cycle = 10;
+				    break;
+					}
+				break;
+				case "seobu_4" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_foot_YA = 0 - 45
+						left_arm_YA = 0 + 110
+						arm_movement(5, 0, 20, 5);
+						foot_movement(5, 0, -5, -4);
+						a_cycle = 3;
+					break;
+					case 1 :
+						arm_type_num = 0
+						left_foot_YA = 0 - 45
+						left_arm_YA = 0 + 110
+						arm_movement(5, 0, 20, 0);
+						foot_movement(5, 0, -5, -4);
+						a_cycle = 3;
+					break;
+					}
+				break;
+				case "ik_1" :
+					temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+					    all_YA_change_delta(65)
+						spr_armr_more = spr_bucket;
+						arm_type_num = 1
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2; 
+					break;
+					case 1 :
+					    all_YA_change_delta(-20)// 45
+						arm_type_num = 2
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2; 
+					break;
+					case 2 :
+					    all_YA_change_delta(-30)//15
+						arm_type_num = 3
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2; 
+					break;
+					case 3 :
+					    all_YA_change_delta(-50)// -65
+						arm_type_num = 4
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2; 
+					break;
+					case 4 :
+					    all_YA_change_delta(-20)//-85
+						arm_type_num = 5
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2;
+					break;
+					case 5 :
+					    all_YA_change_delta(-5)//-90
+						arm_type_num = 6
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2;
+					break;
+					case 6 :
+					    all_YA_change_delta(-20)// -110
+						arm_type_num = 7
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 10;
+					break;
+					case 7 :
+					    all_YA_change_delta(80)
+						arm_type_num = 8
+						left_arm_YA = 0 - 14
+						right_arm_YA = 0 + 50
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(6, -5, 4, 0);
+						foot_movement(-6, 6, -15, -15);
+						a_cycle = 2;
+					break;
+					/*case 8 :
+						arm_type_num = 8
+						spr_armr_more = spr_none
+						left_arm_YA = 0 
+						right_arm_YA = 0
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(0, 0, 0, 0);
+                        foot_movement(0, 0, 0, 0);
+						a_cycle = 2;
+					break;*/
+				}
+				break
+				case "hide_1" :
+				    temp_YA = YA;
+						switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_YA = 0 - 40
+						right_arm_YA = 0 + 110
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(5, -1, 15, 15);
+						foot_movement(-6, 6, -7, -7);
+						a_cycle = 2; 
+					break;//동작 1
+					case 1 :
+						arm_type_num = 2
+						left_arm_YA = 0 - 90
+						right_arm_YA = 0 + 60
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(2, -1, 15, 15);
+						foot_movement(-6, 6, -7, -7);
+						a_cycle = 2; 
+					break;//동작 2
+					case 2 :
+						arm_type_num = 3
+						left_arm_YA = 0 - 45
+						right_arm_YA = 0 - 37
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(5, -9, 15, 16);
+						foot_movement(-6, 6, -7, -7);
+						a_cycle = 2; 
+					break;//동작 3
+					case 3 :
+					    spin_scale = 1
+						arm_type_num = 4
+						left_arm_YA = 0 + 45
+						right_arm_YA = 0 - 70
+						left_foot_YA = 0 
+						right_foot_YA = 0
+						arm_movement(2, -2, 13, 18);
+						foot_movement(-6, 6, -7, -7);
+						a_cycle = 30; 
+					break;
+					
+					}
+				break;
 				case "drinking_red" :
 					temp_YA = YA;
-					hp += 1;
+					hp += 0.5;
 				break;
 				case "drinking_blue" :
 					temp_YA = YA;
 					prt_val_add(Val.mp, 1);
+					if(global.hat = spr_hat70) {
+                        prt_val_add(Val.mp, 1.5);
+                    }
 				break;
 				case "temp_YA_async" :
 					temp_YA = YA;
@@ -6883,21 +3279,656 @@ if(live = 1) {
 					buff_time = 5;
 					YA_changeable = false;
 				break;
+				case "ass" :
+				    temp_YA = YA;
+				    left_arm_YA = 0 + 245;
+                    right_arm_YA = 0 + 290;
+                    arm_movement(0, 0, 0, 17)
+				break;
+				case "sang" :
+					temp_YA = YA;
+					switch(arm_type_num) {
+						case 0 :
+							arm_type_num = 0
+							face_YA = - 15;
+							hat_angle = -35;
+							left_arm_YA = 0 - 135;
+							right_arm_YA = 0 - 120;
+							arm_movement(-4, -10, 0, 25)
+							foot_movement(0, 0, -10, 5)
+						break;
+				}
+				break;
+				case "sang_swing" :
+				switch(arm_type_num) {
+					case 0 :
+						face_YA = 20
+						hat_angle = 45
+						arm_type_num = 1
+						right_arm_YA = 0 + 160
+						left_arm_YA = 0 + 25
+						left_foot_YA = 0 - 45
+						right_foot_YA = 0 + 45
+						all_spin = 1 ;
+						spin_scale = 1.8
+						all_spin_limit = 360;
+						server78_create_instace_angle(sang_skill12, x, y);
+						arm_movement(8, 0, 16, -2)
+						foot_movement(0, 0, -10, 0)
+						a_cooltime = 41
+						a_cycle = 40
+					break;
+					case 1:
+						face_YA = 0
+						hat_angle = 0
+						arm_type_num = 2
+						right_arm_YA = 0 
+						left_arm_YA = 0
+						left_foot_YA = 0 
+						right_foot_YA = 0 
+						arm_movement(0, 0, 0, 0)
+						foot_movement(0, 0, 0, 0)
+						a_possible = true
+					break;
+					}
+				break;
+				case "sang_bow_ready" :
+					face_YA = 20
+					hat_angle = 45 
+					arm_type_num = 1
+					right_arm_YA = 0 - 35
+					left_arm_YA = 0 + 45
+					spr_arml_more = spr_sang_boweffect
+					left_foot_YA = 0 - 45
+					right_foot_YA = 0 + 45
+					arm_movement(10, 0, 16, 10)
+					foot_movement(0, 0, -10, 0)	
+				break
+				case "sang_bow" :
+					switch(arm_type_num) {
+						case 0 :
+							face_YA = 20
+							hat_angle = 45 
+							arm_type_num = 1
+							right_arm_YA = 0 - 35
+							left_arm_YA = 0 + 45
+							spr_arml_more = spr_sang_boweffect
+							left_foot_YA = 0 - 45
+							right_foot_YA = 0 + 45
+							arm_movement(10, 0, 16, 10)
+							foot_movement(0, 0, -10, 0)
+							a_cycle = 33
+						break;
+						case 1 :
+							face_YA = 20
+							hat_angle = 45
+							arm_type_num = 2
+							right_arm_YA = 0 + 160
+							left_arm_YA = 0 + 45
+							left_foot_YA = 0 - 45
+							right_foot_YA = 0 + 45
+							arm_movement(8, 0, 16, -2)
+							foot_movement(0, 0, -10, 0)
+							a_cycle = 7
+						break;
+						case 2 :
+							face_YA = 20
+							hat_angle = 45 
+							arm_type_num = 1
+							right_arm_YA = 0 - 35
+							left_arm_YA = 0 + 45
+							spr_arml_more = spr_sang_boweffect
+							left_foot_YA = 0 - 45
+							right_foot_YA = 0 + 45
+							arm_movement(10, 0, 16, 10)
+							foot_movement(0, 0, -10, 0)
+							a_cycle = 7
+						break;
+						case 3 :
+							face_YA = 20
+							hat_angle = 45
+							arm_type_num = 4
+							right_arm_YA = 0 + 160
+							left_arm_YA = 0 + 45
+							left_foot_YA = 0 - 45
+							right_foot_YA = 0 + 45
+							arm_movement(8, 0, 16, -2)
+							foot_movement(0, 0, -10, 0)
+							a_cycle = 2
+						break;
+						case 4 :
+							face_YA = 20
+							hat_angle = 45 
+							arm_type_num = 3
+							right_arm_YA = 0 - 35
+							left_arm_YA = 0 + 45
+							spr_arml_more = spr_sang_boweffect
+							left_foot_YA = 0 - 45
+							right_foot_YA = 0 + 45
+							arm_movement(10, 0, 16, 10)
+							foot_movement(0, 0, -10, 0)
+							a_cycle = 2
+						break;
+						}
+					break;
+				case "newb_1" :
+				temp_YA = YA;
+					switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						left_arm_xscale = -1
+						spr_arml_more = spr_newb1
+						left_arm_YA = 0 - 160;
+                        right_arm_YA = 0 + 290;
+                        arm_movement(0, 0, 0, 17)
+						a_cycle = 6;
+					break;
+					case 1 :
+						arm_type_num = 2
+						arm_movement(2, -4, 10, -10);
+						foot_movement(-6, 5, -6, 5);
+						left_arm_xscale = 1
+						left_arm_YA = 0 + 25;
+						right_arm_YA = 0 + 25;
+						left_foot_YA = 0 + 110;
+						right_foot_YA = 0 - 10	
+						spr_arml_more = spr_none
+						a_cycle = 6;
+						server78_create_instace(newb_skill1, x + lengthdir_x(-30, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 2 :
+						arm_type_num = 3
+						right_arm_yscale_1 = -1
+						spr_armr_more = spr_newb1
+						left_arm_YA = 0 - 290;
+                        right_arm_YA = 0 + 130;
+                        arm_movement(4, 4, 17, 0)
+						a_cycle = 6;
+					break;
+					case 3 :
+						switch(level) {
+							case 0 : 
+								arm_type_num = 4
+							break;
+							default:
+								arm_type_num = 6
+							break;
+						}
+						arm_movement(4, -2, -10, 10);
+						foot_movement(-5, 6, -5, 6)
+						right_arm_yscale = 1
+						left_arm_YA = 0 - 25;
+						right_arm_YA = 0 - 25;
+						left_foot_YA = 0 + 10;
+						right_foot_YA = 0 - 110	
+						spr_armr_more = spr_none
+						a_cycle = 6;
+						server78_create_instace(newb_skill1, x + lengthdir_x(-30, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 4:
+						arm_type_num = 5
+						left_arm_YA = 0 + 30;
+						right_arm_YA = 0 + 120;
+						left_foot_YA = 0
+						right_foot_YA = 0 
+						spr_armr_more = spr_newb4_2
+						face_YA = 20
+						a_cycle = 30;
+						arm_movement(10, -3, 16, -8)
+						foot_movement(-6, 5, -6, 5);
+					break;
+					case 5:
+						arm_type_num = 12
+						arm_movement(4, -2, -10, 10);
+						foot_movement(-5, 6, -5, 6)
+						left_arm_YA = 0 - 25;
+						right_arm_YA = 0 - 25;
+						left_foot_YA = 0 
+						right_foot_YA = 0 
+						spr_armr_more = spr_none
+						face_YA = 0
+						a_cooltime = 40
+						a_cycle = 30;
+						server78_create_instace(newb_skill11, x + lengthdir_x(-40, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 6 :
+						arm_type_num = 7
+						left_arm_xscale = -1
+						spr_arml_more = spr_newb1
+						left_arm_YA = 0 - 160;
+                        right_arm_YA = 0 + 290;
+                        arm_movement(0, 0, 0, 17)
+						a_cycle = 6;
+					break;
+					case 7 :
+							switch(level) {
+								case 1 : 
+									arm_type_num = 4
+								break;
+								default:
+									arm_type_num = 8
+								break;
+							}
+						arm_movement(2, -4, 10, -10);
+						foot_movement(-6, 5, -6, 5);
+						left_arm_xscale = 1
+						left_arm_YA = 0 + 25;
+						right_arm_YA = 0 + 25;
+						left_foot_YA = 0 + 110;
+						right_foot_YA = 0 - 10	
+						spr_arml_more = spr_none
+						a_cycle = 6;
+						server78_create_instace(newb_skill1, x + lengthdir_x(-30, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 8 :
+						arm_type_num = 9
+						right_arm_yscale = -1
+						spr_armr_more = spr_newb1
+						left_arm_YA = 0 - 290;
+                        right_arm_YA = 0 + 130;
+                        arm_movement(4, 4, 17, 0)
+						a_cycle = 6;
+					break;
+					case 9 :
+						switch(level) {
+							case 2 : 
+								arm_type_num = 4
+							break;
+							default:
+								arm_type_num = 10
+							break;
+						}
+						arm_movement(4, -2, -10, 10);
+						foot_movement(-5, 6, -5, 6)
+						right_arm_yscale = 1
+						left_arm_YA = 0 - 25;
+						right_arm_YA = 0 - 25;
+						left_foot_YA = 0 + 10;
+						right_foot_YA = 0 - 110	
+						spr_armr_more = spr_none
+						a_cycle = 6;
+						server78_create_instace(newb_skill1, x + lengthdir_x(-30, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 10 :
+						arm_type_num = 11
+						left_arm_xscale = -1
+						spr_arml_more = spr_newb1
+						left_arm_YA = 0 - 160;
+                        right_arm_YA = 0 + 290;
+                        arm_movement(0, 0, 0, 17)
+						a_cycle = 6;
+					break;
+					case 11 :
+						arm_type_num = 4
+						arm_movement(2, -4, 10, -10);
+						foot_movement(-6, 5, -6, 5);
+						left_arm_xscale = 1
+						left_arm_YA = 0 + 25;
+						right_arm_YA = 0 + 25;
+						left_foot_YA = 0 + 110;
+						right_foot_YA = 0 - 10	
+						spr_arml_more = spr_none
+						a_cycle = 6;
+						server78_create_instace(newb_skill1, x + lengthdir_x(-30, YA - 90), y + lengthdir_y(-30, YA - 90))
+					break;
+					case 12 :
+						a_possible = true;
+						arm_type = "none"
+						cancle_able = false;
+						left_arm_YA = 0;
+						right_arm_YA = 0 ;
+						server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+						arm_movement(0,0,0,0)
+						foot_movement(0,0,0,0)
+						arm_type_more = "none"
+						arm_type_num = 0
+					break; 
+					}
+				break;
+				case "ski_1" :
+					switch(arm_type_num) {
+						case 0 :
+							arm_type_num = 0;
+							temp_YA = YA;
+							arm_movement(7, -6, 13, 13);
+							left_arm_YA = 0 + 35
+							right_arm_YA = 0 - 35
+							spr_armr_more = spr_ski_arm;
+							spr_arml_more = spr_ski_arm;
+							extra_speed = 13
+							go_to_scale = 1 * big_val;
+							big_val = 1.5;
+							left_arm_yscale = 1;
+							right_arm_yscale = 1;
+							arm_type_num = 1;
+							foot_movement(-7, 7, 0, 0);
+							server78_create_instace(ski_skill1, x, y);
+							a_cycle = 10;
+						break;
+						case 1 :
+							ski_ready = false
+							arm_type_num = 2;
+							temp_YA = YA;
+							go_to_speed = 2
+							extra_speed = 0
+							arm_movement(0, 0, 18, 0);
+							left_arm_YA = 0 + 45
+							right_arm_YA = 0 +	75
+							spr_armr_more = spr_ski_arm1;
+							spr_arml_more = spr_ski_arm;
+							left_foot_YA = 0 + 55;
+							right_foot_YA  = YA + 125;
+							foot_movement(0, -5, 13, 0);
+							a_cycle = 55;
+						break;
+							case 2 :
+							spr_armr_more = spr_none;
+							spr_arml_more = spr_none;
+							arm_type = "none"
+							arm_type_more = "none"
+							left_arm_YA = 0 ;
+							right_arm_YA = 0 ;
+							left_foot_YA = 0 ;
+							right_foot_YA  = YA ;
+							arm_movement(0, 0, 0, 0);
+							foot_movement(0, 0, 0, 0);
+							all_spin_limit = YA;
+						break;
+						}
+					break;
+				case "ski_2" :
+				    temp_YA = YA;
+				    left_arm_yscale = 1;
+					right_arm_yscale = 1;
+					left_arm_YA = 0 - 25;
+					right_arm_YA = 0 + 25
+					left_foot_YA = 0 - 25
+					right_foot_YA = 0 + 25
+					spr_armr_more = spr_ski_arm;
+					spr_arml_more = spr_ski_arm;
+				    arm_movement(0, 0, 10, 10);
+					foot_movement(0, 0, 0, 0);
+				break;;
+				case "hammer_end" :
+					switch(arm_type_num) {
+						case 0 :
+							arm_type_num = 1;
+							temp_YA = YA;
+							arm_spin_able = false
+							keyboard_checkD = false;
+							arm_movement(7, 10, 0, 15);
+							left_arm_YA = 0 - 135
+							right_arm_YA = 0 - 65
+							left_arm_get_bigger = false;
+							a_cooltime = 110;
+							go_to_speed = 20
+							go_to_scale = 1 * big_val;
+							big_val = 1.5;
+							foot_movement(-7, 7, 0, 0);
+							a_cycle = 10
+						break;
+						case 1 :
+							arm_type_num = 2;
+							go_to_speed = -1
+							a_cycle = 7
+						break;
+						case 2:
+							arm_type_num = 3
+							a_cycle = 5
+							left_arm_YA = 0 + 35
+							right_arm_YA = 0 - 45
+							server78_create_instace(obj_hammer_skill1_1, x + lengthdir_x(35 * big_val, YA - 90), y + lengthdir_y(35 * big_val, YA - 90));
+						break;
+						case 3:
+							a_cycle = 80
+							arm_type_num = 4
+							left_arm_YA = 0 - 135
+							right_arm_YA = 0 - 65
+						break;
+						case 4:
+							arm_type_num = 0
+							arm_type = "none"
+							arm_type_more = "none"
+							arm_movement(0, 0, 0, 0);
+							foot_movement(-0, 0, 0, 0);
+							a_possible = true;
+							cancle_able = false;
+							server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+							left_arm_YA = 0
+							right_arm_YA = 0 
+							left_arm_xscale = 1;
+							left_arm_yscale = 1;
+							spr_arml_more = spr_none
+							timeline_index = spr_none
+						break;
+						}
+					break;
+				case "sang_1" :
+					switch(arm_type_num) {
+						case 0 :
+							normal_play(sang_1_act1)
+						break;
+						}
+				break;
+				case "bam_1" :
+					switch(arm_type_num) {
+						case 0 :
+							temp_YA = YA;
+							left_arm_YA = 0 ;
+							left_arm_yscale = 1;
+							right_arm_yscale = 1;
+							right_arm_YA = 0 ;
+							arm_type_num = 1;
+							arm_movement(8, -8, 2, 2);
+							a_cycle = 12;
+						break;
+						case 1 :
+							arm_type_num = 2
+							arm_movement(5, -5, 5, 5);
+							left_arm_YA = 0 + 270;
+							right_arm_YA = 0 + 90;
+							all_YA_change_delta2(60);
+							temp_YA += 1;
+							server78_create_instace(bam_skill11, x, y);
+							a_cycle = 38; 
+						break;
+							case 2 :
+							arm_type = "none"
+							arm_type_more = "none"
+							arm_movement(0, 0, 0, 0);
+							foot_movement(0, 0, 0, 0);
+							all_spin_limit = YA;
+						break;
+						}
+					break;
+				case "eng_1" :
+					right_arm_YA = 0 - 130;
+					left_arm_YA = 0 + 45;
+					spr_armr_more = spr_eng_mask;
+					spr_arml_more = spr_eng_gun;
+					arm_movement(0, 0, 20, 25);
+				break;
+				case "tu_1" :
+					switch(arm_type_num) {
+					case 0 :
+						arm_type_num = 1
+						temp_YA = YA;
+						left_arm_yscale = -1
+						right_arm_yscale = -1
+						arm_movement(0, 0, -14, 1);
+						foot_movement(-2, 2, -39, 3);
+						a_cycle = 4
+					break;
+					case 1 :
+						arm_type_num = 0
+						temp_YA = YA;
+						left_arm_yscale = -1
+						right_arm_yscale = -1
+						arm_movement(0, 0, -17, 4);
+						foot_movement(-2, 2, -39, 3);
+						a_cycle = 4
+					break;
+					}
+				break;;
+				case "nk_reload" :
+				    left_arm_YA = 0 - 290;
+                    right_arm_YA = 0 - 245;
+                    arm_movement(0, 0, 17,0)
+				break;
+				case "reload" :
+					right_arm_YA = 0 - 25;
+                    left_arm_YA = 0 - 45
+                    arm_movement(0, 0, 0, 10)
+				break;
+				case "reload_1" :
+					right_arm_YA = 0 - 29;
+                    left_arm_YA = 0 - 15
+                    arm_movement(0, 0, 0, 10)
+				break;
+				case "reload_2" :
+					right_arm_YA = 0 - 15;
+                    left_arm_YA = 0 - 5
+                    arm_movement(0, 0, 0, 10)
+				break;
+				case "shot" :
+					right_arm_YA = 0 - 25;
+                    left_arm_YA = 0 + 230 ;
+                    arm_movement( 3, 0, -4, 15)
+				break;
 				case "apple_1" :
-					arm_movement(13, -13, 5, 5);
+					arm_movement(8, -8, 2, 2);
 					a_cycle = 1;
 					temp_YA = YA;
+				break;
+				case "mili_1" :
+					arm_movement(4, -3, 1, 17);
+					a_cycle = 1;
+					face_YA = -15
+					hat_angle = -35
+					right_arm_YA = 0 - 80
+					left_arm_YA = 0
+					temp_YA = YA;
+				break;	
+				case "ane_1" :
+ switch(arm_type_num) {
+                    case 0:
+terror_charge = 20240524;
+                        arm_type_num = 1
+                        arm_movement(-1, 0, -11, 2);
+                        foot_movement(-3, 0, -7, 2);
+                        face_YA = -15
+                        hat_angle = -15
+                        right_arm_YA = 0 - 15
+                        left_arm_YA = 0 - 90
+                        right_foot_YA = 0 - 15
+                        left_foot_YA = 0 - 15
+                        temp_YA = YA;
+                        a_cycle = 2
+                    break;
+                    case 1:
+                        arm_type_num = 2
+                        arm_movement(3, 0, 7, 0);
+                        foot_movement(0, 0, 0, 0);
+                        face_YA = 0
+                        hat_angle = 0
+                        right_arm_YA = 0 + 120
+                        left_arm_YA = 0 + 10
+                        right_foot_YA = 0
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                        a_cycle = 2
+                    break;
+                    case 2:
+                        arm_type_num = 3
+                        arm_movement(12, -16, 16, -16);
+                        foot_movement(13, -5, 4, -14);
+                        face_YA = 25
+                        hat_angle = 45
+                        right_arm_YA = 145
+                        left_arm_YA = 35
+                        right_foot_YA = 0 + 100
+                        left_foot_YA = 0  -10
+                        temp_YA = YA;
+                        terror_charge = 9;
+                        server78_create_instace(ane_skill1, x, y);
+                    break;
+				}
+				break;
+				case "ane_2" :
+                switch(arm_type_num) {
+                    case 0:
+                        arm_type_num = 1
+                        arm_movement(4, 0, 10, 8);
+                        foot_movement(0, 0, 0, 0);
+                        right_arm_YA = 0 + 90
+                        left_arm_YA = 0
+                        right_foot_YA = 0 
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                        a_cycle = 3
+                    break;
+                    case 1:
+                        arm_type_num = 2
+                        arm_movement(0, -4, 8, 10);
+                        foot_movement(0, 0, -4, 0);
+                        right_arm_YA = 0
+                        left_arm_YA = 0 - 90
+                        right_foot_YA = 0
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                        a_cycle = 3
+                    break;
+                    case 2:
+                        arm_type_num = 3
+                        arm_movement(4, 0, 10, 8);
+                        foot_movement(0, 0, 0, 0);
+                        right_arm_YA = 0 + 90
+                        left_arm_YA = 0
+                        right_foot_YA = 0 
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                        a_cycle = 3
+						break;
+                    case 3:
+                        arm_type_num = 4
+                        arm_movement(0, -4, 8, 10);
+                        foot_movement(0, 0, -4, 0);
+                        right_arm_YA = 0
+                        left_arm_YA = 0 - 90
+                        right_foot_YA = 0
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                        a_cycle = 3
+                    break;
+                    case 4:
+                        arm_type_num = 5
+                        arm_movement(4, 0, 10, 8);
+                        foot_movement(0, 0, 0, 0);
+                        right_arm_YA = 0 + 90
+                        left_arm_YA = 0
+                        right_foot_YA = 0 
+                        left_foot_YA = 0 
+                        temp_YA = YA;
+                    break;
+                }
+                break; 
+
+				case "hide_ready" :
+					arm_movement(8, -8, 2, 2);
+					a_cycle = 1;
+					temp_YA = YA;
+					go_to_speed = 0
 				break;
 				case "mine_1" :
 					arm_movement(13, -13, 5, 5);
 					a_cycle = 1;
 					temp_YA = YA;
-					hp += 0.10;
+					hp += 0.055;
 					go_to_speed = 0;
 				break;
 				case "arm_lock" :
-					left_arm_YA = YA - 90;
-					right_arm_YA = YA + 90;
+					left_arm_YA = 0 - 90;
+					right_arm_YA = 0 + 90;
 					all_YA_change_delta(10);
 					temp_YA = YA;
 				break;
@@ -6905,18 +3936,18 @@ if(live = 1) {
 					all_YA_change_delta(44);
 					arm_spin_able = true;
 					arm_spin_speed = 1;
-					right_goto_YA = YA + 140;
-					left_goto_YA = YA - 140;
+					right_goto_YA = 0 + 140;
+					left_goto_YA = 0 - 140;
 				break;
 				case "arm_lock3" :
-					left_arm_YA = YA - 30;
-					right_arm_YA = YA + 30;
+					left_arm_YA = 0 - 30;
+					right_arm_YA = 0 + 30;
 					all_YA_change_delta(20);
 					go_to_speed_solid = 10;
 				break;
 				case "arm_lock4" :
 					all_YA_change_delta(20);
-					temp_YA += 10;
+					temp_YA += 1;
 				break;
 				case "not" :
 					left_arm_YA += 15;
@@ -6951,21 +3982,21 @@ if(live = 1) {
 				break;
 				case "leba2" :
 					var deltaYA = irandom_range(-1, 1) * 45;
-					right_arm_YA = YA + 90 + deltaYA;
-					left_arm_YA = YA - 90 + deltaYA;
+					right_arm_YA = 0 + 90 + deltaYA;
+					left_arm_YA = 0 - 90 + deltaYA;
 					y += irandom_range(-1, 1);
 					temp_YA = YA;
 				break;
 				case "lebe1":
-					left_arm_YA = YA - 135;
-					right_arm_YA = YA + 135;
+					left_arm_YA = 0 - 135;
+					right_arm_YA = 0 + 135;
 					temp_YA = YA;
 				break;
 				case "shit3":
 					left_arm_YA += 30;
 				break;
 				case "domi":
-					left_arm_YA = YA + 180;
+					left_arm_YA = 0 + 180;
 					buff_index = spr_none;
 				break;
 				case "cry" :
@@ -6996,27 +4027,35 @@ if(live = 1) {
 						right_arm_YA += 15;
 					}
 				break;
+				case "sang_3_ready":
+					if (right_arm_YA < YA + 120) {
+						right_arm_YA += 8;
+					}
+					if (left_arm_YA < YA + 65) {
+						left_arm_YA += 5;
+					}
+				break;
 			}
 		}
 	} //평소 손 바꾸기 
 
 	if (a_cooltime < 0){
-		if (f_cycle = 0) {
-			f_cycle = 10;
-			if (foot_type = "normal")
-			{
-				switch(foot_type_num) {
-					case 0 :
-						foot_type_num = 1
-						foot_movement(0, 0, -2, 2);
-					break;
-					case 1 :
-						foot_type_num = 0
-						foot_movement(0, 0, 2, -2);
-					break;
+			if (f_cycle = 0) {
+				f_cycle = 10;
+				if (foot_type = "normal")
+				{
+					switch(foot_type_num) {
+						case 0 :
+							foot_type_num = 1
+							foot_movement(0, 0, -2, 2);
+						break;
+						case 1 :
+							foot_type_num = 0
+							foot_movement(0, 0, 2, -2);
+						break;
+					}
 				}
 			}
-		}
 	} 
 
 	if (arm_tabcooltime = 0) {
@@ -7046,13 +4085,16 @@ if(live = 1) {
 		else {
 			stemina += 1;
 		}
+		if (global.stats = spr_stats3) {
+			stemina += 1;
+		}//스테미나
 	} //자동 스테미너 회복
 	if (mana_1 > 1) {
 		mana_1 = mana_1 - floor(mana_1);
 		var temp_mana = prt_val_get(Val.MPR);
 		prt_val_add(Val.mp, temp_mana);
 	}
-
+    if(global.hat != spr_hat70) {
 	if (mana < 180) {
 		if(global.hat == spr_hat2 and level == 3 and main_speed != 12)
 		{
@@ -7062,9 +4104,20 @@ if(live = 1) {
 		{
 			mana_1 += 0.06 ;
 		}
-	}//자동 마나 회복 
-
-
+	}//자동 마나 회복
+	}
+	
+	  if(global.stats = spr_stats2) {
+	      if(global.hat == spr_hat2 and level == 3 and main_speed != 12)
+		      {
+			      mana_1 += 0.03 ;
+		      }
+		      else
+		      {
+			      mana_1 += 0.015 ;
+		      }
+	      }// 안다미로
+	
 	if (gi <m_gi) {
 		gi_1 += 0.066 ;
 		if (gi_1 > 1) {
@@ -7096,126 +4149,43 @@ if(live = 1) {
 		stemina -= 1
 	} //스테미너 보정 
 		switch (level) {
-			case 0: if (aexp >= 200) {
+			case 0:
+			if (aexp >= 200) {
 				aexp -= 200;
-				if (irandom(500) == 1) {
-					level = 4;
-					random_level5();
-				}
-				else {
-					level = 1;
-				}
-					buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-					buffer_write(buff_fast,buffer_u8, 200)//200은 레벨업!소리와 표시
-					buffer_write(buff_fast,buffer_u8, 0);
-	
-					network_send_packet(global.intuto,buff_fast,buffer_tell(buff_fast));
-	
-					buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-					buffer_write(buff_fast,buffer_u8,201)//201은 실질적인 값증가.
-					buffer_write(buff_fast,buffer_u8,level);
-	
-					network_send_packet(0,buff_fast,buffer_tell(buff_fast));
-				hp = m_hp;
+				try_level_up(level + 1);
 			}
 			break;
-			case 1: if (aexp >= 400) {
+			case 1:
+			if (aexp >= 400) {
 				aexp -= 400;
-				if (irandom(500) == 1) {
-					level = 4;
-					random_level5();
-				}
-				else {
-					if (irandom(0) == 0) {
-						level = 2;
-						buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-								buffer_write(buff_fast,buffer_u8,201)//201은 실질적인 값증가.
-								buffer_write(buff_fast,buffer_u8,level);
-	
-						network_send_packet(0,buff_fast,buffer_tell(buff_fast));
-					}
-				}
-								buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-								buffer_write(buff_fast,buffer_u8,200)//200은 레벨업!소리와 표시
-								buffer_write(buff_fast,buffer_u8, 0);
-	
-				network_send_packet(global.intuto,buff_fast,buffer_tell(buff_fast));
-	
-			
-				hp = m_hp;
+				try_level_up(level + 1);
 			}
 			break;
-			case 2: if (aexp >= 600) {
-				aexp -= 600;
-			
-				buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-				buffer_write(buff_fast,buffer_u8,200)//200은 레벨업!소리와 표시
-				buffer_write(buff_fast,buffer_u8, 0);
-	
-				network_send_packet(global.intuto,buff_fast,buffer_tell(buff_fast));
-	
-			
-				if (irandom(100) < 25 + level_up_false) {
-					level = 3;
-				}
-				else {
-					level_up_false += 5;
-				}
-				if (irandom(500) == 1) {
-					level = 4;
-					random_level5();
-				}
-			
-				buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-				buffer_write(buff_fast,buffer_u8,201)//201은 실질적인 값증가.
-				buffer_write(buff_fast,buffer_u8,level);
-	
-				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
-	
-			
-				hp = m_hp;
-				a_level++;
-			}
-				break;
-			case 3:
-			case 4:
+			case 2:
 			if (aexp >= 600) {
 				aexp -= 600;
-				if (irandom(500) == 1) {
-					level = 4;
-					random_level5();
-				}
-			
-				buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-				buffer_write(buff_fast,buffer_u8,200)//200은 레벨업!소리와 표시
-				buffer_write(buff_fast,buffer_u8,0);
-	
-				network_send_packet(global.intuto,buff_fast,buffer_tell(buff_fast));
-	
-			
-			
-				buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-				buffer_write(buff_fast,buffer_u8,201)//201은 실질적인 값증가.
-				buffer_write(buff_fast,buffer_u8,level);
-	
-				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
-	
-			
-				hp = m_hp;
+				try_level_up(level + 1);
 				a_level++;
+			}
+			break;
+            default:
+			if (aexp >= 600) {
+				aexp -= 600;
+				try_level_up(level);
+				a_level++;
+
 			}
 		}//레벨업 관련
 	
-	
 	if (sturn > 0) {
+		if (arm_type_more != "cry") { 
+			if (instance_exists(obj_card_manager)) {
+				if (obj_card_manager.get_playing_name() == "울보") {
+					arm_type = "attack";
+					normal_play(cry_1_act);
+				}
+			}
+		}
 		sturn -= 1 ;
 		if (copper > 0)
 		{
@@ -7231,23 +4201,29 @@ if(live = 1) {
 	
 	if place_meeting(x, y, all_heal_zone) {
 		if (hp < m_hp) {
-			hp += 0.12;
+			hp += 0.1;
 		}
 	}//파랑존
 	
 	
 	if place_meeting(x, y, team_1_heal_zone) {
-		if (global.team =1 or invisible == true or global.hat == spr_level5_hat1) {
+		if (global.team =1 or global.hat == spr_level5_hat1) {
 			if (hp < m_hp) {
-				hp += 0.09;
+				hp += 0.07;
 			}
 		}
-		else{
+		else {
+		if (global.team =1 and invisible == true) {
+			if (hp < m_hp) {
+				hp += 0.07;
+			}
+		}
+		
 			if (hp >= 0) {
 				if(invisible = false and buff_index != spr_wing1) {
 					if! (global.hat == spr_hat37 and level > 1) {
 						other_cid = 0;
-						hp -= 0.12;
+						hp -= 0.1;
 						if (spr_arml_more == sprite490) {
 							dominate_time++;
 							skill_say_time = 20;
@@ -7301,17 +4277,23 @@ if(live = 1) {
 	
 	
 	if place_meeting(x, y, team_0_heal_zone) {
-		if (global.team == 0 or invisible == true or global.hat == spr_level5_hat1) {
+		if (global.team == 0 or global.hat == spr_level5_hat1) {
 			if (hp < m_hp) {
-				hp += 0.09;
+				hp += 0.07;
 			}
-		}
+		} 
 		else{
+			if (global.team =0 and invisible == true) {
+			    if (hp < m_hp) {
+				    hp += 0.07;
+			    }
+		    }
+			
 			if (hp >= 0) {
 				if(invisible = false and buff_index != spr_wing1) {
 					if! (global.hat == spr_hat37 and level > 1) {
 						other_cid = 0;
-						hp -= 0.12;
+						hp -= 0.1;
 						if (spr_arml_more == sprite490) {
 							dominate_time++;
 							skill_say_time = 20;
@@ -7363,7 +4345,6 @@ if(live = 1) {
 		}
 	}//적팀 기지
 	
-	
 	if (a_possible_time >0) {
 		a_possible_time -= 1;
 	}//공격만 불가능한 시간
@@ -7377,11 +4358,22 @@ if(live = 1) {
 	}//옐캡4차 기모으기
 	
 	if (charging = 30) {
+	switch(global.skin) {
+	case 2:
+		spr_armr_more = spr_new_yellow41;
+		spr_arm_more_num = 0;
+		spr_arm_morex = 0;
+		spr_arm_morey = -20;
+		audio_play_sound(sound_charging,1,false);
+    break;
+    default:
 		spr_armr_more = spr_yellow_4_skill;
 		spr_arm_more_num = 0;
 		spr_arm_morex = 0;
 		spr_arm_morey = -20;
 		audio_play_sound(sound_charging,1,false);
+	break;
+	}
 	}//소리
 	
 	if (charging = 60) {
@@ -7395,6 +4387,29 @@ if(live = 1) {
 		instance_create_depth(x, y, depth, see_skill_showa)
 	}//소리
 	
+	if(global.hat == spr_hat70)
+		{	
+		 if (mana > 0) {
+		    if (hp < 99) {
+			    hp += 0.15
+			    prt_val_add(Val.mp, -0.27);
+	        }
+	    }
+	}
+    // 혈변환
+	
+	if(global.hat == spr_hat75)
+		{	
+		 if (heal_stack > 0) {
+		    if (hp < 99) {
+			    hp += 0.125
+	        }
+	    }
+	}
+    // 생존본능
+
+	
+	if(undying = false) {
 	if (hp <= 0){
 		var dead = true;
 		view_visible[3] = true;
@@ -7460,12 +4475,14 @@ if(live = 1) {
 					}
 				}
 			}
+			
 			if (global.hat == spr_hat5) {
 				alarm_set(4, 75);
 			}
 			else {
 				alarm_set(4, 220);
 			}
+			if (!instance_exists(obj_hurt_list_UI)) instance_create_depth(0, 0, depth, obj_hurt_list_UI);
 			if (level == 4) {
 				if (global.team == 2) {
 					for (var i = 0; i < 6; i++) {
@@ -7476,6 +4493,24 @@ if(live = 1) {
 					for (var i = 0; i < 6; i++) {
 						server78_create_instace(obj_aexpball, x + irandom_range(-20, 20), y + irandom_range(-20, 20));
 					}
+				}
+			}
+			if (room != room_tuto) {
+				if(room != room_ghost) {
+					if (serve.pow[global.my_cid] > 2) {
+					 var num = serve.pow[global.my_cid] - 2;
+						for (var i = 0; i < num; i++) {
+							server78_create_instace(obj_aexpball, x + irandom_range(-20, 20), y + irandom_range(-20, 20));
+						}
+					}
+				}
+				else {
+					if (serve.pow[global.my_cid] > 0) {
+						var num = serve.pow[global.my_cid];
+						for (var i = 0; i < num; i++) {
+							server78_create_instace(room_ghost_exp, x + irandom_range(-20, 20), y + irandom_range(-20, 20));
+						}// 적 사망 exp (제압킬)
+					}	
 				}
 			}
 			if (global.hat == spr_level5_hat14 and level == 4) {
@@ -7505,10 +4540,6 @@ if(live = 1) {
 	
 				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
 			}
-			if (global.hat == spr_hat72 and level == 3) {
-				level = 0;
-				random_die_shangus();
-			}
 			if (global.hat != spr_hat5 and instance_exists(serve) and cur_attack != 0)
 			{
 				switch(global.team)
@@ -7523,18 +4554,21 @@ if(live = 1) {
 						var up = irandom(1);
 					break;
 				}
-							
+				var scr = 1;
+				if (level >= 3) {
+					scr = 2;
+				}
 				buffer_seek(buff_chat, buffer_seek_start, 0);
 				buffer_write(buff_chat, buffer_u8, 99);
 				buffer_write(buff_chat, buffer_bool, up);//팀점수 업
 				buffer_write(buff_chat, buffer_u8, cur_attack);
-				buffer_write(buff_chat, buffer_u8, 1);
+				buffer_write(buff_chat, buffer_u8, scr);
 	
 				network_send_packet(0,buff_chat,buffer_tell(buff_chat));
 			}
 			else
 			{
-				if (other_cid != 0) {		
+				if (other_cid != 0 and level > 0) {	//고자 레벨	
 					buffer_seek(buff_fast, buffer_seek_start, 0);
 					buffer_write(buff_fast, buffer_u8, 94);
 					buffer_write(buff_fast, buffer_u8, other_cid);
@@ -7553,7 +4587,13 @@ if(live = 1) {
 				network_send_packet(0,buff_chat, buffer_tell(buff_chat));
 			}
 		}
+	}
 	}//죽음
+	else {
+		if (hp <= 0){
+			hp = 10
+		}
+	}
 	
 	if (left_goto_YA != left_arm_YA and arm_spin_able == 1)
 	{
@@ -7565,24 +4605,31 @@ if(live = 1) {
 		right_arm_YA += angle_difference(right_goto_YA, right_arm_YA) / arm_spin_speed;
 	}//오른손회전
 	
-	if(all_spin == 1)
+	if(arm_moveR) {
+	   right_arm_YA += arm_move_speed;
+	   arm_move_delta += arm_move_speed;
+	   if (arm_move_delta > arm_move_limit) {
+		   arm_moveR = false;
+	   }
+	}
+	
+if(all_spin == 1)
 	{
 		if (all_spin_limit >= 0) {
-			all_YA_change_delta(20);
+			all_YA_change_delta(20 * spin_scale);
 			if (YA >= temp_YA + all_spin_limit)
 			{
 				all_spin = 0;
 			}
 		}
 		else {
-			all_YA_change_delta(-20);
+			all_YA_change_delta(-20 * spin_scale);
 			if (YA <= temp_YA + all_spin_limit)
 			{
 				all_spin = 0;
 			}
 		}
-	}//전체 돌리기
-	
+	}//전체 돌리기	
 	if (jumping) {
 		if (jump_time > 0) {
 			x += lengthdir_x(jump_try, temp_YA - 90);
@@ -7590,12 +4637,13 @@ if(live = 1) {
 		}
 	}
 	else {
-		if(place_free(x + lengthdir_x(go_to_speed, temp_YA - 90), y + lengthdir_y(go_to_speed, temp_YA - 90)))
-		{
-			x += lengthdir_x(go_to_speed, temp_YA - 90);
-			y += lengthdir_y(go_to_speed, temp_YA - 90);
-		}//앞으로 자동이동
-		else {
+		if(ski_ready != true) {
+			high_speed = 1
+			if(place_free(x + lengthdir_x(go_to_speed, temp_YA - 90), y + lengthdir_y(go_to_speed, temp_YA - 90))){
+				x += lengthdir_x(go_to_speed, temp_YA - 90);
+				y += lengthdir_y(go_to_speed, temp_YA - 90);
+			}//앞으로 자동이동
+			else {
 			if (charge) {
 				charge_time--;
 				if (charge_time < 0) {
@@ -7605,6 +4653,14 @@ if(live = 1) {
 			}
 		}
 	}
+	else {
+		high_speed = 1.4
+		if(place_free(x + lengthdir_x(speedd * high_speed, temp_YA - 90), y + lengthdir_y(speedd * high_speed, temp_YA - 90))){
+			x += lengthdir_x(speedd * high_speed, temp_YA - 90);
+			y += lengthdir_y(speedd * high_speed, temp_YA - 90);
+		}//스키 자동이동
+	}
+}
 	if(go_to_speed_solid > 0 and a_possible == false)
 		{
 			x += lengthdir_x(go_to_speed_solid, go_to_solid_YA - 90);
@@ -7683,7 +4739,7 @@ if (skill_say_time > 0){
 if (shild_time > 0){
 	shild_time -=1;
 	effect_index_num = 1;
-}//스킬 말
+}//보호막
 else {
 	immune = false;
 	effect_index_num = 0;
@@ -7701,8 +4757,28 @@ if (big_val_time >= 0) {
 }
 else 
 {
-	go_to_scale = main_big_val;
+	go_to_scale = main_big_val * stats_big_val;
+}// 거대화 지속시간
+
+if(global.hat = spr_hat71) {
+	if (skill_con > 0) {
+		if (skill_con_time >= 0) {
+			skill_con_time  -= 1;
+		}
+		else {
+			skill_con -= 1
+			skill_con_time = 100
+		}
+	}
 }
+else {
+	if (skill_con_time >= 0) {
+		skill_con_time  -= 1;
+	}
+	else {
+		skill_con = 0
+	}
+}// 스택 코드 
 
 if (go_to_scale != big_val) {
 	if(go_to_scale >= 1) {
@@ -7734,21 +4810,18 @@ if (YA_change_small == true) {
 	}
 }
 
-if (buff_time > 0 ) {
-	buff_time -= 1;
+if (buff_time > 0) {
+	if (card_name == "고무모자") {
+		buff_time = max(buff_time - 10, 0);
+	}
+	else {
+		buff_time -= 1;		
+	}
 	if(buff_time == 0) {
 		buff_time = -1;
-		if(buff_index == buff_giligili or buff_index == buff_giligili2) {
-			go_to_speed = 0;
-			YA_changeable = false;
-		}
 		if (buff_index == buff_see2) {
 			color = c_white
 			server77_equal(serve_val.color, c_white, buffer_f32);	
-		}
-		if (buff_index == buff_timeb) {
-			x = time_x;
-			y = time_y;
 		}
 		if (buff_index == buff_see2) {
 			buff_time = 40;
@@ -7768,9 +4841,17 @@ if (buff_time > 0 ) {
 			buff_index = spr_none;
 		}
 		extra_speed = 0;
+		stats_speed = 0;
 		server77_equal(serve_val.buff_index, buff_index, buffer_u16);
 	}
 	switch(buff_index) {
+		case buff_endemic :
+			hp -= 0.01;
+			if (endemic_time <= 0) {
+				endemic_time = 80;
+				server79_create_instace_ext(obj_endemic, x, y, irandom(360));
+			}
+		break;
 		case buff_timeP:
 			if (stemina < m_stemina) {
 				stemina += 1;
@@ -7780,6 +4861,10 @@ if (buff_time > 0 ) {
 				{
 					mana_1 += 0.12 ;
 				}
+				if(global.stats == spr_stats2 and level >= 0)
+				{
+					mana_1 += 0.096;
+				}
 				else
 				{
 					mana_1 += 0.06 ;
@@ -7787,7 +4872,7 @@ if (buff_time > 0 ) {
 			}//자동 마나 회복 
 		break;
 		case buff_p2 :
-			hp += 0.1;
+			hp += 0.09;
 		break;
 		case buff_mpkiller:
 			if (mana > 0) {
@@ -7804,79 +4889,10 @@ if (buff_time > 0 ) {
 		break;
 	}
 }
-if (global.hat == spr_hat57) {
-	switch(level) {
-		case 0:
-			main_big_val = 1.1;
-			go_to_scale = 1.1;
-		break;
-		case 1:
-			main_big_val = 1.2;
-			go_to_scale = 1.2;
-		break;
-		case 2:
-			main_big_val = 1.3;
-			go_to_scale = 1.3;
-		break;
-		case 3:
-			main_big_val = 1.7;
-			go_to_scale = 1.7;
-		break;
-	}
-}
-if (global.hat == spr_hat21) {
-	switch(level) {
-		case 0:
-			main_big_val = 1.2;
-			go_to_scale = 1.2;
-		break;
-		case 1:
-			main_big_val = 1.4;
-			go_to_scale = 1.4;
-		break;
-		case 2:
-			main_big_val = 1.6;
-			go_to_scale = 1.6;
-		break;
-		case 3:
-			main_big_val = 2;
-			go_to_scale = 2;
-		break;
-	}
-}
-else {
-	if (global.hat == spr_level5_hat2) {
-		main_big_val = 3;
-		go_to_scale = 3;
-	}
-}
-if (buff_index == buff_giligili) {
-	go_to_speed = 4;
-	YA_changeable = true;
-}
-else {
-	if (a_cooltime <= 0 and a_possible == true) {
-		go_to_speed = 0;
-	}
-	YA_changeable = false;
-}
 
-if (buff_index == buff_giligili2) {
-	go_to_speed = 20;
-	YA_changeable = true;
-	go_soild = true;
-}
-if (buff_index == spr_gas) {
-	if (hp > 1) {
-		hp -= 0.15;
-	}
-}
-if (buff_index == buff_apple3) {
-	if (hp > 22) {
-		hp -= 2;
-	}
-}
+buff_set();
 a_a_cooltime--;
+x_cooltime--;
 if (a_a_cooltime == 0) {
 	jumping = false;
 	shild = false;
@@ -7884,10 +4900,16 @@ if (a_a_cooltime == 0) {
 		effect_index = spr_none;
 	}
 }
+
+
+if (b_cooltime > -1) {
+    b_cooltime--;
+}
 buff_change_time--;
 if (a_cooltime <= 0 and a_possible == true and buff_index == spr_none) {
 	YA_changeable = false;
 	extra_speed = 0;
+	stats_speed = 0;
 	only_hat = false;
 	go_to_speed = 0;
 	go_to_speed_solid = 0;
@@ -7907,10 +4929,10 @@ if (global.hat == spr_level5_hat12 or (global.hat == spr_hat37 and level > 1)) {
 just_time--;
 if (just_time < 200) {
 	skill_say_time = 30;
-	skill_say = "아무짓도 안하면 꺼집니다. (" + string(just_time / 40) + "초 남음)";
+	skill_say = "";//"아무짓도 안하면 꺼집니다. (" + string(just_time / 40) + "초 남음)"
 }
 if (just_time > 1700) {
-	show_message("ㅄ");
+	show_message("헉");
 	url_open("https://www.youtube.com/watch?v=tf7ArwxMHR8");
 	game_end();
 	exit;
@@ -7930,7 +4952,7 @@ else {
 	if (gap > 8400) {
 		hp -= 1;
 	}
-}
+}		
 if (hat_bye_time == 0) {
 	hat_bye = false;
 	server77_equal(serve_val.hat_bye, hat_bye, buffer_bool);
@@ -7955,10 +4977,7 @@ if (spr_arml_more != spr_arml_more_1) {
 	spr_arml_more_1 = spr_arml_more;
 	server77_equal(serve_val.spr_arml_more, spr_arml_more, buffer_u16);
 }
-if (spr_armr_more != spr_armr_more_1) {
-	spr_armr_more_1 = spr_armr_more;
-	server77_equal(serve_val.spr_armr_more, spr_armr_more, buffer_u16);
-}
+set_val_dif("spr_armr_more", serve_val.spr_armr_more, buffer_u16);
 if (effect_index != effect_index_1) {
 	effect_index_1 = effect_index;
 	server77_equal(serve_val.effect_index, effect_index, buffer_u16);
@@ -7971,9 +4990,13 @@ if (hat_YA != hat_YA_1) {
 	hat_YA_1 = hat_YA;
 	server77_equal(serve_val.hat_YA, hat_YA, buffer_s8);
 }
-if (right_arm_yscale != right_arm_yscale_1) {
-	right_arm_yscale_1 = right_arm_yscale;
-	server77_equal(serve_val.right_arm_yscale, right_arm_yscale, buffer_s8);
+if (face_YA != face_YA_1) {
+	face_YA_1 = face_YA;
+	server77_equal(serve_val.face_YA, face_YA, buffer_s8);
+}
+if (hat_angle != hat_angle_1) {
+	hat_angle_1 = hat_angle;
+	server77_equal(serve_val.hat_angle, hat_angle, buffer_s8);
 }
 if (left_arm_yscale != left_arm_yscale_1) {
 	left_arm_yscale_1 = left_arm_yscale;
@@ -7987,15 +5010,39 @@ if (effect_index_num != effect_index_num_1) {
 	effect_index_num_1 = effect_index_num;
 	server77_equal(serve_val.effect_index_num, effect_index_num_1, buffer_u8);
 }
+
+
+set_val_dif("draw_lighting", serve_val.light, buffer_bool);
+set_val_dif("protection_val", serve_val.protection_val, buffer_u8);
+set_val_dif("armR_more_x", serve_val.armR_more_x, buffer_u16);
+set_val_dif("armR_more_y", serve_val.armR_more_y, buffer_u16);
+set_val_dif("armL_more_x", serve_val.armL_more_x, buffer_u16);
+set_val_dif("armL_more_y", serve_val.armL_more_y, buffer_u16);
+set_val_dif("arm_moreR_YA", serve_val.arm_moreR_YA, buffer_f16);
+set_val_dif("arm_moreL_YA", serve_val.arm_moreL_YA, buffer_f16);
+set_val_dif("right_arm_xscale", serve_val.right_arm_xscale, buffer_s8);
+set_val_dif("right_arm_yscale", serve_val.right_arm_yscale, buffer_s8);
+
+server77_equal(serve_val.face_YA, face_YA, buffer_s16);
 if (combo_time == 0) {
 	combo = 0;
 }
 else {
 	combo_time--;
 }
+
+if(global.hat = spr_hat75) {
+    if (heal_stack_time == 0) {
+	    heal_stack = 0;
+    }
+    else {
+	    heal_stack_time--;
+    }
+}
+
 switch(buff_index) {
 	case buff_fast_go:
-		buff_speed = 7;
+		buff_speed = 4;
 	break;
 	case buff_bwiza2:
 		buff_speed = -3;
@@ -8012,7 +5059,7 @@ hat_bye_time--;
 fish_time--;
 push++;
 if (fish_time <= 0) {
-	if (fishing == true) {
+	if (fishing == 1) {
 		normal_play(fish_catch);
 		fishing = 2;
 	}
@@ -8036,3 +5083,83 @@ if (big_val > 50) {
 jump_time--;
 x = round(x);
 y = round(y);
+mask_index = spr_face1;
+
+
+if (keyboard_check(vk_alt))
+   {
+   if (keyboard_check_released(vk_enter)) 
+   {
+	if (window_get_x() != 0) {
+		scr_set_full();
+    }
+    else {
+	    scr_reset_full();
+    }
+}
+}//전체화면 인게임
+
+if (keyboard_check(vk_enter))
+   {
+   if (keyboard_check_released(vk_alt)) 
+   {
+	if (window_get_x() != 0) {
+		scr_set_full();
+    }
+    else {
+	    scr_reset_full();
+    }
+}
+}//전체화면 인게임
+
+if(level > 2) {
+    if (keyboard_check(global.keye)) {
+	    if (global.hat == spr_hat70) {
+		    if (gi >= 450) {
+			    prt_val_add(Val.gi, -450);
+			    server78_create_instace(bam_skill42, x, y);	
+			    server78_create_instace(bam_skill43, x, y);		
+		    }
+		    else {
+			    skill_say_time = 30;
+			    skill_say = "GI: " + string(gi) + " / 450(450)";
+			}
+	    }
+    }
+}//뱀파이어 불사
+
+if(a_cooltime <= 0 and sturn <= 0) {
+	if(level > 1) {
+	    if (keyboard_check(global.keyw)) {
+		    if (global.hat == spr_hat77 and babo_change = false) {
+			    if (gi >= 100) {
+				    prt_val_add(Val.gi, -100);
+					babo_change = true
+					server77_equal(serve_val.babo_change, babo_change, buffer_bool);
+					a_cooltime = 40
+			    }
+			    else {
+				    skill_say_time = 30;
+				    skill_say = "GI: " + string(gi) + " / 100(100)";
+				}
+		    }
+	    }
+	}//바보 바로변신
+}
+
+
+
+if (is_babo_angle) {
+	spr_arml_more = spr_babo_ruler;
+	spr_armr_more = spr_babo_ruler;
+	all_YA_change(temp_YA + 90);
+	left_arm_YA = babo_angle2 + 90;
+	right_arm_YA = babo_angle1 + 90;
+	babo_angle1 += 1;
+	babo_angle2 -= 1;
+}
+
+if (place_free(x + lengthdir_x(buff_goto_speed, temp_YA - 90), y + lengthdir_y(buff_goto_speed, temp_YA - 90))){
+	x += lengthdir_x(buff_goto_speed, temp_YA - 90);
+	y += lengthdir_y(buff_goto_speed, temp_YA - 90);
+}//앞으로 자동이동

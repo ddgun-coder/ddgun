@@ -1,1 +1,1 @@
-DMG(38, hunt_skill2, 40)
+DMG(55, n_attack_area, 120)

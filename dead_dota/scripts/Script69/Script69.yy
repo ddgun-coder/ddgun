@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"Script69",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Script69",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,4 +1,5 @@
 image_speed = 0;
+draw_set_font(font1)
 xx = x
 yy = y;
 #macro mj 1

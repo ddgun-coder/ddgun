@@ -1,4 +1,4 @@
-var D = 2
+var D = 4
 var name = n_attack_area;
 var sturn_time = 10
 
@@ -20,8 +20,8 @@ if (live = 1) {
 			jumping = false;
 			a_charging = 0;
 			arm_all_normal();
-			left_arm_YA = YA + 270;
-			right_arm_YA = YA + 90;
+			left_arm_YA = 0 + 270;
+			right_arm_YA = 0 + 90;
 			invisible = false;
 			alpha = 1;
 			arm_type = "ouch";

@@ -2,7 +2,8 @@ function DMG_hpteal(argument0, argument1, argument2) {
 	var D = argument0
 	var name = argument1
 	var sturn_time = argument2
-	D = dmg_cal(D);
+	
+	D = dmg_cal(D, other);
 
 	if (buff_index == buff_djz) {
 		sturn_time *= 2;  	
@@ -40,9 +41,6 @@ function DMG_hpteal(argument0, argument1, argument2) {
 								}
 								camera_set_view_target(view_camera[0], testing.id);	
 								counter = 6;
-								if (up_skill > 0) {
-									up_skill--;
-								}
 								YA_changeable = false;
 								sturn = sturn_time;
 								m_sturn = sturn_time;
@@ -50,20 +48,16 @@ function DMG_hpteal(argument0, argument1, argument2) {
 								alpha = 1;
 								mouse_posible = false;
 								cli_alpha = 1;
+								heal_stack += 1
+								heal_stack_time = 80
 								server77_equal(serve_val.alpha, 1, buffer_bool)
 								obj_id = other.cid_id;
-								if (obj_id.buff_index == buff_nu2) {
-									D *= 1.8;
-									hp -= D;
-									if (global.hat == spr_level5_hat8) {
-										prt_val_add(Val.mp, D);	
-									}
+								hp -= D;
+								if (global.hat == spr_level5_hat8) {
+									prt_val_add(Val.mp, D);	
 								}
-								else {
-									hp -= D;
-									if (global.hat == spr_level5_hat8) {
-										prt_val_add(Val.mp, D);	
-									}
+								if (global.hat == spr_hat53) {
+									server78_create_instace(he_skillp, x, y)
 								}
 								view_visible[1] = false;
 								view_visible[0] = true;
@@ -76,6 +70,7 @@ function DMG_hpteal(argument0, argument1, argument2) {
 								t.tt = other.cid_id;
 								arm_type = "ouch";
 								push = 0;
+								Hit_item(D)
 								server202_sound(have_hit);
 				
 								buffer_seek(testing.buff_chat, buffer_seek_start, 0);
@@ -95,7 +90,8 @@ function DMG_hpteal(argument0, argument1, argument2) {
 	
 									network_send_packet(0,testing.buff_chat,6);
 								}
-								camera_set_view_size(view_camera[0], view_wport[0], view_hport[0]);	
+								camera_set_view_size(view_camera[0], global.window_width, global.window_height + 18);
+								view_set_yport(0, 18);
 							}
 						}
 					}

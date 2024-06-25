@@ -10,9 +10,9 @@ if(instance_exists(shop_UI)) {
 				var number = j * 9 + i;
 				draw_set_color(c_black)
 				draw_set_halign(fa_center);
-				draw_sprite_ext(select, 0, x + i * 64,  y + j * 64, 1, 1, 0, -1, 0.75)
-				draw_sprite(spr_pickaxe1 + number, 0, x + i * 64, y + j * 64);
-				draw_text(x + i * 64, y + 14 + j * 64, string(item[number].price));
+				draw_sprite_ext(select, 0, x + i * 70,  y + j * 70, 1, 1, 0, -1, 0)
+				draw_sprite(spr_pickaxe1 + number, 0, x + i * 70, y + j * 70);
+				draw_text(x + i * 70, y + 14 + j * 70, string(item[number].price));
 				draw_set_alpha(1);
 			}
 		}

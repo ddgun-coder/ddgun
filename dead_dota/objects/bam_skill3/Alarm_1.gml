@@ -1,3 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
-image_angle = cid_id.YA - 90;
+if (cid == global.my_cid) {
+    testing.hide_bam = true
+}
+cid_id.hide_bam = true

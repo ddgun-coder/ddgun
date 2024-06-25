@@ -10,7 +10,7 @@ if (room == room_temp) {
 	buffer_write(buff_chat,buffer_bool,global.team);
 	buffer_write(buff_chat,buffer_u8,global.hat_show);
 	buffer_write(buff_chat,buffer_u8,global.arm);
-	buffer_write(buff_chat,buffer_u8,global.foot);
+	buffer_write(buff_chat,buffer_u8,global.foot_index);
 	buffer_write(buff_chat,buffer_u16,global.face);
 	buffer_write(buff_chat,buffer_u8,global.skin);
 	

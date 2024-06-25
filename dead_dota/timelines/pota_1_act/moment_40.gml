@@ -1,0 +1,1 @@
+terror_charge = 17;

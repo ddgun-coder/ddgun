@@ -1,3 +1,3 @@
 /// @description Insert description here
 // You can write your code in this editor
-DMG(24, n_attack_area, 10);
+DMG(floor(hp * 0.28) + 10, musa_skill1,78);

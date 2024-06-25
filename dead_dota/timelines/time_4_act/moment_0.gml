@@ -1,5 +1,6 @@
 arm_all_normal();
-a_cooltime = 40;
+a_cooltime = 41;
+x_cooltime = 400
 all_spin = true;
 all_spin_limit = 1000;
 temp_YA = YA;

@@ -1,5 +1,1 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 6D010413
-/// @DnDArgument : "code" "DMG(15 , hunt_skill1, 35)"
-DMG(15 , hunt_skill1, 35)
+DMG_sang(11, hunt_skill1, 10)

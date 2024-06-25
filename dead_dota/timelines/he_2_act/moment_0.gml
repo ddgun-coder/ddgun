@@ -1,2 +1,8 @@
-a_cooltime = 30;
-server78_create_instace(sea_skill41, x + lengthdir_x(30 * big_val, YA - 90), y + lengthdir_y(30 * big_val, YA - 90));
+arm_all_normal();
+a_cooltime = 32;
+temp_YA = YA;
+arm_spin_speed = 5;
+arm_spin_able = true;
+left_goto_YA = 0 + 270;
+right_goto_YA = 0 + 90;
+arm_type = "attack"

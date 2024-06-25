@@ -1,6 +1,6 @@
 server202_sound(resurrection);
 live = 1;
-hp = 1;
+hp = 50;
 alarm_set(4, -1);
 other_cid = other.cid;
 arm_type = "attack"

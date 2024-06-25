@@ -18,7 +18,6 @@ draw_sprite_ext(global.foot, 0, footL_x, footL_y, left_foot_xscale, left_foot_ys
 draw_sprite_ext(global.foot, 0, footR_x, footR_y, right_foot_xscale, right_foot_yscale, right_foot_YA, -1, 1);//오른발
 draw_sprite_ext(global.arm, 0, armL_x, armL_y, left_arm_xscale, left_arm_yscale, left_arm_YA, -1, 1);//왼손
 draw_sprite_ext(global.arm, 0, armR_x, armR_y, right_arm_xscale, right_arm_yscale, right_arm_YA, -1, 1);//오른손
-
 }//팔
 if (live != 2)
 {
@@ -98,8 +97,6 @@ if (live = 1) {
 draw_set_color(c_yellow);
 draw_text(x,y+32,"■ 캐른 ■");//이름
 draw_set_halign(fa_center);
-gpu_set_alphatestenable(true);
-gpu_set_alphatestref(100);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white)

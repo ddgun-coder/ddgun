@@ -1,5 +1,13 @@
-/// @description Insert description here
-// You can write your code in this editor
-skill_create(60)
-audio_play_sound(wild_1_sound,9,false);
+/*skill_create(40)
+alarm[1] = 20;
+mask_index = spr_none;
 YA = 0
+len = 100;
+dmg = 37
+*///구기술 
+skill_create(20)
+alarm[1] = 1
+YA = 0
+dmg = 49
+time = 0
+

@@ -1,4 +1,15 @@
-camera_set_view_border(view_camera[3], 1024, 768);
+view_enabled = true;
+view_visible[0] = true;
+seq_layer = layer_create(depth, "seq_layer");
+for (var i = 0; i < 4; i++) {
+	view_set_wport(i, global.window_width);
+	view_set_hport(i, global.window_height);
+	camera_set_view_size(view_camera[i], global.window_width, global.window_height + 18);
+	view_set_yport(i, 18);
+}
+
+camera_set_view_border(view_camera[3], global.window_width, global.window_height);
+camera_set_view_border(view_camera[0], global.window_width, global.window_height);
 if (instance_exists(obj_start_here)) {
 	x = obj_start_here.x + irandom_range(-150, 150);
 	y = obj_start_here.y + irandom_range(-150, 150);

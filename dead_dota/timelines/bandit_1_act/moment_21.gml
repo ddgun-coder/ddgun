@@ -1,2 +1,2 @@
 invisible = true;
-invisible_time = 140;
+invisible_time = 180;

@@ -8,4 +8,4 @@ if (live = 1) {
 		}
 	}
 }
-DMG(12, goza_skill, 150)
+DMG(12, goza_skill, 150);

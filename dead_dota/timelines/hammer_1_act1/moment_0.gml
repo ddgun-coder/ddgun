@@ -1,0 +1,14 @@
+arm_type = "attack"
+arm_type_more = "hammer_2"
+arm_type_num = 0
+keyboard_checkD = false;
+left_arm_get_bigger = false;
+left_arm_get_bigger_delta = 0
+a_possible = true;
+cancle_able = true;
+spr_arml_more = spr_hammer;
+temp_YA = YA;
+arm_spin_speed = 0;
+arm_spin_able = 0;
+a_cooltime = 80
+go_to_speed = 10 

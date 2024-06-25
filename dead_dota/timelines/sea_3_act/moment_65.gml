@@ -1,1 +1,1 @@
-server78_create_instace(sea_skill3, x + lengthdir_x(35 * big_val, YA - 90), y + lengthdir_y(35 * big_val, YA - 90) + irandom(30))
+//server78_create_instace(sea_skill3, x + lengthdir_x(35 * big_val, YA - 90), y + lengthdir_y(35 * big_val, YA - 90) + irandom(30))

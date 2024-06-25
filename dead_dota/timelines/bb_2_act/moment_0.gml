@@ -1,9 +1,9 @@
 arm_all_normal()
 arm_type = "attack"
 spr_armr_more = spr_spear;
-right_arm_YA = YA - 180;
+right_arm_YA = 0 - 180;
 a_cooltime = 10;
-right_arm_YA = YA;
+right_arm_YA = 0;
 arm_type = "attack"
 spr_armr_more = spr_none;
 arm_movement(0, -3, 0, 10);

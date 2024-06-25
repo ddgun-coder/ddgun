@@ -1,17 +1,24 @@
 {
-  "function": 0,
-  "channels": [
-    {"colour":4290799884,"visible":true,"points":[
-        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
-        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
-      ],"resourceVersion":"1.0","name":"curve1","tags":[],"resourceType":"GMAnimCurveChannel",},
+  "$GMAnimCurve":"",
+  "%Name":"AnimationCurve1",
+  "channels":[
+    {"$GMAnimCurveChannel":"","%Name":"curve1","colour":4290799884,"name":"curve1","points":[
+        {"th0":-0.1,"th1":0.0,"tv0":0.0,"tv1":-7.287599E-08,"x":0.0,"y":-0.0029074887,},
+        {"th0":-0.01587787,"th1":0.01389313,"tv0":-0.0003815837,"tv1":0.00014710426,"x":0.034335878,"y":1.274,},
+        {"th0":-0.019847328,"th1":0.009923665,"tv0":0.0,"tv1":0.0,"x":0.07343512,"y":0.93,},
+        {"th0":-0.009923667,"th1":0.0063912733,"tv0":0.0,"tv1":0.0,"x":0.10916031,"y":1.02,},
+        {"th0":-0.01984733,"th1":0.012456798,"tv0":0.0,"tv1":0.0,"x":0.14865729,"y":0.9913705,},
+        {"th0":-0.021194361,"th1":0.0,"tv0":0.0,"tv1":0.0,"x":0.46755725,"y":0.7866667,},
+        {"th0":-0.15050471,"th1":0.11122958,"tv0":0.14118035,"tv1":-0.10433849,"x":0.7420648,"y":0.74033827,},
+        {"th0":-0.085877895,"th1":0.1,"tv0":0.68,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
   ],
-  "parent": {
-    "name": "dead_dota",
-    "path": "dead_dota.yyp",
+  "function":2,
+  "name":"AnimationCurve1",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
   },
-  "resourceVersion": "1.2",
-  "name": "AnimationCurve1",
-  "tags": [],
-  "resourceType": "GMAnimCurve",
+  "resourceType":"GMAnimCurve",
+  "resourceVersion":"2.0",
 }

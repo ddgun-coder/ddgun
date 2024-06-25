@@ -1,0 +1,1 @@
+DMG_buff(16, buff_bwiza2, 25, 100)

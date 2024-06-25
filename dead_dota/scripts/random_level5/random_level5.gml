@@ -2,7 +2,7 @@ function random_level5() {
 	main_big_val = 1;
 	go_to_scale = 1;
 	if (global.hat != spr_hat5) {
-		var what = irandom(18);
+		var what = irandom(16);
 		switch(what) {
 			case 0:
 				scr_hat_change2(spr_level5_hat1);
@@ -12,22 +12,22 @@ function random_level5() {
 			case 1:
 				main_big_val = 2.5;
 				go_to_scale = 2.5;
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat2);
 			break;
 			case 2:
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat3);
 			break;
 			case 3:
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat4);
 			break;
 			case 4:
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat5);
 			break;
 			case 5:
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat6);
 			break;
 			case 6:
-				scr_hat_change2(spr_level5_hat1 + what);
+				scr_hat_change2(spr_level5_hat7);
 			break;
 			case 7:
 				scr_hat_change2(spr_ehat4);
@@ -48,21 +48,15 @@ function random_level5() {
 				scr_hat_change2(spr_level5_hat12);
 			break;
 			case 13:
-				scr_hat_change2(spr_level5_hat13);
-			break;
-			case 14:
 				scr_hat_change2(spr_level5_hat14);
 			break;
-			case 15:
+			case 14:
 				scr_hat_change2(spr_level5_hat15);
 			break;
-			case 16:
-				scr_hat_change2(spr_level5_hat16);
-			break;
-			case 17:
+			case 15:
 				scr_hat_change2(spr_level5_hat17);
 			break;
-			case 18:
+			default:
 				scr_hat_change2(spr_level5_hat18);
 			break;
 		}

@@ -82,9 +82,11 @@ else {
 				case 1:
 					server51_fish(obj_fish11, random(10) + 50);// 벌칙
 				break;
+				/*
 				case 2:
 					server51_fish(obj_fish17, random(10) + 50);
 				break;
+				*/
 				case 3:
 					server51_fish(obj_fish20, random(10) + 50);
 				break;

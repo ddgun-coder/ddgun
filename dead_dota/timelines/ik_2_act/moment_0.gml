@@ -5,6 +5,13 @@ a_possible = false;
 temp_YA = YA;
 effect_index = effect_lamp
 server202_sound(ik_2_sound)
-for(var i = 0; i < MAX_ITME_BOX; i++) {
-	global.item_time[i] += 260 + level * 20;
+if(global.hat != spr_hat7) {
+    for(var i = 0; i < MAX_ITME_BOX; i++) {
+	    global.item_time[i] += 260 + level * 60;
+    }
+}
+else {
+	  for(var i = 0; i < MAX_ITME_BOX; i++) {
+	    global.item_time[i] += 156 + level * 36;
+    }
 }

@@ -1,5 +1,7 @@
 image_angle = testing.YA;
 team = 0;
+cancle = 2;
+r = 0;
 
 alarm_set(0, 110);
 

@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "server",
-    "path": "folders/Scripts/server.yy",
+  "$GMScript":"",
+  "%Name":"server201_levelup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"server201_levelup",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "server201_levelup",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

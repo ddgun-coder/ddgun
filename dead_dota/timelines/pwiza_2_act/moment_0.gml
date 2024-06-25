@@ -1,5 +1,7 @@
 arm_all_normal();
-a_cooltime = 125;
+arm_type = "attack"
+arm_movement(3, -3, 10, 10);
+a_cooltime = 134;
 view_visible[0] = false;
 view_visible[1] = true;
 view_where = 1;

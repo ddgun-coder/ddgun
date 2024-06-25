@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"server_what",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"server_what",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,7 +1,10 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 551D9A33
-/// @DnDArgument : "code" "item_draw(6);$(13_10)x = xstart + camera_get_view_x(view_camera[view_current])$(13_10)y = ystart + camera_get_view_y(view_camera[view_current])"
-item_draw(6);
-x = xstart + camera_get_view_x(view_camera[view_current])
-y = ystart + camera_get_view_y(view_camera[view_current])
+if (global.stats = spr_stats1 or global.stats= spr_stats2) {
+	item_draw(6);
+	draw_sprite(spr_item_num,6,x,y)
+}
+else {
+	if (global.item[6] != spr_none) {
+		prt_val_add(0 ,1000);
+		global.item[6] = spr_none;
+	}	
+}

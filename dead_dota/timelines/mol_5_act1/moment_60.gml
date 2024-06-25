@@ -11,8 +11,8 @@ for(var i = 1; i < 24; i++) {
 					all_spin = 1;
 					temp_YA = YA;
 					spr_armr_more = spr_mol;
-					right_arm_YA = YA;
-					left_arm_YA = YA - 90;
+					right_arm_YA = 0;
+					left_arm_YA = 0 - 90;
 					all_spin_limit = 360;
 					server78_create_instace(mol_skill51, x + lengthdir_x(35, YA - 90), y + lengthdir_y(35, YA - 90));
 					break;

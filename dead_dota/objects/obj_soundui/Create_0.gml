@@ -1,4 +1,4 @@
 /// @description Insert description here
 // You can write your code in this editor
-sound_x = 1;
-depth = -1000;
+sound_x = audio_group_get_gain(audiogroup_default);
+depth = -1500;

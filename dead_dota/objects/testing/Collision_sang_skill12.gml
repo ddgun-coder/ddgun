@@ -1,1 +1,2 @@
-DMG(23, hunt_skill2, 40)
+DMG_sang(15, hunt_skill2, 40);
+

@@ -7,4 +7,4 @@ audio_play_sound(ssg_1_sound,9,false);
 cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
 image_yscale = 2
-dmg = 15;
+dmg = 23;

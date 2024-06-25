@@ -1,5 +1,6 @@
 arm_all_normal()
+temp_YA = YA;
+arm_type_num = 0
 a_possible = false;
 arm_type = "attack"
-temp_YA = YA;
-effect_index = effect_hunter1
+arm_type_more = "sang_bow"

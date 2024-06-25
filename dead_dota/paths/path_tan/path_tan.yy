@@ -1,0 +1,19 @@
+{
+  "$GMPath":"",
+  "%Name":"path_tan",
+  "closed":false,
+  "kind":0,
+  "name":"path_tan",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "points":[
+    {"speed":100.0,"x":-54.867905,"y":42.63359,},
+    {"speed":100.0,"x":48.18553,"y":42.251923,},
+    {"speed":100.0,"x":47.42218,"y":-44.389313,},
+  ],
+  "precision":4,
+  "resourceType":"GMPath",
+  "resourceVersion":"2.0",
+}

@@ -69,3 +69,8 @@ else {
 
 	network_send_packet(global.intuto,buff_chat, buffer_tell(buff_chat));
 }
+server77_equal(serve_val.stats6_type, stats6_type, buffer_u16);
+server77_equal(serve_val.q_attack_type, q_attack_type, buffer_u16);
+server77_equal(serve_val.w_attack_type, w_attack_type, buffer_u16);
+server77_equal(serve_val.skill_con, skill_con, buffer_u16);
+server77_equal(serve_val.up_skill, up_skill, buffer_u16);

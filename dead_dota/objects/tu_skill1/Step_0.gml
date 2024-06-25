@@ -1,5 +1,9 @@
-image_xscale = cid_id.big_val * 1.1;
-image_yscale = cid_id.big_val * 1.1;
-image_angle = cid_id.YA;
-x = cid_id.x + lengthdir_x(55, cid_id.YA - 90);
-y = cid_id.y + lengthdir_y(55, cid_id.YA - 90);
+image_xscale = cid_id.big_val * 1
+image_yscale = cid_id.big_val * 1
+image_alpha -= A_delay
+image_angle = YA
+x += lengthdir_x((21 - delay) * cid_id.big_val, YA - 90);
+y += lengthdir_y((21 - delay) * cid_id.big_val, YA - 90);
+if (cid_id.skin == 1) {
+	sprite_index =  spr_west_tu1;
+}

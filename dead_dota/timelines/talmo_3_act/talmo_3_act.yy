@@ -1,0 +1,14 @@
+{
+  "$GMTimeline":"",
+  "%Name":"talmo_3_act",
+  "momentList":[
+    {"$GMMoment":"","%Name":"","evnt":{"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},"moment":0,"name":"","resourceType":"GMMoment","resourceVersion":"2.0",},
+  ],
+  "name":"talmo_3_act",
+  "parent":{
+    "name":"etc",
+    "path":"folders/Timelines/etc.yy",
+  },
+  "resourceType":"GMTimeline",
+  "resourceVersion":"2.0",
+}

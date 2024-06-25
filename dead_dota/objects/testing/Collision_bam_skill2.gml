@@ -1,9 +1,11 @@
-var D = 25;
+if (other.cid_id.buff_index == buff_noheal) {
+	DMG_no_surn(0)
+}
+else {
+var D = 15 + ((other.cid_id.m_hp - other.cid_id.hp) * 0.16);
 var sturn_time = 40;
 
-if (global.hat == spr_hat18 and level > 2) {
-	D = D / 2;
-}
+D = dmg_cal(D, other);
 if (buff_index != spr_wing1) {
 	if (creper = false) {
 		if (live = 1) {
@@ -37,10 +39,11 @@ if (buff_index != spr_wing1) {
 					immune = false;
 					alpha = 1;
 					cli_alpha = 1;
+					heal_stack += 1
 					server77_equal(serve_val.alpha, 1, buffer_bool)
 					obj_id = other.cid_id;
 					if (obj_id.buff_index == buff_nu2) {
-						hp -= 2 * D;
+						hp -= 1.5 * D;
 					}
 					else {
 						hp -= D;
@@ -49,6 +52,7 @@ if (buff_index != spr_wing1) {
 					arm_sturncooltime = 1 
 					other_cid = other.cid;
 					arm_type = "ouch";
+					Hit_item(D)
 					server202_sound(have_hit);
 				
 					buffer_seek(testing.buff_chat, buffer_seek_start, 0);
@@ -63,7 +67,7 @@ if (buff_index != spr_wing1) {
 					buffer_seek(testing.buff_chat, buffer_seek_start, 0);
 				
 					buffer_write(testing.buff_chat,buffer_u8,103);//101은 때린 사람 경험치 주기
-					buffer_write(testing.buff_chat,buffer_f32,30);
+					buffer_write(testing.buff_chat,buffer_f32,D);
 					buffer_write(testing.buff_chat,buffer_u8,other_cid);
 	
 					network_send_packet(0,testing.buff_chat,6);
@@ -102,4 +106,5 @@ if (buff_index != spr_wing1) {
 	
 		network_send_packet(0,buff_chat,3);
 	}
+}
 }

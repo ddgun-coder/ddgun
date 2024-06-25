@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "server",
-    "path": "folders/Scripts/server.yy",
+  "$GMScript":"",
+  "%Name":"server51_fish",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"server51_fish",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "server51_fish",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

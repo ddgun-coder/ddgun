@@ -1,14 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
-var D = 79
-var sturn_time = 50
-if (level == 5 and global.hat == spr_level5_hat16) {
-	D = D / 2;
-}
 
-if ((global.hat == spr_hat18 and level > 2) or buff_index == buff_jaja) {
-	D = D / 2;
-}
+var D = 20
+var sturn_time = 50
+
+D = dmg_cal(D, other);
 if (buff_index == buff_djz) {
 	sturn_time *= 2;  	
 }
@@ -52,12 +48,14 @@ if (buff_index != spr_wing1) {
 							alpha = 1;
 							mouse_posible = false;
 							cli_alpha = 1;
+							heal_stack += 1
+							heal_stack_time = 80
 							server77_equal(serve_val.alpha, 1, buffer_bool)
 							obj_id = other.cid_id;
 							if (obj_id.buff_index == buff_nu2) {
-								hp -= 1.8 * D;
+								hp -= 1.5 * D;
 								if (global.hat == spr_level5_hat8) {
-									prt_val_add(Val.mp, 1.8 * D);	
+									prt_val_add(Val.mp, 1.5 * D);	
 								}
 							}
 							else {
@@ -66,15 +64,17 @@ if (buff_index != spr_wing1) {
 									prt_val_add(Val.mp, D);	
 								}
 							}
+							/*
 							if (hp > 0) {
 								hp += 49;	
 							}
-							
+							*/
 							s_cooltime = 1
 							arm_sturncooltime = 1 
 							cur_attack = other.cid;
 							other_cid = other.cid;
 							arm_type = "ouch";
+							Hit_item(D)
 							server202_sound(have_hit);
 				
 							buffer_seek(testing.buff_chat, buffer_seek_start, 0);

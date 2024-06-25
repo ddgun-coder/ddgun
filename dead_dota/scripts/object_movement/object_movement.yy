@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"object_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"object_movement",
+  "parent":{
+    "name":"server",
+    "path":"folders/Scripts/server.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

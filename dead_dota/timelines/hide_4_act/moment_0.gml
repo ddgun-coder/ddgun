@@ -5,3 +5,4 @@ arm_type = "attack"
 server202_sound(hide_1_sound_1)
 invisible = true;
 invisible_time = 400;
+sturn_alpha = true;

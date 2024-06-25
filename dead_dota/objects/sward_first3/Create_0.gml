@@ -1,1 +1,2 @@
-skill_create(40);
+skill_create(25);
+depth = 100

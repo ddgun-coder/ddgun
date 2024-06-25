@@ -25,6 +25,6 @@ if (minind == 0) {
 	server78_create_instace(twiza_skill3_2, x, y);
 }
 else {
-	buffer_write(buff_chat, buffer_u8, minind  - testing0);
+	buffer_write(buff_chat, buffer_u8, minind.testing_cid);
 	network_send_packet(0,buff_chat,buffer_tell(buff_chat));
 }

@@ -1,0 +1,1 @@
+DMG_aexp(33, n_attack_area, 80)

@@ -1,5 +1,5 @@
-var cur_xview = camera_get_view_x(view_camera[view_current]) + xstart;
-var cur_yview = camera_get_view_y(view_camera[view_current]) + ystart;
+var cur_xview = camera_get_view_x(view_camera[0]) + xstart;
+var cur_yview = camera_get_view_y(view_camera[0]) + ystart;
 draw_sprite(spr_map, 0, cur_xview, cur_yview);
 for(i = 1; i <= 24; i++) {
 	var what = global.cid_array[i]

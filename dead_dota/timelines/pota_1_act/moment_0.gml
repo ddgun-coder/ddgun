@@ -1,5 +1,12 @@
-arm_all_normal();
-a_cooltime = 35;
-effect_index = effect_nu1;
-server202_sound(nu_11_sound);
-arm_type = "normal";
+server78_create_instace(pota_skill11, x, y);
+only_hat = true;
+server77_equal(serve_val.only_hat, only_hat, buffer_bool);
+a_possible = false;
+effect_index = spr_none;
+arm_type = "attack"
+stemina += m_stemina
+arm_type_more = "arm_lock4"
+a_cooltime = -1;
+extra_speed = 3
+cancle_able = true;
+server77_equal(serve_val.cancle_able, cancle_able, buffer_bool)

@@ -14,6 +14,7 @@ if (live = 1) {
 			alpha = 1;
 			cli_alpha = 1;
 			bloodable = true;
+			cur_attack = other.cid;
 			server77_equal(serve_val.alpha, 1, buffer_bool)
 			if (other.cid_id.buff_index == buff_nu2) {
 				hp -= 2 * D;

@@ -1,4 +1,4 @@
-skill_create(7);
+skill_create(20);
 deltay = 0;
 audio_play_sound(wild_1_sound, 9,false);
-dmg = 38;
+dmg = 55;

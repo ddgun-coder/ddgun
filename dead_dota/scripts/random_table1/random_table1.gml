@@ -1,5 +1,5 @@
 function random_table1() {
-	var what = irandom(56);
+	var what = irandom(62);
 	switch(what) {
 		case 0:
 			normal_play(yellow_1_act);
@@ -20,7 +20,7 @@ function random_table1() {
 			normal_play(p_1_act);
 		break;
 		case 6:
-			normal_play(bwiza_1_act2);
+			normal_play(bwiza_1_act1);
 		break;
 		case 7:
 			normal_play(twiza_1_act);
@@ -119,7 +119,7 @@ function random_table1() {
 			normal_play(sans_1_act);
 		break;
 		case 39:
-			normal_play(nuke_1_act);
+			normal_play(nuke_1_act1);
 		break;
 		case 40:
 			normal_play(sea_1_act);
@@ -143,7 +143,7 @@ function random_table1() {
 			normal_play(ma_1_act);
 		break;
 		case 47:
-			normal_play(nk_1_act);
+			normal_play(nk_1_act1);
 		break;
 		case 48:
 			normal_play(see_1_act);
@@ -167,10 +167,28 @@ function random_table1() {
 			normal_play(yo_1_act);
 		break;
 		case 55:
-			normal_play(tree_1_act);
+			normal_play(tree_1_act1);
 		break;
 		case 56:
-			normal_play(bam_1_act);
+			normal_play(bam_1_act1);
+		break;
+		case 57:
+			normal_play(gun_1_act);
+		break;
+		case 58:
+			normal_play(ass_1_act);
+		break;
+		case 59:
+			normal_play(sli_1_act);
+		break;
+		case 60:
+			normal_play(newb_1_act);
+		break;
+		case 61:
+			normal_play(ski_1_act);
+		break;
+		case 62:
+			normal_play(sang_2_act);
 		break;
 	}
 

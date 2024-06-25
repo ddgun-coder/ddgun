@@ -1,9 +1,5 @@
-image_angle = testing.YA;
-image_blend = c_black;
-team = -1;
-alarm_set(0, 20);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
-audio_play_sound(tu_2_sound,9,false);
-cid = 1;
-cid_id  = asset_get_index("testing" + string(cid));
+/// @description Insert description here
+// You can write your code in this editor
+skill_create(40);
+dmg = 25
+audio_play_sound(lebe_3_sound3,1,false);

@@ -5,3 +5,4 @@ alarm[1] = 1;
 cid_id = testing2
 team = -1
 cid = 0;
+dmg = 15

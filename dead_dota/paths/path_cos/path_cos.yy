@@ -1,0 +1,19 @@
+{
+  "$GMPath":"",
+  "%Name":"path_cos",
+  "closed":false,
+  "kind":0,
+  "name":"path_cos",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "points":[
+    {"speed":100.0,"x":44.132095,"y":-49.114502,},
+    {"speed":100.0,"x":-59.303024,"y":42.106873,},
+    {"speed":100.0,"x":47.20079,"y":40.450394,},
+  ],
+  "precision":4,
+  "resourceType":"GMPath",
+  "resourceVersion":"2.0",
+}

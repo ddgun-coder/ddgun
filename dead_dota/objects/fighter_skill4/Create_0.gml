@@ -1,4 +1,4 @@
-image_angle = testing.YA;
+image_angle = testing.YA
 team = 0;
 
 alarm_set(0, 300);

@@ -2,4 +2,5 @@
 // You can write your code in this editor
 skill_create(400);
 alarm[1] =1;
-dmg = 9;
+dmg = 23;
+go_to = 12

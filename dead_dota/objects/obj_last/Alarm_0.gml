@@ -1,7 +1,7 @@
 if (cid_id == global.my_cid_id) {
 	with (testing) {
-		cur_attack = 0;
-		self.other_cid = 0;
+		cur_attack = other.to_cid;
+		other_cid = other.to_cid;
 		hp -= 101;
 		arm_type = "ouch";
 		testing.sturn = 300;
@@ -10,7 +10,7 @@ if (cid_id == global.my_cid_id) {
 		YA_changeable = true;
 		view_where = 2;
 		buffer_seek(testing.buff_chat, buffer_seek_start, 0);
-	
+		
 		buffer_write(testing.buff_chat,buffer_u8,100);//100은 피해량,스턴값
 		buffer_write(testing.buff_chat,buffer_u8, 200);
 		buffer_write(testing.buff_chat,buffer_u8,101);

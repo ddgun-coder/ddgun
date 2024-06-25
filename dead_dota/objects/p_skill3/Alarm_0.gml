@@ -1,5 +1,5 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 0FEC0061
-/// @DnDArgument : "code" "instance_destroy();"
+if (cid == global.my_cid) {
+    testing.hide_bam = false
+}
+cid_id.hide_bam = false
 instance_destroy();

@@ -1,1 +1,1 @@
-draw_sprite_ext(spr_he1, 0, x, y, scale, scale, 0, c_white, 20)
+draw_sprite_ext(spr_he1, 0, x, y, scale, scale, 0, c_white, image_alpha)

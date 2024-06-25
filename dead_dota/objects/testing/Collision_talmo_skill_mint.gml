@@ -1,0 +1,1 @@
+DMG(13, yellow_skill2, 35)

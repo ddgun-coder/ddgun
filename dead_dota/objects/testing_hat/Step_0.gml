@@ -11,27 +11,18 @@ if (cid_id.hat != spr_hat6) {
 	sprite_index = cid_id.hat
 }
 else {
-	sprite_index = spr_hat6_1 + cid_id.hat_frame;
+	var spr_hat_array = [spr_hat6_1, spr_hat6_2, spr_hat6_3, spr_hat6_4];
+	sprite_index = spr_hat_array[cid_id.hat_frame];
 }
 image_angle = cid_id.YA + cid_id.hat_YA
 image_alpha = cid_id.alpha;
-if (place_meeting(x, y, testing)) {
-	if (sprite_index == spr_level5_hat16) {
-		if (image_index == 3) {
-			if (global.my_cid_id != cid_id) {
-				if (testing.sturn <= 0) {
-					testing.hp -= 2;
-					testing.sturn = 10;
-					testing.counter = 7;
-					show_debug_message(cid_id);
-					show_debug_message(global.my_cid_id);
-				}
-			}
-		}
-		if (image_index == 2) {
-			if (global.my_cid_id != cid_id) {
-				testing.hp -= 0.05;
-			}
-		}
-	}	
+
+if (cid_id.hat != spr_hat47 and cid_id != global.my_cid_id) {
+    if (time % 3 != 0) {
+	    solid = false;
+    }
+    else {	
+	    solid = true;
+    }
 }
+time++;

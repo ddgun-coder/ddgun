@@ -21,7 +21,8 @@ if (cid_id == global.my_cid_id) {
 			jump_time = i;
 			jump_try = 30;	
 		}
-		testing.a_cooltime = 20;
+		testing.a_a_cooltime = 20;
+		testing.a_cooltime = 20
 		testing.temp_YA = testing.YA;
 		testing.arm_type_more = "temp_YA_async";
 		testing.extra_speed = 1;

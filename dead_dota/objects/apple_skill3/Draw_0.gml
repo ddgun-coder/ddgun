@@ -1,4 +1,10 @@
-draw_set_color(c_black);
-draw_set_halign(fa_left);
 draw_self();
-draw_text_ext_transformed(x + 85, y, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);
+draw_set_font(font1);
+draw_set_halign(fa_left);
+draw_set_color(c_black);
+draw_text_ext_transformed(x + 85, y + 21, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);
+draw_text_ext_transformed(x + 86, y + 20, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);
+draw_text_ext_transformed(x + 85, y + 19, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);
+draw_text_ext_transformed(x + 84, y + 20, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);
+draw_set_color(c_white);
+draw_text_ext_transformed(x + 85, y + 20, dead_name + "님은 침을 기도로 삼켜서 사망했습니다.", 50, 150, 2, 2, 0);

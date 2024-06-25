@@ -1,0 +1,1 @@
+aring_amount = 0

@@ -12,3 +12,8 @@ if (dis > 0) {
 }
 x += lengthdir_x(dis, dir);
 y += lengthdir_y(dis, dir);
+
+if (!place_free(x, y)) {
+	x += lengthdir_x(1, dir);
+    y += lengthdir_y(1, dir);
+}

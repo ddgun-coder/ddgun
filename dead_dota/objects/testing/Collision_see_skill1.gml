@@ -1,2 +1,3 @@
-DMG(9, hunt_skill2, 40)
+DMG(23, hunt_skill2, 80)
+
 other_cid = 0;

@@ -1,12 +1,13 @@
 arm_all_normal();
-a_cooltime = 200;
+a_cooltime = 180;
 arm_type = "attack"
 arm_type_more = "charge"
 temp_YA = YA;
 right_foot_deltay = -10;
 left_foot_deltay = -10;
+go_to_speed = 20
+go_to_speed2 = 50
 server78_create_instace(charge_skill2, x, y);
-go_to_speed = 40;
 charge = true;
 spin_able = true;
 charge_time = 20;

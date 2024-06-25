@@ -18,6 +18,7 @@ alarm_set(0, 400);
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 77E3F0A7
-/// @DnDArgument : "code" "cid = 1;$(13_10)cid_id  = asset_get_index("testing" + string(cid));"
+/// @DnDArgument : "code" "cid = 1;$(13_10)cid_id  = asset_get_index("testing" + string(cid));$(13_10)dmg = 0.1;"
 cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
+dmg = 0.1;

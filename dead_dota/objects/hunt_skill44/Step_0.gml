@@ -5,7 +5,6 @@ with(testing) {
 	x = other.cid_id.x;
 	y = other.cid_id.y;
 	big_val = 0;
-	bloodable = true;
 	buff_index = spr_wing1;
 	buff_time = 10;
 }

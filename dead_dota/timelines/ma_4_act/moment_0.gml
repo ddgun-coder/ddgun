@@ -1,8 +1,7 @@
 arm_all_normal();
-a_cooltime = 35;
-go_to_speed = 1;
+go_to_speed = -1;
+temp_YA = YA;
+a_cooltime = 20;
 arm_type = "attack"
-left_arm_yscale = -4;
-left_arm_xscale = 2;
-right_arm_xscale = -2;
-arm_type_more = "temp_YA_async"
+left_arm_yscale = -1
+right_arm_yscale = -1

@@ -1,9 +1,13 @@
-image_angle = testing.YA;
-team = -1;
-
-alarm_set(0, 20);
-
-audio_play_sound(normal_attack,9,false);
-cid = 1;
-cid_id  = asset_get_index("testing" + string(cid));
-dmg = 10;
+/// @description Insert description here
+// You can write your code in this editor
+skill_create(20);
+depth = testing.depth - 1;
+image_alpha = 1
+alarm[1] = 1
+alarm[2] = 14
+audio_play_sound(tu_2_sound,9,false);
+audio_play_sound(tu_2_sound,9,false);
+audio_play_sound(tu_2_sound,9,false);
+delay = 0
+A_delay = 0
+dmg = 23

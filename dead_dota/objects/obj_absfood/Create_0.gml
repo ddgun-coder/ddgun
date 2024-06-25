@@ -6,3 +6,4 @@ dir = 0;
 alarm[1] = 1;
 alarm[0] = 4000;
 image_index = spr_food;
+fish_len = 0;

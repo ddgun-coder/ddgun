@@ -1,7 +1,8 @@
-arm_all_normal()
+arm_all_normal();
 a_possible = false;
 arm_type = "attack"
 left_arm_yscale = -1;
+temp_YA = YA;
 right_arm_yscale = -1;
 stemina = m_stemina * 5;
 server78_create_instace(die_skill1_1, x + lengthdir_x(55 * big_val, YA), y + lengthdir_y(55 * big_val, YA));

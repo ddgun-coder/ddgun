@@ -1,1 +1,1 @@
-DMG_no_surn2(0.5);
+DMG_no_surn2(0.5,0.375);

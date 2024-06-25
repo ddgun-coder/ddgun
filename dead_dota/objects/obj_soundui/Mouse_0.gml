@@ -1,5 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
-var cx = mouse_x - camera_get_view_x(view_camera[0]);
-sound_x = (cx - xstart) / 64;
+if (instance_exists(hat_button_main)) {
+	if (hat_button_main.windows != 8) {
+		exit;	
+	}
+}
+sound_x = (mouse_x - x) / 64;
 audio_group_set_gain(audiogroup_default, sound_x, 100);

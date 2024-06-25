@@ -1,0 +1,1 @@
+effect_index = spr_none;

@@ -1,4 +1,6 @@
+image_angle = cid_id.YA;
+if (cid_id.skin == 1) {
+	sprite_index =  spr_mafia_wild1;
+}
 image_xscale = cid_id.big_val;
 image_yscale = cid_id.big_val;
-y = cid_id.y + lengthdir_y(450 * cid_id.big_val, cid_id.YA - 90);
-x = cid_id.x + lengthdir_x(450 * cid_id.big_val, cid_id.YA - 90);

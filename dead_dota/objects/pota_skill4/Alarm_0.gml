@@ -1,10 +1,10 @@
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 117672D1
-/// @DnDArgument : "code" "if(global.team == team) {$(13_10)	with(testing) {$(13_10)		normal_play(pota_1_act1);$(13_10)	}$(13_10)}$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)instance_destroy();$(13_10)"
+/// @DnDArgument : "code" "if(global.team == team) {$(13_10)	with(testing) {$(13_10)		normal_play(pota_1_act);$(13_10)	}$(13_10)}$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)audio_play_sound(pota_4_sound, 9,false);$(13_10)instance_destroy();$(13_10)"
 if(global.team == team) {
 	with(testing) {
-		normal_play(pota_1_act1);
+		normal_play(pota_1_act);
 	}
 }
 audio_play_sound(pota_4_sound, 9,false);

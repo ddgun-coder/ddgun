@@ -1,3 +1,5 @@
-norm_attack();
-server79_create_instace_ext(bam_skill11, x + lengthdir_x(25 * big_val, YA - 90), y + lengthdir_y(25 * big_val, YA - 90), prt_val_get(Val.mp) / 2);
-prt_val_set(Val.mp, 0);
+a_possible = false;
+a_cooltime = -1;
+arm_type_num = 0
+arm_type = "attack"
+arm_type_more = "bam_1"

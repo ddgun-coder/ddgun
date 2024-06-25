@@ -1,9 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
-x = camera_get_view_x(view_camera[view_current]);
-y = camera_get_view_y(view_camera[view_current]);
+x = camera_get_view_x(view_camera[0]);
+y = camera_get_view_y(view_camera[0]);
 if (!surface_exists(surf)) {
-	surf = surface_create(1024, 768);
+	surf = surface_create(global.window_width, global.window_height);
 	surface_set_target(surf);
 	draw_clear(c_black);
 	gpu_set_blendmode(bm_subtract);

@@ -1,8 +1,9 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 79494CF2
-/// @DnDArgument : "code" "if (global.pickaxe_exist[pickaxe_UI.index - spr_pickaxe1] == true)$(13_10){$(13_10)	global.pickaxe_index = pickaxe_UI.index$(13_10)}"
-if (global.pickaxe_exist[pickaxe_UI.index - spr_pickaxe1] == true)
-{
-	global.pickaxe_index = pickaxe_UI.index
+if (!visible) exit;
+if (!sprite_exists(pickaxe_UI.index)) exit;
+var str = sprite_get_name(pickaxe_UI.index);
+if (str != "") {
+	if (global.pickaxe_exist[real(string_digits(str)) - 1] == true)
+	{
+		global.pickaxe_index = pickaxe_UI.index
+	}
 }

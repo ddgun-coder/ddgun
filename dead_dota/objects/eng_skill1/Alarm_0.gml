@@ -1,3 +1,2 @@
-/// @description Insert description here
-// You can write your code in this editor
 instance_destroy();
+audio_stop_sound(eng_1_sound);

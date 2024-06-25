@@ -1,0 +1,18 @@
+arm_type = "normal";
+arm_type_more = "none";
+cancle_able = false;
+keyboard_checkW = false;
+server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+a_possible = true;
+arm_all_normal();
+only_hat = false;
+server77_equal(serve_val.only_hat, only_hat, buffer_bool);
+spin_steadly_start(false);
+arm_spin_speed = 4;
+right_goto_YA = 0 + 45;
+a_cooltime = 25;
+left_arm_get_bigger = false;
+spr_arml_more = spr_none;
+how_long = 200;
+server79_create_instace_ext(hammer_skill3_0, x + lengthdir_x(20 * big_val, YA - 90), y + lengthdir_y(20 * big_val, YA - 90), how_long);
+instance_destroy(hammer_skill3_gauge);

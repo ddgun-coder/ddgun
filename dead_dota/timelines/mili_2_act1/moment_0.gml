@@ -7,5 +7,5 @@ server78_create_instace(mili_skill2, x + lengthdir_x(25, YA - 90), y + lengthdir
 server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
 arm_type = "attack";
 arm_type_more = "healing";
-left_arm_YA = YA + 20;
-right_arm_YA = YA - 20;
+left_arm_YA = 0 + 20;
+right_arm_YA = 0 - 20;

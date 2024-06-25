@@ -1,0 +1,1 @@
+testing.hat_move = false;

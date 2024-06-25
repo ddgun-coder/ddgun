@@ -1,6 +1,13 @@
 network_destroy(global.client);
 global.online = 0;
-server = network_create_server(network_socket_tcp,55350, 1);
+testing.cid = 0;
+testing0.cid = 0;
+global.intuto = true;
+global.my_cid = 0;
+global.my_cid_id = testing0;
+testing0.skin = global.skin
+/*
+server = network_create_server(network_socket_tcp,55350, 15);
 if (global.online == 0) {
 	network_set_config(network_config_connect_timeout,800);
 	global.client = network_create_socket(network_socket_tcp);
@@ -9,7 +16,6 @@ if (global.online == 0) {
 		game_end()
 	}
 	depth = -2000;
-	ime_set_composition_window(0);
 	connect = network_connect(global.client , "127.0.0.1" , 55350);
 	if (connect < 0) {
 		show_message("오류!")
@@ -18,12 +24,14 @@ if (global.online == 0) {
 	else {
 		global.intuto = true;
 		global.my_cid = 0;
-		global.my_cid_id = testing0;	
+		global.my_cid_id = testing0;
+		testing0.skin = global.skin
 	}
 }
 else {
 	connect = 1;
 } 
+*/
 win = 0;
 last_time = 0;
 buff_size = 0;
@@ -82,5 +90,5 @@ date_get_year(date),date_get_month(date),
 date_get_day(date),date_get_hour(date),
 date_get_minute(date),date_get_second(date)+delay);
 
-alarm[0] = room_speed * delay + 1;
-alarm[1] = room_speed * delay;
+
+alarm[2] = 100

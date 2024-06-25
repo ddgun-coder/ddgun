@@ -1,11 +1,10 @@
-if (windows = true)
+if (windows)
 {
-	draw_set_font(font0);
+	draw_self();
+	draw_set_font(font1);
 	draw_set_color(c_black);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
-	draw_sprite_ext(spr_shop, 0, xstart , ystart , 1, 1, 0, -1, 0.75);
-	draw_sprite(index, 0, xstart  + 123, ystart  +105);
 	switch(index)
 	{
 		case spr_pickaxe1 :
@@ -64,6 +63,7 @@ if (windows = true)
 			draw_text(x  + 15, y  +187, "설명: 높은 확률로 도타볼이나오는 사기적인 곡괭이.");
 		break;
 	}
-	draw_text(x  + 191, y  +50, "현제강화:" + string(global.pickaxe_num[index - spr_pickaxe1]));
+	var ind = real(string_digits(sprite_get_name(index))) - 1;
+	draw_text(x  + 191, y  +50, "현제강화:" + string(global.pickaxe_num[ind]));
 	draw_text(x  + 15, y  + 270, "강화주문서:" + string(testing.pickaxe_up));
 }

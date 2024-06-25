@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"SUBWAY_BGM",
+  "audioGroupId":{
+    "name":"audio_bgm",
+    "path":"audiogroups/audio_bgm",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":85.2114,
+  "name":"SUBWAY_BGM",
+  "parent":{
+    "name":"BGM",
+    "path":"folders/Sounds/BGM.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"SUBWAY_BGM.mp3",
+  "type":0,
+  "volume":0.4,
+}

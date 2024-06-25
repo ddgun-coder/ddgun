@@ -5,3 +5,6 @@ image_angle += angle_difference(go_to + 90, image_angle) / 5;
 if (cid_id == global.my_cid_id) {
 	instance_destroy();
 }
+if (cid_id.skin == 1) {
+	sprite_index =  spr_fwiza_bam3;
+}

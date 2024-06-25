@@ -1,5 +1,5 @@
 function random_table4() {
-	var what = irandom(54);
+	var what = irandom(59);
 	switch(what) {
 		case 0:
 			normal_play(yellow_4_act);
@@ -83,7 +83,7 @@ function random_table4() {
 			normal_play(fly_4_act);
 		break;
 		case 27:
-			normal_play(fighter_4_act);
+			normal_play(fighter_4_act_old);
 		break;
 		case 28:
 			normal_play(shit_4_act);
@@ -134,7 +134,7 @@ function random_table4() {
 			normal_play(t_4_act);
 		break;
 		case 44:
-			normal_play(ma_4_act);
+			normal_play(ma_2_act);
 		break;
 		case 45:
 			normal_play(nk_4_act);
@@ -164,7 +164,20 @@ function random_table4() {
 			normal_play(tree_4_act);
 		break;
 		case 54:
-			normal_play(bam_4_act);
+			server78_create_instace(bam_skill42, x, y);	
+			server78_create_instace(bam_skill43, x, y);	
+		break;
+		case 55:
+			normal_play(gun_4_act);
+		break;
+		case 56:
+			normal_play(ass_4_act);
+		break;
+		case 58:
+		    normal_play(sli_4_act);
+		break;
+		case 59:
+		    normal_play(newb_4_act);
 		break;
 	}
 

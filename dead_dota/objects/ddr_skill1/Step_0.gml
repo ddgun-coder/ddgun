@@ -1,5 +1,5 @@
-image_xscale = cid_id.big_val;
-image_yscale = (0.5 + deltay) * cid_id.big_val;
+image_xscale = cid_id.big_val * 2;
+image_yscale = (0.6 + deltay) * cid_id.big_val * 2;
 image_angle = cid_id.YA;
 y = cid_id.y ;
 x = cid_id.x ;

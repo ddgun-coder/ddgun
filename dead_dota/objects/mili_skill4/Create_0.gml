@@ -18,9 +18,9 @@ cid = 3;
 /// @DnDAction : YoYo Games.Common.Execute_Code
 /// @DnDVersion : 1
 /// @DnDHash : 228A0D4D
-/// @DnDArgument : "code" "audio_play_sound(mili_4_sound, 1, false);$(13_10)cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_angle = cid_id.YA;$(13_10)time = 0;$(13_10)dmg = 14;"
+/// @DnDArgument : "code" "audio_play_sound(mili_4_sound, 1, false);$(13_10)cid_id  = asset_get_index("testing" + string(cid));$(13_10)image_angle = cid_id.YA;$(13_10)time = 0;$(13_10)dmg = 10;"
 audio_play_sound(mili_4_sound, 1, false);
 cid_id  = asset_get_index("testing" + string(cid));
 image_angle = cid_id.YA;
 time = 0;
-dmg = 14;
+dmg = 10;

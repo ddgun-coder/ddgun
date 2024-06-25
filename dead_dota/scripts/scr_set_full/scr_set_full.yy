@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_set_full",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_set_full",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

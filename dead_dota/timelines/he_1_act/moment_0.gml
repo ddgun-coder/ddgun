@@ -5,5 +5,5 @@ arm_type = "attack";
 spr_armr_more = spr_h;
 spr_arml_more = spr_what;
 arm_type_more = "not";
-left_arm_YA = YA - 90;
-right_arm_YA = YA - 90;
+left_arm_YA = 0 - 90;
+right_arm_YA = 0 - 90;

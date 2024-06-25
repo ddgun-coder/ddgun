@@ -1,11 +1,22 @@
 arm_all_normal()
+arm_movement(5,-1,10,-4)
+foot_movement(0,0,-4,4)
 a_possible = 0;
 switch(global.skin) {
+	case 0:
+       effect_index = effect_hunter3;
+    break;
+	case 1:
+       effect_index = effect_hunter3;
+    break;
 	case 2:
 		effect_index = effect_hunter32;
 	break;
+	case 3:
+       effect_index = spr_hunt_bow3;
+	break;
 	default:
-		effect_index = effect_hunter3;
+	   effect_index = effect_hunter3;
 	break;
 }
 arm_type = "attack"

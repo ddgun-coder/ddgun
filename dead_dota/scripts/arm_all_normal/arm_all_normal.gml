@@ -1,6 +1,6 @@
 function arm_all_normal() {
-	left_arm_YA = YA;
-	right_arm_YA = YA;
+	left_arm_YA = 0;
+	right_arm_YA = 0;
 
 	left_arm_xscale = 1;
 	right_arm_xscale = -1;
@@ -25,6 +25,4 @@ function arm_all_normal() {
 	spr_armr_more = spr_none;
 	spr_arml_more = spr_none;
 	effect_index = spr_none;
-
-
 }

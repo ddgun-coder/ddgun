@@ -1,5 +1,11 @@
-/// @description Insert description here
-// You can write your code in this editor
-skill_create(100);
+image_angle = testing.YA;
+team = 0;
+
+skill_create(30);
+
 audio_play_sound(bam_3_sound,9,false);
-alarm[1] = 1;
+cid = 1;
+cid_id  = asset_get_index("testing" + string(cid));
+dmg = 7;
+
+alarm[1] = 1

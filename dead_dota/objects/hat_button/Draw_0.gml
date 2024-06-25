@@ -1,20 +1,7 @@
 if(hat_button_main.windows == 1) {
-	for(var i = 0; i < 15; i++) {
-		for(var j = 0; j < 5; j++) {
-			var index = i + j * 15
-			if (index < 72) {
-				draw_sprite(select, 0, x + 64 * i, y + 64 * j);
-				draw_sprite(global.hat_array[index + 1], 0, x + 64 * i, y + 64 * j);
-				if (global.ban_list[index + 1]) {
-					draw_sprite(spr_x, 0, x + 64 * i, y + 64 * j);
-				}
-			}
-		}
-	}
-}
-/*
-if(hat_button_main.windows == 1)
-{
-	draw_self();
-	draw_sprite(spr_hat1 + number, 0, x, y);
+	surf_made();
+	var draw_y1 = my_layer * 78;
+	var draw_y2 = 78 * 4;
+	draw_surface_part(surf, 0, draw_y1, weight * 78, draw_y2, x - 32, y - 32);
+	draw_sprite(spr_hat_rand, 0, x + 340, y - 184);
 }

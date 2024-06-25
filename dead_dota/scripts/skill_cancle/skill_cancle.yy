@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"skill_cancle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"skill_cancle",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

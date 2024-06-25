@@ -1,3 +1,5 @@
+x = cid_id.x
+y = cid_id.y
 path_scale = 2 * cid_id.big_val;
 path_speed = 24 * cid_id.big_val;
 image_xscale = cid_id.big_val;

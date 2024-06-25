@@ -1,4 +1,4 @@
-alarm[1] = 800;
+alarm[1] = 400;
 alarm[0] = 10;
 depth = -2000;
 image_xscale = 4;

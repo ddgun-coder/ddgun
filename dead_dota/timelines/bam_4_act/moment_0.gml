@@ -1,8 +1,8 @@
-a_cooltime = 40;
-arm_movement(5, -5, 5, 5);
-left_arm_YA = YA + 270;
-right_arm_YA = YA + 90;
-YA -= 45;
-all_spin = true;
-all_spin_limit = YA + 145;
-server78_create_instace(bam_skill4, x, y);
+arm_all_normal();
+a_possible = false
+arm_movement(4, -4, 4, 4);
+foot_movement(0, 0, -5, -5);
+left_arm_yscale = -1
+right_arm_yscale = -1
+left_goto_YA = 0 + 85
+right_goto_YA = 0 - 85

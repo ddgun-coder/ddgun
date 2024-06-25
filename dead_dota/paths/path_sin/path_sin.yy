@@ -1,0 +1,19 @@
+{
+  "$GMPath":"",
+  "%Name":"path_sin",
+  "closed":false,
+  "kind":0,
+  "name":"path_sin",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "points":[
+    {"speed":100.0,"x":-57.0,"y":39.0,},
+    {"speed":100.0,"x":44.0,"y":-49.0,},
+    {"speed":100.0,"x":45.0,"y":42.0,},
+  ],
+  "precision":4,
+  "resourceType":"GMPath",
+  "resourceVersion":"2.0",
+}
