@@ -2,21 +2,39 @@
 
 만들면서 느꼈던 많은 내용들과 코드에 대한 몇몇 이모저모 등등 많은 이야기는 게임메이커 카페에 자세히 써봤습니다.
 1화 : https://cafe.naver.com/crazygm/230098
+
 2화 : https://cafe.naver.com/crazygm/230116
+
 3화 : https://cafe.naver.com/crazygm/230145
+
 4화 : https://cafe.naver.com/crazygm/230212
+
 5화 : https://cafe.naver.com/crazygm/230239
+
 6화 : https://cafe.naver.com/crazygm/230363
+
 7화 : https://cafe.naver.com/crazygm/230371
+
 8화 : https://cafe.naver.com/crazygm/230440
+
 9화 : https://cafe.naver.com/crazygm/230483
+
 10화 : https://cafe.naver.com/crazygm/230523
+
 11화 : https://cafe.naver.com/crazygm/230552
+
 12화 : https://cafe.naver.com/crazygm/230590
+
 13화 : https://cafe.naver.com/crazygm/230664
+
 14화 : https://cafe.naver.com/crazygm/230687
+
 15화 : https://cafe.naver.com/crazygm/230808
+
 16화 : https://cafe.naver.com/crazygm/230842
+
 17화 : https://cafe.naver.com/crazygm/230848
+
 18화 : https://cafe.naver.com/crazygm/230877
+
 19화 : https://cafe.naver.com/crazygm/230919
