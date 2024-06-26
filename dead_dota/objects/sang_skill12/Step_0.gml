@@ -9,8 +9,9 @@ if (time < 360) {
 else {
 	image_yscale = dis * 0.85
 }*/
-time += 20;
+time += 20 / time_scale;
 if (time < 360) {
+	
 }
 else {
 	time -= 360

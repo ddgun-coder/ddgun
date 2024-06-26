@@ -2,8 +2,14 @@
    if(shop_UI.windows == true and shop_UI.windows_index == 0)
    {
 	    if (!surface_exists(surf)) item_surf();
-		var cx = camera_get_view_x(view_camera[0]);
-        var cy = camera_get_view_y(view_camera[0]);
+		if (room == room_main) {
+			var cx = 0;
+			var cy = 0;
+		}
+		else {
+			var cx = camera_get_view_x(view_camera[0]);
+	        var cy = camera_get_view_y(view_camera[0]);
+		}
         x = xstart + cx;	
         y = ystart + cy;
        draw_surface_part(surf, 0, surf_y, 80 * weight, 80 * 3.9, xstart - 40, ystart - 40);

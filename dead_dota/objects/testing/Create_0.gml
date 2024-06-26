@@ -640,6 +640,7 @@ function skill_start(_type, _level) {
 			_skill_str = global.Rskill;
 		break;
 	}
+	//먼저 몇차 스킬인지에 따라 Dskill, Qskill, Wkill를 정합니다. 이유는 Dskill에 1차스킬, Qskill에 2차스킬이 있는 형태이기 때문입니다.
 	if (variable_struct_exists(_skill_str, _name)) {
 		var _str = _skill_str[$ _name];
 		if (_str.exception) {
@@ -660,6 +661,7 @@ function skill_start(_type, _level) {
 					skillR_exception(_type);
 				break;
 			}
+			//만약 구조체로 넣을수 없는 복잡한 스킬이라면 skill_exception에 따로 적어둔 내용이 실행되도록
 		}
 		else {
 			var _mana_max = _str.mana_max();
@@ -675,6 +677,7 @@ function skill_start(_type, _level) {
 			else {
 				skill_gi_and_mana(_mana_max, _gi_max, _mana, _gi, _str.timeline(), _str.func);
 			}
+			//여기서 마나와 기 둘다 사용하는지? 혹은 하나만 사용하지를 결정하여 실행합니다.
 		}
 	}
 }

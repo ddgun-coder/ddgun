@@ -1,5 +1,6 @@
 team = 0;
-alarm[0] = 30;
+time_scale = 1;
+alarm[0] = 30 * time_scale;
 cid = 0;
 cid_id = testing0;
 image_angle = 0

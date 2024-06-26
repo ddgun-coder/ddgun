@@ -1,5 +1,5 @@
-x = mouse_x - camera_get_view_x(view_camera[0]);
-y = mouse_y - camera_get_view_y(view_camera[0]);
+x = mouse_x;
+y = mouse_y;
 if (instance_exists(shop_UI)) {
 	if (point_in_rectangle(mouse_x, mouse_y, shop_button1.x - 40, shop_button1.y - 40, shop_button1.x + 80 * (shop_button1.weight + 1)- 40, shop_button1.y + 80 * 3.9 - 40)){
 		if (shop_UI.windows == true and shop_UI.windows_index == 0) {

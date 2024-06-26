@@ -7,6 +7,11 @@ item_array = [];
 array_size = 0;
 surf_y = 0
 
+enum item_type {
+	defence = 1,
+	attack = 2,
+	utility = 3
+}
 
 function found_index(spr, spr_ind) {
 	var n = array_length(item);
@@ -21,22 +26,22 @@ function found_index(spr, spr_ind) {
 for(var j = 0; j < 59; j++) {
 	var num = j;
 	item[num] = {
-		sprite : noone,
-		sprite_ind : 0,
-		name: "",
-		price : 6000,
-		max_time : 40 * 95,
-		cancle : false,
-		what : 2,
-		expl : "",
-		ban : false,
-		server : false,
-		index : j,
+		sprite : noone, //보여줄 스프라이트
+		sprite_ind : 0, //해당 스프라이트의 프레임 번호
+		name: "", //아이템의 이름
+		price : 6000, // 아이템의 가격
+		max_time : 40 * 95, //아이템 시간 
+		cancle : false, //해당 아이템이 1회용이면 true, 아니면 false
+		what : item_type.attack, // 해당 아이템의 종류 enum item_type확인
+		expl : "", //아이템 설명
+		ban : false, //해당 아이템이 서버에서 밴을 했는가?
+		server : false, //해당 아이템은 서버에서 정해준 아이템인가?
+		index : j, //각 아이템을 나타낼 고유한 ID값
 	}
 	switch (num) {
 		case 0:
 			item[num].sprite = spr_book;
-			item[num].what = 3
+			item[num].what = item_type.utility
 			item[num].name = "'[ 노트 ]'"
 			item[num].expl = "가만히 공부를해서 경험치를 얻는다.\n 맞으면 풀리니 조심하자."
 		break;
@@ -45,7 +50,7 @@ for(var j = 0; j < 59; j++) {
 			item[num].sprite_ind = 1;
 			item[num].price = 5000;
 			item[num].max_time = 40 * 135;
-			item[num].what = 1;
+			item[num].what = item_type.defence;
 			item[num].name = "[ 체력 포션 ]"
 			item[num].expl = "체력을 회복한다. 이동속도가 느려진다.\n맞으면 풀리니 조심하자.";
 		break;
