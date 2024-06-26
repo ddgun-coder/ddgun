@@ -1,8 +1,10 @@
 alarm_set(11,20);
 global.prt_key=irandom_range(1,10000);
-if (sturn >0) {
+if (sturn > 0) {
 	if (global.hat != spr_hat48 and level == 3) {
-		keyboard_string += "쿨럭"
+		with (obj_say_here_online) {
+			text.input("쿨럭");
+		}
 	}
 }
 if (global.hat == spr_hat5 or global.hat == spr_level5_hat1)

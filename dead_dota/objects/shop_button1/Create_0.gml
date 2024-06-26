@@ -556,10 +556,7 @@ function item_surf() {
 		 var spr = noone;
 		 if (item_array[number].sprite != noone) {
 			spr = item_array[number].sprite;
-			draw_sprite_part_ext(spr, item_array[number].sprite_ind, sprite_get_xoffset(spr) - 60, sprite_get_yoffset(spr) - 60, 120, 120, draw_x - 19,  draw_y - 28, 0.4, 0.4, c_white, 1);	
-			/*
-			draw_sprite_part_ext(select2, 0, 0, 0, 4, 70, draw_x - 35, draw_y - 35, -1, 1, c_white, 1);
-			draw_sprite_part_ext(select2, 0, 0, 0, 70, 4, draw_x - 35, draw_y - 35, 1, -1, c_white, 1);*/
+			draw_sprite_part_ext(spr, item_array[number].sprite_ind, sprite_get_xoffset(spr) - 60, sprite_get_yoffset(spr) - 60, 120, 120, draw_x - 19,  draw_y - 28, 0.4, 0.4, c_white, 1);
 		}
          draw_set_color(make_color_rgb(254, 215, 100));
          draw_text(draw_x + 6,  draw_y + 25, string(item_array[number].price));

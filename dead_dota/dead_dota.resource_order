@@ -3,6 +3,7 @@
     {"name":"Animation Curves","order":446,"path":"folders/Animation Curves.yy",},
     {"name":"Extensions","order":447,"path":"folders/Extensions.yy",},
     {"name":"Fonts","order":448,"path":"folders/Fonts.yy",},
+    {"name":"KorInput","order":495,"path":"folders/KorInput.yy",},
     {"name":"Notes","order":449,"path":"folders/Notes.yy",},
     {"name":"Objects","order":450,"path":"folders/Objects.yy",},
     {"name":"buttons","order":58,"path":"folders/Objects/UI/buttons.yy",},

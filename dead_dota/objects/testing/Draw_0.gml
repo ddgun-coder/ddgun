@@ -325,7 +325,9 @@ if (chat_point = 1) {
 	draw_set_color(c_black);
 	var chat_x = cur_xview + global.window_width / 2 - (1024 / 2 - obj_say_here_online.xstart);
 	draw_sprite(spr_say_here,0,chat_x,cur_yview + 384);
-	draw_text(chat_x,cur_yview + 384, keyboard_string)
+	if (instance_exists(obj_say_here_online)) {
+		draw_text(chat_x,cur_yview + 384, obj_say_here_online.text.get_text());
+	}
 	draw_set_color(c_white);
 }//그 채팅 칠때 나오는거
 if (mine_say_time > 0) {

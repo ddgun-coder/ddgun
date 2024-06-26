@@ -10,4 +10,6 @@ with(testing) {
 	chat1 = "@@@@@@@@@@@@@@@@@@@@@@@@@";
 }
 testing.chat_point = 0;
-keyboard_string = "";
+with (obj_say_here_online) {
+	text.clear();	
+}

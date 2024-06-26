@@ -1,33 +1,32 @@
 if (instance_exists(testing)) {
 	if (!global.only_see) {
 		if (!instance_exists(see_skill32)) {
-			change_han();
+			var _str = text.get_text();
+			text.clear();
 			switch (testing.chat_point) {
 				case 0 : 
-				//SetHangleMode();
 					testing.chat_point = 1;
-					keyboard_string = "";
+					_str = "";
 				break;
 	
 				case 1 : 
-				//SetEnglishMode();
 				testing.chat_point = 0;
 				if (string_count("씨",pre_len) > 0 or string_count("시",pre_len) > 0) {
-					keyboard_string = string_replace_all(keyboard_string, "2", "에아");
-					keyboard_string = string_replace_all(keyboard_string, "E", "갑니다.");
-					keyboard_string = string_replace_all(keyboard_string, "이", "엌");
-					keyboard_string = string_replace_all(keyboard_string, "발", "뷁");
-					keyboard_string = string_replace_all(keyboard_string, "e", "마이크체크");
+					_str = string_replace_all(_str, "2", "에아");
+					_str = string_replace_all(_str, "E", "갑니다.");
+					_str = string_replace_all(_str, "이", "엌");
+					_str = string_replace_all(_str, "발", "뷁");
+					_str = string_replace_all(_str, "e", "마이크체크");
 				}
 				if (string_count("병",pre_len) > 0 or string_count("븅",pre_len) > 0) {
-					keyboard_string = string_replace_all(keyboard_string, "신", "잌");
-					keyboard_string = string_replace_all(keyboard_string, "산", "아리");
-					keyboard_string = string_replace_all(keyboard_string, "싄", "따개");
-					keyboard_string = string_replace_all(keyboard_string, "센", "센진방패대가");
-					keyboard_string = string_replace_all(keyboard_string, "샌", "샌드믹서");
-					keyboard_string = string_replace_all(keyboard_string, "인", "인간성기사 뿌뿌뿡");
+					_str = string_replace_all(_str, "신", "잌");
+					_str = string_replace_all(_str, "산", "아리");
+					_str = string_replace_all(_str, "싄", "따개");
+					_str = string_replace_all(_str, "센", "센진방패대가");
+					_str = string_replace_all(_str, "샌", "샌드믹서");
+					_str = string_replace_all(_str, "인", "인간성기사 뿌뿌뿡");
 				}
-				global.chat = keyboard_string;
+				global.chat = _str;
 				pre_len = global.chat;
 				max_chat = string_length(global.chat);
 				var first_str = string_char_at(global.chat, 0)
@@ -271,7 +270,6 @@ if (instance_exists(testing)) {
 	
 							network_send_packet(0,buff_chat, buffer_tell(buff_chat));
 						}
-						break;
 						break;
 						case "&":
 						if (global.hat == spr_hat48 and testing.level > 2) {
