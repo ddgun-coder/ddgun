@@ -49,6 +49,16 @@ if (hat_button_main.windows == 5) {
 					explain = "";
 					made = "SIM"
 				break;
+				case 4 :
+					name = "물의 검투사 ";
+					explain = "근데 물검이 왜 아픈거죠?";
+					made = "김계란"
+				break; 
+				case 5 :
+					name = "빛의 검투사 ";
+					explain = "빛의 추종자 검투사와는 서로 모르는 사이 입니다.";
+					made = "김계란"
+				break; 
 				}
 				}//검투사스킨
 				
@@ -489,6 +499,11 @@ if (hat_button_main.windows == 5) {
 					explain = "";
 					made = "DD총"
 				break;
+				case 2:
+					name = "물사신";
+					explain = "불사신과 상극입니다.";
+					made = "김계란";
+				break;
 				}
 				}//거인스킨
 				
@@ -599,6 +614,11 @@ if (hat_button_main.windows == 5) {
 					explain = "";
 					made = "엔듈 "
 				break;
+				case 1:
+					name = "물귀신 으잌";
+					explain = "직업은? 워터소믈리에.";
+					made = "김계란 "
+				break;
 				}
 				}//으잌스킨
 				
@@ -669,6 +689,18 @@ if (hat_button_main.windows == 5) {
 					explain = "";
 					made = "엔듈 "
 				break;
+				case 1:
+					name = "물임금";
+					explain = @"플루톤님 생식이 지피 300 이고
+무사도 3차스킬이 300입니다.
+근데 화염법사는 200 이라니요
+심지어 범위도 더 넓고 방패도
+통하지 않습니다.그리고 무사처럼
+차지기술도 아닙니다.
+이 댓글을 보고 패치해주시면
+감사하겠습니다.";
+					made = "김계란 "
+				break;
 				}
 				}//용사스킨
 				
@@ -702,7 +734,7 @@ if (hat_button_main.windows == 5) {
 				case 1:
 					name = "스윗 법관";
 					explain = "성격은 스윗하지만, 법 앞에서는 모두에게 평등합니다.";
-					made = "김계한 "
+					made = "김계란 "
 				break;
 				}
 				}//법관스킨

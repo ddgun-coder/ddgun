@@ -1264,7 +1264,6 @@ if ( tp = network_type_data) {
             cur_room = buffer_read(buff, buffer_string);
             team_score[0] = buffer_read(buff,buffer_u8);
             team_score[1] = buffer_read(buff,buffer_u8);
-            server202_sound(resurrection);
             var temp_time =  buffer_read(buff,buffer_u16);
             win =  buffer_read(buff,buffer_bool);
             if (cid == global.my_cid) {

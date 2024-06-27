@@ -1,3 +1,9 @@
+if (room == room_in) {
+	exit;
+}
+else if (room == room_temp and global.online == 1) {
+	exit;
+}
 mask_index = spr_wall_mask
 gi = prt_val_get(Val.gi);
 mana = prt_val_get(Val.mp);

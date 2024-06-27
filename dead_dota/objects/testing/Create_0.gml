@@ -490,8 +490,6 @@ if (ds_list_size(global.prt_list) == 1) {
 	prt_add(2);
 }
 prt_val_set(Val.ball, 0);
-audio_play_sound(resurrection, 0, 0);
-audio_play_sound(resurrection2, 0, 0);
 
 charging = 0;
 time_charging = 0;

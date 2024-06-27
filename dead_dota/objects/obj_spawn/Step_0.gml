@@ -11,5 +11,3 @@ image_angle = cid_id.YA - 90;
 
 
 
-
-

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.6648409,
+  "duration":1.659841,
   "name":"resurrection2",
   "parent":{
     "name":"effect_sound",
