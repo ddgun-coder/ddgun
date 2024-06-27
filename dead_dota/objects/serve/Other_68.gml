@@ -1379,6 +1379,7 @@ if ( tp = network_type_data) {
                room_pass(cur_room);
             }
             green_text_update(string(serve_name[cid]) + "님이 세상에서 태어났습니다.");
+			shop_button1.item_surf();
       break;
       case 112:
          cid = buffer_read(buff,buffer_u8);

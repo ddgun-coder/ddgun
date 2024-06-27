@@ -560,6 +560,12 @@ function item_surf() {
 		}
          draw_set_color(make_color_rgb(254, 215, 100));
          draw_text(draw_x + 6,  draw_y + 25, string(item_array[number].price));
+		 var scale = 66 / 64;
+		 var doffset = 33 - 32;
+		 if (item_array[number].ban) {
+			
+			draw_sprite_ext(spr_x, 0, draw_x + doffset, draw_y + doffset, scale, scale, 0, c_white, 1);	
+		}
       }
    }
    surface_reset_target();

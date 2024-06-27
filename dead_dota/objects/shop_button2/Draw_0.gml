@@ -5,6 +5,8 @@ if(instance_exists(shop_UI)) {
 		var cy = camera_get_view_y(view_camera[0]);
 		x = xstart + cx;
 		y = ystart + cy;
+		x = round(x);
+		y = round(y);
 		for(var j = 0; j < mj; j++) {
 			for (var i = 0; i < 9; i++) {
 				var number = j * 9 + i;
