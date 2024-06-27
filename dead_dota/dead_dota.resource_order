@@ -1171,6 +1171,7 @@
     {"name":"tilegroup","order":126,"path":"sprites/tilegroup/tilegroup.yy",},
     {"name":"tu_skill2","order":282,"path":"sprites/tu_skill2/tu_skill2.yy",},
     {"name":"twiza_3_2","order":283,"path":"sprites/twiza_3_2/twiza_3_2.yy",},
+    {"name":"Unlined","order":496,"path":"sprites/Unlined/Unlined.yy",},
     {"name":"tile_tuto","order":75,"path":"tilesets/tile_tuto/tile_tuto.yy",},
     {"name":"TileSet_art","order":88,"path":"tilesets/TileSet_art/TileSet_art.yy",},
     {"name":"TileSet_ghost","order":290,"path":"tilesets/TileSet_ghost/TileSet_ghost.yy",},

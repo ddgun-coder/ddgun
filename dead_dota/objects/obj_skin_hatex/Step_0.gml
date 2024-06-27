@@ -134,6 +134,11 @@ if (hat_button_main.windows == 5) {
 					explain = "";
 					made = "시민"
 				break;
+				case 3:
+					name = "알비노 펭귄";
+					explain = "알빠노?";
+					made = "김계란"
+				break;
 				}
 				}//펭귄스킨
 				
@@ -693,6 +698,11 @@ if (hat_button_main.windows == 5) {
 					name = "기본 스킨";
 					explain = "";
 					made = "엔듈 "
+				break;
+				case 1:
+					name = "스윗 법관";
+					explain = "성격은 스윗하지만, 법 앞에서는 모두에게 평등합니다.";
+					made = "김계한 "
 				break;
 				}
 				}//법관스킨
