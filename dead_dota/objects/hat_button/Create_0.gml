@@ -6,6 +6,7 @@ surf = -1;
 size = global.hat_limit;
 weight = 5;
 height = ceil(size / weight);
+cur_height = height;
 enum HAT_TYPE {
    all,
    maze,
@@ -42,6 +43,7 @@ function set_hat_real_index() {
 		}
 	}
 	size = array_length(hat_real_index);
+	cur_height = ceil(size / weight);
 }
 function surf_made() {
    var offset = 0;

@@ -143,8 +143,6 @@ function scr_draw() {
 			rot_x = surf_xoffset * cos(degtorad(-YA)) - surf_yoffset * sin(degtorad(-YA));
 			rot_y = surf_xoffset * sin(degtorad(-YA)) + surf_yoffset * cos(degtorad(-YA));
 			draw_surface_ext(surf, x - rot_x * big_val, y - rot_y * big_val, big_val, big_val, YA, color, 1);
-			draw_text(x - 105, y, right_arm_xscale);
-			draw_text(x + 105, y, left_arm_xscale);
 
 			if(sturn > 0) {
 				draw_sprite_ext(spr_star, -1, x, y, 1, 1, YA, -1, alpha);

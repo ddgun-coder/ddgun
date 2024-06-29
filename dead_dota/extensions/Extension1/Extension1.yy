@@ -17,7 +17,7 @@
   "extensionVersion":"0.0.1",
   "files":[
     {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"Dll2.dll","final":"","functions":[
-        {"$GMExtensionFunction":"","%Name":"change_han","argCount":0,"args":[],"documentation":"","externalName":"change_han","help":"","hidden":false,"kind":1,"name":"change_han","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"change_han","argCount":0,"args":[],"documentation":"","externalName":"ImeChangeMode","help":"","hidden":false,"kind":1,"name":"change_han","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":1,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",

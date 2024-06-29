@@ -26,15 +26,6 @@ function __kortext_class_element(str) constructor
 	backspace_delay = 0;
 	backspace_last_frame = -1;
 	
-	static clear = function() {
-		text = "";
-		text_composing = ["","",""];
-		text_composing_status = 0;// 0 = "", 1 = "(초성)", 1.2 = "(합성 초성)", 1.5 = "( )(모음)", 2 = "(초성)(중성)", 2.5 = "( )(합성 모음)" 3 = "(초성)(중성)(종성)
-		backspace_time = 0;
-		backspace_delay = 0;
-		backspace_last_frame = -1;
-	}
-	
 	static input = function(str)
 	{
 		kortext_set_language();

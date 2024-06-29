@@ -20,6 +20,7 @@ function surt_set() {
 				color = c_yellow;
 				break;
 		}
+		if (num < 1) exit;
 		surf = surface_create(256, 64 * num);
 		surface_set_target(surf); 
 		draw_set_halign(fa_center);

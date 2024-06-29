@@ -3,7 +3,7 @@ global.prt_key=irandom_range(1,10000);
 if (sturn > 0) {
 	if (global.hat != spr_hat48 and level == 3) {
 		with (obj_say_here_online) {
-			text.input("쿨럭");
+			keyboard_string += "쿨럭";
 		}
 	}
 }

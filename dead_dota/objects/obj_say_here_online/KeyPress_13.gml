@@ -2,14 +2,14 @@ if (instance_exists(testing)) {
 	if (!global.only_see) {
 		if (!instance_exists(see_skill32)) {
 			var _str = text.get_text();
-			text.clear();
 			switch (testing.chat_point) {
 				case 0 : 
 					testing.chat_point = 1;
-					_str = "";
+					text = kortext();
 				break;
 	
 				case 1 : 
+				text = kortext();
 				testing.chat_point = 0;
 				if (string_count("씨",pre_len) > 0 or string_count("시",pre_len) > 0) {
 					_str = string_replace_all(_str, "2", "에아");

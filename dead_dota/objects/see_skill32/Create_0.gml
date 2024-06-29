@@ -11,5 +11,5 @@ with(testing) {
 }
 testing.chat_point = 0;
 with (obj_say_here_online) {
-	text.clear();	
+	keyboard_string = "";
 }
