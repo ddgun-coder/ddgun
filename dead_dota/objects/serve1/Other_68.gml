@@ -1163,6 +1163,7 @@ if ( tp = network_type_data) {
             if (cid > 25) {
                exit   
             }
+			var level5_ration = buffer_read(buff,buffer_u8);
             cur_room = buffer_read(buff,buffer_u8);
             team_score[0] = buffer_read(buff,buffer_u8);
             team_score[1] = buffer_read(buff,buffer_u8);
@@ -1195,9 +1196,11 @@ if ( tp = network_type_data) {
             }
             max_score = buffer_read(buff,buffer_u8);
             var temp_mpr = buffer_read(buff,buffer_s8);
-            var t_dmg_per = buffer_read(buff,buffer_s8);
+            var t_dmg_per = buffer_read(buff,buffer_u8);
+
             prt_val_set(Val.MPR, temp_mpr);
             prt_val_set(Val.dmg_per, t_dmg_per / 100 + 1);
+            prt_val_set(Val.level5_ration, level5_ration);
             
             for(var i = 1; i < 100; i++) {
                global.ban_list[i] = buffer_read(buff,buffer_bool);

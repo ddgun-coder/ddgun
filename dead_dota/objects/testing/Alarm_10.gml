@@ -1,4 +1,5 @@
 alarm_set(10, 1);
+
 if (global.only_see) {
 	buffer_seek(buff_chat, buffer_seek_start, 0);
 	

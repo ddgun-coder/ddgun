@@ -51,7 +51,6 @@ global.Qskill = {};
 global.Wskill = {};
 global.Eskill = {};
 global.Rskill = {};
-global.level5_ration = 2;
 #region //1차 스킬
 global.Dskill[$ "spr_hat1"] = {
 	timeline : function() { return yellow_1_act },

@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 surf = -1;
+dx = sprite_get_width(spr_hurt_list_UI);
 function surt_set() {
 	if (!surface_exists(surf)) {
 		var draw_y = 0;

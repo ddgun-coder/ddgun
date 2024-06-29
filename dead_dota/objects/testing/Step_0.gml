@@ -107,7 +107,7 @@ if (speedd < 0) {
 }
 /*
 if (mouse_check_button(mb_left)) {
-	var _id = instance_create_depth(mouse_x, mouse_y, depth, choose(bwiza_skill2 , tree_skill41));
+	var _id = instance_create_depth(mouse_x, mouse_y, depth, choose(bwiza_skill2 , yellow_skill1));
 	_id.cid = global.my_cid;
 	_id.team = !global.team;
 	_id.cid_id = global.cid_array[global.my_cid];

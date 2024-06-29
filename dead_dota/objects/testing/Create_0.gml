@@ -2,7 +2,8 @@ card_name = "noone";
 endemic_time = 0;
 buff_goto_speed = 0;
 function try_level_up(_level) {
-	if (irandom(999) < global.level5_ration) {
+	var val = prt_val_get(Val.level5_ration);
+	if (irandom(999) < val) {
 		level = 4;
 		random_level5();
 	}		
@@ -476,7 +477,8 @@ enum Val
 	ball = 6,
 	event = 7,
 	dmg_per = 8,
-	MPR = 9
+	MPR = 9,
+	level5_ration = 10,
 }
 if (ds_list_size(global.prt_list) == 1) {
 	prt_add(gi);
@@ -487,6 +489,7 @@ if (ds_list_size(global.prt_list) == 1) {
 	prt_add(dota_ball);
 	prt_add(0);
 	prt_add(1);
+	prt_add(2);
 	prt_add(2);
 }
 prt_val_set(Val.ball, 0);

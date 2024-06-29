@@ -1121,12 +1121,14 @@ if ( tp = network_type_data) {
 				break;
 			   }// 폭군
 		    }
+			/*
 			break;
             if (global.stats == spr_stats1) {
                if (D / 8 > 1) {
                prt_val_add(Val.gi, floor(D/4));
                }
             }
+			*/
          }
       }
       break;
@@ -1432,7 +1434,7 @@ if ( tp = network_type_data) {
 	  break;
 	  case 115:
 		var to_cid = buffer_read(buff, buffer_u8);
-	  	var id_array = [];
+	  	var id_array = [];//현재의 스킬을 담을 배열
 		with (all) {
 			if (string_count("skill", object_get_name(id.object_index)) >= 1) {
 				if (id.alarm[0] >= 40) {	
@@ -1442,7 +1444,7 @@ if ( tp = network_type_data) {
 			else if (asset_has_tags(object_index, "serve_load", asset_object)) {
 				array_push(id_array, id);
 			}
-		}
+		}//여기서 오브젝트 이름에 skill혹은 serve_load란 tag가 존재하면 해당 값들을 하나식 가져옵니다.
 		buffer_seek(buff_big, buffer_seek_start, 0);
 		var _num = array_length(id_array);
 		var _id;
@@ -1454,16 +1456,16 @@ if ( tp = network_type_data) {
 			buffer_write(buff_big, buffer_u16, _id.object_index);
 			buffer_write(buff_big, buffer_u16, _id.x);
 			buffer_write(buff_big, buffer_u16, _id.y);
-			buffer_write(buff_big, buffer_u16, _id.alarm[0]);
+			buffer_write(buff_big, buffer_u16, _id.alarm[0]);//해당 스킬의 object, x, y, alarm을 차례대로 적습니다.
 			if(variable_instance_exists(_id, "cid")) {
 				buffer_write(buff_big, buffer_u16, _id.cid);
-			}
+			}//cid값도 추가로 넣습니다.
 			else {
 				buffer_write(buff_big, buffer_u16, 0);	
-			}
+			}//해당 스키
 			if (variable_instance_exists(id, "hp")) {
 				buffer_write(buff_big, buffer_s16, _id.hp);
-			}
+			}//포탑처럼 hp가 존재하면 이것도 넣습니다.
 			else {
 				buffer_write(buff_big, buffer_s16, -300);
 			}
@@ -1472,7 +1474,7 @@ if ( tp = network_type_data) {
 	  break;
 	  case 116:
 		buffer_seek(buff, buffer_seek_start, 2);
-		var _num = buffer_read(buff, buffer_u8);
+		var _num = buffer_read(buff, buffer_u8);//버퍼에서 현재 가져온 오브젝트의 개수를 확인
 		if (_num == 0) break;
 		var _x, _y, _alarm, _object_index, _cid, ida, _hp;
 		repeat (_num) {
@@ -1490,6 +1492,7 @@ if ( tp = network_type_data) {
 	        ida.image_angle = ida.cid_id.YA;
 			if (_hp != -300) ida.hp = _hp;
 			global.cid_array[_cid].cancle_able = true;
+			//해당 object_index, x, y, alarm, cid, hp 를 하나씩 가져오고 이를 오브젝트에 적용시켜 줍니다.
 		}
 	  break;
       case 198:
