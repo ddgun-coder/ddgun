@@ -26,6 +26,7 @@ else {
 ping = 0;
 num_client = 0;
 win = 0;
+game_end_lose = false;
 bol_hat1 = 0;
 bol_hat2 = 0;
 last_time = 0;

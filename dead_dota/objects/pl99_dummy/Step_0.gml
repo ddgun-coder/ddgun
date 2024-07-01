@@ -27,45 +27,6 @@ if(live = 1) {
 		}
 	}//공격을 받았다!
 
-	if (a_cooltime <0) {
-		if (only_move_frame = 1) {
-			if (keyboard_check(vk_shift) and arm_type != "ouch" and arm_type != "caps_lock" and arm_type != "attack") {
-				arm_type = "shift"
-				arm_movement(5, -5, 5, 5);
-				left_arm_YA = 0 + 270;
-				right_arm_YA = 0 + 90;
-			}
-			else {
-				if (arm_type == "shift")
-				{
-					arm_type = "normal"
-					arm_all_normal();
-				}
-			}//쉬프트 움직임 정상화
-		
-			if (keyboard_check(20)) {
-				if (arm_type != "caps_lock" and arm_type != "shift" and arm_type != "ouch" and arm_type != "attack")
-				{
-					left_arm_yscale = -1;
-					right_arm_yscale = -1;
-					arm_movement(0, 0, 5, 0);
-					arm_type = "caps_lock"
-					if (arm_tabcooltime = -1) {
-						arm_tabcooltime = 20;
-					}
-				}
-			}
-		else {
-			if (arm_type == "caps_lock")
-				{
-					arm_type = "normal"
-					arm_all_normal();
-				}
-			}
-		}
-	}//caps_lock키 움직임 정상화
-
-
 	if (a_cycle > 0) {
 		a_cycle -= 1
 	} // 손 순환을 위한 감소 

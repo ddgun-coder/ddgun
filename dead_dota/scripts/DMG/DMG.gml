@@ -69,6 +69,9 @@ function DMG(D, name, sturn_time, _fun = undefined, _no_sturn = false) {
 									prt_val_add(Val.mp, D);	
 								}
 								if (_fun != undefined)	{
+									show_debug_message(team);
+									show_debug_message(global.team);
+									
 									var foo = method(testing, _fun);
 									foo();
 								}

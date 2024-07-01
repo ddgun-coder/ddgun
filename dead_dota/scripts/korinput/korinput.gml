@@ -314,9 +314,19 @@ function __kortext_class_element(str) constructor
 
 function __kortext_get_cho_index(str)// 초성 인덱스
 {
-	switch(str)
+	var double_mo = ["R", "E", "Q", "T", "W"];
+	var num = array_length(double_mo);
+	var check = false;
+	for (var i = 0; i < num ; i++) {
+		if (double_mo[i] == str) {
+			check = true;
+			break;
+		}
+	}
+	if (!check) str = string_lower(str);
+	
+	switch (str) 
 	{
-		// 초성 인덱스
 		case "r": return 0; // ㄱ
 		case "R": return 1; // ㄲ
 		case "s": return 2; // ㄴ
@@ -343,7 +353,18 @@ function __kortext_get_cho_index(str)// 초성 인덱스
 
 function __kortext_get_joong_index(str)// 중성 인덱스
 {
-	switch(str)
+	var double_mo = ["O", "P"];
+	var num = array_length(double_mo);
+	var check = false;
+	for (var i = 0; i < num ; i++) {
+		if (double_mo[i] == str) {
+			check = true;
+			break;
+		}
+	}
+	if (!check) str = string_lower(str);
+	
+	switch (str) 
 	{
 		// 중성 인덱스
 		case "k": return 0; // ㅏ
@@ -374,6 +395,17 @@ function __kortext_get_joong_index(str)// 중성 인덱스
 
 function __kortext_get_jong_index(str)// 종성 인덱스
 {
+	var double_mo = ["R", "T"];
+	var num = array_length(double_mo);
+	var check = false;
+	for (var i = 0; i < num ; i++) {
+		if (double_mo[i] == str) {
+			check = true;
+			break;
+		}
+	}
+	if (!check) str = string_lower(str);
+	
 	switch (str) {
 		case "r": return 1;  // "ㄱ"
 		case "R": return 2;  // "ㄲ"
@@ -392,7 +424,7 @@ function __kortext_get_jong_index(str)// 종성 인덱스
 		case "fg": return 15; // "ㅀ"
 		case "a": return 16;  // "ㅁ"
 		case "q": return 17;  // "ㅂ"
-		case "qt": return 19; // "ㅄ"
+		case "qt": return 18; // "ㅄ"
 		case "t": return 19;  // "ㅅ"
 		case "T": return 20;  // "ㅆ"
 		case "d": return 21;  // "ㅇ"
@@ -407,8 +439,18 @@ function __kortext_get_jong_index(str)// 종성 인덱스
 }
 
 function __kortext_get_consonant_can_be_jong(eng_str) {
-    var kor_consonant;
-    
+	
+	var double_mo = ["R", "E", "Q", "T", "W"];
+	var num = array_length(double_mo);
+	var check = false;
+	for (var i = 0; i < num ; i++) {
+		if (double_mo[i] == eng_str) {
+			check = true;
+			break;
+		}
+	}
+	if (!check) eng_str = string_lower(eng_str);
+	
     switch (eng_str) {
         case "r": kor_consonant = "ㄱ"; break;
         case "R": kor_consonant = "ㄲ"; break;

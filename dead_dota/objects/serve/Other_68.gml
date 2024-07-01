@@ -1275,8 +1275,9 @@ if ( tp = network_type_data) {
             else {
                var D = buffer_read(buff,buffer_bool);
             }
+			last_time = temp_time;
             if (win != global.team) {
-               last_time = temp_time;
+				game_end_lose = true;
             }
             for (var i = 1 ; i < 25 ; i++) {
                ary_cid[i] = buffer_read(buff,buffer_bool);
@@ -1680,8 +1681,9 @@ if ( tp = network_type_data) {
             audio_play_sound(time_to_say_good_bye,9,false);
             audio_play_sound(time_to_say_good_bye,9,false);
             audio_play_sound(time_to_say_good_bye,9,false);
+			last_time = 720;
             if (win != global.team) {
-               last_time = 720;
+			   game_end_lose = true;
             }
          }
       break;

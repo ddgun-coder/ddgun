@@ -7,7 +7,7 @@ if (food_displaying > 0) {
 		food_displaying--;
 		repeat(100) {
 			var r = irandom_range(1, 28);
-			if (r != 23 or r != 25) break;
+			if (r != 23 and r != 25) break;
 		}	
 		server51_fish_xy(asset_get_index("obj_food" + string(r)), 100, x + lengthdir_x(64, image_angle), y + lengthdir_y(64, image_angle));
 		image_angle += 90;

@@ -15,6 +15,9 @@ global.money = prt_val_get(0);
 item_time--
 flash_time = max(flash_time - 1, 0);
 endemic_time = max(endemic_time - 1, 0);
+
+card_name = "none";
+
 if (instance_exists(obj_card_manager)) {
 	if (obj_card_manager.timer > 0) {
 		moveable = false;
@@ -33,8 +36,8 @@ else {
 		effect_index = spr_none;
 		moveable = true;
 	}
-	card_name = "none";
 }
+
 if (alive > 0) {
 	server78_create_instace(obj_spawn, x, y);
 }
@@ -5169,3 +5172,9 @@ if (place_free(x + lengthdir_x(buff_goto_speed, temp_YA - 90), y + lengthdir_y(b
 	x += lengthdir_x(buff_goto_speed, temp_YA - 90);
 	y += lengthdir_y(buff_goto_speed, temp_YA - 90);
 }//앞으로 자동이동
+
+var check_lose = false;
+with(serve) {
+	check_lose = game_end_lose;
+}
+if (check_lose) effect_index = effect_gag;

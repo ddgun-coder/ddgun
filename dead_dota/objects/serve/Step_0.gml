@@ -75,16 +75,37 @@ if (instance_exists(testing)) {
 }//핸디
 if (instance_exists(testing)) {
 	if (last_time > 0) {
-		with(testing) {
-			testing.moveable = false;
-			testing.effect_index = effect_gag;
-			testing.undying = false
-			testing.arm_type = "ouch"
-			testing.a_possible = false;
-			temp_YA = YA;
-			testing.hp = m_hp;
+		if (!audio_is_playing(time_to_say_good_bye)) {
+			audio_stop_all();
+            audio_play_sound(time_to_say_good_bye,9,false);	
+            audio_play_sound(time_to_say_good_bye,9,false);	
+            audio_play_sound(time_to_say_good_bye,9,false);	
+		}
+		if (game_end_lose) {
+			with(testing) {
+				testing.moveable = false;
+				testing.effect_index = effect_gag;
+				testing.undying = false
+				testing.arm_type = "ouch"
+				testing.a_possible = false;
+				temp_YA = YA;
+				testing.hp = m_hp;
+			}
 		}
 	}
+	else {
+		if (last_time == 0) {
+			if (global.BGM) {
+				audio_stop_all();
+				BMG_play();
+			}
+			if (game_end_lose) {
+				with (testing) {
+					hp -= 999;
+				}
+			}
+		}
+	}	
 }
 for (var i = 0; i < 24; i++) {
 	cid_time[i]--;
