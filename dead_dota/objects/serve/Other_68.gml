@@ -24,8 +24,20 @@ if ( tp = network_type_data) {
       exit
    }
    if (buff_size <= 0) {
-      exit
+      exit;
    }
+   	if (!full_loaded) {
+		var out = false;
+		for (var i = 0; i < white_array_loading_num; i++) {
+			if (buffer_type == white_array_loading[i]) {
+				out = true;
+				break;	
+			}
+		}
+		if (out == false) {
+			//exit;	
+		}
+	}
    switch (buffer_type) {
       case 0:
          if (buff_size > 3) {
@@ -1256,134 +1268,7 @@ if ( tp = network_type_data) {
          }
       break;
       case 111://오직 처음에만 주는값
-            cid = buffer_read(buff,buffer_u8);
-            if (cid < 0) {
-               exit    
-            }
-            if (cid > 25) {
-               exit	
-            }
-			var level5_ration = buffer_read(buff,buffer_u8);
-            cur_room = buffer_read(buff, buffer_string);
-            team_score[0] = buffer_read(buff,buffer_u8);
-            team_score[1] = buffer_read(buff,buffer_u8);
-            var temp_time =  buffer_read(buff,buffer_u16);
-            win =  buffer_read(buff,buffer_bool);
-            if (cid == global.my_cid) {
-               global.team = buffer_read(buff,buffer_bool);
-            }
-            else {
-               var D = buffer_read(buff,buffer_bool);
-            }
-			last_time = temp_time;
-            if (win != global.team) {
-				game_end_lose = true;
-            }
-            for (var i = 1 ; i < 25 ; i++) {
-               ary_cid[i] = buffer_read(buff,buffer_bool);
-                  if (ary_cid[i] == 1) {
-                     hat_frame[i] = buffer_read(buff,buffer_u8);
-                     serve_name[i] = buffer_read(buff,buffer_string);
-                     team[i] = buffer_read(buff,buffer_u8);
-                     hat[i] = buffer_read(buff,buffer_u8);
-                     arm[i] = buffer_read(buff,buffer_u8);
-                     foot[i] = buffer_read(buff,buffer_u8);
-                     face[i] = buffer_read(buff,buffer_u16);
-                     pow[i] = buffer_read(buff,buffer_u8);
-                     skin[i] = buffer_read(buff,buffer_u8);
-                     
-               }
-            }
-            max_score = buffer_read(buff,buffer_u8);
-            var temp_mpr = buffer_read(buff,buffer_s8);
-            var t_dmg_per = buffer_read(buff,buffer_s8);
-            prt_val_set(Val.MPR, temp_mpr);
-            prt_val_set(Val.dmg_per, t_dmg_per / 100 + 1);
-			prt_val_set(Val.level5_ration, level5_ration);
-            
-            for(var i = 1; i < 100; i++) {
-               global.ban_list[i] = buffer_read(buff,buffer_bool);
-               if (global.hat_show == i) {
-                  if (global.ban_list[i]) {
-                     scr_hat_change2(spr_hat);
-                     buffer_seek(buff_chat, buffer_seek_start, 0);
-   
-                     buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
-                     buffer_write(buff_chat,buffer_u8, global.hat_show);
-                     buffer_write(buff_chat,buffer_u8, testing.level);
-   
-                     network_send_packet(0,buff_chat, 3);
-                  }
-               }
-            }
-			
-			var num = array_length(shop_button1.item);
-			for (var i = 0; i < num; i++) {
-				shop_button1.item[i].ban = false;
-			}
-			
-			for (var i = 0; i < 5; i++) {
-				var item = buffer_read(buff, buffer_u8);
-				var item_ind = buffer_read(buff, buffer_u8);
-				if (item == 0) continue;
-				var index = shop_button1.found_index(asset_get_index("spr_hat" + string(item)) , item_ind);
-				if (index != -1) {
-					shop_button1.item[index].ban = true;
-					for (var j = 0; j < MAX_ITME_BOX; j++) {
-						if (global.item[j] == index) {
-							prt_val_add(0 ,1000);
-							global.item[j] = spr_none;
-						}
-					}
-				}
-			}
-			
-			for (var i = 0; i < 5; i++) {
-				var item = buffer_read(buff, buffer_u8);
-				var item_ind = buffer_read(buff, buffer_u8);
-				var item_time = buffer_read(buff, buffer_u16);
-				if (item == 0) continue;
-				var index = shop_button1.server_array[i];
-				if (index != -1) {
-					shop_button1.item[index].sprite = asset_get_index("spr_hat" + string(item));
-					shop_button1.item[index].sprite_ind = item_ind;
-					shop_button1.item[index].max_time = item_time;
-				}
-			}
-            for (var i = 1 ; i < 25 ; i++) {
-               var obji = global.cid_array[i];
-               obji.hat_frame = hat_frame[i];
-               obji.x = xx[i];
-               obji.y = yy[i];
-               obji.name = serve_name[i];
-               obji.team = team[i];
-			   
-			   if (0 <= hat[i] and hat[i] < array_length(global.hat_array) - 1) {
-					obji.hat = global.hat_array[hat[i]];
-			   }
-			   else {
-					obji.hat = spr_face1;
-			   }
-			   
-			   if (0 <= foot[i] and foot[i] < array_length(global.foot_array) - 1) {
-					  obji.foot = global.foot_array[foot[i]];
-			   }
-			   else {
-					  obji.foot = spr_foot1;
-			   }
-             
-               obji.arm = arm[i];
-               obji.face = face[i];
-               obji.skin = skin[i];
-            }
-            var obj = global.cid_array[cid];
-            obj.YA = 0;
-            obj.live = 1;
-            if (room != room_out) {
-               room_pass(cur_room);
-            }
-            green_text_update(string(serve_name[cid]) + "님이 세상에서 태어났습니다.");
-			shop_button1.item_surf();
+		case111_func();
       break;
       case 112:
          cid = buffer_read(buff,buffer_u8);

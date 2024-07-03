@@ -5,6 +5,7 @@ if (room == room_temp) {
 	buffer_seek(buff_chat, buffer_seek_start, 0);
 					
 	buffer_write(buff_chat,buffer_u8,111)//111 is only start 
+	buffer_write(buff_chat,buffer_u8,0)//111 is only start 
 	buffer_write(buff_chat,buffer_u8,level);
 	buffer_write(buff_chat,buffer_string,global.name);
 	buffer_write(buff_chat,buffer_bool,global.team);

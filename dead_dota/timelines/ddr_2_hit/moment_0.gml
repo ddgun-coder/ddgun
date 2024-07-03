@@ -1,7 +1,3 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 4697D22B
-/// @DnDArgument : "code" "var xx;$(13_10)var yy;$(13_10)$(13_10)while(true) {$(13_10)	xx = irandom(room_width - 100);$(13_10)	yy = irandom(room_height - 100);$(13_10)	if(place_free(xx,yy)) {$(13_10)		testing.x = xx;$(13_10)		testing.y = yy;$(13_10)		break;$(13_10)	}$(13_10)}"
 var xx;
 var yy;
 

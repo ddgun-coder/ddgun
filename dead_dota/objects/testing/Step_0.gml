@@ -5177,4 +5177,6 @@ var check_lose = false;
 with(serve) {
 	check_lose = game_end_lose;
 }
-if (check_lose) effect_index = effect_gag;
+if (check_lose) {
+	effect_index = effect_gag;
+}

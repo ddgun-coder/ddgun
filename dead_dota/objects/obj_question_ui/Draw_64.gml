@@ -13,11 +13,11 @@ switch(question_result) {
 	case QR.none :
 	case noone :
 		for (var i = 0; i < 4; i++) {
+			draw_sprite(spr_babo_arrow, i, x + _gap * i + 5, y + 40);
+			draw_text_bold_color(x + _gap * i + 32, y + 40 + 20, answer_array[i], c_black, c_white);
 			if (x_array[i]) {
 				draw_sprite_ext(spr_x, 0, x + _gap * i + 5 + 16, y + 40 + 16,  1 / (question_time[i] + 0.1),  1 / (question_time[i] + 0.1), 0, c_white, image_alpha * question_time[i]);	
 			}
-			draw_sprite(spr_babo_arrow, i, x + _gap * i + 5, y + 40);
-			draw_text_bold_color(x + _gap * i + 32, y + 40 + 20, answer_array[i], c_black, c_white);
 		}
 		break;
 	case QR.correct :
