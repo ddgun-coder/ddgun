@@ -12,7 +12,7 @@ randomize();
 global.money = 40000;
 global.team = irandom(1);
 var ran = irandom(99);
-global.version = 281;
+global.version = 282;
 global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, skill_obj) constructor {
 	self.spr = spr;
 	self.damage = damage;

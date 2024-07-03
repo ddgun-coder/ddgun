@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"DMG_only_exp",
   "isCompatibility":false,
   "isDnD":false,

@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"server78_create_instace",
   "isCompatibility":false,
   "isDnD":false,

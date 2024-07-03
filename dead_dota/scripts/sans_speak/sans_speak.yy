@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"sans_speak",
   "isCompatibility":false,
   "isDnD":false,

@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"green_text_update",
   "isCompatibility":false,
   "isDnD":false,

@@ -2,7 +2,7 @@
   "$GMObject":"",
   "%Name":"hurt_zone_weak2",
   "eventList":[
-    {"$GMEvent":"","%Name":"","collisionObjectId":{"name":"testing","path":"objects/testing/testing.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"testing","path":"objects/testing/testing.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":false,
   "name":"hurt_zone_weak2",

@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"server77_equal",
   "isCompatibility":false,
   "isDnD":false,

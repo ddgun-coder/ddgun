@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"yagol_1_act",
   "isCompatibility":false,
   "isDnD":false,

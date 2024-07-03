@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"djz_2_act",
   "isCompatibility":false,
   "isDnD":false,

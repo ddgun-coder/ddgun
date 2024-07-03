@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"server51_fish",
   "isCompatibility":false,
   "isDnD":false,

@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"server202_sound",
   "isCompatibility":false,
   "isDnD":false,

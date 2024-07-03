@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"skill_cancle",
   "isCompatibility":false,
   "isDnD":false,

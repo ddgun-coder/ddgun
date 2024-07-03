@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"DMG_buff_e",
   "isCompatibility":false,
   "isDnD":false,

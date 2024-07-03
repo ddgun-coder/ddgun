@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"arm_all_normal",
   "isCompatibility":false,
   "isDnD":false,

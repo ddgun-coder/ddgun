@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"DMG_no_surn",
   "isCompatibility":false,
   "isDnD":false,

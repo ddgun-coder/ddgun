@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"DMG_debuff",
   "isCompatibility":false,
   "isDnD":false,

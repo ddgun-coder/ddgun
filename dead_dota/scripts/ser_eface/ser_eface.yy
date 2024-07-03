@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"ser_eface",
   "isCompatibility":false,
   "isDnD":false,

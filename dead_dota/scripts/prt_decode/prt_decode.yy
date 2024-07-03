@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"prt_decode",
   "isCompatibility":false,
   "isDnD":false,

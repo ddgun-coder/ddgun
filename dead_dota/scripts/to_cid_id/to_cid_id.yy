@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"to_cid_id",
   "isCompatibility":false,
   "isDnD":false,

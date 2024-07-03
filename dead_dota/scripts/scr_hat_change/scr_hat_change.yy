@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"scr_hat_change",
   "isCompatibility":false,
   "isDnD":false,

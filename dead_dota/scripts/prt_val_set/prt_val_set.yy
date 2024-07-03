@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"prt_val_set",
   "isCompatibility":false,
   "isDnD":false,
