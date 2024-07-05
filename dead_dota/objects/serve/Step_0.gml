@@ -4,7 +4,6 @@ if (room == room_main) {
 	instance_destroy()
 }
 
-show_debug_message(case111_type);
 prt_val_add(0, floor(get_money));
 get_money = 0;
 if (room == room_kazino and kazino_get == true) {

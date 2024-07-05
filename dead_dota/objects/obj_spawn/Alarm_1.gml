@@ -3,6 +3,11 @@
 var skin_type = 0;
 
 switch (cid_id.hat) {
+	case spr_hat56 :
+		if (cid_id.skin == 1) {
+			skin_type = 1;
+		}
+	break;
 	case spr_hat25 :
 		if (cid_id.skin == 1) {
 			skin_type = 1;

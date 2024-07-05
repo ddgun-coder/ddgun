@@ -42,7 +42,6 @@ function buff_set() {
 		a_cooltime = 4
 		a_cycle = 4
 	}
-
 	if (buff_index == buff_giligili2) {
 		buff_goto_speed = 20;
 		YA_changeable = true;

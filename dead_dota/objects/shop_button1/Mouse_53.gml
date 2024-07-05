@@ -1,4 +1,5 @@
-if (mouse_x > x - 40 and mouse_x < x + 80 * weight + 40 and mouse_y > y - 40 and mouse_y < y + 80 * (server_size) + 40) {
+var check = point_in_rectangle(mouse_x, mouse_y, x - 40, y - 40, x + 80 * (weight + 1)- 40, y + 80 * 3.9 - 40)
+if (check) {
 	var w = floor((mouse_x + 40 - x) / 80);
 	var h = floor((mouse_y + 40 - y + surf_y) / 80);
 	var number = (h + my_layer) * weight + w;

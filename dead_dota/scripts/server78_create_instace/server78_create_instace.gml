@@ -1,7 +1,7 @@
-function server78_create_instace(argument0, argument1, argument2) {
+function server78_create_instace(name, skill_x, skill_y) {
 	if (room == room_tuto) {
 		if (object_index == tuto_dummy_move) {
-			var ida = instance_create_depth(argument1, argument2, -100, argument0);
+			var ida = instance_create_depth(skill_x, skill_y, -100, name);
 	        ida.team = -1;
 	        ida.cid = ai_index;
 	        ida.cid_id = ai_index_to;
@@ -17,7 +17,7 @@ function server78_create_instace(argument0, argument1, argument2) {
 			return;
 		}
 		else {
-			var ida = instance_create_depth(argument1, argument2, -100, argument0);
+			var ida = instance_create_depth(skill_x, skill_y, -100, name);
 	        ida.team = global.team;
 	        ida.cid = 0;
 	        ida.cid_id = global.cid_array[cid];
@@ -34,9 +34,6 @@ function server78_create_instace(argument0, argument1, argument2) {
 		}
 	}
 	if (!global.only_see) {
-		var name = argument0;//obj스킬 변수값
-		var skill_x = argument1;// x좌표
-		var skill_y = argument2;// y좌표 
 		buffer_seek(testing.buff_chat, buffer_seek_start, 0);
 	
 		buffer_write(testing.buff_chat, buffer_u8, 78);//78은 모두에게 보내기

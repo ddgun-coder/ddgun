@@ -4,7 +4,7 @@ var type = -1;
 with (serve) {
 	type = case111_type;
 }
-if (type == -1) {
+if (type == 0) {
 	draw_self();		
 }
 else {
@@ -26,5 +26,5 @@ else {
 			str = "기존 오브젝트 가져오는중...";
 		break;
 	}
-	draw_text(x, y, str);
+	draw_text(250, 250, str);
 }

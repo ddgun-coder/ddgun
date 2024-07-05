@@ -76,6 +76,7 @@
     {"name":"obj_crown_beam","order":1,"path":"objects/obj_crown_beam/obj_crown_beam.yy",},
     {"name":"obj_crown","order":79,"path":"objects/obj_crown/obj_crown.yy",},
     {"name":"obj_cutscene","order":31,"path":"objects/obj_cutscene/obj_cutscene.yy",},
+    {"name":"obj_drink_control","order":1,"path":"objects/obj_drink_control/obj_drink_control.yy",},
     {"name":"obj_endemic","order":75,"path":"objects/obj_endemic/obj_endemic.yy",},
     {"name":"obj_enemy","order":2,"path":"objects/obj_enemy/obj_enemy.yy",},
     {"name":"obj_exit_robot","order":1,"path":"objects/obj_exit_robot/obj_exit_robot.yy",},

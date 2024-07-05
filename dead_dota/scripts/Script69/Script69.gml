@@ -1,5 +1,61 @@
 // v2.3.0에 대한 스크립트 어셋 변경됨 자세한 정보는
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 참조
+function move_bounce(x1,y1,x2,y2) {
+    if (bbox_top < y1)     { y = yprevious; vspeed *= -1; }
+    if (bbox_left < x1)    { x = xprevious; hspeed *= -1; }
+    if (bbox_right >= x2)  { x = xprevious; hspeed *= -1; }
+    if (bbox_bottom >= y2) { y = yprevious; vspeed *= -1; }
+    return 0;
+}
+
+function collision_normal_solid(x, y, obj, radius=4, spacing=1)
+{
+	var _list = ds_list_create();
+	var _num = collision_circle_list(x, y, radius, obj, true, true, _list, true);
+	
+	if (_num <= 0) {
+		ds_list_destroy(_list);
+		return -1;
+	}
+	
+	for (var i = 0; i < _num; i++) {
+		var _obj = _list[| i];
+		if (_obj.solid == false) continue;
+	
+		var temp = collision_normal(x, y, _obj);
+		show_debug_message(temp);
+		
+		if (temp == -1) continue;
+		ds_list_destroy(_list);
+		return temp;
+	}
+
+    return (-1);
+}
+
+function collision_normal(x, y, obj, radius=4, spacing=1)
+{
+    var nx = 0;
+    var ny = 0;
+    if (collision_circle(x, y, radius, obj, true, true) != noone) {
+        for (var j=spacing; j<=radius; j+=spacing) {
+            for (var i=0; i<radius; i+=spacing) {
+                if (point_distance(0, 0, i, j) <= radius) {
+                    if (collision_point(x+i, y+j, obj, true, true) == noone) { nx += i; ny += j; }
+                    if (collision_point(x+j, y-i, obj, true, true) == noone) { nx += j; ny -= i; }
+                    if (collision_point(x-i, y-j, obj, true, true) == noone) { nx -= i; ny -= j; }
+                    if (collision_point(x-j, y+i, obj, true, true) == noone) { nx -= j; ny += i; }
+                }
+            }
+        }
+        if (nx == 0 && ny == 0) {
+			return (-1);
+		}
+        return point_direction(0, 0, nx, ny);
+    }
+    return (-1);
+}
+
 function buff_exp(){
     aexp += 50
 }

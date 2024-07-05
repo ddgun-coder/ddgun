@@ -640,6 +640,7 @@
     {"id":{"name":"obj_dotaball3","path":"objects/obj_dotaball3/obj_dotaball3.yy",},},
     {"id":{"name":"obj_dotaball4","path":"objects/obj_dotaball4/obj_dotaball4.yy",},},
     {"id":{"name":"obj_dotaballt","path":"objects/obj_dotaballt/obj_dotaballt.yy",},},
+    {"id":{"name":"obj_drink_control","path":"objects/obj_drink_control/obj_drink_control.yy",},},
     {"id":{"name":"obj_end","path":"objects/obj_end/obj_end.yy",},},
     {"id":{"name":"obj_endemic","path":"objects/obj_endemic/obj_endemic.yy",},},
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},

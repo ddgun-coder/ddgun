@@ -1,5 +1,4 @@
-if (windows = true)
-{
+if (windows) {
 	draw_set_font(font1);
 	draw_set_color(c_black);
 	draw_set_halign(fa_left);

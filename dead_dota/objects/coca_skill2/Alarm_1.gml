@@ -1,3 +1,3 @@
 YA = cid_id.YA
-direction = YA - 90
-speed = 15
+dir = YA - 90
+spd = 15
