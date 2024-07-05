@@ -110,13 +110,6 @@ if (speedd < 0) {
 	speedd = 0;
 }
 
-if (mouse_check_button(mb_left)) {
-	var _id = instance_create_depth(mouse_x, mouse_y, depth, coca_skill2 );
-	_id.cid = global.my_cid;
-	_id.team = !global.team;
-	_id.cid_id = global.cid_array[global.my_cid];
-}
-
 if(global.hat = spr_hat74) {
    if (stats_speed > 2 or extra_speed > 2 or buff_speed > 2) {
       if (speedd > 16 or go_to_speed > 10 ) {

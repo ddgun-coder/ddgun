@@ -12,6 +12,8 @@ function collision_normal_solid(x, y, obj, radius=4, spacing=1)
 {
 	var _list = ds_list_create();
 	var _num = collision_circle_list(x, y, radius, obj, true, true, _list, true);
+	var temp = -1;
+	var _obj;
 	
 	if (_num <= 0) {
 		ds_list_destroy(_list);
@@ -19,41 +21,34 @@ function collision_normal_solid(x, y, obj, radius=4, spacing=1)
 	}
 	
 	for (var i = 0; i < _num; i++) {
-		var _obj = _list[| i];
+		_obj = _list[| i];
 		if (_obj.solid == false) continue;
-	
-		var temp = collision_normal(x, y, _obj);
-		show_debug_message(temp);
 		
-		if (temp == -1) continue;
-		ds_list_destroy(_list);
-		return temp;
-	}
+		temp = collision_normal(x, y, _obj, radius, spacing);
 
-    return (-1);
+		if (temp != -1) break;
+	}
+	
+	ds_list_destroy(_list);
+    return temp;
 }
 
 function collision_normal(x, y, obj, radius=4, spacing=1)
 {
     var nx = 0;
     var ny = 0;
-    if (collision_circle(x, y, radius, obj, true, true) != noone) {
-        for (var j=spacing; j<=radius; j+=spacing) {
-            for (var i=0; i<radius; i+=spacing) {
-                if (point_distance(0, 0, i, j) <= radius) {
-                    if (collision_point(x+i, y+j, obj, true, true) == noone) { nx += i; ny += j; }
-                    if (collision_point(x+j, y-i, obj, true, true) == noone) { nx += j; ny -= i; }
-                    if (collision_point(x-i, y-j, obj, true, true) == noone) { nx -= i; ny -= j; }
-                    if (collision_point(x-j, y+i, obj, true, true) == noone) { nx -= j; ny += i; }
-                }
+    for (var j=spacing; j<=radius; j+=spacing) {
+        for (var i=0; i<radius; i+=spacing) {
+            if (point_distance(0, 0, i, j) <= radius) {
+                if (collision_point(x+i, y+j, obj, true, true) == noone) { nx += i; ny += j; }
+                if (collision_point(x+j, y-i, obj, true, true) == noone) { nx += j; ny -= i; }
+                if (collision_point(x-i, y-j, obj, true, true) == noone) { nx -= i; ny -= j; }
+                if (collision_point(x-j, y+i, obj, true, true) == noone) { nx -= j; ny += i; }
             }
         }
-        if (nx == 0 && ny == 0) {
-			return (-1);
-		}
-        return point_direction(0, 0, nx, ny);
     }
-    return (-1);
+    if (nx == 0 && ny == 0) return (-1);
+    return point_direction(0, 0, nx, ny);
 }
 
 function buff_exp(){
