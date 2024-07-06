@@ -22,6 +22,7 @@ global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, 
 	self.hat_index = hat_index;
 	self.hat_num = hat_num;
 	self.skill_obj = skill_obj;
+	num = 1;
 }
 global.hurt_list = [];
 if (ran < 10) {									 
@@ -4103,7 +4104,7 @@ enum Val2
     mon=0
 }
 prt_add(global.money);
-global.num_font = font_add_sprite_ext(spr_num, "0123456789.-+|", false, 0);
+global.num_font = font_add_sprite_ext(spr_num, "0123456789.-+|X", false, 0);
 scr_hat_change2(spr_hat1);
 
 var path = "setting.txt";

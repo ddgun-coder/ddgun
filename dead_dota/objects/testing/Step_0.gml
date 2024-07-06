@@ -19,6 +19,13 @@ endemic_time = max(endemic_time - 1, 0);
 
 card_name = "none";
 
+if (mouse_check_button(mb_left)) {
+	var idd = instance_create_depth(mouse_x, mouse_y, depth, choose(coca_skill2, yellow_skill1));	
+	idd.cid = global.my_cid;
+	idd.cid_id = global.my_cid_id;
+	idd.team = !global.team;
+}
+
 if (instance_exists(obj_card_manager)) {
 	if (obj_card_manager.timer > 0) {
 		moveable = false;

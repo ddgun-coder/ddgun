@@ -1,7 +1,22 @@
 function hurt_array_set(D) {
 	var _obj = global.cid_array[other.cid];
+	if (array_length(global.hurt_list) > 0) {
+		var pre_const = global.hurt_list[array_length(global.hurt_list) - 1];
+		if (pre_const.name == _obj.name and pre_const.skill_obj == other.object_index) {
+			pre_const.num++;	
+		}
+		else {
+			push_hurt_list(D, _obj)
+		}
+	}
+	else {
+		push_hurt_list(D, _obj)
+	}
+}
+
+function push_hurt_list(D, _obj) {
 	array_push(global.hurt_list, new global.hurt_const(other.sprite_index, D, _obj.name, _obj.face, _obj.hat, 
-	_obj.hat_frame + _obj.skin * 4, other.object_index));
+		_obj.hat_frame + _obj.skin * 4, other.object_index));		
 }
 
 function DMG(D, name, sturn_time, _fun = undefined, _no_sturn = false) {
