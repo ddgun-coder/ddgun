@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_skill_struct",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_skill_struct",
+  "parent":{
+    "name":"dead_dota",
+    "path":"dead_dota.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

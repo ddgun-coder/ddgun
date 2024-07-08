@@ -30,7 +30,6 @@ function surt_set() {
 			draw_y = i * draw_dy;
 			draw_facey = draw_y + face_yoffset + 15;
 			const = global.hurt_list[i];
-			show_debug_message(const);
 			draw_sprite(spr_hurt_list_UI, 0, 0, draw_y);
 			
 			draw_sprite(const.face_index, 0, draw_dx + face_xoffset, draw_facey);

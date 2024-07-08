@@ -31,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_skill_explain",
-    "path":"sprites/spr_skill_explain/spr_skill_explain.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
