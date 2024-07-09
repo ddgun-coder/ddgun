@@ -26,6 +26,16 @@ attack_type = 0;
 
 function set_skill_variables() {
 	var _ind = array_get_index(global.hat_array, global.hat);
+	var out = true;
+	if (array_length(global.skill_exp) > _ind) {
+		if (is_array(global.skill_exp[_ind])) {
+			if (array_length(global.skill_exp[_ind]) > show_level) {
+				out = false;
+			}
+		}
+	}	
+	if (out) return;
+	
 	var _const = global.skill_exp[_ind][show_level];
 	ui_type = _const.ui_type;
 	attack_type = _const.attack_type;
