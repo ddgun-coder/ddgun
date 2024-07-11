@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_flash",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.899521,
+  "name":"snd_flash",
+  "parent":{
+    "name":"gili_skills",
+    "path":"folders/Objects/area/gili_skills.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_flash.wav",
+  "type":0,
+  "volume":1.0,
+}

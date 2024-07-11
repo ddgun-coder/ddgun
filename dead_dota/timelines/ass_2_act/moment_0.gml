@@ -1,4 +1,5 @@
 arm_all_normal()
+server202_sound(snd_ass_hide);
 server78_create_instace(obj_ass_effct1, x, y);
 a_possible = false;
 invisible = true;

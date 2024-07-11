@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_yo3",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":30.77136,
+  "name":"snd_yo3",
+  "parent":{
+    "name":"yo_skills",
+    "path":"folders/Objects/area/yo_skills.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_yo3.wav",
+  "type":0,
+  "volume":1.0,
+}

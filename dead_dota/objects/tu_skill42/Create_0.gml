@@ -10,3 +10,4 @@ cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
 
 alarm[1] = 1
+audio_play_sound(snd_tu4, 0, false);

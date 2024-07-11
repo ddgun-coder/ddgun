@@ -5145,6 +5145,7 @@ if(a_cooltime <= 0 and sturn <= 0) {
 			    if (gi >= 100) {
 				    prt_val_add(Val.gi, -100);
 					babo_change = true
+					server202_sound(snd_babo3);
 					server77_equal(serve_val.babo_change, babo_change, buffer_bool);
 					a_cooltime = 40
 			    }

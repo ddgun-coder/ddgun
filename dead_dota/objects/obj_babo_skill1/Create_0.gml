@@ -22,3 +22,4 @@ dmg = 15
 YA = 0;
 
 move_first = false;
+audio_play_sound(snd_babo1A, 0, false);

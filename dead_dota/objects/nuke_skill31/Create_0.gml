@@ -1,5 +1,2 @@
-/// @DnDAction : YoYo Games.Common.Execute_Code
-/// @DnDVersion : 1
-/// @DnDHash : 7B89016E
-/// @DnDArgument : "code" "skill_create(400);"
 skill_create(400);
+audio_play_sound(snd_nuke3, 0, false);

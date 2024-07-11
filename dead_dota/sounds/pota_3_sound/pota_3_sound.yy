@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.533,
+  "duration":0.528,
   "name":"pota_3_sound",
   "parent":{
     "name":"effect_sound",

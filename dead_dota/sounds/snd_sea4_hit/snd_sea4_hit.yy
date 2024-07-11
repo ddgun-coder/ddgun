@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_sea4_hit",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.098912,
+  "name":"snd_sea4_hit",
+  "parent":{
+    "name":"sea_skill",
+    "path":"folders/Objects/area/sea_skill.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_sea4_hit.wav",
+  "type":0,
+  "volume":1.0,
+}

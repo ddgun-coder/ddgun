@@ -14,3 +14,4 @@ y = testing.y + lengthdir_y(1 * testing.big_val, testing.YA - 90)
 
 cid = 1;
 cid_id  = asset_get_index("testing" + string(cid));
+audio_play_sound(snd_nk3, 0, false);

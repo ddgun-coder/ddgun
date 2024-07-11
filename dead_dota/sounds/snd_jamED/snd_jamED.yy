@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_jamED",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.236327,
+  "name":"snd_jamED",
+  "parent":{
+    "name":"jam_skill",
+    "path":"folders/Objects/area/jam_skill.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_jamED.wav",
+  "type":0,
+  "volume":1.0,
+}

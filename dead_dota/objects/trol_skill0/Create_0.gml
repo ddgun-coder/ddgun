@@ -9,3 +9,4 @@ speedd = 0
 alarm[1] = 1;
 friction = 0.1;
 sturn = 0;
+audio_play_sound(snd_trol0, 0, false);

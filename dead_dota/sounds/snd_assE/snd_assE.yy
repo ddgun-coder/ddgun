@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_assE",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.09288,
+  "name":"snd_assE",
+  "parent":{
+    "name":"ass_skills",
+    "path":"folders/Objects/area/ass_skills.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_assE.wav",
+  "type":0,
+  "volume":1.0,
+}

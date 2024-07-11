@@ -14,6 +14,7 @@ if (delayb != -1) {
 		if (i != cid) {
 			if (place_meeting(x, y, global.cid_array[i])) {
 				delayb = -1;
+				audio_play_sound(snd_sea4_hit, 0, false);
 				alarm[0] = 20 - alarm[0];
 			}
 		}

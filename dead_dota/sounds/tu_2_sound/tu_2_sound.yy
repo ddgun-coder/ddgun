@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.102125,
+  "duration":1.097125,
   "name":"tu_2_sound",
   "parent":{
     "name":"effect_sound",

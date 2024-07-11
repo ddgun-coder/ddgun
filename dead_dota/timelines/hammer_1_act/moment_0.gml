@@ -12,3 +12,4 @@ keyboard_checkD = true;
 left_arm_get_bigger = true;
 left_arm_get_bigger_delta = 0.01;
 /*instance_create_depth(x, y + 50, depth, hammer_skill1_gauge);*/
+server202_sound(snd_hammer1);

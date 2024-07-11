@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":2.20178,
+  "duration":2.19678,
   "name":"bam_3_sound",
   "parent":{
     "name":"effect_sound",

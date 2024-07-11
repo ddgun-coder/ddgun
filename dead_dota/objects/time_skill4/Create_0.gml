@@ -2,6 +2,7 @@ YA = 0;
 image_blend = c_gray;
 skill_create(400);
 depth = -20;
+audio_play_sound(snd_time4_start, 0, false);
 
 m_hp = 100;
 

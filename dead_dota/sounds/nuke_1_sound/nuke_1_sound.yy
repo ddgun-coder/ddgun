@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.363344,
+  "duration":1.358344,
   "name":"nuke_1_sound",
   "parent":{
     "name":"effect_sound",

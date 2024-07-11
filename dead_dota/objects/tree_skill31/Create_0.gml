@@ -9,3 +9,4 @@ moveable = true;
 a_cooltime = 0;
 my_se = 0
 temp_layer= layer_create(depth - 1);
+audio_play_sound(snd_tree_spawn, 0, false);

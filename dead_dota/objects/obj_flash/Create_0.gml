@@ -7,6 +7,7 @@ copied = false;
 copied_YA = 0;
 copied_big_val = 1;
 angle = 0;
+audio_play_sound(snd_flash, 0, false);
 function set_surf_to_cid_id() {
 	if (!surface_exists(copied_surf)) {
 		copied_surf = surface_create(2048, 2048);
