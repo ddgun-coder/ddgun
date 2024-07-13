@@ -214,20 +214,18 @@ function case111_func() {
 		case 1:
 		    for (var i = 1 ; i < 25 ; i++) {
 		        ary_cid[i] = buffer_read(buff,buffer_bool);
-		            if (ary_cid[i] == 1) {
-		                hat_frame[i] = buffer_read(buff,buffer_u8);
-		                serve_name[i] = buffer_read(buff,buffer_string);
-		                team[i] = buffer_read(buff,buffer_u8);
-		                hat[i] = buffer_read(buff,buffer_u8);
-		                arm[i] = buffer_read(buff,buffer_u8);
-		                foot[i] = buffer_read(buff,buffer_u8);
-		                face[i] = buffer_read(buff,buffer_u16);
-		                pow[i] = buffer_read(buff,buffer_u8);
-		                skin[i] = buffer_read(buff,buffer_u8);
-                     
+		        if (ary_cid[i] == 1) {
+		            hat_frame[i] = buffer_read(buff,buffer_u8);
+		            serve_name[i] = buffer_read(buff,buffer_string);
+		            team[i] = buffer_read(buff,buffer_u8);
+		            hat[i] = buffer_read(buff,buffer_u8);
+		            arm[i] = buffer_read(buff,buffer_u8);
+		            foot[i] = buffer_read(buff,buffer_u8);
+		            face[i] = buffer_read(buff,buffer_u16);
+		            pow[i] = buffer_read(buff,buffer_u8);
+		            skin[i] = buffer_read(buff,buffer_u8);
 		        }
 		    }
-	
 		    max_score = buffer_read(buff,buffer_u8);
 		    var temp_mpr = buffer_read(buff,buffer_s8);
 		    var t_dmg_per = buffer_read(buff,buffer_s8);
@@ -308,8 +306,13 @@ function case111_func() {
 				else {
 						obji.foot = spr_foot1;
 				}
-             
-		        obji.arm = arm[i];
+				
+				if (0 <= arm[i] and arm[i] < array_length(global.arm_array) - 1) {
+						obji.arm = global.arm_array[arm[i]];
+				}
+				else {
+						obji.arm = spr_foot1;
+				}
 		        obji.face = face[i];
 		        obji.skin = skin[i];
 		    }

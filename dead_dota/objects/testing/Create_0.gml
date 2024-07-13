@@ -504,7 +504,7 @@ color_cycle = 0;
 bullet = 0 // 산타 탄창
 skill_con = 0 // 연속 시전 스킬 횟수
 skill_con_time = 0 //연속 시전 스킬 지속
-global.show_me = false;
+global.show_me = true;
 
 function set_val_dif(val1, _serve_val, _buff_type) {
 	var val2 = val1 + "1";

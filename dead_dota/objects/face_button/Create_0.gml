@@ -1,13 +1,7 @@
 image_speed = 0;
 depth = -1200
 var index;
-face_array = [];
-for (var i = 1; i < 60; i++) {
-	index = asset_get_index("spr_face" + string(i))
-	if (index != -1) {	
-		array_push(face_array, index);
-	}
-}
+face_array = global.face_array;
 
 size = array_length(face_array);
 weight = 5;

@@ -13,7 +13,7 @@ global.money = 40000;
 global.team = irandom(1);
 var ran = irandom(99);
 surface_depth_disable(true);
-global.version = 283;
+global.version = 284;
 global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, skill_obj) constructor {
 	self.spr = spr;
 	self.damage = damage;
@@ -27,6 +27,13 @@ global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, 
 global.hurt_list = [];
 if (ran < 10) {									 
 	ran = "0" + string(ran); 
+}
+global.face_array = [];
+for (var i = 1; i < 60; i++) {
+	index = asset_get_index("spr_face" + string(i))
+	if (index != -1) {	
+		array_push(global.face_array, index);
+	}
 }
 audio_group_load(audio_bgm);
 audio_group_set_gain(audio_bgm, 1, 100);
@@ -53,6 +60,11 @@ global.Qskill = {};
 global.Wskill = {};
 global.Eskill = {};
 global.Rskill = {};
+global.arm_index = 0;
+global.arm_array = [spr_arm1, spr_arm10, spr_arm5, spr_arm4, spr_arm11, spr_arm9, spr_arm12, spr_arm16, spr_arm17
+, spr_arm13, spr_arm6, spr_arm18, spr_arm2, spr_arm19, spr_arm20, spr_arm21, spr_arm14, spr_arm22, spr_arm15
+, spr_arm23, spr_arm24, spr_arm25, spr_arm26, spr_arm7, spr_arm8, spr_arm27, spr_arm28, spr_arm29, spr_arm30
+, spr_arm31];
 #region //1차 스킬
 global.Dskill[$ "spr_hat1"] = {
 	timeline : function() { return yellow_1_act },

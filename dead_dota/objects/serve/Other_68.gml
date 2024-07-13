@@ -6,6 +6,7 @@ if (tp == network_type_non_blocking_connect) {
 	connecting = false;
 	if (ds_map_find_value(async_load, "succeeded")) {
 		global.online = 1;
+		network_set_config(network_config_use_non_blocking_socket,false);
 		room_goto(room_temp);
 	}	
 	else {
@@ -966,7 +967,7 @@ if ( tp = network_type_data) {
             if (cid > 25) {
                exit   
             }
-            D = buffer_read(buff,buffer_u8);
+            var D = buffer_read(buff,buffer_u8);
             var sturn = buffer_read(buff,buffer_u16);
          
             var obj = global.cid_array[cid];

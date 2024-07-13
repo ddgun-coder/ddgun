@@ -5,9 +5,9 @@ if (hat_button_main.windows == 2)
 			var w = floor((mouse_x + 32 - x) / 78);
 			var h = floor((mouse_y + 32 - y) / 78);
 			var number = w + h * 6
-			//show_debug_message(number)
 			if(number < max_num) {
 			hat_button_main.windows = 0;
+			global.arm_index = number;
 			global.arm = arm_array[number];
 			only_main.do_effect = true;
 			}

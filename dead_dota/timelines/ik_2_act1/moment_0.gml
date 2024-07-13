@@ -6,5 +6,7 @@ temp_YA = YA;
 effect_index = effect_lamp
 server202_sound(ik_2_sound)
 for(var i = 0; i < MAX_ITME_BOX; i++) {
-	global.item_time[i] += global.item_time_max[i] / 8
+	if (global.item[i] != spr_none) {
+        global.item_time[i] += shop_button1.item[global.item[i]].max_time * 0.12;
+    }
 }

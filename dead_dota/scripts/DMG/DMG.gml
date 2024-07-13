@@ -14,6 +14,38 @@ function hurt_array_set(D) {
 	}
 }
 
+function set_creper_arm_hat() {
+	server78_create_instace(mine_skill3, x, y);
+	sturn = 240;
+	creper = false;
+	creper_die = 240;
+	footL_x = surf_xoffset + irandom_range(-50, 50);
+	footR_x = surf_xoffset + irandom_range(-50, 50);
+	footL_y = surf_yoffset + irandom_range(-50, 50);
+	footR_y = surf_yoffset + irandom_range(-50, 50);
+	armL_x = surf_xoffset + irandom_range(-50, 50);
+	armR_x = surf_xoffset + irandom_range(-50, 50);
+	armL_y = surf_yoffset + irandom_range(-50, 50);
+	armR_y = surf_yoffset + irandom_range(-50, 50);
+	right_arm_YA = irandom(360);
+	left_arm_YA = irandom(360);
+	right_foot_YA = irandom(360);
+	left_foot_YA = irandom(360);
+	hat_xscale = 0;
+	hat_yscale = 0;
+	server77_equal(serve_val.hat_yscale, hat_yscale, buffer_s8);
+	server77_equal(serve_val.hat_xscale, hat_xscale, buffer_s8);
+	level = 0;
+	server77_equal(serve_val.hat_frame, level, buffer_u8);
+	buffer_seek(buff_chat, buffer_seek_start, 0);
+	
+	buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
+	buffer_write(buff_chat,buffer_u8, global.hat_show);
+	buffer_write(buff_chat,buffer_u8, level);
+	
+	network_send_packet(0,buff_chat,3);
+}
+
 function push_hurt_list(D, _obj) {
 	array_push(global.hurt_list, new global.hurt_const(other.sprite_index, D, _obj.name, _obj.face, _obj.hat, 
 		_obj.hat_frame + _obj.skin * 4, other.object_index));		
@@ -154,35 +186,7 @@ function DMG(D, name, sturn_time, _fun = undefined, _no_sturn = false) {
 			}
 		}
 		else {
-			server78_create_instace(mine_skill3, x, y);
-			sturn = 240;
-			creper = false;
-			creper_die = 240;
-			footL_x = x + irandom_range(-50, 50);
-			footR_x = x + irandom_range(-50, 50);
-			footL_y = y + irandom_range(-50, 50);
-			footR_y = y + irandom_range(-50, 50);
-			armL_x = x + irandom_range(-50, 50);
-			armR_x = x + irandom_range(-50, 50);
-			armL_y = y + irandom_range(-50, 50);
-			armR_y = y + irandom_range(-50, 50);
-			right_arm_YA = irandom(360);
-			left_arm_YA = irandom(360);
-			right_foot_YA = irandom(360);
-			left_foot_YA = irandom(360);
-			hat_xscale = 0;
-			hat_yscale = 0;
-			server77_equal(serve_val.hat_yscale, hat_yscale, buffer_s8);
-			server77_equal(serve_val.hat_xscale, hat_xscale, buffer_s8);
-			level = 0;
-			server77_equal(serve_val.hat_frame, level, buffer_u8);
-			buffer_seek(buff_chat, buffer_seek_start, 0);
-	
-			buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
-			buffer_write(buff_chat,buffer_u8, global.hat_show);
-			buffer_write(buff_chat,buffer_u8, level);
-	
-			network_send_packet(0,buff_chat,3);
+			set_creper_arm_hat();
 		}
 	}
 }
@@ -649,7 +653,7 @@ function DMG_sang(argument0, argument1, argument2) {
 									D *= 2;
 								}
 								hp -= D;
-								hurt_array_set();
+								hurt_array_set(D);
 								if (global.hat == spr_level5_hat8) {
 									prt_val_add(Val.mp, D);	
 								}
@@ -718,35 +722,7 @@ function DMG_sang(argument0, argument1, argument2) {
 			}
 		}
 		else {
-			server78_create_instace(mine_skill3, x, y);
-			sturn = 240;
-			creper = false;
-			creper_die = 240;
-			footL_x = x + irandom_range(-50, 50);
-			footR_x = x + irandom_range(-50, 50);
-			footL_y = y + irandom_range(-50, 50);
-			footR_y = y + irandom_range(-50, 50);
-			armL_x = x + irandom_range(-50, 50);
-			armR_x = x + irandom_range(-50, 50);
-			armL_y = y + irandom_range(-50, 50);
-			armR_y = y + irandom_range(-50, 50);
-			right_arm_YA = irandom(360);
-			left_arm_YA = irandom(360);
-			right_foot_YA = irandom(360);
-			left_foot_YA = irandom(360);
-			hat_xscale = 0;
-			hat_yscale = 0;
-			server77_equal(serve_val.hat_yscale, hat_yscale, buffer_s8);
-			server77_equal(serve_val.hat_xscale, hat_xscale, buffer_s8);
-			level = 0;
-			server77_equal(serve_val.hat_frame, level, buffer_u8);
-			buffer_seek(buff_chat, buffer_seek_start, 0);
-	
-			buffer_write(buff_chat,buffer_u8,95);//95는 고자동기화
-			buffer_write(buff_chat,buffer_u8, global.hat_show);
-			buffer_write(buff_chat,buffer_u8, level);
-	
-			network_send_packet(0,buff_chat,3);
+			set_creper_arm_hat();
 		}
 	}
 }

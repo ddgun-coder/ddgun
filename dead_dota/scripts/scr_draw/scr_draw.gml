@@ -15,6 +15,7 @@ function scr_draw() {
 		
 		if (!surface_exists(surf)) {
 			surf = surface_create(2048, 2048);
+			draw_clear_ext(c_white, 0);
 		}
 		surface_set_target(surf);
 		draw_clear_alpha(c_white, 0);
