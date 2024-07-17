@@ -21,8 +21,10 @@ function sound_draw_sounddot() {
 			exit;	
 		}	
 	}
-	draw_self();
-	draw_sprite(spr_sounddot, 0, x + (sound_x) * 64, y + 32);
+	var draw_x = global.window_width - (1024 - xstart);
+	var draw_y = global.window_height - (768 - ystart) + view_get_yport(0);
+	draw_sprite(sprite_index, image_index, draw_x, draw_y)
+	draw_sprite(spr_sounddot, 0, draw_x + (sound_x) * 64, draw_y + 32);
 }
 
 function BMG_play() {

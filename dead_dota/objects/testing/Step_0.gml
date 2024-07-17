@@ -21,6 +21,12 @@ var _key_d = keyboard_check(global.keyd);
 var _key_q = keyboard_check(global.keyq);
 var _key_w = keyboard_check(global.keyw);
 var _key_e = keyboard_check(global.keye);
+var _key_4 = keyboard_check(global.key4);
+var _key_5 = keyboard_check(global.key5);
+var _key_6 = keyboard_check(global.key6);
+var _key_7 = keyboard_check(global.key7);
+var _key_f = keyboard_check(global.keyf);
+var _key_g = keyboard_check(global.keyg);
 
 if (chat_point) {
 	_key_a = false;
@@ -28,6 +34,12 @@ if (chat_point) {
 	_key_q = false;
 	_key_w = false;
 	_key_e = false;
+	_key_4 = false;
+	_key_5 = false;
+	_key_6 = false;
+	_key_7 = false;
+	_key_f = false;
+	_key_g = false;
 }
 
 card_name = "none";
@@ -807,22 +819,22 @@ if(live == 1) {
 			}
 		}
 		if (a_possible) {
-			if (keyboard_check(global.key4)) {
+			if (_key_4) {
 				if (a_cooltime <= 0) {
 					normal_play(it_hing);
 				}
 			}
-			if (keyboard_check(global.key5)) {
+			if (_key_5) {
 				if (a_cooltime <= 0) {
 					normal_play(da_bong);
 				}
 			}
-			if (keyboard_check(global.key6)) {
+			if (_key_6) {
 				if (a_cooltime <= 0) {
 					normal_play(ap);
 				}
 			}
-			if (keyboard_check(global.key7)) {
+			if (_key_7) {
 				if (a_cooltime <= 0) {
 					normal_play(ap1);
 				}
@@ -1173,7 +1185,7 @@ if(live == 1) {
 						skill_start(global.hat, 4);
 					}
 				}//5차스킬	
-				if (keyboard_check(global.keyg)) {
+				if (_key_g) {
 						switch(global.stats) {
 							case spr_stats4 :
 								if (b_cooltime <= 0) {
@@ -1208,7 +1220,7 @@ if(live == 1) {
 						break;//검삭신왕
 				 	    }
 					}
-				if (keyboard_check(global.keyf)) {
+				if (_key_f) {
 					if (room == room_racing) {
 						if (a_cooltime <= 0 and a_possible = true) {
 							if (mana >= 55) {
@@ -1655,13 +1667,13 @@ if(live == 1) {
 					skill_say = "점멸 쿨타임: " + string(flash_time / 40) + "초";
 				}
 				
-				if (stemina <= 100) {
+				if (stemina >= 66) {
 					flash();
-					stemina -= 100;
+					stemina -= 66;
 				}
 				else {
 					skill_say_time = 30;
-					skill_say = "stemina: " + string(stemina) + " / 100(100)";
+					skill_say = "stemina: " + string(stemina) + " / 66(66)";
 				}
 			}
 			else {

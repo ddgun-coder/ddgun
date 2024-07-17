@@ -6,7 +6,6 @@ if (tp == network_type_non_blocking_connect) {
 	connecting = false;
 	if (ds_map_find_value(async_load, "succeeded")) {
 		global.online = 1;
-		network_set_config(network_config_use_non_blocking_socket,false);
 		room_goto(room_temp);
 	}	
 	else {
@@ -985,6 +984,7 @@ if ( tp = network_type_data) {
          }
       break;
       case 101:
+		if (!instance_exists(testing)) break;
          if (testing.a_level < 256) {
             if (buff_size > 4) {
                var D = buffer_read(buff,buffer_f32);//경험치 얻기

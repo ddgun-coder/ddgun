@@ -1,12 +1,14 @@
-var camera_x = camera_get_view_x(view_camera[0]);
-var camera_y = camera_get_view_y(view_camera[0]);
+/// @description Insert description here
+// You can write your code in this editor
+var camera_x = 0;
+var camera_y = view_get_yport(0);
+var show_this = "";
 left_n = 0;
 right_n = 0;
 var left_list = ds_list_create();
 var right_list = ds_list_create();
-var show_this = "";
 
-for (j = 1; j <= 24; j++) {
+for (var j = 1; j <= 24; j++) {
     if (team[j] == 0) {
         if (instance_exists(score_0_team)) {
             if (serve_name[j] != "") {
@@ -110,4 +112,3 @@ if (last_time > 0) {
         var wherel = "좌파";
 	}
 }
-   

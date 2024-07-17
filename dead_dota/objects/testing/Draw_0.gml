@@ -341,10 +341,6 @@ if (mine_say_time > 0) {
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_set_color(c_blue)
-draw_text_bold(cur_xview + 25 , cur_yview + 740 ,"GOLD : " + string(global.money))
-draw_set_color(c_white);
-draw_text(cur_xview + 25 , cur_yview + 740 ,"GOLD : " + string(global.money));//돈 부분
 
 if (is_babo_angle_show) {
 	draw_set_color(c_red);

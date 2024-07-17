@@ -1,15 +1,18 @@
 function item_draw(argument0) {
 	var where = argument0;
+	var xx, yy;
 	if (room == room_main) {
-		x = xstart;
-		y = ystart;
+		xx = xstart;
+		yy = ystart;
 	}
 	else {
-		x = camera_get_view_x(view_camera[0]) + global.window_width / 2 - (1024 / 2 - xstart);
-		y = camera_get_view_y(view_camera[0]) + global.window_height - (768 - ystart);
+		xx = global.window_width / 2 - (1024 / 2 - xstart);
+		yy = global.window_height - (768 - ystart);
 	}
-	var xx = x;	
-	var yy = y;
+	x = xx + camera_get_view_x(view_camera[0]);
+	y = yy + camera_get_view_y(view_camera[0]);
+	
+	yy += view_get_yport(0)
 	var ind = global.item[where];
 
 	draw_sprite(spr_itemz, where, xx, yy)
@@ -29,4 +32,5 @@ function item_draw(argument0) {
 	if (time_max - global.item_time[where] < 200 and time_max - global.item_time[where] > 0) {
 		draw_sprite_ext(spr_item_layer, global.item[where], xx, yy, 1, 1, 0, c_red, 0.4)
 	}
+	draw_sprite(spr_item_num,where,xx,yy);
 }

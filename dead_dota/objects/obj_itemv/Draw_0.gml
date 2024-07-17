@@ -1,2 +1,2 @@
-item_draw(3);
-draw_sprite(spr_item_num,3,x,y)
+/// @description Insert description here
+// You can write your code in this editor

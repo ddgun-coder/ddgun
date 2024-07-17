@@ -3,7 +3,6 @@ y = cid_id.y + lengthdir_y(cid_id.charge * 15, cid_id.YA - 90)
 image_xscale = cid_id.big_val;
 image_yscale = cid_id.big_val;
 image_index = cid_id.hat_frame + cid_id.skin;
-solid = cid_id.solid;
 if (cid_id.visible = false) {
 	visible = false;
 }
@@ -26,3 +25,9 @@ if (cid_id.hat != spr_hat47 and cid_id != global.my_cid_id) {
     }
 }
 time++;
+if (visible) {
+	solid = cid_id.solid;		
+}
+else {
+	solid = false;
+}

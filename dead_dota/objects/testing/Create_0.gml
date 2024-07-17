@@ -3,7 +3,7 @@ endemic_time = 0;
 buff_goto_speed = 0;
 function flash() {
 	hp -= 5;
-	flash_time = 40;
+	flash_time = 200;
 	arm_type = "attack";
 	server78_create_instace(obj_flash, x, y);
 	for(var i = 50; i > 0; i--) {

@@ -35,3 +35,5 @@ if (ui_type == 1) {
 	draw_set_font(font1)
 	draw_text(_drawx + 180, _drawy + 480, Qskill);
 }
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);

@@ -42,13 +42,11 @@ function item_button(argument0) {
 								global.item_time[point] = 0;
 								normal_play(cry_1_act);
 							break;
-							/*
 							case 49:
 								arm_type = "attack";
 								global.item_time[point] = 0;
 								normal_play(gili_3_act);
 							break;
-							*/
 						}
 					}
 				}
