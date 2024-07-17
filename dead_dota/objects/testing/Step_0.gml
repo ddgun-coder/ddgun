@@ -16,11 +16,24 @@ global.money = prt_val_get(0);
 item_time--
 flash_time = max(flash_time - 1, 0);
 endemic_time = max(endemic_time - 1, 0);
+var _key_a = keyboard_check(global.keya);
+var _key_d = keyboard_check(global.keyd);
+var _key_q = keyboard_check(global.keyq);
+var _key_w = keyboard_check(global.keyw);
+var _key_e = keyboard_check(global.keye);
+
+if (chat_point) {
+	_key_a = false;
+	_key_d = false;
+	_key_q = false;
+	_key_w = false;
+	_key_e = false;
+}
 
 card_name = "none";
 /*
 if (mouse_check_button(mb_left)) {
-	var idd = instance_create_depth(mouse_x, mouse_y, depth, choose(coca_skill2, yellow_skill1));	
+	var idd = instance_create_depth(mouse_x, mouse_y, depth, choose(kesin_skill1, fheal_skill3));	
 	idd.cid = global.my_cid;
 	idd.cid_id = global.my_cid_id;
 	idd.team = !global.team;
@@ -224,7 +237,7 @@ if (global.stats == spr_stats3 and level >= 0) {
 
 switch(global.hat) {
    case spr_hat24:
-   if (keyboard_check(global.keyw)) {
+   if (_key_w) {
       if (level > 1) {
          if (a_cooltime <= 0) {
             if (gi >= 40) {
@@ -718,578 +731,651 @@ if(live == 1) {
 		}
 	}
 	if (sturn <= 0) {
-		if (chat_point = 0) {
-			if (keyboard_checkD) {
-				if(arm_type_more != "hammer_end") {	
-					if (a_cooltime <= 0) {
-						if (keyboard_check_released(global.keyd)) {
-							keyboard_checkD = false;
-							switch (timeline_index) {
-								case hammer_1_act :
-									if (timeline_position > 30) {
-										normal_play(hammer_1_act1);
-									}
-									else {
-										arm_spin_speed = 4;
-										left_goto_YA = 0 + 45;
-										a_cooltime = 10;
-										left_arm_get_bigger = false;
-										normal_play(hammer_1_act0);
-									}
-									instance_destroy(hammer_skill1_gauge);
-								break;
-							}
+		if (keyboard_checkD) {
+			if(arm_type_more != "hammer_end") {	
+				if (a_cooltime <= 0) {
+					if (keyboard_check_released(global.keyd)) {
+						keyboard_checkD = false;
+						switch (timeline_index) {
+							case hammer_1_act :
+								if (timeline_position > 30) {
+									normal_play(hammer_1_act1);
+								}
+								else {
+									arm_spin_speed = 4;
+									left_goto_YA = 0 + 45;
+									a_cooltime = 10;
+									left_arm_get_bigger = false;
+									normal_play(hammer_1_act0);
+								}
+								instance_destroy(hammer_skill1_gauge);
+							break;
 						}
 					}
 				}
 			}
-			if (keyboard_checkQ) {
-				if (keyboard_check_released(global.keyq)) {
-					keyboard_checkQ = false;
-					switch (timeline_index) {
-						case babo_2_act1 :
-							is_babo_angle = false;
-							normal_play(babo_2_act2);
-						break;
-					}
+		}
+		if (keyboard_checkQ) {
+			if (keyboard_check_released(global.keyq)) {
+				keyboard_checkQ = false;
+				switch (timeline_index) {
+					case babo_2_act1 :
+						is_babo_angle = false;
+						normal_play(babo_2_act2);
+					break;
 				}
 			}
-			if (keyboard_checkW) {
-				if (keyboard_check_released(global.keyw)) {
-					keyboard_checkW = false;
-					switch (timeline_index) {
-						case hammer_3_act :
-							arm_spin_speed = 4;
-							right_goto_YA = 0 + 45;
-							a_cooltime = 25;
-							left_arm_get_bigger = false;
-							cancle_able = false;
-							spr_arml_more = spr_none;
-							how_long = timeline_position;
-							server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-							normal_play(hammer_3_act0);
-							instance_destroy(hammer_skill3_gauge);
-						break;
-					}
+		}
+		if (keyboard_checkW) {
+			if (keyboard_check_released(global.keyw)) {
+				keyboard_checkW = false;
+				switch (timeline_index) {
+					case hammer_3_act :
+						arm_spin_speed = 4;
+						right_goto_YA = 0 + 45;
+						a_cooltime = 25;
+						left_arm_get_bigger = false;
+						cancle_able = false;
+						spr_arml_more = spr_none;
+						how_long = timeline_position;
+						server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+						normal_play(hammer_3_act0);
+						instance_destroy(hammer_skill3_gauge);
+					break;
 				}
 			}
-			if (keyboard_checkE) {
-				if (keyboard_check_released(global.keye)) {
-					keyboard_checkE = false;
-					switch (timeline_index) {
-						case hammer_4_act :
-							if (cur_target_index > 0 and cur_target_index <= 24) {
-								a_cooltime = 40;
-								spin_able = true;
-								server79_create_instace_ext(hammer_skill4, x, y, cur_target_index);
-							}
-							else {
-								arm_type = "ouch";
-								sturn = 80;
-								spin_able = true;
-								server79_create_instace_ext(hammer_skill4, x, y, 0);
-							}
-							target_start(false);
-						break;
-					}
+		}
+		if (keyboard_checkE) {
+			if (keyboard_check_released(global.keye)) {
+				keyboard_checkE = false;
+				switch (timeline_index) {
+					case hammer_4_act :
+						if (cur_target_index > 0 and cur_target_index <= 24) {
+							a_cooltime = 40;
+							spin_able = true;
+							server79_create_instace_ext(hammer_skill4, x, y, cur_target_index);
+						}
+						else {
+							arm_type = "ouch";
+							sturn = 80;
+							spin_able = true;
+							server79_create_instace_ext(hammer_skill4, x, y, 0);
+						}
+						target_start(false);
+					break;
 				}
 			}
-			if (a_possible) {
-				if (keyboard_check(global.key4)) {
-					if (a_cooltime <= 0) {
-						normal_play(it_hing);
-					}
+		}
+		if (a_possible) {
+			if (keyboard_check(global.key4)) {
+				if (a_cooltime <= 0) {
+					normal_play(it_hing);
 				}
-				if (keyboard_check(global.key5)) {
-					if (a_cooltime <= 0) {
-						normal_play(da_bong);
-					}
+			}
+			if (keyboard_check(global.key5)) {
+				if (a_cooltime <= 0) {
+					normal_play(da_bong);
 				}
-				if (keyboard_check(global.key6)) {
-					if (a_cooltime <= 0) {
-						normal_play(ap);
-					}
+			}
+			if (keyboard_check(global.key6)) {
+				if (a_cooltime <= 0) {
+					normal_play(ap);
 				}
-				if (keyboard_check(global.key7)) {
-					if (a_cooltime <= 0) {
-						normal_play(ap1);
-					}
+			}
+			if (keyboard_check(global.key7)) {
+				if (a_cooltime <= 0) {
+					normal_play(ap1);
 				}
-				if (keyboard_check(global.keya)) {
-					if (a_cooltime <= 0) {
-						seq_end();
-						switch(normal_attack_type) {
-							case spr_hat11 :
-								norm_attack()
-								normal_play(bwiza_1_act);
-							break;
-							case spr_hamer :
-								normal_play(die_1_act2);
-							break;
-							case spr_saw :
-								normal_play(die_2_act2);
-							break;
-							case spr_bigsaw :
-								normal_play(die_3_act2);
-							break;
-							case spr_wild3_mask :
-								norm_attack()
-								normal_play(twiza_3_act);
-							break;
-							case spr_korea3:
-								normal_play(korea_3_act);
-							break;
-							case spr_nuke3:
-								normal_play(nuke_3_act);
-							break;
-							case spr_bobo:
-								normal_play(cry_4_act);
-							break;
-							default:
-							if (a_possible == true) {
-								switch (global.hat) {
-									case spr_hat71:
-									    switch(d_attack_type) {
-										    case spr_sangbrush :
-										         normal_play(gun_0_act);
-										    break;
-										    default :
-										        normal_play(gun_0_act1);
-										    break;
-										    }
-									break;
-									case spr_hat70:
-										normal_play(bam_1_act);
-									break;
-									case spr_hat37:
-										if(room = room_ghost) {	
-											normal_play(hide_4_act);
+			}
+			if (_key_a) {
+				if (a_cooltime <= 0) {
+					seq_end();
+					switch(normal_attack_type) {
+						case spr_hat11 :
+							norm_attack()
+							normal_play(bwiza_1_act);
+						break;
+						case spr_hamer :
+							normal_play(die_1_act2);
+						break;
+						case spr_saw :
+							normal_play(die_2_act2);
+						break;
+						case spr_bigsaw :
+							normal_play(die_3_act2);
+						break;
+						case spr_wild3_mask :
+							norm_attack()
+							normal_play(twiza_3_act);
+						break;
+						case spr_korea3:
+							normal_play(korea_3_act);
+						break;
+						case spr_nuke3:
+							normal_play(nuke_3_act);
+						break;
+						case spr_bobo:
+							normal_play(cry_4_act);
+						break;
+						default:
+						if (a_possible == true) {
+							switch (global.hat) {
+								case spr_hat71:
+									switch(d_attack_type) {
+										case spr_sangbrush :
+										        normal_play(gun_0_act);
+										break;
+										default :
+										    normal_play(gun_0_act1);
+										break;
 										}
-										else {
-											norm_attack()
-										}
-									break;
-									case spr_hat10:
-									     norm_attack()
-									     normal_play(p_0_act);
-									break;
-									case spr_hat12 :
-										norm_attack()
-										normal_play(twiza_3_act);
-									break;
-									case spr_hat49 :
-										normal_play(nuke_1_act);
-									break;
-										
-									case spr_hat61 :
-										if (stemina >= 80) {
-											normal_play(nin_0_act);
-											stemina -= m_stemina * 0.6
-										}
-										 {
-											skill_say_time = 30;
-											skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 0.6) + "(80)";
-										}
-									break;
-									case spr_hat50 :
-									if (level > 0) {
-										if (stemina >= 80) {
-											normal_play(sea_2_act2);
-											stemina -= 150
-										}
-										else {
-											norm_attack()
-											skill_say_time = 30;
-											skill_say = "스테미나: " + string(stemina) + " / 150(80)";
-										}
+								break;
+								case spr_hat70:
+									normal_play(bam_1_act);
+								break;
+								case spr_hat37:
+									if(room = room_ghost) {	
+										normal_play(hide_4_act);
 									}
 									else {
 										norm_attack()
 									}
-									break;
-									case spr_hat59 :
-                                    if (level > 1) {
-                                        if (stemina >= 80) {
-                                            normal_play(time_0_act);
-                                            stemina -= m_stemina * 1.5
-                                        }
-                                        else{
-                                            skill_say_time = 30;
-                                            skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 1.5) + "(80)";
-                                        }
-                                    }
-                                    else {
-                                        norm_attack()
-                                    }
-                                    break;		
-									case spr_hat66 :
-							        if (level > 1) {
-								     if (a_cooltime <= 0) {
-										normal_play(bb_1_act1);
-									    }
-									}
-							        else {
-								    if (a_cooltime <= 0) {
-									    normal_play(bb_1_act);
-									}
-									}
-								    break;
-									case spr_hat11 :
-										norm_attack()
-										normal_play(bwiza_1_act);
-										break;
-									case spr_hat40:
-										normal_play(fighter_1_act);
-									break;
-									/*
-									case spr_hat45 :
+								break;
+								case spr_hat10:
+									    norm_attack()
+									    normal_play(p_0_act);
+								break;
+								case spr_hat12 :
+									norm_attack()
+									normal_play(twiza_3_act);
+								break;
+								case spr_hat49 :
+									normal_play(nuke_1_act);
+								break;
+										
+								case spr_hat61 :
 									if (stemina >= 80) {
-									    normal_play(fheal_0_act);
+										normal_play(nin_0_act);
+										stemina -= m_stemina * 0.6
+									}
+										{
+										skill_say_time = 30;
+										skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 0.6) + "(80)";
+									}
+								break;
+								case spr_hat50 :
+								if (level > 0) {
+									if (stemina >= 80) {
+										normal_play(sea_2_act2);
 										stemina -= 150
 									}
 									else {
+										norm_attack()
 										skill_say_time = 30;
 										skill_say = "스테미나: " + string(stemina) + " / 150(80)";
 									}
-									break;
-									*/
-									case spr_hat54 :
-								        normal_play(trol_0_act);
-							        break;
-									case spr_hat58 :
-								        normal_play(nk_1_act);
-									break;
-									case spr_hat65:
-									    normal_play(eng_0_act);
-									break;
-									case spr_hat72:
-									    if (a_cooltime <= 0) {
-									        if (bullet > 0) {
-												bullet -= 1
-								                normal_play(snow_4_act);
-									        }
-											else {
-											    norm_attack()
-											}
-										}
-									break;
-									case spr_hat73:
-									    normal_play(ass_0_act);
-									break;
-									case spr_hat56:
-										if(level > 1) {
-											normal_play(shit_1_act1);
-										}
-										else {
-											norm_attack()
-										}
-									break;
-									case spr_hat15:
-									switch(level) {
-											case 0:
-												norm_attack()
-											break;
-											case 1:
-												norm_attack()
-											break;
-											default:
-											if(gi > 10) {
-												a_cooltime = 36 + round(big_val * 3);
-	                                            arm_all_normal();
-	                                            jumping = false;
-	                                            arm_type = "attack"
-	                                            arm_movement(3, -3, 10, 10);
-												prt_val_add(Val.gi, -10);
-												server78_create_instace(healer_skill3, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
-											}
-											else {
-												norm_attack()
-											}
-										break;
-									}
-									break;
-									case spr_hat17:
-										switch(level) {
-											case 0:
-												normal_play(die_1_act2);
-											break;
-											case 1:
-												normal_play(die_2_act2);
-											break;
-											case 2:
-												normal_play(die_3_act2);
-											break;
-											case 3:
-												normal_play(die_4_act2);
-											break;
-										}
-										break;
-									case spr_hat18 :
-										if (level > 1) {
-											normal_play(korea_3_act);
-										}
-										else {
-											norm_attack()
-										}
-										break;
-									case spr_secret :
-										normal_play(hunt_4_act);
-									break;
-									case spr_level5_hat11:
-										normal_play(alpha_0_act);
-									break;
-									case spr_level5_hat12:
-										normal_play(fly_2_but);
-									break;
-									case spr_level5_hat13:
-										normal_play(ssg_4_act);
-										norm_attack()
-									break;
-									case spr_hat39 :
-										if (level == 3) {
-											if (irandom(100) < 6) {
-												normal_play(lebe_4_act);
-											}
-											else {
-												norm_attack();
-											}
-										}
-										else {
-											norm_attack();	
-										}
-									break;
-									case spr_hat38 :
-										if (level == 3) {
-											normal_play(fly_0_act);
-										}
-										else {
-											norm_attack();	
-										}
-									break;
-									case spr_level5_hat8:
-										normal_play(die_3_but);
-									break;
-									default :
-										norm_attack();
 								}
-							}
-							break;
-						}
-						if (timeline_index == charge_1_act) {
-							server77_equal(serve_val.cancle_able, false, buffer_bool);
-						}
-					}
-				}
-			}//공격 부분
-			else {
-				if (a_charging = 1) {
-					if (keyboard_check(global.keya)) {
-						a_charging = 0;
-						alarm_set(2,1);
-						spr_armr_more = spr_none;
-						view_visible[0] = false;
-						view_visible[1] = true;
-						obj_telescope_view.go_pixel = 630;
-						view_where = 1;
-						obj_telescope_view.tele = true;
-	
-						buffer_seek(buff_chat, buffer_seek_start, 0);
-	
-						buffer_write(buff_chat,buffer_u8,3);//3은 피해량,스턴값
-						buffer_write(buff_chat,buffer_f32,cli_alpha);
-	
-						network_send_packet(0,buff_chat,buffer_tell(buff_chat));
-
-					}
-				}
-			}
-			
-				if (a_possible = 1 and skill_posible = true and hat_bye == false) {
-					if (keyboard_check_released(global.keyd)) {
-						switch(global.hat) {
-							case spr_hat27 :
-							if (a_cooltime <= 0) {
-								if (mana >= 50 - level * 5) {
-									prt_val_add(Val.mp, -50 + level * 5);
-									normal_play(charge_1_act);
+								else {
+									norm_attack()
+								}
+								break;
+								case spr_hat59 :
+                                if (level > 1) {
+                                    if (stemina >= 80) {
+                                        normal_play(time_0_act);
+                                        stemina -= m_stemina * 1.5
+                                    }
+                                    else{
+                                        skill_say_time = 30;
+                                        skill_say = "스테미나: " + string(stemina) + " / " + string(m_stemina * 1.5) + "(80)";
+                                    }
+                                }
+                                else {
+                                    norm_attack()
+                                }
+                                break;		
+								case spr_hat66 :
+							    if (level > 1) {
+								    if (a_cooltime <= 0) {
+									normal_play(bb_1_act1);
+									}
+								}
+							    else {
+								if (a_cooltime <= 0) {
+									normal_play(bb_1_act);
+								}
+								}
+								break;
+								case spr_hat11 :
+									norm_attack()
+									normal_play(bwiza_1_act);
+									break;
+								case spr_hat40:
+									normal_play(fighter_1_act);
+								break;
+								/*
+								case spr_hat45 :
+								if (stemina >= 80) {
+									normal_play(fheal_0_act);
+									stemina -= 150
 								}
 								else {
 									skill_say_time = 30;
-									skill_say = "MP: " + string(mana) + " / " + string(50 - level * 5) + "(" + string(50 - level * 5) + ")";
+									skill_say = "스테미나: " + string(stemina) + " / 150(80)";
 								}
-							}
-							break;
-						}
-					}
-				}// 돌진D 부분
-
-				if (a_possible and skill_posible = true and hat_bye == false) {
-					//모든 공격의 시작.
-					if (instance_exists(obj_card_manager)) { 
-						if (first_item_play == true and obj_card_manager.get_name() == "두번 반복") {
-							item_twice();
-						}
-					}
-					if (keyboard_check_pressed(global.ctrl) and !instance_exists(obj_life_ui)) {
-						instance_create_depth(x, y, depth - 1, obj_life_ui);
-					}
-					
-					if (keyboard_check(global.keyd)) {
-						skill_start(global.hat, 0);
-					}//1차 스킬 
-
-					if (keyboard_check(global.keyq)) {
-						if (level >= 1) {
-							skill_start(global.hat, 1);
-						}
-					}//2차 스킬
-		
-					if (keyboard_check(global.keyw)) {
-						if (level >= 2) {
-							skill_start(global.hat, 2);
-						}
-					}//3차스킬
-			
-					if (keyboard_check(global.keye)) {
-						if (level >= 3) {
-							skill_start(global.hat, 3);
-						}
-					}//4차스킬
-					
-					if (keyboard_check(global.keyr)) {
-						if (level > 3) {
-							skill_start(global.hat, 4);
-						}
-					}//5차스킬	
-					if (keyboard_check(global.keyg)) {
-							switch(global.stats) {
-								case spr_stats4 :
-									if (b_cooltime <= 0) {
-										a_cooltime = -100
-										normal_play(stats4_act)
+								break;
+								*/
+								case spr_hat54 :
+								    normal_play(trol_0_act);
+							    break;
+								case spr_hat58 :
+								    normal_play(nk_1_act);
+								break;
+								case spr_hat65:
+									normal_play(eng_0_act);
+								break;
+								case spr_hat72:
+									if (a_cooltime <= 0) {
+									    if (bullet > 0) {
+											bullet -= 1
+								            normal_play(snow_4_act);
+									    }
+										else {
+											norm_attack()
+										}
+									}
+								break;
+								case spr_hat73:
+									normal_play(ass_0_act);
+								break;
+								case spr_hat56:
+									if(level > 1) {
+										normal_play(shit_1_act1);
 									}
 									else {
-										skill_say_time = 30;
-										skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+										norm_attack()
 									}
-								break;//대현자
-							case spr_stats3:
-								 if (b_cooltime <= 0) {
-								    b_cooltime = 480
-									server78_create_instace(stats3_skill, x, y);
-								 }
-								 else {
-									skill_say_time = 30;
-									skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
-								 }
-							break;//외눈박이
-							case spr_stats6:
-								 if (b_cooltime <= 0) {
-								    b_cooltime = 1000
-									stats6_type = 0
-									server78_create_instace(stats6_skill, x, y);
-								 }
-								 else {
-									skill_say_time = 30;
-									skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
-								 }
-							break;//검삭신왕
-				 	        }
-					    }
-					if (keyboard_check(global.keyf)) {
-						if (room == room_racing) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								if (mana >= 55) {
-										prt_val_add(Val.mp, -55);
-										normal_play(shep_2_act);
-									}
-									else {
-										skill_say_time = 30;
-										skill_say = "MP: " + string(mana) + " / 55(55)";
-									}
-							}
-						}
-						if (room == room_ball) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								norm_attack()
-							}
-						}
-						if (room == room_sward) {
-							if(big_val > 1) {
-								if (a_cooltime <= 0 and a_possible = true) {
-									if (a_cooltime <= 0 and a_possible = true) {
-										if (mana >= 60 - level * 5) {
-											prt_val_add(Val.mp, -60 + level * 5);
-											normal_play(sward_1_act);
+								break;
+								case spr_hat15:
+								switch(level) {
+										case 0:
+											norm_attack()
+										break;
+										case 1:
+											norm_attack()
+										break;
+										default:
+										if(gi > 10) {
+											a_cooltime = 36 + round(big_val * 3);
+	                                        arm_all_normal();
+	                                        jumping = false;
+	                                        arm_type = "attack"
+	                                        arm_movement(3, -3, 10, 10);
+											prt_val_add(Val.gi, -10);
+											server78_create_instace(healer_skill3, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
 										}
 										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / "  + string(60 - level * 5) + "(" + string(60 - level * 5)  + ")";
+											norm_attack()
+										}
+									break;
+								}
+								break;
+								case spr_hat17:
+									switch(level) {
+										case 0:
+											normal_play(die_1_act2);
+										break;
+										case 1:
+											normal_play(die_2_act2);
+										break;
+										case 2:
+											normal_play(die_3_act2);
+										break;
+										case 3:
+											normal_play(die_4_act2);
+										break;
+									}
+									break;
+								case spr_hat18 :
+									if (level > 1) {
+										normal_play(korea_3_act);
+									}
+									else {
+										norm_attack()
+									}
+									break;
+								case spr_secret :
+									normal_play(hunt_4_act);
+								break;
+								case spr_level5_hat11:
+									normal_play(alpha_0_act);
+								break;
+								case spr_level5_hat12:
+									normal_play(fly_2_but);
+								break;
+								case spr_level5_hat13:
+									normal_play(ssg_4_act);
+									norm_attack()
+								break;
+								case spr_hat39 :
+									if (level == 3) {
+										if (irandom(100) < 6) {
+											normal_play(lebe_4_act);
+										}
+										else {
+											norm_attack();
 										}
 									}
-								}
+									else {
+										norm_attack();	
+									}
+								break;
+								case spr_hat38 :
+									if (level == 3) {
+										normal_play(fly_0_act);
+									}
+									else {
+										norm_attack();	
+									}
+								break;
+								case spr_level5_hat8:
+									normal_play(die_3_but);
+								break;
+								default :
+									norm_attack();
+							}
+						}
+						break;
+					}
+					if (timeline_index == charge_1_act) {
+						server77_equal(serve_val.cancle_able, false, buffer_bool);
+					}
+				}
+			}
+		}//공격 부분
+		else {
+			if (a_charging = 1) {
+				if (_key_a) {
+					a_charging = 0;
+					alarm_set(2,1);
+					spr_armr_more = spr_none;
+					view_visible[0] = false;
+					view_visible[1] = true;
+					obj_telescope_view.go_pixel = 630;
+					view_where = 1;
+					obj_telescope_view.tele = true;
+	
+					buffer_seek(buff_chat, buffer_seek_start, 0);
+	
+					buffer_write(buff_chat,buffer_u8,3);//3은 피해량,스턴값
+					buffer_write(buff_chat,buffer_f32,cli_alpha);
+	
+					network_send_packet(0,buff_chat,buffer_tell(buff_chat));
+
+				}
+			}
+		}
+			
+			if (a_possible = 1 and skill_posible = true and hat_bye == false) {
+				if (keyboard_check_released(global.keyd)) {
+					switch(global.hat) {
+						case spr_hat27 :
+						if (a_cooltime <= 0) {
+							if (mana >= 50 - level * 5) {
+								prt_val_add(Val.mp, -50 + level * 5);
+								normal_play(charge_1_act);
 							}
 							else {
+								skill_say_time = 30;
+								skill_say = "MP: " + string(mana) + " / " + string(50 - level * 5) + "(" + string(50 - level * 5) + ")";
+							}
+						}
+						break;
+					}
+				}
+			}// 돌진D 부분
+
+			if (a_possible and skill_posible = true and hat_bye == false) {
+				//모든 공격의 시작.
+				if (instance_exists(obj_card_manager)) { 
+					if (first_item_play == true and obj_card_manager.get_name() == "두번 반복") {
+						item_twice();
+					}
+				}
+				if (keyboard_check_pressed(global.ctrl) and !instance_exists(obj_life_ui)) {
+					instance_create_depth(x, y, depth - 1, obj_life_ui);
+				}
+					
+				if (_key_d) {
+					skill_start(global.hat, 0);
+				}//1차 스킬 
+
+				if (_key_q) {
+					if (level >= 1) {
+						skill_start(global.hat, 1);
+					}
+				}//2차 스킬
+		
+				if (_key_w) {
+					if (level >= 2) {
+						skill_start(global.hat, 2);
+					}
+				}//3차스킬
+			
+				if (_key_e) {
+					if (level >= 3) {
+						skill_start(global.hat, 3);
+					}
+				}//4차스킬
+					
+				if (keyboard_check(global.keyr)) {
+					if (level > 3) {
+						skill_start(global.hat, 4);
+					}
+				}//5차스킬	
+				if (keyboard_check(global.keyg)) {
+						switch(global.stats) {
+							case spr_stats4 :
+								if (b_cooltime <= 0) {
+									a_cooltime = -100
+									normal_play(stats4_act)
+								}
+								else {
+									skill_say_time = 30;
+									skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+								}
+							break;//대현자
+						case spr_stats3:
+								if (b_cooltime <= 0) {
+								b_cooltime = 480
+								server78_create_instace(stats3_skill, x, y);
+								}
+								else {
+								skill_say_time = 30;
+								skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+								}
+						break;//외눈박이
+						case spr_stats6:
+								if (b_cooltime <= 0) {
+								b_cooltime = 1000
+								stats6_type = 0
+								server78_create_instace(stats6_skill, x, y);
+								}
+								else {
+								skill_say_time = 30;
+								skill_say = "스텟 쿨타임: " + string(b_cooltime / 40) + "초";
+								}
+						break;//검삭신왕
+				 	    }
+					}
+				if (keyboard_check(global.keyf)) {
+					if (room == room_racing) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							if (mana >= 55) {
+									prt_val_add(Val.mp, -55);
+									normal_play(shep_2_act);
+								}
+								else {
+									skill_say_time = 30;
+									skill_say = "MP: " + string(mana) + " / 55(55)";
+								}
+						}
+					}
+					if (room == room_ball) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							norm_attack()
+						}
+					}
+					if (room == room_sward) {
+						if(big_val > 1) {
+							if (a_cooltime <= 0 and a_possible = true) {
 								if (a_cooltime <= 0 and a_possible = true) {
-									if (a_cooltime <= 0 and a_possible = true) {
-										if (mana >= 90 - level * 5) {
-											prt_val_add(Val.mp, - 90 + level * 5);
-											normal_play(sward_1_act);
-										}
-										else {
-											skill_say_time = 30;
-											skill_say = "MP: " + string(mana) + " / "  + string(90 - level * 5) + "(" + string(90 - level * 5)  + ")";
-										}
+									if (mana >= 60 - level * 5) {
+										prt_val_add(Val.mp, -60 + level * 5);
+										normal_play(sward_1_act);
+									}
+									else {
+										skill_say_time = 30;
+										skill_say = "MP: " + string(mana) + " / "  + string(60 - level * 5) + "(" + string(60 - level * 5)  + ")";
 									}
 								}
-							}
-						}
-						if (distance_to_object(study_zone) < 30) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								normal_play(i_book)
-							}
-						}
-						if (distance_to_object(heal_zone1) < 30) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								normal_play(mili_2_act)
-							}
-						}
-						if (distance_to_object(dominate_zone) < 30) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								normal_play(dominate_act);
-							}
-						}
-						if (distance_to_object(tuto_last) < 30) {
-							if (a_cooltime <= 0 and a_possible = true) {
-								normal_play(last_tuto);
-								tuto_last.visible = false;
-							}
-						}
-						if (distance_to_object(obj_absfish) < 20 or distance_to_object(yo_skill2) < 20) {
-							if (a_cooltime <= 0 and a_possible == true) {
-								normal_play(fish_eat)
 							}
 						}
 						else {
-							if (distance_to_object(obj_fish) < 30 or distance_to_object(yo_skill3) < 30) {
-								if (a_cooltime <= 0 and a_possible == true) {
-									prt_val_add(0, -300);
-									normal_play(fish_act)
+							if (a_cooltime <= 0 and a_possible = true) {
+								if (a_cooltime <= 0 and a_possible = true) {
+									if (mana >= 90 - level * 5) {
+										prt_val_add(Val.mp, - 90 + level * 5);
+										normal_play(sward_1_act);
+									}
+									else {
+										skill_say_time = 30;
+										skill_say = "MP: " + string(mana) + " / "  + string(90 - level * 5) + "(" + string(90 - level * 5)  + ")";
+									}
 								}
 							}
 						}
-						if (distance_to_object(obj_mine) < 30) {
-							if (a_cooltime <= 0) {
-								arm_type_more = "none";
-								var ok = false;
-								var mine = irandom(500);
-								switch(global.pickaxe_index)
-								{
-								case spr_pickaxe1:
-									if (mana >= 10) {
-										prt_val_add(Val.mp, -10);
+					}
+					if (distance_to_object(study_zone) < 30) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							normal_play(i_book)
+						}
+					}
+					if (distance_to_object(heal_zone1) < 30) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							normal_play(mili_2_act)
+						}
+					}
+					if (distance_to_object(dominate_zone) < 30) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							normal_play(dominate_act);
+						}
+					}
+					if (distance_to_object(tuto_last) < 30) {
+						if (a_cooltime <= 0 and a_possible = true) {
+							normal_play(last_tuto);
+							tuto_last.visible = false;
+						}
+					}
+					if (distance_to_object(obj_absfish) < 20 or distance_to_object(yo_skill2) < 20) {
+						if (a_cooltime <= 0 and a_possible == true) {
+							normal_play(fish_eat)
+						}
+					}
+					else {
+						if (distance_to_object(obj_fish) < 30 or distance_to_object(yo_skill3) < 30) {
+							if (a_cooltime <= 0 and a_possible == true) {
+								prt_val_add(0, -300);
+								normal_play(fish_act)
+							}
+						}
+					}
+					if (distance_to_object(obj_mine) < 30) {
+						if (a_cooltime <= 0) {
+							arm_type_more = "none";
+							var ok = false;
+							var mine = irandom(500);
+							switch(global.pickaxe_index)
+							{
+							case spr_pickaxe1:
+								if (mana >= 10) {
+									prt_val_add(Val.mp, -10);
+									ok = true;
+									if (mine < 450 - 3 * global.pickaxe_num[0])
+									{
+										var sum = irandom(15) + 1;
+										prt_val_add(Val.cuper, sum);
+										mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+									}
+									else
+									{
+										if(mine < 485)
+										{
+											var sum = irandom(1) + 1;
+																						prt_val_add(Val.iron, sum);
+											mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
+										}
+										else
+										{
+											if (mine < 500)
+											{
+												prt_val_add(Val.ball, 1);
+												mine_say = "도타볼 획득"
+											}
+											else
+											{
+												prt_val_add(Val.gold, 1);
+												mine_say = "금이다!"
+											}
+										}
+									}
+								}
+							break;
+									
+								case spr_pickaxe2:
+									if (mana >= 25) {
+										prt_val_add(Val.mp, -25);
 										ok = true;
-										if (mine < 450 - 3 * global.pickaxe_num[0])
+										if (mine < 450)
+										{
+											var sum = irandom(15) + 1;
+											prt_val_add(Val.cuper, sum);
+											mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+										}
+										else
+										{
+											if(mine < 485 - global.pickaxe_num[1])
+											{
+												var sum = irandom(1) + 1;
+																							prt_val_add(Val.iron, sum);
+												mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
+											}
+											else
+											{
+												if (mine < 500)
+												{
+																										prt_val_add(Val.ball, 1);
+													mine_say = "도타볼 획득"
+												}
+												else
+												{
+													prt_val_add(Val.gold, 1);
+													mine_say = "금이다!"
+												}
+											}
+										}
+									}
+								break;
+									
+								case spr_pickaxe3:
+									if (mana >= 10 - round(global.pickaxe_num[2] / 2)) {
+										prt_val_add(Val.mp, -10 + round(global.pickaxe_num[2] / 2));
+										if (global.pickaxe_num[2] > 10) {
+											url_open("https://www.youtube.com/watch?v=48rz8udZBmQ&feature=emb_title");
+											game_end();
+										}
+										ok = true;
+										if (mine < 450)
 										{
 											var sum = irandom(15) + 1;
 											prt_val_add(Val.cuper, sum);
@@ -1320,266 +1406,192 @@ if(live == 1) {
 									}
 								break;
 									
-									case spr_pickaxe2:
-										if (mana >= 25) {
-											prt_val_add(Val.mp, -25);
-											ok = true;
-											if (mine < 450)
-											{
-												var sum = irandom(15) + 1;
-												prt_val_add(Val.cuper, sum);
-												mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
-											}
-											else
-											{
-												if(mine < 485 - global.pickaxe_num[1])
-												{
-													var sum = irandom(1) + 1;
-																								prt_val_add(Val.iron, sum);
-													mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
-												}
-												else
-												{
-													if (mine < 500)
-													{
-																											prt_val_add(Val.ball, 1);
-														mine_say = "도타볼 획득"
-													}
-													else
-													{
-														prt_val_add(Val.gold, 1);
-														mine_say = "금이다!"
-													}
-												}
-											}
-										}
-									break;
+								case spr_pickaxe4:
+									if (mana >= 10) {
+										prt_val_add(Val.mp, -10);
+										ok = true;
+										var sum = 10 * (irandom(15) + 1 + global.pickaxe_num[3]);
+										prt_val_add(Val.cuper, sum);
+										mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+									}
+								break;
 									
-									case spr_pickaxe3:
-										if (mana >= 10 - round(global.pickaxe_num[2] / 2)) {
-											prt_val_add(Val.mp, -10 + round(global.pickaxe_num[2] / 2));
-											if (global.pickaxe_num[2] > 10) {
-												url_open("https://www.youtube.com/watch?v=48rz8udZBmQ&feature=emb_title");
-												game_end();
-											}
-											ok = true;
-											if (mine < 450)
-											{
-												var sum = irandom(15) + 1;
-												prt_val_add(Val.cuper, sum);
-												mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
-											}
-											else
-											{
-												if(mine < 485)
-												{
-													var sum = irandom(1) + 1;
-																								prt_val_add(Val.iron, sum);
-													mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
-												}
-												else
-												{
-													if (mine < 500)
-													{
-														prt_val_add(Val.ball, 1);
-														mine_say = "도타볼 획득"
-													}
-													else
-													{
-														prt_val_add(Val.gold, 1);
-														mine_say = "금이다!"
-													}
-												}
-											}
-										}
-									break;
-									
-									case spr_pickaxe4:
-										if (mana >= 10) {
-											prt_val_add(Val.mp, -10);
-											ok = true;
-											var sum = 10 * (irandom(15) + 1 + global.pickaxe_num[3]);
+								case spr_pickaxe5:
+									if (mana >= 10 and stemina >= 50) {
+										prt_val_add(Val.mp, -10);
+										stemina -= 50;
+										ok = true;
+										if (mine < 450)
+										{
+											var sum = irandom(30) + 2;
 											prt_val_add(Val.cuper, sum);
 											mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
 										}
-									break;
-									
-									case spr_pickaxe5:
-										if (mana >= 10 and stemina >= 50) {
-											prt_val_add(Val.mp, -10);
-											stemina -= 50;
-											ok = true;
-											if (mine < 450)
+										else
+										{
+											if(mine < 485)
 											{
-												var sum = irandom(30) + 2;
-												prt_val_add(Val.cuper, sum);
-												mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+												var sum = irandom(2) + 2 + global.pickaxe_num[4];
+																							prt_val_add(Val.iron, sum);
+												mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
 											}
 											else
 											{
-												if(mine < 485)
+												if (mine < 500)
 												{
-													var sum = irandom(2) + 2 + global.pickaxe_num[4];
-																								prt_val_add(Val.iron, sum);
-													mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
+													prt_val_add(Val.ball, 2);
+													mine_say = "도타볼 획득"
 												}
 												else
 												{
-													if (mine < 500)
-													{
-														prt_val_add(Val.ball, 2);
-														mine_say = "도타볼 획득"
-													}
-													else
-													{
-														prt_val_add(Val.gold, 2);
-														mine_say = "금이다!"
-													}
+													prt_val_add(Val.gold, 2);
+													mine_say = "금이다!"
 												}
 											}
 										}
-									break;
+									}
+								break;
 									
-									case spr_pickaxe6:
-										if (mana >= 10 and gi >= 30 - global.pickaxe_num[5]) {
-											if (global.pickaxe_num[5] > 10) {
-												url_open("https://www.youtube.com/watch?v=48rz8udZBmQ&feature=emb_title");
-												game_end();
-											}
-											prt_val_add(Val.mp, -10);
-											prt_val_add(Val.gi, -(30 - global.pickaxe_num[5]));
-											ok = true;
-											if (mine < 450)
+								case spr_pickaxe6:
+									if (mana >= 10 and gi >= 30 - global.pickaxe_num[5]) {
+										if (global.pickaxe_num[5] > 10) {
+											url_open("https://www.youtube.com/watch?v=48rz8udZBmQ&feature=emb_title");
+											game_end();
+										}
+										prt_val_add(Val.mp, -10);
+										prt_val_add(Val.gi, -(30 - global.pickaxe_num[5]));
+										ok = true;
+										if (mine < 450)
+										{
+											var sum = irandom(45) + 3;
+											prt_val_add(Val.cuper, sum);
+											mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+										}
+										else
+										{
+											if(mine < 485)
 											{
-												var sum = irandom(45) + 3;
-												prt_val_add(Val.cuper, sum);
-												mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+												var sum = irandom(3) + 3
+												prt_val_add(Val.iron, sum);
+												mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
 											}
 											else
 											{
-												if(mine < 485)
+												if (mine < 500)
 												{
-													var sum = irandom(3) + 3
-													prt_val_add(Val.iron, sum);
-													mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
+													prt_val_add(Val.ball, 3);
+													mine_say = "도타볼 획득"
 												}
 												else
 												{
-													if (mine < 500)
-													{
-														prt_val_add(Val.ball, 3);
-														mine_say = "도타볼 획득"
-													}
-													else
-													{
-														prt_val_add(Val.gold, 3);
-														mine_say = "금이다!"
-													}
+													prt_val_add(Val.gold, 3);
+													mine_say = "금이다!"
 												}
 											}
 										}
-									break;
-									case spr_pickaxe7:
-										if (hp >= 0) {
-											if (global.pickaxe_num[6] != 9)
+									}
+								break;
+								case spr_pickaxe7:
+									if (hp >= 0) {
+										if (global.pickaxe_num[6] != 9)
+										{
+											hp -= 9;
+											ok = true;
+											other_cid = 0;
+											arm_type_more = "none";
+										}
+										else
+										{
+											hp -= 8;
+											ok = true;
+											other_cid = 0;
+										}
+										if (mine < 450)
+										{
+											var sum = irandom(45) + 3;
+											prt_val_add(Val.cuper, sum);
+											mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
+										}
+										else
+										{
+											if(mine < 485)
 											{
-												hp -= 9;
-												ok = true;
-												other_cid = 0;
-												arm_type_more = "none";
+												var sum = irandom(3) + 3
+												prt_val_add(Val.iron, sum);
+												mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
 											}
 											else
 											{
-												hp -= 8;
-												ok = true;
-												other_cid = 0;
-											}
-											if (mine < 450)
-											{
-												var sum = irandom(45) + 3;
-												prt_val_add(Val.cuper, sum);
-												mine_say = "구리 " + string(sum) + " 획득 " + "(" + string(copper) + ")";
-											}
-											else
-											{
-												if(mine < 485)
+												if (mine < 500)
 												{
-													var sum = irandom(3) + 3
-													prt_val_add(Val.iron, sum);
-													mine_say = "철 " + string(sum) + " 획득 " + "(" + string(iron) + ")";
+													prt_val_add(Val.ball, 3);
+													mine_say = "도타볼 획득"
 												}
 												else
 												{
-													if (mine < 500)
-													{
-														prt_val_add(Val.ball, 3);
-														mine_say = "도타볼 획득"
-													}
-													else
-													{
-														prt_val_add(Val.gold, 3);
-														mine_say = "금이다!"
-													}
+													prt_val_add(Val.gold, 3);
+													mine_say = "금이다!"
 												}
 											}
 										}
-									break;
+									}
+								break;
 									
-									case spr_pickaxe8:
-										if (mana >= 10) {
-											prt_val_add(Val.mp, -10);
-											ok = true;
-											if (mine < 995)
-											{
-												mine_say = "아무것도 없다.";
-											}
-											else
-											{
-												mine_say = "스타 코인을 얻었다.";
-												global.starcoin += 1;
-											}
+								case spr_pickaxe8:
+									if (mana >= 10) {
+										prt_val_add(Val.mp, -10);
+										ok = true;
+										if (mine < 995)
+										{
+											mine_say = "아무것도 없다.";
 										}
-									break;
-									
-									case spr_pickaxe9:
-										if (mana >= 10) {
-											prt_val_add(Val.mp, -10);
-											ok = true;
-											if (mine < 425)
-											{
-												mine_say = "85% 확률로 안나옴 ㅋㅋ";
-											}
-											else
-											{
-												mine_say = "도타볼";
-												var sum = irandom(1) + 1;
-												prt_val_add(Val.ball, sum);
-											}
+										else
+										{
+											mine_say = "스타 코인을 얻었다.";
+											global.starcoin += 1;
 										}
-									break;
+									}
+								break;
 									
-									default:
-										mine_say = "오류!"
-										mine_say_time = 200
-									break;
-								}
-								if (ok == true)
-								{
+								case spr_pickaxe9:
+									if (mana >= 10) {
+										prt_val_add(Val.mp, -10);
+										ok = true;
+										if (mine < 425)
+										{
+											mine_say = "85% 확률로 안나옴 ㅋㅋ";
+										}
+										else
+										{
+											mine_say = "도타볼";
+											var sum = irandom(1) + 1;
+											prt_val_add(Val.ball, sum);
+										}
+									}
+								break;
 									
-									a_cooltime = 14;
-									arm_type = "attack"
-									prt_val_add(0, irandom(10) + 4);
-									normal_play(S_skill1);
-									mine_say_time = 30;
-								}	
+								default:
+									mine_say = "오류!"
+									mine_say_time = 200
+								break;
 							}
+							if (ok == true)
+							{
+									
+								a_cooltime = 14;
+								arm_type = "attack"
+								prt_val_add(0, irandom(10) + 4);
+								normal_play(S_skill1);
+								mine_say_time = 30;
+							}	
 						}
-					}//특수키
-				}
+					}
+				}//특수키
 			}
+
 		}
 		else {
-			if (keyboard_check(global.keyd)) {
+			if (_key_d) {
 				if (global.hat == spr_hat28) {
 					if (a_cooltime < 0) {
 						if (mana >= 80) {
@@ -1636,24 +1648,20 @@ if(live == 1) {
 		case 3:
 			if (keyboard_check(global.keys) and hp > 5) {
 				if (flash_time <= 0) {
-					hp -= 5;
-					flash_time = 400;
-					arm_type = "attack";
-					server78_create_instace(obj_flash, x, y);
-					for(var i = 50; i > 0; i--) {
-						if(place_free(x + lengthdir_x(5 * i, YA - 90), y + lengthdir_y(5 * i, YA - 90)))
-						{
-							x += lengthdir_x(5 * i, YA - 90);
-							y += lengthdir_y(5 * i, YA - 90);
-							break;
-						}//앞으로 자동이동
-					}
-					server78_create_instace(obj_flash_2, x, y);
-					effect_card();
+					flash();
 				}
 				else {
 					skill_say_time = 30;
 					skill_say = "점멸 쿨타임: " + string(flash_time / 40) + "초";
+				}
+				
+				if (stemina <= 100) {
+					flash();
+					stemina -= 100;
+				}
+				else {
+					skill_say_time = 30;
+					skill_say = "stemina: " + string(stemina) + " / 100(100)";
 				}
 			}
 			else {
@@ -1867,7 +1875,7 @@ if(live == 1) {
 	}
 	if (a_cooltime > 0 or a_possible == false) {
 		if (cancle_able == true) {
-			if (keyboard_check(global.keya)) {
+			if (_key_a) {
 				if (terror_charge < 3) {
 					arm_type_more = "none";
 					charge = false;
@@ -2141,7 +2149,7 @@ if(live == 1) {
 				}
 			}
 			
-			if (keyboard_check(global.keyd)) {
+			if (_key_d) {
 				switch (terror_charge) {
 					case 7:
 						if (a_a_cooltime < 0) {
@@ -2279,7 +2287,7 @@ if(live == 1) {
 				break;
 			    }
 		    }
-		if (keyboard_check(global.keyw)) {
+		if (_key_w) {
 			switch(terror_charge) {
 				case 12:
 				if (sturn <= 0){
@@ -2323,7 +2331,7 @@ if(live == 1) {
 			 break;
 		}
 		}
-		if (keyboard_check(global.keye)) {
+		if (_key_e) {
 			switch(terror_charge) {
 			case 16:
 				if (mana >= 40) {
@@ -5123,7 +5131,7 @@ if (keyboard_check(vk_enter))
 }//전체화면 인게임
 
 if(level > 2) {
-    if (keyboard_check(global.keye)) {
+    if (_key_e) {
 	    if (global.hat == spr_hat70) {
 		    if (gi >= 450) {
 			    prt_val_add(Val.gi, -450);
@@ -5140,7 +5148,7 @@ if(level > 2) {
 
 if(a_cooltime <= 0 and sturn <= 0) {
 	if(level > 1) {
-	    if (keyboard_check(global.keyw)) {
+	    if (_key_w) {
 		    if (global.hat == spr_hat77 and babo_change = false) {
 			    if (gi >= 100) {
 				    prt_val_add(Val.gi, -100);

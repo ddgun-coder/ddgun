@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_time4_end",
+  "%Name":"snd_gun3_pick",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":2.089146,
-  "name":"snd_time4_end",
+  "duration":0.984979,
+  "name":"snd_gun3_pick",
   "parent":{
-    "name":"time_skill",
-    "path":"folders/Timelines/time_skill.yy",
+    "name":"gun_skills",
+    "path":"folders/Objects/area/gun_skills.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_time4_end.wav",
+  "soundFile":"snd_gun3_pick.wav",
   "type":0,
   "volume":1.0,
 }

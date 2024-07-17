@@ -199,7 +199,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.1.160",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"dead_dota",
   "resources":[
@@ -860,6 +860,7 @@
     {"id":{"name":"obj_show_me1","path":"objects/obj_show_me1/obj_show_me1.yy",},},
     {"id":{"name":"obj_show_me2","path":"objects/obj_show_me2/obj_show_me2.yy",},},
     {"id":{"name":"obj_show_me3","path":"objects/obj_show_me3/obj_show_me3.yy",},},
+    {"id":{"name":"obj_show_me4","path":"objects/obj_show_me4/obj_show_me4.yy",},},
     {"id":{"name":"obj_show_rgb","path":"objects/obj_show_rgb/obj_show_rgb.yy",},},
     {"id":{"name":"obj_silversing","path":"objects/obj_silversing/obj_silversing.yy",},},
     {"id":{"name":"obj_skill_roulette","path":"objects/obj_skill_roulette/obj_skill_roulette.yy",},},
@@ -1647,6 +1648,7 @@
     {"id":{"name":"snd_flash","path":"sounds/snd_flash/snd_flash.yy",},},
     {"id":{"name":"snd_fly4","path":"sounds/snd_fly4/snd_fly4.yy",},},
     {"id":{"name":"snd_gun1","path":"sounds/snd_gun1/snd_gun1.yy",},},
+    {"id":{"name":"snd_gun3_pick","path":"sounds/snd_gun3_pick/snd_gun3_pick.yy",},},
     {"id":{"name":"snd_gun3","path":"sounds/snd_gun3/snd_gun3.yy",},},
     {"id":{"name":"snd_hammer1","path":"sounds/snd_hammer1/snd_hammer1.yy",},},
     {"id":{"name":"snd_jam2","path":"sounds/snd_jam2/snd_jam2.yy",},},

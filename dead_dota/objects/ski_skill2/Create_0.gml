@@ -10,4 +10,4 @@ dmg = 0;
 YA = -1;
 alarm[1] = 1;
 
-audio_play_sound(ski_3_sound, 0, false);
+audio_play_sound(snd_ski2, 0, false);

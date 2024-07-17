@@ -13,7 +13,8 @@ global.money = 40000;
 global.team = irandom(1);
 var ran = irandom(99);
 surface_depth_disable(true);
-global.version = 284;
+display_reset(8, true);
+global.version = 285;
 global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, skill_obj) constructor {
 	self.spr = spr;
 	self.damage = damage;

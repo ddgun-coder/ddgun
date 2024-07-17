@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":4.002993,
+  "duration":3.075708,
   "name":"snd_time4_start",
   "parent":{
     "name":"time_skill",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_time4_start.mp3",
+  "soundFile":"snd_time4_start.wav",
   "type":0,
   "volume":1.0,
 }

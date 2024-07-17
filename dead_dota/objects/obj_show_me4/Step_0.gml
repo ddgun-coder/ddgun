@@ -1,0 +1,1 @@
+image_index = gpu_get_texfilter();

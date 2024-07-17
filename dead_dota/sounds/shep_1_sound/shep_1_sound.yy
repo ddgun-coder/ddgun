@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.228107,
+  "duration":0.223107,
   "name":"shep_1_sound",
   "parent":{
     "name":"effect_sound",

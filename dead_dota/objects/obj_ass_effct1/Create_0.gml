@@ -8,3 +8,4 @@ cid_id  = asset_get_index("testing" + string(cid));
 dmg = 0;
 YA = -1;
 alarm[1] = 1;
+audio_play_sound(snd_ass_hide, 0, false);

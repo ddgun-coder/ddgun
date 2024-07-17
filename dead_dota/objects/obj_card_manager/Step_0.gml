@@ -143,7 +143,7 @@ if (instance_exists(testing) and cur_card_str != noone) {
 		switch (cur_card_str.name_str) {
 			case "쓸만한 점멸" :
 				with (testing) {
-					stemina = 0;
+					stemina -= 1;
 				}
 				break;
 			case "폭죽" :

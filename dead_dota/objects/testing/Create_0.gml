@@ -1,6 +1,22 @@
 card_name = "noone";
 endemic_time = 0;
 buff_goto_speed = 0;
+function flash() {
+	hp -= 5;
+	flash_time = 40;
+	arm_type = "attack";
+	server78_create_instace(obj_flash, x, y);
+	for(var i = 50; i > 0; i--) {
+		if(place_free(x + lengthdir_x(5 * i, YA - 90), y + lengthdir_y(5 * i, YA - 90)))
+		{
+			x += lengthdir_x(5 * i, YA - 90);
+			y += lengthdir_y(5 * i, YA - 90);
+			break;
+		}//앞으로 자동이동
+	}
+	server78_create_instace(obj_flash_2, x, y);
+	effect_card();	
+}
 function try_level_up(_level) {
 	var val = prt_val_get(Val.level5_ration);
 	if (irandom(999) < val) {
@@ -504,7 +520,7 @@ color_cycle = 0;
 bullet = 0 // 산타 탄창
 skill_con = 0 // 연속 시전 스킬 횟수
 skill_con_time = 0 //연속 시전 스킬 지속
-global.show_me = true;
+global.show_me = false;
 
 function set_val_dif(val1, _serve_val, _buff_type) {
 	var val2 = val1 + "1";

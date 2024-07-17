@@ -22,6 +22,11 @@ if(hat_button_main.windows == 8) {
 			draw_text_bold(x + 325, y + 260, "서부 원 표시" );
 			draw_set_color(make_color_rgb(159, 162, 169));
 			draw_text(x + 325 , y + 260 , "서부 원 표시" );
+			
+			draw_set_color(c_black);
+			draw_text_bold(x + 325, y + 344, "anti-aliasing" );
+			draw_set_color(make_color_rgb(159, 162, 169));
+			draw_text(x + 325 , y + 344 , "anti-aliasing" );
 			break;
 		case 1 :
 			draw_text_bold(x + 272, y + 152, "BGM 설정" );
