@@ -21,6 +21,8 @@ if(hat_button_main.windows == 8 and image_index == 0) {
 	file_text_writeln(file);
 	file_text_write_real(file, global.wild_circle);
 	file_text_writeln(file);
+	file_text_write_real(file, gpu_get_texfilter());
+	file_text_writeln(file);
 	
 	file_text_close(file);
 	image_index = 1;

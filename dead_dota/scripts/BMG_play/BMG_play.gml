@@ -1,7 +1,7 @@
 function sound_draw() {
 	if (room != room_main) {
-		x = camera_get_view_x(view_camera[0]) + global.window_width - (1024 - xstart);
-		y = camera_get_view_y(view_camera[0]) + global.window_height - (768 - ystart);
+		x = camera_get_view_x(view_camera[view_current]) + global.window_width - (1024 - xstart);
+		y = camera_get_view_y(view_camera[view_current]) + global.window_height - (768 - ystart);
 	}
 	else {
 		if (hat_button_main.windows != 8) {
@@ -12,17 +12,22 @@ function sound_draw() {
 }
 
 function sound_draw_sounddot() {
+	var dx = global.window_width - (1024 - xstart);
+	var dy = global.window_height - (768 - ystart);
+	var draw_x, draw_y;
 	if (room != room_main) {
-		x = camera_get_view_x(view_camera[0]) + global.window_width - (1024 - xstart);
-		y = camera_get_view_y(view_camera[0]) + global.window_height - (768 - ystart);
+		x = camera_get_view_x(view_camera[view_current]) + dx;
+		y = camera_get_view_y(view_camera[view_current]) + dy;
+		draw_x = dx;
+		draw_y = dy + view_get_yport(0);
 	}
 	else {
 		if (hat_button_main.windows != 8) {
-			exit;	
+			return;
 		}	
+		draw_x = xstart;
+		draw_y = ystart;
 	}
-	var draw_x = global.window_width - (1024 - xstart);
-	var draw_y = global.window_height - (768 - ystart) + view_get_yport(0);
 	draw_sprite(sprite_index, image_index, draw_x, draw_y)
 	draw_sprite(spr_sounddot, 0, draw_x + (sound_x) * 64, draw_y + 32);
 }

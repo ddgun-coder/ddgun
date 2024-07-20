@@ -4144,6 +4144,11 @@ if (file_exists(path)) {
 	file_text_readln(file);
 	global.wild_circle = file_text_read_real(file);
 	file_text_readln(file);
+	var _filter = file_text_read_real(file);
+	file_text_readln(file);
+	if (_filter) {
+		gpu_set_texfilter(true);
+	}
 	global.window_width = max(global.window_width, 1024);
 	global.window_height = max(global.window_height, 768);
 	window_set_size(global.window_width, global.window_height + 18);

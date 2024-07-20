@@ -1,5 +1,5 @@
-x = camera_get_view_x(view_camera[0]) + global.window_width - (1024 - xstart);
-y = camera_get_view_y(view_camera[0]) + global.window_height - (768 - ystart);
+x = camera_get_view_x(view_camera[view_current]) + global.window_width - (1024 - xstart);
+y = camera_get_view_y(view_camera[view_current]) + global.window_height - (768 - ystart);
 ;
 if (room == room_tuto or room == room_in) {
 	draw_sprite(sprite_index, 0, x, y);
