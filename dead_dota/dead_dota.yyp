@@ -210,7 +210,6 @@
     {"id":{"name":"AnimationCurve1","path":"animcurves/AnimationCurve1/AnimationCurve1.yy",},},
     {"id":{"name":"AnimationCurve2","path":"animcurves/AnimationCurve2/AnimationCurve2.yy",},},
     {"id":{"name":"AnimationCurve3","path":"animcurves/AnimationCurve3/AnimationCurve3.yy",},},
-    {"id":{"name":"Extension1","path":"extensions/Extension1/Extension1.yy",},},
     {"id":{"name":"KorInput","path":"extensions/KorInput/KorInput.yy",},},
     {"id":{"name":"font_load","path":"fonts/font_load/font_load.yy",},},
     {"id":{"name":"font_number","path":"fonts/font_number/font_number.yy",},},
