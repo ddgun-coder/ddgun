@@ -1,1 +1,1 @@
-DMG_buff(21, buff_giligili, 30, 240);
+DMG_buff(16, buff_giligili, 30, 160);

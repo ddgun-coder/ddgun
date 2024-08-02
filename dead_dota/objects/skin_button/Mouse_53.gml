@@ -8,7 +8,6 @@ if (hat_button_main.windows == 5)
 		if (num < floor(sprite_get_number(global.hat) / 4)) {
 			global.skin = num;
 			only_main.do_effect = true;
-			hat_button_main.windows = 0;
 		}
 	}
 }

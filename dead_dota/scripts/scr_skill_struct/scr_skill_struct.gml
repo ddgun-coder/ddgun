@@ -25,36 +25,128 @@ global.skill_exp[1] = {
 	Pskill : ""
 }
 
+function const_skill(_name, _expl, _skill) constructor {
+	name = _name;
+	explain = _expl;
+	skill = _skill;
+}
+
+global.normal_attack = {
+	name : " [ A ] - 정권",
+	explain : "주먹을 내질러 적에게 10 기절 피해를 줍니다.",
+	skill : "-10 DMG",
+}
 
 global.skill_exp[1][0] = {
 	ui_type : 1,
 	attack_type : 1,
-	Dname : " [ A ] - 정권",
-	Dexplain : "주먹을 내질러 적에게 10 기절 피해를 줍니다.",
+	Dskill : global.normal_attack,
+		
 	attack_type1 : 1,
-	Dskill : "",
-	Qname : " [ D ] - 장풍",
-	Qexplain : "잠깐의 준비 후 장풍을 일자로 발사해 데미지를 준다",
-	Qskill : "- 38 DMG \n-' 가까이에서 사용하는 것이 좋다. '",
+	Qskill : {
+		name : " [ D ] - 장풍",
+		explain : "잠깐의 준비 후 장풍을 일자로 발사해 데미지를 준다",
+		skill : "- 38 DMG \n-' 가까이에서 사용하는 것이 좋다. '",		
+	}
 }
 
 global.skill_exp[1][1] = {
-	ui_type : 1,
-	attack_type : 0,
-    Qname : " [ Q ] - 연타",
-    Qexplain : "이동속도가 빨라지며 기절시간이 짧은 기본공격을 연속으로 사용한다.",
-    Qskill : "- 10 DMG \n-' 피격시 스킬중단 '",
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : {
+	    name : " [ Q ] - 연타",
+	    explain : "이동속도가 빨라지며 기절시간이 짧은 기본공격을 연속으로 사용한다.",
+	    skill : "- 10 DMG \n-' 피격시 스킬중단 '",
+	}
 }
 global.skill_exp[1][2] = {
-    Wname : " [ W ] - 대장풍",
-    Wexplain : "긴 준비 시간 후 거대한 장풍을 4연속 발사한다.",
-    Wskill : "- 40 DMG \n-' 피격시 스킬중단 '",
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+	    name : " [ W ] - 대장풍",
+	    explain : "긴 준비 시간 후 거대한 장풍을 4연속 발사한다.",
+	    skill : "- 40 DMG \n-' 피격시 스킬중단 '",
+	}
 }
 global.skill_exp[1][3] = {
-    Ename : " [ E ] - 네오레이저",
-    Eexplain : "긴 준비 시간 후 네오 레이저를 전방으로 발사한다.",
-    Eskill : "- 초당 4(40) DMG \n-' 피격시 스킬중단 '\n-' A키로 발사하세요. '\n-' 비기절 공격 '",
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+	    name : " [ E ] - 네오레이저",
+	    explain : "긴 준비 시간 후 네오 레이저를 전방으로 발사한다.",
+	    skill : "- 초당 4(40) DMG \n-' 피격시 스킬중단 '\n-' A키로 발사하세요. '\n-' 비기절 공격 '",
+	}
 }
+
+global.skill_exp[27][0] = {
+	ui_type : 1,
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ D ] - 돌진",
+		explain : "전방으로 빠르게 돌진한다.",
+		skill : "- 24 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '",	
+	}
+}
+
+global.skill_exp[27][1] = {
+	ui_type: 0,
+	attack_type: 1,
+
+	Dskill: [{	
+		level : 1,
+		name: " [ Q ] - 우골의 돌진",
+		explain: "전방으로 빠르게 돌진합니다.\n돌진 시간이 지날수록 속도가 빨라집니다.",
+		skill: "- 35 DMG\n- 피격 시 스킬 중단\n- 시전 중 좌우 키로 움직일 수 있습니다."
+	}, {
+		level : 3,
+		name: " [ Q ] - 우골의 돌진2",
+		explain: "전방으로 빠르게 돌진합니다.\n돌진 시간이 지날수록 속도가 빨라집니다.",
+		skill: "- 35 DMG\n- 피격 시 스킬 중단\n- 시전 중 방향키로 자유롭게 움직일 수 있습니다."
+	}],
+}
+
+global.skill_exp[27][2] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : {
+		name : " [ W ] - 광우돌진",
+		explain : "긴 준비시간 후 전방으로 빠르게 돌진한다",
+		skill : "- 49 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '\n-' 플레이어나 지형지물을 무시한다. '",
+	}
+}
+
+global.skill_exp[27][3] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : {
+		name : " [ E ] - 워낭소리",
+		explain : "아군/적군 모두 [ 돌진 ] 을 시전한다.",
+		skill : "-' 뇌절하지 마세요.. '",
+	}
+}
+
+/*
+global.skill_exp[27] = {
+	Dname : " [ D ] - 돌진",
+	Dexplain : "전방으로 빠르게 돌진한다.",
+	Dskill : "- 24 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '",
+	Qname : " [ Q ] - 우골의 돌진",
+	Qexplain : "전방으로 빠르게 돌진한다\n 돌진이 시간이 지날때마다 빨라진다.",
+	Qskill : "- 35 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 왼쪽 오르쪽 키로 움직 일 수 있다. '",
+	Wname : " [ W ] - 광우돌진",
+	Wexplain : "긴 준비시간 후 전방으로 빠르게 돌진한다",
+	Wskill : "- 49 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '\n-' 플레이어나 지형지물을 무시한다. '",
+	Ename : " [ E ] - 워낭소리",
+	Eexplain : "아군/적군 모두 [ 돌진 ] 을 시전한다.",
+	Eskill : "-' 뇌절하지 마세요.. '",
+	Pname : "",
+	Pexplain : "",
+	Pskill : ""
+}
+*/
 
 global.skill_exp[14] = {
 	Dname : " [ D ] -땅의 검술",
@@ -89,23 +181,6 @@ global.skill_exp[15] = {
 	Pname : "■ LV 4 ■ [ 패시브 ] - 희생  ",
 	Pexplain : " 자신이 죽으면 자신의 모든 동료들이 천사의 가호를 받게 됩니다. ",
 	Pskill : "-'자신이 사망할 시 아군 모두에게 상당량의 경험치를 준다.'",
-}
-global.skill_exp[27] = {
-	Dname : " [ D ] - 돌진",
-	Dexplain : "전방으로 빠르게 돌진한다.",
-	Dskill : "- 24 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '",
-	Qname : " [ Q ] - 우골의 돌진",
-	Qexplain : "전방으로 빠르게 돌진한다\n 돌진이 시간이 지날때마다 빨라진다.",
-	Qskill : "- 35 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 왼쪽 오르쪽 키로 움직 일 수 있다. '",
-	Wname : " [ W ] - 광우돌진",
-	Wexplain : "긴 준비시간 후 전방으로 빠르게 돌진한다",
-	Wskill : "- 49 DMG \n-' 피격시 스킬중단. '\n-' 시전 중 움직일 수없다. '\n-' 플레이어나 지형지물을 무시한다. '",
-	Ename : " [ E ] - 워낭소리",
-	Eexplain : "아군/적군 모두 [ 돌진 ] 을 시전한다.",
-	Eskill : "-' 뇌절하지 마세요.. '",
-	Pname : "",
-	Pexplain : "",
-	Pskill : ""
 }
 global.skill_exp[12] = {
 	Dname : " [ D ] - 메테오",

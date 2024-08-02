@@ -5,11 +5,7 @@ if (timeline_index == spear_1_act) {
 	server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
 	normal_play(spear_1_act1);
 }
-if (timeline_index == law_1_act) {
-	cancle_able = false;
-	server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-	normal_play(twiza_4_act2);
-}
+
 
 if (sturn <= 0) {
     if (timeline_index == ma_1_act) {

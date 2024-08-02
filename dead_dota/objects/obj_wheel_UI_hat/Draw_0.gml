@@ -3,7 +3,6 @@
 draw_sprite_ext(spr_wheel1, 0, x, y, 1, 1, 0, c_white,1)
 var draw_y = y;
 var n = max((hat_button.cur_height - 3), 1);
-show_debug_message(n);
 with(hat_button) {
 	draw_y = other.y + (my_layer / n) * 316;
 }

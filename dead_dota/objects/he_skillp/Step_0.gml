@@ -17,8 +17,8 @@ if (cid_id.live != 1) {
 	instance_destroy()	
 }
 
-image_xscale = cid_id.big_val * 1
-image_yscale = cid_id.big_val * 1
+image_xscale = cid_id.big_val * 1.2
+image_yscale = cid_id.big_val * 1.2
 x = cid_id.x;
 y = cid_id.y;
 

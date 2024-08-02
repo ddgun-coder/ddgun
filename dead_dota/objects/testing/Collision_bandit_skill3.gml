@@ -1,1 +1,1 @@
-DMG(29, musa_skill1, 24);
+DMG(49, musa_skill1, 24);

@@ -1,1 +1,3 @@
-server78_create_instace(hunt_skill3, x + lengthdir_x(1250 * big_val, YA - 90), y + lengthdir_y(1250 * big_val, YA - 90));
+view_visible[1] = false;
+view_visible[0] = true;
+view_where = 0;

@@ -1,0 +1,1 @@
+server78_create_instace(hunt_skill3, x + lengthdir_x(1250 * big_val, YA - 90), y + lengthdir_y(1250 * big_val, YA - 90));

@@ -11,7 +11,7 @@ if (hat_button_main.windows == 4)
 		 }
       }
    }
-   if (point_in_rectangle(mouse_x, mouse_y, x + 325, y - 201, x + 355, y - 169)) {
+   if (point_in_rectangle(mouse_x, mouse_y, x + 285, y - 201, x + 330, y - 169)) {
 		global.face = face_array[irandom(size - 1)];
 		only_main.do_effect = true;
    }

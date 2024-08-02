@@ -1,7 +1,7 @@
 if (timeline_index == spear_3_act) {
-    if (mana >= 25) {
+    if (mana >= 30) {
 	    if(a_a_cooltime < 0) {
-		    prt_val_add(Val.mp, -25);
+		    prt_val_add(Val.mp, -30);
 			arm_all_normal();
 			a_a_cooltime = 40;
 			arm_type = "attack"
@@ -17,7 +17,7 @@ if (timeline_index == spear_3_act) {
 	}
 	else {
 		skill_say_time = 30;
-		skill_say = "MP: " + string(mana) + " / "  + "25(25)";
+		skill_say = "MP: " + string(mana) + " / "  + "30(30)";
 	}
 }
 if (level >= 1) {

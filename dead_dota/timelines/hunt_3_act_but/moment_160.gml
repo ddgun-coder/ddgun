@@ -1,1 +1,6 @@
-server78_create_instace(hunt_skill3, x + lengthdir_x(1250 * big_val, YA - 90), y + lengthdir_y(1250 * big_val, YA - 90));
+obj_telescope_view.tele = false;
+a_possible = 1;
+effect_index = spr_none;
+cancle_able = false;
+arm_type = "normal";
+server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);

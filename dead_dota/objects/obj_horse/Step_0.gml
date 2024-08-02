@@ -9,17 +9,19 @@ if (cid_id == global.my_cid_id) {
 			jumping = true;
 			temp_x = x;
 			temp_y = y;
-			for (var i = 20; i > 0; i--) {
-				if(place_free(temp_x + lengthdir_x((i) * 30, YA - 90), temp_y + lengthdir_y((i) * 30, YA - 90))) {
-					if ((temp_x + lengthdir_x((i) * 30, YA - 90) < room_width) and temp_x + lengthdir_x((i) * 30, YA - 90) > 0) {
-						if ((temp_y + lengthdir_y((i) * 30, YA - 90) < room_height) and temp_y + lengthdir_y((i) * 30, YA - 90) > 0) {
+			var _speed = 25;
+			var _max_time = 20;
+			for (var i = _max_time; i > 0; i--) {
+				if(place_free(temp_x + lengthdir_x((i) * _speed, YA - 90), temp_y + lengthdir_y((i) * _speed, YA - 90))) {
+					if ((temp_x + lengthdir_x((i) * _speed, YA - 90) < room_width) and temp_x + lengthdir_x((i) * _speed, YA - 90) > 0) {
+						if ((temp_y + lengthdir_y((i) * _speed, YA - 90) < room_height) and temp_y + lengthdir_y((i) * _speed, YA - 90) > 0) {
 							break;	
 						}
 					}
 				}
 			}
 			jump_time = i;
-			jump_try = 30;	
+			jump_try = _speed;	
 		}
 		testing.a_a_cooltime = 20;
 		testing.a_cooltime = 20

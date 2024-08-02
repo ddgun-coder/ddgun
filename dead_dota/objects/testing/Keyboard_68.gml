@@ -2,7 +2,7 @@ if (timeline_index == spear_3_act) {
 	if (a_possible = false) {
 						if (mana >= 0) {
 							if(a_a_cooltime < 0) {
-								prt_val_add(Val.mp, -24);
+								prt_val_add(Val.mp, -30);
 								a_a_cooltime = 40;
 								terror_charge = 11
 								server78_create_instace(spear_skill1, x + lengthdir_x(22 * big_val, YA - 90), y + lengthdir_y(22 * big_val, YA - 90));
@@ -10,7 +10,7 @@ if (timeline_index == spear_3_act) {
 						}
 						else {
 							skill_say_time = 30;
-							skill_say = "MP: " + string(mana) + " / "  + "24(0)";
+							skill_say = "MP: " + string(mana) + " / "  + "30(0)";
 						}
 					}
 }

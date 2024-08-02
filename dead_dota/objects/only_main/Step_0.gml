@@ -17,12 +17,12 @@ if (cycle = 0) {
 			case 0 :
 				arm_type_num = 1
 				arm_movement(0, 1, 2, -2);
-				foot_movement(0, 0, -2, 2);
+				foot_movement(0, 0, -1, 1);
 			break;
 			case 1 :
 				arm_type_num = 0
 				arm_movement(0, 1, -2, 2);
-				foot_movement(0, 0, 2, -2);
+				foot_movement(0, 0, 1, -1);
 			break;
 		}
 	}

@@ -12,7 +12,7 @@ if (cid_id = global.my_cid_id) {
 					perfect = false
 					testing.x_cooltime = 44
 					c_time = 20
-					prt_val_add(Val.mp, 12);
+					prt_val_add(Val.mp, 18);
 					switch(Em) {
 						case 0:
 							server202_sound(music_1_sound);

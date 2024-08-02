@@ -60,6 +60,7 @@ if (instance_exists(obj_card_manager)) {
 		arm_type = "ouch"
 		a_possible = false;
 		temp_YA = YA;
+		counter = 2;
 	}
 	card_name = obj_card_manager.get_name();
 }
@@ -1745,6 +1746,7 @@ if(live == 1) {
 		a_cooltime--;
 	} //공격 정상화
 	
+
 	if (sturn == 1) {
 		mouse_posible = false;
 		effect_index = spr_none;
@@ -2346,7 +2348,7 @@ if(live == 1) {
 		}
 	}//caps_lock키 움직임 정상화
 
-	ouch_check_after();
+	ouch_check_after()
 	if (a_cycle > 0) {
 		a_cycle -= 1
 	} // 손 순환을 위한 감소 
@@ -3624,27 +3626,43 @@ if(live == 1) {
 					switch(arm_type_num) {
 						case 0 :
 							temp_YA = YA;
-							left_arm_YA = 0 ;
+							left_arm_YA = -125;
+							right_arm_YA = 125;
+							left_arm_yscale = 1;
+							right_arm_yscale = 1;
+							arm_type_num = 1;
+							arm_movement(-8, 8, 0, 0);
+							a_cycle = 6;
+						break;
+						case 1 :
+							temp_YA = YA;
+							left_arm_YA = 0;
+							right_arm_YA = 0;
 							left_arm_yscale = 1;
 							right_arm_yscale = 1;
 							right_arm_YA = 0 ;
-							arm_type_num = 1;
+							arm_type_num = 2;
 							arm_movement(8, -8, 2, 2);
 							a_cycle = 12;
 						break;
-						case 1 :
-							arm_type_num = 2
-							arm_movement(5, -5, 5, 5);
-							left_arm_YA = 0 + 270;
-							right_arm_YA = 0 + 90;
-							all_YA_change_delta2(60);
+						case 2 :
+							arm_type_num = 3
+							arm_movement(5, 0, 5, 5);
+							left_arm_YA = 0;
+							right_arm_YA = 0 + 120;
+							face_YA = 60
+							hat_angle = 60
 							temp_YA += 1;
 							server78_create_instace(bam_skill11, x, y);
-							a_cycle = 38; 
+							a_cycle = 20; 
 						break;
-							case 2 :
+							case 3 :
 							arm_type = "none"
 							arm_type_more = "none"
+							left_arm_YA = 0;
+							right_arm_YA = 0;
+							face_YA = 0
+							hat_angle = 0
 							arm_movement(0, 0, 0, 0);
 							foot_movement(0, 0, 0, 0);
 							all_spin_limit = YA;
@@ -4392,7 +4410,9 @@ terror_charge = 20240524;
 			else {
 				alarm_set(4, 220);
 			}
-			if (!instance_exists(obj_hurt_list_UI)) instance_create_depth(0, 0, depth, obj_hurt_list_UI);
+			if (global.show_kill_ui) {
+				if (!instance_exists(obj_hurt_list_UI)) instance_create_depth(0, 0, depth, obj_hurt_list_UI);
+			}
 			if (level == 4) {
 				if (global.team == 2) {
 					for (var i = 0; i < 6; i++) {
@@ -5041,23 +5061,51 @@ if(level > 2) {
 if(a_cooltime <= 0 and sturn <= 0) {
 	if(level > 1) {
 	    if (_key_w) {
-		    if (global.hat == spr_hat77 and babo_change = false) {
-			    if (gi >= 100) {
-				    prt_val_add(Val.gi, -100);
-					babo_change = true
-					server202_sound(snd_babo3);
-					server77_equal(serve_val.babo_change, babo_change, buffer_bool);
-					a_cooltime = 40
-			    }
-			    else {
-				    skill_say_time = 30;
-				    skill_say = "GI: " + string(gi) + " / 100(100)";
+		    if (global.hat == spr_hat77){
+				if(babo_change = false) {
+					if (gi >= 100) {
+						prt_val_add(Val.gi, -100);
+						babo_change = true
+						server202_sound(snd_babo3);
+						server77_equal(serve_val.babo_change, babo_change, buffer_bool);
+						a_cooltime = 40
+					}
+					else {
+						skill_say_time = 30;
+						skill_say = "GI: " + string(gi) + " / 100(100)";
+					}
 				}
-		    }
-	    }
-	}//바보 바로변신
+				else {
+					if (mana >= 90) {
+						prt_val_add(Val.mp, -90);
+						normal_play(babo_3_act)
+					}
+					else {
+						skill_say_time = 30;
+						skill_say = "MP: " + string(mana) + " / 90(90)";
+					}
+				}
+			}
+		}//바보 바로변신
+	}
 }
 
+if(a_cooltime <= 0 and sturn <= 0) {
+	if(level > 1) {
+		if (_key_w) {
+		    if (global.hat == spr_hat46) {
+				if (stemina >= 100) {
+					normal_play(bandit_3_act);
+					stemina -= 200
+				}
+				else {
+					skill_say_time = 30;
+					skill_say = "스테미나: " + string(stemina) + " / " + string(100) + "(200)";
+				}
+			}
+		}
+	}
+}
 
 
 if (is_babo_angle) {

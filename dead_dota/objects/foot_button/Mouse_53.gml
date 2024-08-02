@@ -10,7 +10,6 @@ if (hat_button_main.windows == 3)
 			   global.foot = foot_array[number];
 			   global.foot_index = number;
 			   only_main.do_effect = true;
-			   hat_button_main.windows = 0;
 			}
 		}
 	}

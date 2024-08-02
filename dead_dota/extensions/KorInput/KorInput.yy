@@ -16,9 +16,9 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"DisableIME.dll","final":"","functions":[
+    {"$GMExtensionFile":"","%Name":"DisableIME.dll","constants":[],"copyToTargets":-1,"filename":"DisableIME.dll","final":"set_language","functions":[
         {"$GMExtensionFunction":"","%Name":"set_language","argCount":0,"args":[1,],"documentation":"","externalName":"set_language","help":"","hidden":false,"kind":1,"name":"set_language","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":1,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"set_language","kind":1,"name":"DisableIME.dll","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,
@@ -40,7 +40,9 @@
   "maclinkerflags":"",
   "macsourcedir":"",
   "name":"KorInput",
-  "options":[],
+  "options":[
+    {"$GMExtensionOption":"","%Name":"__extOptLabel","defaultValue":"0","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"9cf01537-c5e2-412c-9a0b-e4c8269f337e","hidden":false,"listItems":[],"name":"__extOptLabel","optType":5,"resourceType":"GMExtensionOption","resourceVersion":"2.0",},
+  ],
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{

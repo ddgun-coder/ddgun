@@ -136,7 +136,7 @@ function do_charge() {
 	var show = instance_create_depth(x, y, depth - 1, DMG_show);
 	show.d = 20;
 	to_testingXY = true;
-	to_testingXY_time = 100;
+	to_testingXY_time = 80;
 }
 function go_to_back() {
 	to_testingXY = false;

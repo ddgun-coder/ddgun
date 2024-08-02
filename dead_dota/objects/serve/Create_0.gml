@@ -186,7 +186,6 @@ function case111_func() {
     if (cid > 25) {
         exit	
     }
-	show_debug_message(type);
 	switch(type) {
 		case 0:
 			var level5_ration = buffer_read(buff,buffer_u8);

@@ -1,5 +1,5 @@
 arm_movement(0, 0, 0, 0);
-a_cooltime = 140;
+a_cooltime = 75;
 arm_type = "attack";
 all_spin = true;
 all_spin_limit = 99999;

@@ -403,7 +403,7 @@ else {
 	explain = "";
 }
 if (instance_exists(shop_UI) and hat_button_main.windows == 1) {
-	 if (point_in_rectangle(mouse_x, mouse_y, hat_button.x + 325, hat_button.y - 201, hat_button.x + 355, hat_button.y - 169)) {
+	 if (point_in_rectangle(mouse_x, mouse_y, hat_button.x + 285, hat_button.y - 201, hat_button.x + 330, hat_button.y - 169)) {
 		name = "무작위";
 		explain = "게임 시작시 무작위 모자가 된다.";
 		skill = "난이도 ?"

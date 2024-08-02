@@ -30,22 +30,22 @@ function layer_get_ins_id() {
 }
 layer_get_ins_id();
 function set_layer_activate(ind) {
-	global.sub_setting = ind;
-	var n = 0;
-	for (var i = 0; i < size; i++) {
-		n = array_length(ins_id[i]);
-		if (i == global.sub_setting) {
-			for (var j = 0; j < n; j++) {
-				if (ins_id[i][j].object_index != obj_window_resolution) {
-					instance_activate_object(ins_id[i][j]);
-				}
-			}
-		}
-		else {
-			for (var j = 0; j < n; j++) {
-				instance_deactivate_object(ins_id[i][j]);
-			}
-		}
-	}
+    global.sub_setting = ind;
+    var n = 0;
+    for (var i = 0; i < size; i++) {
+        n = array_length(ins_id[i]);
+        if (i == global.sub_setting) {
+            for (var j = 0; j < n; j++) {
+                if (ins_id[i][j].object_index != obj_window_resolution) {
+                    instance_activate_object(ins_id[i][j]);
+                }
+            }
+        }
+        else {
+            for (var j = 0; j < n; j++) {
+                instance_deactivate_object(ins_id[i][j]);
+            }
+        }
+    }
 }
 set_layer_activate(0);

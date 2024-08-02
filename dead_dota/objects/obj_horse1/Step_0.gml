@@ -2,7 +2,7 @@ if (cid_id == global.my_cid_id) {
 	x = testing.x;
 	y = testing.y;
 	if (charge < 45) {
-	testing.extra_speed = 1;
+		testing.extra_speed = 1;
 	}
 	else {
 		testing.a_a_cooltime = 10;

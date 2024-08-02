@@ -324,15 +324,6 @@ function dmg_cal(D, _other) { // 공격 받음
 					case "pwiza_skill3_2" :
 				       skill_index = pwiza_3_act
 					break;//예외처리 (불법)		
-					case "bandit_skill3_1" :
-				       skill_index = bandit_3_act
-					break;		
-					case "bandit_skill3_2" :
-				       skill_index = bandit_3_act
-					break;		
-					case "bandit_skill3_3" :
-				       skill_index = bandit_3_act
-					break;//예외처리 (밴디트)
 					case "fheal_skill41" :
 				       skill_index = fheal_4_act
 					break;		

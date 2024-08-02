@@ -12,10 +12,15 @@ if (hat_button_main.windows == 1)
          global.skin = 0;
       }
    }
-   if (point_in_rectangle(mouse_x, mouse_y, x + 325, y - 201, x + 355, y - 169)) {
+   if (point_in_rectangle(mouse_x, mouse_y, x + 285, y - 201, x + 330, y - 169)) {
 		global.hat = spr_hat_rand;
 		global.random_hat = true;
 		only_main.do_effect = true;
    }
 }
 
+if (hat_button_main.windows > 0 and hat_button_main.windows < 8) {
+	if (point_in_rectangle(mouse_x, mouse_y, x + 325, y - 201, x + 370, y - 169)) {
+		hat_button_main.windows = 0
+   }	
+}

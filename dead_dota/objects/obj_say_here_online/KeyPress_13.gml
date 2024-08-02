@@ -136,7 +136,7 @@ if (instance_exists(testing)) {
 		
 					case "%":
 						if (global.hat == spr_hat13 and testing.level >= 0 and testing.a_cooltime <= 0) {
-							if (testing.gi >= 220 - testing.level * 40) {
+							if (testing.gi >= 260 - testing.level * 40) {
 								var delet = string_delete(global.chat, 1, 1);
 								var find = false;
 								var teama = false;

@@ -10,8 +10,8 @@ function surt_set() {
 		var sub_num = 0;
 		var num = array_length(global.hurt_list);
 		if (num > 10) {
-			num = 10;
 			sub_num = num - 10;
+			num = 10;
 		}
 		var color;
 		var face_xoffset = sprite_get_xoffset(spr_face1);

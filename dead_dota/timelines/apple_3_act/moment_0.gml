@@ -6,6 +6,7 @@ effect_index = effect_book;
 spr_armr_more = spr_ballpen;
 temp_YA = YA;
 cancle_able = true;
+server49_create_instance_str(obj_cutscene, global.window_width / 2 - 300, global.window_height - 300, "(뭔가 적는 중..)");
 server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
 buffer_seek(buff_chat, buffer_seek_start, 0);
 	

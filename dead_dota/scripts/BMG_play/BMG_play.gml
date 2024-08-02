@@ -27,7 +27,7 @@ function sound_draw_sounddot() {
 		}	
 		draw_x = xstart;
 		draw_y = ystart + view_get_yport(0);
-	}
+	}	
 	draw_sprite(sprite_index, image_index, draw_x, draw_y)
 	draw_sprite(spr_sounddot, 0, draw_x + (sound_x) * 64, draw_y + 32);
 }

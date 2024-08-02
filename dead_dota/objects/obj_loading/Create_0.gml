@@ -13,7 +13,7 @@ global.money = 40000;
 global.team = irandom(1);
 var ran = irandom(99);
 surface_depth_disable(true);
-global.version = 286;
+global.version = 287;
 global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, skill_obj) constructor {
 	self.spr = spr;
 	self.damage = damage;
@@ -24,6 +24,7 @@ global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, 
 	self.skill_obj = skill_obj;
 	num = 1;
 }
+global.show_kill_ui = true;
 global.hurt_list = [];
 if (ran < 10) {									 
 	ran = "0" + string(ran); 
@@ -123,8 +124,8 @@ global.Dskill[$ "spr_hat3"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat3,
-	mana_max : function() { return  55 - testing.level * 5 },
-	mana : function() { return  55 - testing.level * 5 },
+	mana_max : function() { return  50 - testing.level * 5 },
+	mana : function() { return  50 - testing.level * 5 },
 }
 global.Dskill[$ "spr_hat4"] = {
 	timeline : function() { return EQ_1_act },
@@ -470,16 +471,18 @@ global.Dskill[$ "spr_hat32"] = {
 	mana_max : function() { return  60 },
 	mana : function() { return  60 },
 }
+
 global.Dskill[$ "spr_hat33"] = {
-	timeline : function() { return law_1_act },
+	timeline : function() { return twiza_4_act2 },
 	gi_max : function() { return 0 },
 	gi : function() { return 0 },
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat33,
-	mana_max : function() { return  110 },
-	mana : function() { return  140 },
+	mana_max : function() { return  110 - testing.level * 5 },
+	mana : function() { return  140 - testing.level * 5 },
 }
+
 global.Dskill[$ "spr_hat34"] = {
 	timeline : function() { return p_2_act },
 	gi_max : function() { return 0 },
@@ -578,7 +581,7 @@ global.Dskill[$ "spr_hat43"] = {
 	exception : 0,
 	case_name : spr_hat43,
 	mana_max : function() { return  0 },
-	mana : function() { return  32 },
+	mana : function() { return  30 },
 }
 global.Dskill[$ "spr_hat44"] = {
 	timeline : function() { return pwiza_1_act },
@@ -637,8 +640,8 @@ global.Dskill[$ "spr_hat49"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat49,
-	mana_max : function() { return  25 },
-	mana : function() { return  30 },
+	mana_max : function() { return  20 },
+	mana : function() { return  25 },
 }
 global.Dskill[$ "spr_hat50"] = {
 	timeline : function() { return sea_1_act },
@@ -830,8 +833,8 @@ global.Dskill[$ "spr_hat57"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat57,
-	mana_max : function() { return  38 },
-	mana : function() { return  38 },
+	mana_max : function() { return  33 },
+	mana : function() { return  33 },
 }
 global.Dskill[$ "spr_hat58"] = {
 	timeline : function() { return nk_1_act1 },
@@ -860,8 +863,8 @@ global.Dskill[$ "spr_hat60"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat60,
-	mana_max : function() { return  60 - testing.level * 10 },
-	mana : function() { return  60 - testing.level * 10 },
+	mana_max : function() { return  60 - testing.level * 5 },
+	mana : function() { return  60 - testing.level * 5 },
 }
 global.Dskill[$ "spr_hat61"] = {
 	timeline : function() { return nin_1_act },
@@ -1172,7 +1175,7 @@ global.Qskill[$ "spr_hat43"] = {
 	gi_max : function() { return 0 },
 	gi : function() { return 0 },
 	func : function() {
-		prt_val_add(Val.mp, -25);
+		prt_val_add(Val.mp, -30);
 		normal_play(sward_2_act);
 		arm_all_normal();
 		a_a_cooltime = 200
@@ -1191,8 +1194,8 @@ global.Qskill[$ "spr_hat43"] = {
 	},
 	exception : true,
 	case_name : spr_hat43,
-	mana_max : function() { return  25 },
-	mana : function() { return  25 },
+	mana_max : function() { return  30 },
+	mana : function() { return  30 },
 }
 global.Qskill[$ "spr_hat15"] = {
 	timeline : function() { return noone },
@@ -1595,8 +1598,8 @@ global.Qskill[$ "spr_hat49"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat49,
-	mana_max : function() { return  80 },
-	mana : function() { return  80 },
+	mana_max : function() { return  75 },
+	mana : function() { return  75 },
 }
 global.Qskill[$ "spr_hat50"] = {
 	timeline : function() { return sea_2_act },
@@ -1775,8 +1778,8 @@ global.Qskill[$ "spr_hat57"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat57,
-	mana_max : function() { return  69 },
-	mana : function() { return  69 },
+	mana_max : function() { return  58 },
+	mana : function() { return  58 },
 }
 global.Qskill[$ "spr_hat58"] = {
 	timeline : function() { return nk_2_act },
@@ -2367,8 +2370,8 @@ global.Wskill[$ "spr_hat33"] = {
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat33,
-	mana_max : function() { return  85 },
-	mana : function() { return  85 },
+	mana_max : function() { return  75 },
+	mana : function() { return  75 },
 }
 global.Wskill[$ "spr_hat34"] = {
 	timeline : function() { return wing_2_act },
@@ -2452,8 +2455,8 @@ global.Wskill[$ "spr_hat41"] = {
 }
 global.Wskill[$ "spr_hat43"] = {
 	timeline : function() { return spear_3_act0 },
-	gi_max : function() { return  70 },
-	gi : function() { return  70 },
+	gi_max : function() { return  95 },
+	gi : function() { return  95 },
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat43,
@@ -2489,16 +2492,6 @@ global.Wskill[$ "spr_hat45"] = {
 	case_name : spr_hat45,
 	mana_max : function() { return  51 },
 	mana : function() { return  51 },
-}
-global.Wskill[$ "spr_hat46"] = {
-	timeline : function() { return bandit_3_act },
-	gi_max : function() { return 0 },
-	gi : function() { return 0 },
-	func : undefined,
-	exception : 0,
-	case_name : spr_hat46,
-	mana_max : function() { return  68 },
-	mana : function() { return  68 },
 }
 global.Wskill[$ "spr_hat47"] = {
 	timeline : function() { return gilmak_3_act },
@@ -2901,6 +2894,7 @@ global.Wskill[$ "spr_hat76"] = {
 	mana_max : function() { return 0 },
 	mana : function() { return 0 },
 }
+
 global.Wskill[$ "spr_hat75"] = {
 	timeline : function() { return skill_index },
 	gi_max : function() { return  125 },
@@ -3366,8 +3360,8 @@ global.Eskill[$ "spr_hat45"] = {
 }
 global.Eskill[$ "spr_hat46"] = {
 	timeline : function() { return bandit_4_act },
-	gi_max : function() { return  180 },
-	gi : function() { return  180 },
+	gi_max : function() { return  200 },
+	gi : function() { return  200 },
 	func : undefined,
 	exception : 0,
 	case_name : spr_hat46,
@@ -4145,6 +4139,8 @@ if (file_exists(path)) {
 	global.wild_circle = file_text_read_real(file);
 	file_text_readln(file);
 	var _filter = file_text_read_real(file);
+	file_text_readln(file);
+	global.show_kill_ui = file_text_read_real(file);
 	file_text_readln(file);
 	if (_filter) {
 		gpu_set_texfilter(true);

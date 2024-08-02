@@ -1,5 +1,5 @@
 arm_all_normal();
-a_cooltime = 64;
+a_cooltime = 40;
 arm_type = "attack"
 spr_armr_more = spr_coca1;
 right_arm_YA = 0 - 180;

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.53161,
+  "duration":0.753021,
   "name":"snd_gun1",
   "parent":{
     "name":"gun_skills",
