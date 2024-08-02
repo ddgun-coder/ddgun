@@ -25,10 +25,10 @@ if (Dskill_is_array) {
 	_explain = Dskill_array[Dskill_index].explain;
 	_skill = Dskill_array[Dskill_index].skill;
 	if (Dskill_index - 1 >= 0){ 
-		draw_sprite(spr_ui_skill_arrow, 0, _drawx - 32, _drawy + 214 / 2);
+		draw_sprite(spr_ui_skill_arrow, 0, _drawx - arrow_xoffset, _drawy + arrow_yoffset);
 	}
 	else if (Dskill_index < Dskill_array_num - 1) {
-		draw_sprite(spr_ui_skill_arrow, 1, _drawx + 32 + 343, _drawy + 214 / 2);	
+		draw_sprite(spr_ui_skill_arrow, 1, _drawx + arrow_xoffset + sprite_get_width(spr_skill_ui_type), _drawy + arrow_yoffset);	
 	}
 	
 }

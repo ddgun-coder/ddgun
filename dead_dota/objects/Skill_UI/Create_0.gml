@@ -36,6 +36,9 @@ Qskill_array = [];
 
 cur_hat = noone;
 
+arrow_xoffset = sprite_get_xoffset(spr_ui_skill_arrow);
+arrow_yoffset = sprite_get_height(spr_skill_ui_type) / 2;
+
 function switch_window() {
 	windows = !windows;	
 	set_skill_variables();
@@ -49,7 +52,7 @@ function set_skill_variables() {
 	else {
 		_my_level = 0;	
 	}
-	var _ind = array_get_index(global.hat_array, global.hat);
+	var _ind = real(string_digits(sprite_get_name(global.hat)));
 	var out = true;
 	if (_ind == -1) return;
 	if (array_length(global.skill_exp) > _ind) {
