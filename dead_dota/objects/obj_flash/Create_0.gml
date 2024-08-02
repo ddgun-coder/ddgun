@@ -22,8 +22,8 @@ function set_surf_to_cid_id() {
 					other.copied = true;
 					other.copied_YA = YA;
 					other.copied_big_val = big_val;
-					gpu_set_blendequation(bm_eq_subtract);
-					surface_set_target(temp_surf);
+					gpu_set_blendmode(bm_subtract);
+					surface_set_target(temp_surf);	
 					draw_clear(#FFF568);
 					draw_surface(surf, 0, 0);
 					surface_reset_target();
@@ -43,7 +43,7 @@ function set_surf_to_cid_id() {
 					other.copied = true;
 					other.copied_YA = YA;
 					other.copied_big_val = big_val;
-					gpu_set_blendequation(bm_eq_subtract);
+					gpu_set_blendmode(bm_subtract);
 					surface_set_target(temp_surf);
 					draw_clear(#FFF568);
 					draw_surface(surf, 0, 0);

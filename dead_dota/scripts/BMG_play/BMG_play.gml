@@ -16,8 +16,8 @@ function sound_draw_sounddot() {
 	var dy = global.window_height - (768 - ystart);
 	var draw_x, draw_y;
 	if (room != room_main) {
-		x = camera_get_view_x(view_camera[view_current]) + dx;
-		y = camera_get_view_y(view_camera[view_current]) + dy;
+		x = camera_get_view_x(view_camera[0]) + dx;
+		y = camera_get_view_y(view_camera[0]) + dy;
 		draw_x = dx;
 		draw_y = dy + view_get_yport(0);
 	}
@@ -26,7 +26,7 @@ function sound_draw_sounddot() {
 			return;
 		}	
 		draw_x = xstart;
-		draw_y = ystart;
+		draw_y = ystart + view_get_yport(0);
 	}
 	draw_sprite(sprite_index, image_index, draw_x, draw_y)
 	draw_sprite(spr_sounddot, 0, draw_x + (sound_x) * 64, draw_y + 32);

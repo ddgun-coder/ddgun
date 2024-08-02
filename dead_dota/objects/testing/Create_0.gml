@@ -1,6 +1,137 @@
 card_name = "noone";
 endemic_time = 0;
 buff_goto_speed = 0;
+skill_used = false;
+ouch_after = false;
+function ouch_check() {
+	if (arm_type == "ouch")
+	{
+		seq_end();
+		ouch_after = true;
+		first_item_play = false;
+		keyboard_checkE = false;
+		keyboard_checkQ = false;
+		keyboard_checkD = false;
+		keyboard_checkW = false;
+		is_babo_angle_show = false;
+		target_start(false);
+		spin_steadly_start(false);
+		left_arm_get_bigger = false;
+		face_variable = 0;
+		server77_equal(serve_val.face_variable, 0, buffer_u8);
+		if(global.stats = spr_stats2){
+		    b_cooltime = 200
+		}
+		if (timeline_position >= 0 and skill_used == false) {
+			timeline_running = 0;
+		}
+		only_hat = false;
+		ski_ready = false
+		hat_bye = false;
+		server77_equal(serve_val.only_hat, only_hat, buffer_bool);
+		server77_equal(serve_val.hat_bye, hat_bye, buffer_bool);
+		all_spin = 0;
+		go_to_speed = 0;
+		go_to_speed_solid = 0;
+		jumping = false;
+		a_charging = 0;
+		arm_all_normal();
+		left_arm_YA = 0 + 270;
+		right_arm_YA = 0 + 90;
+		charge = false;
+		arm_movement(5, -5, 5, 5);
+		if (big_shild = false) {
+			if (instance_exists(serve)) {
+				if (serve.kazino_time < 0) {
+					go_to_scale = main_big_val * stats_big_val;		
+				}
+			}
+		}
+		if (sturn <= 0){
+			if (nu_on == true) {
+				nu_on = false;
+				if (go_to_scale < 1) {
+					go_to_scale = main_big_val * stats_big_val;
+				}
+				big_val = 1;
+				if (normal_attack_type == spr_bigsaw) {
+					aring_amount--;
+					if (aring_amount < 1) {
+						normal_attack_type = spr_none;
+					}
+				}
+				else {
+					normal_attack_type = spr_none;
+				}
+				face_variable = 0;
+				if (no_change == false) {
+					terror_charge = 0;
+					server77_equal(serve_val.terror_charge, 0, buffer_u8);
+				}
+				server77_equal(serve_val.face_variable, 0, buffer_u8);
+				server202_sound(nu_3_sound_cancle);
+
+				buffer_seek(buff_fast, buffer_seek_start, 0);
+	
+				buffer_write(buff_fast,buffer_u8,50);//50은 핵폭발관리;
+				buffer_write(buff_fast,buffer_u8,2);
+	
+				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
+			}
+			shild = false;
+			arm_type = "normal"
+			if (global.hat = spr_hat75) {
+			    combo_time = 0
+			}
+			EQ = false;
+			ride = false;
+			spin_scale = 1
+			counter_attak = false
+			extra_speed = 0
+			if (normal_attack_type == spr_bigsaw) {
+					aring_amount -= 1;
+					if (aring_amount < 1) {
+						normal_attack_type = spr_none;
+					}
+				}
+				else {
+					normal_attack_type = spr_none;
+				}
+			high_speed = 1
+			horse = false
+			face_YA = 0
+			hat_angle = 0
+			hide_bam = false
+			YA_changeable = false;
+			view_visible[0] = true;
+			view_visible[2] = false;
+			view_visible[3] = false;
+			view_where = 0;
+			obj_telescope_view.tele = false;
+			hat_move = false;
+			big_shild = false;
+			server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
+			if (buff_index != buff_giligili2 and a_cooltime < 1 and a_possible == true) {
+				go_soild = false;
+			}
+		}
+	}//공격을 받았다!, 피격 상호작용
+}
+
+function ouch_check_after() {
+	if (ouch_after) {
+		ouch_after = false;	
+		if (no_change == false) {
+			a_cooltime = 0;
+			cancle_able = false;
+			spin_able = false;
+			a_possible = true;
+			YA2 = YA;
+		}
+	}
+}
+
+
 function flash() {
 	hp -= 5;
 	flash_time = 200;
@@ -555,6 +686,7 @@ function mana_gi_control(val) {
 }
 
 function skill_mana(_val_max, _val, _act, _func = undefined, _hp = -1, _a_a_cooltime = -1) {
+	skill_used = true;
 	_val = mana_gi_control(_val);
 	if (_a_a_cooltime != -1 and a_a_cooltime > 0) {
 		skill_say_time = 30;
@@ -589,6 +721,7 @@ function spin_steadly_start(_val, _delta = 0) {
 	spin_val_delta = _delta;
 }
 function skill_gi(_val_max, _val, _act, _func = undefined) {
+	skill_used = true;
 	_val = mana_gi_control(_val);
 	if (a_cooltime <= 0) {
 		if (gi >= _val_max) {
@@ -605,6 +738,7 @@ function skill_gi(_val_max, _val, _act, _func = undefined) {
 }
 
 function skill_gi_and_mana(_mana_max, _gi_max, _mana, _gi, _act, _func = undefined) {
+	skill_used = true;
 	_mana = mana_gi_control(_mana);
 	_gi = mana_gi_control(_gi);
 	if (a_cooltime <= 0) {

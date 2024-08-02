@@ -36,7 +36,9 @@ function set_layer_activate(ind) {
 		n = array_length(ins_id[i]);
 		if (i == global.sub_setting) {
 			for (var j = 0; j < n; j++) {
-				instance_activate_object(ins_id[i][j]);
+				if (ins_id[i][j].object_index != obj_window_resolution) {
+					instance_activate_object(ins_id[i][j]);
+				}
 			}
 		}
 		else {

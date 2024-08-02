@@ -307,6 +307,7 @@
     {"name":"path_cos","order":111,"path":"paths/path_cos/path_cos.yy",},
     {"name":"path_sin","order":245,"path":"paths/path_sin/path_sin.yy",},
     {"name":"path_tan","order":416,"path":"paths/path_tan/path_tan.yy",},
+    {"name":"romm_temp","order":2,"path":"rooms/romm_temp/romm_temp.yy",},
     {"name":"room_antcave","order":233,"path":"rooms/room_antcave/room_antcave.yy",},
     {"name":"room_ghost","order":187,"path":"rooms/room_ghost/room_ghost.yy",},
     {"name":"room_kazino2","order":313,"path":"rooms/room_kazino2/room_kazino2.yy",},

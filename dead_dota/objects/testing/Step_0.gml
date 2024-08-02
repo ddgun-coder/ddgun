@@ -60,7 +60,6 @@ if (instance_exists(obj_card_manager)) {
 		arm_type = "ouch"
 		a_possible = false;
 		temp_YA = YA;
-		counter = 2;
 	}
 	card_name = obj_card_manager.get_name();
 }
@@ -439,7 +438,7 @@ if(live == 1) {
 			protect_break = false;	
 		}
 	}
-	
+	ouch_check();
 	if (moveable) {
 		if (a_cooltime <= 0) {
 			with(obj_testing) {
@@ -1746,125 +1745,6 @@ if(live == 1) {
 		a_cooltime--;
 	} //공격 정상화
 	
-	if (arm_type == "ouch")
-	{
-		seq_end();
-		first_item_play = false;
-		keyboard_checkE = false;
-		keyboard_checkQ = false;
-		keyboard_checkD = false;
-		keyboard_checkW = false;
-		is_babo_angle_show = false;
-		target_start(false);
-		spin_steadly_start(false);
-		left_arm_get_bigger = false;
-		face_variable = 0;
-		server77_equal(serve_val.face_variable, 0, buffer_u8);
-		if(global.stats = spr_stats2){
-		    b_cooltime = 200
-		}
-		if (timeline_position >= 0) {
-			timeline_running = 0;
-		}
-		only_hat = false;
-		ski_ready = false
-		hat_bye = false;
-		server77_equal(serve_val.only_hat, only_hat, buffer_bool);
-		server77_equal(serve_val.hat_bye, hat_bye, buffer_bool);
-		all_spin = 0;
-		go_to_speed = 0;
-		go_to_speed_solid = 0;
-		jumping = false;
-		a_charging = 0;
-		arm_all_normal();
-		left_arm_YA = 0 + 270;
-		right_arm_YA = 0 + 90;
-		charge = false;
-		arm_movement(5, -5, 5, 5);
-		if (big_shild = false) {
-			if (instance_exists(serve)) {
-				if (serve.kazino_time < 0) {
-					go_to_scale = main_big_val * stats_big_val;		
-				}
-			}
-		}
-		if (sturn <= 0){
-			if (nu_on == true) {
-				nu_on = false;
-				if (go_to_scale < 1) {
-					go_to_scale = main_big_val * stats_big_val;
-				}
-				big_val = 1;
-				if (normal_attack_type == spr_bigsaw) {
-					aring_amount--;
-					if (aring_amount < 1) {
-						normal_attack_type = spr_none;
-					}
-				}
-				else {
-					normal_attack_type = spr_none;
-				}
-				face_variable = 0;
-				if (no_change == false) {
-					terror_charge = 0;
-					server77_equal(serve_val.terror_charge, 0, buffer_u8);
-				}
-				server77_equal(serve_val.face_variable, 0, buffer_u8);
-				server202_sound(nu_3_sound_cancle);
-
-				buffer_seek(buff_fast, buffer_seek_start, 0);
-	
-				buffer_write(buff_fast,buffer_u8,50);//50은 핵폭발관리;
-				buffer_write(buff_fast,buffer_u8,2);
-	
-				network_send_packet(0,buff_fast,buffer_tell(buff_fast));
-			}
-			shild = false;
-			arm_type = "normal"
-			if (no_change == false) {
-				a_cooltime = 0;
-				cancle_able = false;
-				spin_able = false;
-				a_possible = true;
-				YA2 = YA;
-			}
-			if (global.hat = spr_hat75) {
-			    combo_time = 0
-			}
-			EQ = false;
-			ride = false;
-			spin_scale = 1
-			counter_attak = false
-			extra_speed = 0
-			if (normal_attack_type == spr_bigsaw) {
-					aring_amount -= 1;
-					if (aring_amount < 1) {
-						normal_attack_type = spr_none;
-					}
-				}
-				else {
-					normal_attack_type = spr_none;
-				}
-			high_speed = 1
-			horse = false
-			face_YA = 0
-			hat_angle = 0
-			hide_bam = false
-			YA_changeable = false;
-			view_visible[0] = true;
-			view_visible[2] = false;
-			view_visible[3] = false;
-			view_where = 0;
-			obj_telescope_view.tele = false;
-			hat_move = false;
-			big_shild = false;
-			server77_equal(serve_val.cancle_able, cancle_able, buffer_bool);
-			if (buff_index != buff_giligili2 and a_cooltime < 1 and a_possible == true) {
-				go_soild = false;
-			}
-		}
-	}//공격을 받았다!, 피격 상호작용
-	
 	if (sturn == 1) {
 		mouse_posible = false;
 		effect_index = spr_none;
@@ -2466,7 +2346,7 @@ if(live == 1) {
 		}
 	}//caps_lock키 움직임 정상화
 
-
+	ouch_check_after();
 	if (a_cycle > 0) {
 		a_cycle -= 1
 	} // 손 순환을 위한 감소 
