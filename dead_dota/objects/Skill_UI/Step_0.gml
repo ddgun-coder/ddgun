@@ -19,25 +19,33 @@ if (mouse_check_button_pressed(mb_left)) {
 	var button_dx;
 	var button_dy;
 	
-	if (point_in_rectangle(_mouse_x, _mouse_y, level_draw_x, level_draw_y, level_draw_x + 64, level_draw_y + 32 * 4)) {
+	var _max_level = (is_level5) ? 5 : 4;
+	
+	if (point_in_rectangle(_mouse_x, _mouse_y, level_draw_x, level_draw_y, level_draw_x + 64, level_draw_y + 32 * _max_level)) {
 		show_level = floor((_mouse_y - level_draw_y) / 32);
 		set_skill_variables();
+		//level change
+	}
+	else if (point_in_rectangle(_mouse_x, _mouse_y, changer_draw_x, changer_draw_y, changer_draw_x + 64, changer_draw_y + 32 * _max_level)) {
+		show_level = floor((_mouse_y - changer_draw_y) / 32);
+		set_skill_variables();
+		//additional change
 	}
 	else if (D_left) {
 		button_dx = dx - arrow_xoffset;
 		button_dy = dy + arrow_yoffset;
 		if (point_in_rectangle(_mouse_x, _mouse_y, button_dx - 32, button_dy - 32, button_dx + 32, button_dy + 32)) {
-			show_debug_message("button_left");
 			Dskill_index--;
 		}
+		//left arrow
 	}
 	else if (D_right) {
 		button_dx = dx + arrow_xoffset + sprite_get_width(spr_skill_ui_type);
 		button_dy = dy + arrow_yoffset;
 		if (point_in_rectangle(_mouse_x, _mouse_y, button_dx - 32, button_dy - 32, button_dx + 32, button_dy + 32)) {
-			show_debug_message("button_right");
 			Dskill_index++;
 		}
+		//right arrow
 	}
 }
 

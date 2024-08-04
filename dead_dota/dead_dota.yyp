@@ -2884,6 +2884,7 @@
     {"id":{"name":"spr_ui_skill_arrow","path":"sprites/spr_ui_skill_arrow/spr_ui_skill_arrow.yy",},},
     {"id":{"name":"spr_ui_skill_background1","path":"sprites/spr_ui_skill_background1/spr_ui_skill_background1.yy",},},
     {"id":{"name":"spr_ui_skill_background2","path":"sprites/spr_ui_skill_background2/spr_ui_skill_background2.yy",},},
+    {"id":{"name":"spr_ui_skill_changer","path":"sprites/spr_ui_skill_changer/spr_ui_skill_changer.yy",},},
     {"id":{"name":"spr_ui_skill_level","path":"sprites/spr_ui_skill_level/spr_ui_skill_level.yy",},},
     {"id":{"name":"spr_under","path":"sprites/spr_under/spr_under.yy",},},
     {"id":{"name":"spr_usli_skill1","path":"sprites/spr_usli_skill1/spr_usli_skill1.yy",},},

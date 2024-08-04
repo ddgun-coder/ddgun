@@ -32,6 +32,17 @@ global.skill_exp[1][0] = {
 	}
 }
 
+for (var i = 0; i < 5; i++) {
+	global.skill_noone[0] = {
+		ui_type : 0,
+		attack_type : skill_type.NONE,
+		Dskill : {
+		    name : " noone ",
+		    explain : "noone",
+		    skill : "noone",
+		}
+	}
+}
 global.skill_exp[1][1] = {
 	ui_type : 0,
 	attack_type : 1,
@@ -59,6 +70,68 @@ global.skill_exp[1][3] = {
 	    skill : "- 초당 4(40) DMG \n-' 피격시 스킬중단 '\n-' A키로 발사하세요. '\n-' 비기절 공격 '",
 	}
 }
+
+global.pluton_exp[0] = {
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ D ] - 1차 스킬",
+		explain : "1 차.",
+		skill : "- 1 차. '",	
+	}
+}
+
+global.pluton_exp[1] = {
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ Q ] - 2차 스킬",
+		explain : "2 차.",
+		skill : "- 2 차. '",	
+	}
+}
+
+global.pluton_exp[2] = {
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ W ] - 3차 스킬",
+		explain : "3 차.",
+		skill : "- 3 차. '",	
+	}
+}
+
+global.pluton_exp[3] = {
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ E ] - 4차 스킬",
+		explain : "4 차.",
+		skill : "- 4 차. '",	
+	}
+}
+
+global.pluton_exp[4] = {
+	attack_type : 1,
+	Dskill : global.normal_attack,
+		
+	attack_type1 : 1,
+	Qskill : {
+		name : " [ R ] - 5차 스킬",
+		explain : "5 차.",
+		skill : "- 5 차. '",	
+	}
+}
+
+
 
 global.skill_exp[27][0] = {
 	ui_type : 1,
@@ -3497,6 +3570,83 @@ global.skill_exp_level5[18][3] = {
 		name : " [ E ] -  ...",
 		explain : "...",
 		skill : "- ' ...'",
+	}
+}
+
+global.skill_sang[0][0] = {
+	ui_type : 1,
+	attack_type : 1,
+	Dskill : global.normal_attack, 
+	attack_type1 : 1, 
+	Qskill : { 
+		name : " [ D ] - 가르기 / 회전베기 ",
+		explain : " 직선방향으로 붓을 긋습니다. 시전도중 한번 더 누르면 주변을 휘두릅니다.",
+		skill : "- ' 돌진하여 자신이 이동한 경로에 붓자국을 남긴다. [ 9 DMG ] '\n- ' 가르기 시전이 끝나기 직전, 한번 더 사용하면 데미지를 추가로 준다.[ 15 DMG ] '",
+	}
+}
+global.skill_sang[0][1] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ Q ] - 문무백관",
+		explain : " 자신의 무기를 활로 바꿉니다.\n 무기에 따라 [ D ][ W ]의 스킬이 변경됩니다.",
+		skill : "\n- ' 무기가 바뀔 때마다 4초간 [상투 버프]를 부여합니다.'\n- '버프 효과: 타격시 기 회복 + 25%'",
+	}
+}
+global.skill_sang[0][2] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ W ] - 무아지경",
+		explain : "고도의 집중력으로 한 획을 긋습니다.",
+		skill : "- ' 전방으로 붓에 힘을 담아 공격합니다. 가진 버프를 3초 증가시킨다.[ 14 DMG ]'",
+	}
+}
+global.skill_sang[0][3] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ ! 이름 ] - 이리오너라",
+		explain : "적이 자신에게 오게 하도록 명령합니다.",
+		skill : "- ' 채팅창에 [ ! 적 이름 ]을 입력하여 시전 '\n- ' 시전 시 해당 영웅이 자신에게 순간이동 합니다. '",
+	}
+}
+global.skill_sang[1][0] = {
+	ui_type : 1,
+	attack_type : 1,
+	Dskill : global.normal_attack, 
+	attack_type1 : 1, 
+	Qskill : { 
+		name : " [ D ] - 활쏘기",
+		explain : "적을 조준하여 활을 발사합니다.",
+		skill : "- ' 전방을 향해 화살을 4연발 발사한다. [ 11 DMG ] '",
+	}
+}
+global.skill_sang[1][1] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ Q ] - 문무백관",
+		explain : " 자신의 무기를 붓으로 바꿉니다.\n 무기에 따라 [ D ][ W ]의 스킬이 변경됩니다.",
+		skill : "\n- ' 무기가 바뀔 때마다 4초간 [상투 버프]를 부여합니다.'\n- '버프 효과: 타격시 기 회복 + 25%'",
+	}
+}
+global.skill_sang[1][2] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ W ] - 백발백중",
+		explain : "폭탄을 부착한 화살을 발사합니다. \n 최대 차징 시 3갈래로 발사합니다.",
+		skill : "- ' 직선으로 활을 쏩니다. 화살은 벽이나 플레이어에게 박힙니다. '\n- ' 박힌 화살은 3초뒤 폭발하여 [ 12 DMG ]를 줍니다. '\n- ' 무기를 바꾸어 즉시 폭발을 일으킬수 있습니다. '",
+	}
+}
+global.skill_sang[1][3] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ ! 이름 ] - 이리오너라",
+		explain : "적이 자신에게 오게 하도록 명령합니다.",
+		skill : "- ' 채팅창에 [ ! 적 이름 ]을 입력하여 시전 '\n- ' 시전 시 해당 영웅이 자신에게 순간이동 합니다. '",
 	}
 }
 

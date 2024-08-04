@@ -1542,6 +1542,7 @@
     {"name":"spr_ui_skill_arrow","order":6,"path":"sprites/spr_ui_skill_arrow/spr_ui_skill_arrow.yy",},
     {"name":"spr_ui_skill_background1","order":3,"path":"sprites/spr_ui_skill_background1/spr_ui_skill_background1.yy",},
     {"name":"spr_ui_skill_background2","order":4,"path":"sprites/spr_ui_skill_background2/spr_ui_skill_background2.yy",},
+    {"name":"spr_ui_skill_changer","order":7,"path":"sprites/spr_ui_skill_changer/spr_ui_skill_changer.yy",},
     {"name":"spr_ui_skill_level","order":5,"path":"sprites/spr_ui_skill_level/spr_ui_skill_level.yy",},
     {"name":"spr_usli_skill1","order":64,"path":"sprites/spr_usli_skill1/spr_usli_skill1.yy",},
     {"name":"spr_Usli_skill4","order":334,"path":"sprites/spr_Usli_skill4/spr_Usli_skill4.yy",},

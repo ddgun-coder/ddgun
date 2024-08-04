@@ -15,7 +15,9 @@ draw_set_color(c_black);
 draw_sprite(spr_skill_ui_type, attack_type, _drawx, _drawy);
 var _xoffset = sprite_get_xoffset(global.hat);
 var _yoffset = sprite_get_yoffset(global.hat);
-draw_sprite_part(global.hat, 0, _xoffset - 32, _yoffset - 32, 64, 64, x + _hat_draw_x, y + _hat_draw_y);
+
+draw_sprite_part(global.hat, show_level, _xoffset - 32, _yoffset - 32, 64, 64, x + _hat_draw_x, y + _hat_draw_y);
+
 //sprite part
 var _name = "";
 var _explain = "";
@@ -45,7 +47,8 @@ else {
 	draw_set_color(c_white);
 	draw_text_ext(_drawx + 60, _drawy + 130, _skill, -1, 270);
 //text part
-for (var i = 0; i < 4; i++) {
+var _max_level = (is_level5) ? 5 : 4;
+for (var i = 0; i < _max_level; i++) {
 	if (show_level == i) {
 		draw_set_alpha(1);
 	}
@@ -55,6 +58,26 @@ for (var i = 0; i < 4; i++) {
 	draw_sprite(spr_ui_skill_level, i, x + level_draw_x, y + level_draw_y + 32 * i);	
 }
 draw_set_alpha(1);
+//level ui
+var _changer_spr = noone;
+switch(ui_changer_type) {
+	case 0 :
+		_changer_spr = spr_ui_skill_changer;
+		break;
+}
+if (_changer_spr != noone) {
+	var _num = sprite_get_number(_changer_spr);
+	for (var i = 0; i < _num; i++) {
+		if (ui_change == i) {
+			draw_set_alpha(1);
+		}
+		else {
+			draw_set_alpha(0.6);	
+		}
+		draw_sprite(_changer_spr, i, x + changer_draw_x, y + changer_draw_y + 32 * i);	
+	}
+}
+//additional ui
 
 if (ui_type == 1) {
 	_drawy += 285;
