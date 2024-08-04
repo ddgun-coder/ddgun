@@ -41,9 +41,9 @@ else {
 	draw_text_bold_color(_drawx + 60, _drawy + 38, _name, c_black, make_color_rgb(219, 223, 234));
 	draw_set_color(make_color_rgb(254, 215, 100));
 	draw_set_font(font1)
-	draw_text_ext(_drawx + 60, _drawy + 80, _explain, 16, 270);
+	draw_text_ext(_drawx + 60, _drawy + 80, _explain, -1, 270);
 	draw_set_color(c_white);
-	draw_text(_drawx + 60, _drawy + 110, _skill);
+	draw_text_ext(_drawx + 60, _drawy + 130, _skill, -1, 270);
 //text part
 for (var i = 0; i < 4; i++) {
 	if (show_level == i) {
@@ -64,8 +64,8 @@ if (ui_type == 1) {
 	draw_text_bold_color(_drawx + 60, _drawy + 38, Qname, c_black, make_color_rgb(219, 223, 234));
 	draw_set_color(make_color_rgb(254, 215, 100));
 	draw_set_font(font1)
-	draw_text_ext(_drawx + 60, _drawy + 80, Qexplain, 16, 270);
+	draw_text_ext(_drawx + 60, _drawy + 80, Qexplain, -1, 270);
 	draw_set_color(c_white);
 	draw_set_font(font1)
-	draw_text(_drawx + 60, _drawy + 110, Qskill);
+	draw_text_ext(_drawx + 60, _drawy + 130, Qskill, -1, 270);
 }

@@ -3798,8 +3798,8 @@ global.Rskill[$ "spr_hat1"] = {
 	func : random_table5,
 	exception : 0,
 	case_name : spr_hat1,
-	mana_max : function() { return  9 },
-	mana : function() { return  9 },
+	mana_max : function() { return  45 },
+	mana : function() { return  45 },
 }
 global.Rskill[$ "spr_level5_hat2"] = {
 	timeline : function() { return hunt_4_act1 },

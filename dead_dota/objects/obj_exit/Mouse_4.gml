@@ -17,7 +17,7 @@ if !(room = room_out) {
 		if (instance_exists(testing)) {
 			testing.live = 1;
 			_ind = array_get_index(global.hat_array, global.hat);
-	        if (_ind > global.hat_limit) {
+	        if (_ind > global.hat_limit or global.hat == spr_ehat4) {
 	            scr_hat_change2(spr_hat1);
 	        }
 			if (instance_exists(serve)) {

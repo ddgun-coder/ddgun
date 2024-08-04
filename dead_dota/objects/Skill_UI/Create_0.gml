@@ -25,6 +25,7 @@ attack_type = 0;
 level_draw_x = 5;
 level_draw_y = 92;
 
+is_level5 = false;
 Dskill_is_array = false;
 Dskill_index = 0;
 Dskill_array_num = 0;
@@ -50,22 +51,58 @@ function set_skill_variables() {
 		_my_level = testing.level;
 	}
 	else {
-		_my_level = 0;	
+		_my_level = 0;
 	}
-	var _ind = real(string_digits(sprite_get_name(global.hat)));
+			
+	var _array = [];
 	var out = true;
-	if (_ind == -1) return;
-	if (array_length(global.skill_exp) > _ind) {
-		if (is_array(global.skill_exp[_ind])) {
-			if (array_length(global.skill_exp[_ind]) > show_level) {
-				out = false;
+	var _sprite_string = sprite_get_name(global.hat);
+	
+	if (string_pos(_sprite_string, "spr_level5_hat") != 0) {
+		is_level5 = true;
+		_array = global.skill_exp_level5;
+		_sprite_string = string_replace(_sprite_string, "spr_level5_hat", "");
+		var _ind = real(string_digits(_sprite_string));
+		if (_ind == -1) return;
+		if (array_length(_array) > _ind) {
+			if (is_array(_array[_ind])) {
+				if (array_length(_array[_ind]) > show_level) {
+					out = false;
+				}
 			}
 		}
-	}	
+		//spr_leveln형태의 모자
+	}
+	else if (_my_level == 4) {
+		switch (global.hat) {
+			case spr_ehat4 :
+			
+			break;
+			case spr_hat1 :
+			
+			break;
+		}
+		is_level5 = true;
+		//99pluton 같은 형태
+	}
+	else {
+		is_level5 = false;
+		_array = global.skill_exp;
+		var _ind = real(string_digits(_sprite_string));
+		if (_ind == -1) return;
+		if (array_length(_array) > _ind) {
+			if (is_array(_array[_ind])) {
+				if (array_length(_array[_ind]) > show_level) {
+					out = false;
+				}
+			}
+		}
+		//1~4레벨 일반 모자
+	}
 	if (out) return;
 	cur_hat = global.hat;
 	
-	var _const = global.skill_exp[_ind][show_level];
+	var _const = _array[_ind][show_level];
 	ui_type = _const.ui_type;
 	attack_type = _const.attack_type;
 	
