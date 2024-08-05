@@ -41,6 +41,7 @@ cur_hat = noone;
 
 ui_change = 0;
 ui_changer_type = noone;
+ui_changer_spr = noone;
 
 arrow_xoffset = sprite_get_xoffset(spr_ui_skill_arrow);
 arrow_yoffset = sprite_get_height(spr_skill_ui_type) / 2;
@@ -49,35 +50,43 @@ array = [];
 
 function switch_window() {
 	windows = !windows;	
-	set_skill_variables();
-}
-
-function array_setter() {
-	var _q_attack_type = noone;
-	with (testing) {
-		_q_attack_type = q_attack_type;
-	}
-	is_level5 = false;
-	show_level = min(show_level, 3);
-	ui_changer_type = noone;
-
 	switch (global.hat) {
-		case spr_hat64 :
-			ui_changer_type = 0;
+		case spr_hat64 : 
+			var _q_attack_type = noone;
+			with (testing) {
+				_q_attack_type = q_attack_type;
+			}
 			if (_q_attack_type == spr_sangbrush) {
 				ui_change = 0;
 			}
 			else {
 				ui_change = 1;
 			}
+			break;
+		default : 
+			ui_change = 0;
+			break;
+	}
+	set_skill_variables();
+}
+
+function array_setter() {
+	is_level5 = false;
+	show_level = min(show_level, 3);
+	ui_changer_type = noone;
+	ui_changer_spr = noone;
+
+	switch (global.hat) {
+		case spr_hat64 :
+			ui_changer_type = 0;
 			array = global.skill_sang[ui_change];
+			ui_changer_spr = spr_ui_skill_changer;
 			return false;
 		case spr_hat77 :
 			array = global.skill_noone;
 			ui_changer_type = 1;
 			return false;
 	}
-	ui_change = 0;
 	array = global.skill_exp;
 	var _ind = real(string_digits(sprite_string));
 	if (_ind == -1) return;

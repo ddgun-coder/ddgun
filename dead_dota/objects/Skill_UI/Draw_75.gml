@@ -59,14 +59,8 @@ for (var i = 0; i < _max_level; i++) {
 }
 draw_set_alpha(1);
 //level ui
-var _changer_spr = noone;
-switch(ui_changer_type) {
-	case 0 :
-		_changer_spr = spr_ui_skill_changer;
-		break;
-}
-if (_changer_spr != noone) {
-	var _num = sprite_get_number(_changer_spr);
+if (ui_changer_spr != noone) {
+	var _num = sprite_get_number(ui_changer_spr);
 	for (var i = 0; i < _num; i++) {
 		if (ui_change == i) {
 			draw_set_alpha(1);
@@ -74,9 +68,10 @@ if (_changer_spr != noone) {
 		else {
 			draw_set_alpha(0.6);	
 		}
-		draw_sprite(_changer_spr, i, x + changer_draw_x, y + changer_draw_y + 32 * i);	
+		draw_sprite(ui_changer_spr, i, x + changer_draw_x, y + changer_draw_y + 32 * i);	
 	}
 }
+draw_set_alpha(1);
 //additional ui
 
 if (ui_type == 1) {

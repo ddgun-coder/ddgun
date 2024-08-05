@@ -20,14 +20,16 @@ if (mouse_check_button_pressed(mb_left)) {
 	var button_dy;
 	
 	var _max_level = (is_level5) ? 5 : 4;
+	var _max_change = (ui_changer_type == noone) ? 0 : sprite_get_number(ui_changer_spr);
 	
+	show_debug_message(_max_change);
 	if (point_in_rectangle(_mouse_x, _mouse_y, level_draw_x, level_draw_y, level_draw_x + 64, level_draw_y + 32 * _max_level)) {
 		show_level = floor((_mouse_y - level_draw_y) / 32);
 		set_skill_variables();
 		//level change
 	}
-	else if (point_in_rectangle(_mouse_x, _mouse_y, changer_draw_x, changer_draw_y, changer_draw_x + 64, changer_draw_y + 32 * _max_level)) {
-		show_level = floor((_mouse_y - changer_draw_y) / 32);
+	else if (point_in_rectangle(_mouse_x, _mouse_y, changer_draw_x, changer_draw_y, changer_draw_x + 64, changer_draw_y + 32 * _max_change)) {
+		ui_change = floor((_mouse_y - changer_draw_y) / 32);
 		set_skill_variables();
 		//additional change
 	}
