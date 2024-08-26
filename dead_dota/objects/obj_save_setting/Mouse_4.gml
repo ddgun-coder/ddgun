@@ -25,6 +25,8 @@ if(hat_button_main.windows == 8 and image_index == 0) {
 	file_text_writeln(file);
 	file_text_write_real(file, global.show_kill_ui);
 	file_text_writeln(file);
+	file_text_write_real(file, global.show_toKill_ui);
+	file_text_writeln(file);
 	
 	file_text_close(file);
 	image_index = 1;

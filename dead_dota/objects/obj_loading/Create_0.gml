@@ -13,7 +13,7 @@ global.money = 40000;
 global.team = irandom(1);
 var ran = irandom(99);
 surface_depth_disable(true);
-global.version = 287;
+global.version = 288;
 global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, skill_obj) constructor {
 	self.spr = spr;
 	self.damage = damage;
@@ -25,6 +25,7 @@ global.hurt_const = function(spr, damage, name, face_index, hat_index, hat_num, 
 	num = 1;
 }
 global.show_kill_ui = true;
+global.show_toKill_ui = true;
 global.hurt_list = [];
 if (ran < 10) {									 
 	ran = "0" + string(ran); 
@@ -4141,6 +4142,8 @@ if (file_exists(path)) {
 	var _filter = file_text_read_real(file);
 	file_text_readln(file);
 	global.show_kill_ui = file_text_read_real(file);
+	file_text_readln(file);
+	global.show_toKill_ui = file_text_read_real(file);
 	file_text_readln(file);
 	if (_filter) {
 		gpu_set_texfilter(true);

@@ -18,7 +18,82 @@ global.normal_attack = {
 	explain : "주먹을 내질러 적에게 10 기절 피해를 줍니다.",
 	skill : "-10 DMG",
 }
-
+global.skill_babo[1][0] = {
+	ui_type : 1,
+	attack_type : 1,
+	Dskill : global.normal_attack, 
+	attack_type1 : 1, 
+	Qskill : { 
+		name : " [ D ] - 바보모 변신O 1차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[1][1] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신O 2차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[1][2] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신O 3차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[1][3] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신O 4차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[0][0] = {
+	ui_type : 1,
+	attack_type : 1,
+	Dskill : global.normal_attack, 
+	attack_type1 : 1, 
+	Qskill : { 
+		name : " [ D ] - 바보모 변신X 1차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[0][1] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신X 2차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[0][2] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신X 3차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
+global.skill_babo[0][3] = {
+	ui_type : 0,
+	attack_type : 1,
+	Dskill : { 
+		name : " [ D ] - 바보모 변신X 4차",
+		explain : " SIM 일 해.",
+		skill : "- ' SIM 일 해. '",
+	}
+}
 global.skill_exp[1][0] = {
 	ui_type : 1,
 	attack_type : 1,

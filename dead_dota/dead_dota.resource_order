@@ -229,6 +229,7 @@
     {"name":"obj_show_box","order":27,"path":"objects/obj_show_box/obj_show_box.yy",},
     {"name":"obj_show_me4","order":1,"path":"objects/obj_show_me4/obj_show_me4.yy",},
     {"name":"obj_show_me5","order":2,"path":"objects/obj_show_me5/obj_show_me5.yy",},
+    {"name":"obj_show_me6","order":3,"path":"objects/obj_show_me6/obj_show_me6.yy",},
     {"name":"obj_skill_roulette","order":483,"path":"objects/obj_skill_roulette/obj_skill_roulette.yy",},
     {"name":"obj_skillbox","order":256,"path":"objects/obj_skillbox/obj_skillbox.yy",},
     {"name":"obj_skin_hatex","order":14,"path":"objects/obj_skin_hatex/obj_skin_hatex.yy",},

@@ -908,9 +908,11 @@ if ( tp = network_type_data) {
                if (other_cid < 25) {
                   if (serve_name[cid] != "") {
                      pow[other_cid]++;
-                     var t = instance_create_depth(0, 0, -100, obj_killshow);
-                     t.cid1 = global.cid_array[other_cid];
-                     t.cid2 = global.cid_array[cid];
+					 if (global.show_toKill_ui) {
+	                     var t = instance_create_depth(0, 0, -100, obj_killshow);
+	                     t.cid1 = global.cid_array[other_cid];
+	                     t.cid2 = global.cid_array[cid];
+					 }
                      green_text_update("[♨]" + string(serve_name[other_cid]) + "님이 " + string(serve_name[cid]) + "님을 죽였습니다.");
                   }
                }

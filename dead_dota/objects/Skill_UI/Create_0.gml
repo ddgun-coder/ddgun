@@ -52,15 +52,27 @@ function switch_window() {
 	windows = !windows;	
 	switch (global.hat) {
 		case spr_hat64 : 
-			var _q_attack_type = noone;
+			var _skill_detect = noone;
 			with (testing) {
-				_q_attack_type = q_attack_type;
+				_skill_detect = q_attack_type;
 			}
-			if (_q_attack_type == spr_sangbrush) {
+			if (_skill_detect == spr_sangbrush) {
 				ui_change = 0;
 			}
 			else {
 				ui_change = 1;
+			}
+			break;
+		case spr_hat77 : 
+			var _skill_detect = noone;
+			with (testing) {
+				_skill_detect = babo_change;
+			}
+			if (_skill_detect) {
+				ui_change = 1;
+			}
+			else {
+				ui_change = 0;
 			}
 			break;
 		default : 
@@ -83,7 +95,7 @@ function array_setter() {
 			ui_changer_spr = spr_ui_skill_changer;
 			return false;
 		case spr_hat77 :
-			array = global.skill_noone;
+			array = global.skill_babo[ui_change];
 			ui_changer_type = 1;
 			return false;
 	}
