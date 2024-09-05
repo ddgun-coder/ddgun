@@ -774,7 +774,8 @@ function skill_start(_type, _level) {
 			_skill_str = global.Wskill;
 		break;
 		case 3:
-			_skill_str = global.Eskill;
+			if (keyboard_checkE) return;
+			_skill_str = global.Eskill;		
 		break;
 		case 4:
 			_skill_str = global.Rskill;

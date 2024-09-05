@@ -808,10 +808,8 @@ if(live == 1) {
 							server79_create_instace_ext(hammer_skill4, x, y, cur_target_index);
 						}
 						else {
-							arm_type = "ouch";
-							sturn = 80;
-							spin_able = true;
-							server79_create_instace_ext(hammer_skill4, x, y, 0);
+							arm_all_normal();
+							prt_val_add(Val.mp, 100);
 						}
 						target_start(false);
 					break;

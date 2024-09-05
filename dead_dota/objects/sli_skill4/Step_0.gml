@@ -1,3 +1,4 @@
+
 x = cid_id.x + lengthdir_x(0,cid_id.YA-90)
 y = cid_id.y + lengthdir_y(0,cid_id.YA-90)
 image_xscale = cid_id.big_val * 3;
