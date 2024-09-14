@@ -1,6 +1,6 @@
 function item_button(argument0) {
 	var point = argument0
-	if (chat_point = 0 and buff_index != buff_noitem) {
+	if (chat_point = 0 and buff_index != buff_noitem and arm_type != "ouch") {
 		if(live == 1) {
 			if(sturn <= 0) {
 				if (global.item[point] != spr_none) {
