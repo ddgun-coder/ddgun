@@ -1,5 +1,21 @@
 /// @description Insert description here
 // You can write your code in this editor
+time--;
+if (time <= 0) {
+	with (testing) {
+		if (cur_target_index > 0 and cur_target_index <= 24) {
+			a_cooltime = 40;
+			spin_able = true;
+			server79_create_instace_ext(hammer_skill4, x, y, cur_target_index);
+		}
+		else {
+			arm_all_normal();
+			prt_val_add(Val.mp, 100);
+		}
+		target_start(false);	
+	}
+	instance_destroy();
+}
 if (reverse == false) {
 	if (testing.targeting == true and instance_exists(testing)) {
 		if (testing.cur_target != pre_cid_id) {
