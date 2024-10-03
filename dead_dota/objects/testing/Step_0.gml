@@ -4567,6 +4567,7 @@ if(all_spin == 1)
 	else {
 		if(ski_ready != true) {
 			high_speed = 1
+
 			if(place_free(x + lengthdir_x(go_to_speed, temp_YA - 90), y + lengthdir_y(go_to_speed, temp_YA - 90))){
 				x += lengthdir_x(go_to_speed, temp_YA - 90);
 				y += lengthdir_y(go_to_speed, temp_YA - 90);
